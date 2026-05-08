@@ -104,6 +104,7 @@ function FilterResults({ searchParams }: FilterProps) {
             label="From Date"
             value={createdFrom ? dayjs(createdFrom) : null}
             maxDate={createdTo ? dayjs(createdTo) : undefined}
+            closeOnSelect
             onChange={(newValue: Dayjs | null) => {
               updateFilter(
                 "createdFrom",
@@ -121,6 +122,7 @@ function FilterResults({ searchParams }: FilterProps) {
             label="To Date"
             value={createdTo ? dayjs(createdTo) : null}
             minDate={createdFrom ? dayjs(createdFrom) : undefined}
+            closeOnSelect
             onChange={(newValue: Dayjs | null) => {
               updateFilter(
                 "createdTo",

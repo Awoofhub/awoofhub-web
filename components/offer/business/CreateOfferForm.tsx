@@ -141,6 +141,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                     label="Title"
                     type="text"
                     compulsory
+                    placeholder="Free Facial Spa Treatment for First-Time Visitors"
                     {...register("title", {
                         required: "Title is required",
                         maxLength: {
@@ -154,6 +155,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                 {/* Description */}
                 <InputField
                     label="Description"
+                    placeholder="First-time customers can enjoy a complimentary facial spa treatment at participating GlowSpa locations in Lagos. This limited-time offer includes a full skin consultation, deep cleansing treatment, and facial massage session designed to refresh and revitalize your skin. To redeem the offer, customers must schedule an appointment online and present their confirmation upon arrival."
                     type="textarea"
                     textAreaRows={5}
                     compulsory
@@ -171,6 +173,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                 <InputField
                     label="Value"
                     type="text"
+                    placeholder="Free Spa Treatment"
                     compulsory
                     {...register("value", {
                         required: "Value is required",
@@ -186,6 +189,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                 <InputField
                     label="Link"
                     type="text"
+                    placeholder="https://www.glowspa-demo.com"
                     compulsory
                     icon={<FiGlobe size={18} color="gray" />}
                     {...register("dealUrl", {
@@ -203,6 +207,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                     <InputField
                         label="Coupon Code"
                         type="text"
+                        placeholder="GLOWFREE2026"
                         compulsory
                         {...register("couponCode", {
                             required: "Coupon code is required",
@@ -233,6 +238,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                 <InputField
                     label="Terms & Condition"
                     type="textarea"
+                    placeholder="Offer valid for first-time customers only and limited to one redemption per person. Appointment booking is required before visiting any participating location."
                     textAreaRows={2}
                     compulsory
                     {...register("termsAndConditions", {

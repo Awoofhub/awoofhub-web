@@ -1,3 +1,4 @@
+import { useLatestModeration } from "@/features/moderation/useLatestModeration";
 import { Offer } from "@/types/offer";
 import { formatDateTime } from "@/utils/formatDateTime";
 import { Info } from "lucide-react";
@@ -30,6 +31,8 @@ const statusConfig = {
 
 export default function AdminStatus({ offer }: Props) {
 
+    const { data: moderation } = useLatestModeration({id: offer.id})
+
     const config = statusConfig[offer.status] || statusConfig.pending;
 
     return (
@@ -40,14 +43,14 @@ export default function AdminStatus({ offer }: Props) {
                     <div className="flex gap-4">
                         <div className="mt-1">
                             <RiAdminFill className={`w-8 h-8 ${config.iconColor}`} />
-                        </div>
+                        </div> 
 
                         <div>
                             <h2 className="text-base xss:text-2xl font-bold text-gray-900 leading-tight">
                                 Admin Moderation Status
                             </h2>
                             <p className="text-gray-500 text-sm xss:text-base font-medium">
-                                {config.text} {offer.statusUpdatedAt && formatDateTime(offer.statusUpdatedAt)}
+                                {config.text} {moderation?.createdAt && formatDateTime(moderation?.createdAt)}
                             </p>
                         </div>
                     </div>
@@ -65,9 +68,9 @@ export default function AdminStatus({ offer }: Props) {
                     </div>
 
                     <p className="leading-relaxed">
-                        {offer.adminNote ? (
+                        {moderation?.reason ? (
                             <span className="text-gray-500 break-words">
-                                {offer.adminNote}
+                                {moderation?.reason}
                             </span>
                         ) : (
                             <span className="text-gray-400 italic">

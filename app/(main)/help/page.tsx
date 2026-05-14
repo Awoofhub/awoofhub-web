@@ -7,8 +7,8 @@ import {
   FaFacebookF,
   FaLocationDot,
 } from "react-icons/fa6";
-import { IoCall, IoLocationOutline } from "react-icons/io5";
-import { MdEmail, MdOutlineCall, MdOutlineEmail } from "react-icons/md";
+import { IoCall } from "react-icons/io5";
+import { MdEmail } from "react-icons/md";
 import { FiSearch, FiChevronDown } from "react-icons/fi";
 import Image from "next/image";
 import { useState } from "react";

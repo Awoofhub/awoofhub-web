@@ -9,6 +9,7 @@ const footerLinks = {
   quickLinks: [
     { label: "FAQs", href: "/faq" },
     { label: "Help & Support", href: "/help" },
+     { label: "Policy & Privacy", href: "/policy" },
   ],
   community: [
     { label: "Get Involved", href: "/get-involved" },

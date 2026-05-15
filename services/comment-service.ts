@@ -10,7 +10,7 @@ async function writeComment(id: string, payload: commentData): Promise<ApiRespon
 }
 
 async function getAllComments(id: string): Promise<ApiResponse<Comment[]>> {
-    const res: ApiResponse<Comment[]> = await apiClient.get(`/comments/${id}`)
+    const res: ApiResponse<Comment[]> = await apiClient.get(`/comments/offer/${id}`)
 
     return res;
 }

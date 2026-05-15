@@ -41,8 +41,6 @@ export interface Offer {
   };
   location: string;
   status: "pending" | "approved" | "rejected";
-  adminNote: string | null;
-  statusUpdatedAt: string | null;
   createdAt: string;
   endDate: string;
   avgRating: number,

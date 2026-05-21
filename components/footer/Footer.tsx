@@ -96,7 +96,7 @@ export default function Footer() {
 
           {/* Links Columns */}
           <div className="lg:col-span-2">
-            <h3 className="font-semibold mb-6 font-baloo">Quick Link</h3>
+            <h3 className="font-semibold mb-4 font-baloo">Quick Link</h3>
             <ul className="space-y-4 text-sm text-white">
               {footerLinks.quickLinks.map((link) => (
                 <li key={link.label} className="font-baloo">
@@ -112,7 +112,7 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <h3 className="font-semibold mb-6 font-baloo">Community</h3>
+            <h3 className="font-semibold mb-4 font-baloo">Community</h3>
             <ul className="space-y-4 text-sm text-white">
               {footerLinks.community.map((link) => (
                 <li key={link.label} className="font-baloo">
@@ -128,7 +128,7 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <h3 className="font-semibold mb-6 font-baloo">Pricing</h3>
+            <h3 className="font-semibold mb-4 font-baloo">Pricing</h3>
             <ul className="space-y-4 text-sm text-white">
               {footerLinks.pricing.map((link) => (
                 <li key={link.label} className="font-baloo">
@@ -144,7 +144,7 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <h3 className="font-bold mb-6 font-baloo">Company</h3>
+            <h3 className="font-bold mb-4 font-baloo">Company</h3>
             <ul className="space-y-4 text-sm text-white">
               {footerLinks.company.map((link) => (
                 <li key={link.label} className="font-baloo">

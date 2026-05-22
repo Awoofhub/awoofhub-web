@@ -7,54 +7,54 @@ import { HiMinus, HiPlus } from "react-icons/hi";
 
 const faqs = [
   {
-    question: "How long does it takes to get my offers running?",
+    question: "What is Awoofhub?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "AwoofHub is a centralized marketplace where you can discover verified deals, discounts, promos, and freebies from businesses across Nigeria — all in one place. Instead of hunting for offers, the deals come to you.",
   },
   {
-    question: "How long does it takes to get my offers running?",
+    question: "How do I redeem a deal on AwoofHub?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      " Each deal comes with clear step-by-step instructions to guide you through the redemption process. Depending on the offer, you may need to copy a promo code, click a redemption link, use a USSD code, or complete an action on a partner platform.",
   },
   {
-    question: "How long does it takes to get my offers running?",
+    question: "Are the deals on AwoofHub verified?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Yes. Our team actively reviews and moderates deals before they are published. We also use community feedback and user confirmations to identify active deals, expired, or potentially misleading.",
   },
   {
-    question: "How long does it takes to get my offers running?",
+    question: "How do I find deals on AwoofHub?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Simply browse or search by category, location, or business name on our web platform or mobile app (available on iOS and Android). You can also set preferences so we surface the most relevant deals for you automatically.",
   },
   {
-    question: "How long does it takes to get my offers running?",
+    question: "How can my business post deals on AwoofHub?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Getting started is easy. Create a business account on AwoofHub, submit your deal or promo for review, and once verified, it goes live to thousands of deal-seekers. It's a fast, affordable way to drive traffic and boost sales.",
   },
   {
-    question: "How long does it takes to get my offers running?",
+    question: "Is AwoofHub free to use?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Yes — browsing and discovering deals on AwoofHub is completely free for users. For businesses, we offer flexible listing plans to suit different budgets and marketing goals. Visit our pricing page or contact us to learn more.",
   },
   {
-    question: "How long does it takes to get my offers running?",
+    question: "How often are new deals added?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "New deals and promos are added regularly based on merchant submissions, trending offers, community discoveries, and verified opportunities across different categories. We recommend checking the platform frequently so you don’t miss limited-time offers.",
   },
   {
-    question: "How long does it takes to get my offers running?",
+    question: "Can I share deals with my friends and family?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      " Absolutely. Every deal on AwoofHub has a share option so you can send great offers to the people you care about via WhatsApp, social media, or a direct link. Good deals are better when shared!",
   },
   {
-    question: "How long does it takes to get my offers running?",
+    question: "What should I do if I find a fake or expired deal?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "You can report any suspicious, expired, or misleading deals directly from the deal page. Our moderation team reviews reports quickly to maintain a safe and trusted experience for all users.",
   },
   {
-    question: "How long does it takes to get my offers running?",
+    question: "How do I contact AwoofHub support?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "You can reach us via email at support@awoofhub.online, DM us on Instagram or Facebook. We typically respond within 24 hours.",
   },
 ];
 
@@ -88,56 +88,56 @@ export default function FAQs() {
     <main className="bg-white">
       {/* Hero */}
       <div className="bg-background my-5">
-      <section className="px-6 md:px-12 xl:px-24 py-16 max-w-[1440px] mx-auto">
-        <h2 className="text-primary px-6 py-2 rounded-xl mb-8 font-semibold inline-flex uppercase bg-gray-50 border border-gray-100 shadow-md">
-          FAQs
-        </h2>
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-black mb-6 ">
-          Most of your frequently asked{" "}
-          <span className="text-primary">questions</span> answered
-        </h1>
-        <p className="text-muted text-base md:text-lg lg:text-xl font-medium max-w-6xl">
-          On this page, the AwoofHub team has answered all your questions
-          related to the product and services. If you can't find an answer that
-          you're looking for, feel free to drop us a line.
-        </p>
-      </section>
+        <section className="px-6 md:px-12 xl:px-24 py-16 max-w-[1440px] mx-auto">
+          <h2 className="text-primary px-6 py-2 rounded-xl mb-8 font-semibold inline-flex uppercase bg-gray-50 border border-gray-100 shadow-md">
+            FAQs
+          </h2>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-black mb-6 ">
+            Most of your frequently asked{" "}
+            <span className="text-primary">questions</span> answered
+          </h1>
+          <p className="text-muted text-base md:text-lg lg:text-xl font-medium max-w-6xl">
+            On this page, the AwoofHub team has answered all your questions
+            related to the product and services. If you can't find an answer
+            that you're looking for, feel free to drop us a line.
+          </p>
+        </section>
       </div>
 
       {/* FAQ Accordion */}
       <div className="bg-background my-5">
-      <section className="px-6 md:px-12 py-16 max-w-[1440px] mx-auto">
-        <div className="space-y-3">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-sm overflow-hidden shadow-md"
-            >
-              <button
-                onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                className="w-full flex items-center gap-6 px-6 py-8 text-left hover:bg-gray-50 transition-colors"
+        <section className="px-6 md:px-12 py-16 max-w-[1440px] mx-auto">
+          <div className="space-y-3">
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-sm overflow-hidden shadow-md"
               >
-                {openFaq === index ? (
-                  <HiMinus className="text-[#52BD95] w-5 h-5 flex-shrink-0" />
-                ) : (
-                  <HiPlus className="text-[#1B1139] w-5 h-5 flex-shrink-0" />
-                )}
-                <span className="font-semibold font-baloo text-black text-base md:text-lg">
-                  {faq.question}
-                </span>
-              </button>
+                <button
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  className="w-full flex items-center gap-6 px-6 py-8 text-left hover:bg-gray-50 transition-colors"
+                >
+                  {openFaq === index ? (
+                    <HiMinus className="text-[#52BD95] w-5 h-5 flex-shrink-0" />
+                  ) : (
+                    <HiPlus className="text-[#1B1139] w-5 h-5 flex-shrink-0" />
+                  )}
+                  <span className="font-semibold font-baloo text-black text-base md:text-lg">
+                    {faq.question}
+                  </span>
+                </button>
 
-              {openFaq === index && (
-                <div className="px-6 pb-8 pl-14">
-                  <p className="text-muted text-sm md:text-base font-medium">
-                    {faq.answer}
-                  </p>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </section>
+                {openFaq === index && (
+                  <div className="px-6 pb-8 pl-14">
+                    <p className="text-muted text-sm md:text-base font-medium">
+                      {faq.answer}
+                    </p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
 
       {/* Send a Message */}

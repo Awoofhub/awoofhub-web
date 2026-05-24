@@ -6,7 +6,6 @@ import { useQuery } from '@tanstack/react-query';
 
 
 type GetOffersByBusinessId = {
-    businessId: string,
     search: string,
     category: string,
     minRating: number,
@@ -16,16 +15,15 @@ type GetOffersByBusinessId = {
     limit: number,
 };
 
-export const getOffersByBusiness = ({ businessId, search, category, minRating, createdFrom, createdTo, page, limit }: GetOffersByBusinessId): Promise<ApiResponse<Offer[]>> => {
-    return OfferService.offersByUser(businessId, search, category, minRating, createdFrom, createdTo, page, limit);
+export const getOffersByBusiness = ({ search, category, minRating, createdFrom, createdTo, page, limit }: GetOffersByBusinessId): Promise<ApiResponse<Offer[]>> => {
+    return OfferService.offersByBusiness(search, category, minRating, createdFrom, createdTo, page, limit);
 };
 
-export const useOffersByBusiness = ({ businessId, search, category, minRating, createdFrom, createdTo, page, limit = 10 }: GetOffersByBusinessId) => {
+export const useOffersByBusiness = ({ search, category, minRating, createdFrom, createdTo, page, limit = 10 }: GetOffersByBusinessId) => {
 
     const { data, isFetching, isError, error } = useQuery({
-        queryKey: ['offers', "businessId", businessId, search, category, minRating, createdFrom, createdTo, page, limit],
-        queryFn: () => getOffersByBusiness({ businessId, search, category, minRating, createdFrom, createdTo, page, limit }),
-        enabled: !!businessId,
+        queryKey: ['offers', "business", search, category, minRating, createdFrom, createdTo, page, limit],
+        queryFn: () => getOffersByBusiness({ search, category, minRating, createdFrom, createdTo, page, limit }),
     });
 
     return {

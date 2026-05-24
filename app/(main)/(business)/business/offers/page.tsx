@@ -8,13 +8,13 @@ import { useFilter } from "@/features/offers/useFilter";
 import { useOffersByBusiness } from "@/features/offers/useOffersByBusiness";
 import { useUser } from "@/features/user/useUser";
 import { Spinner } from "@chakra-ui/react";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs, { Dayjs } from "dayjs";
 import { Suspense, use, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
@@ -42,7 +42,6 @@ function FilterResults({ searchParams }: FilterProps) {
   const [page, setPage] = useState(1);
 
   const { data, isFetching, isError, error } = useOffersByBusiness({
-    businessId: user?.id ?? "",
     search: search ?? "",
     category: category ?? "",
     minRating: minRating ?? 0,

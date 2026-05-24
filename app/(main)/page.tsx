@@ -1,5 +1,5 @@
 'use client'
-import BlockBusiness from "@/components/blockBusiness/BlockBusiness";
+import BlockBusiness from "@/components/blockRoles/BlockBusiness";
 import Footer from "@/components/footer/Footer";
 import Banner from "@/components/home/Banner";
 import ExploreOffers from "@/components/home/ExploreOffers";

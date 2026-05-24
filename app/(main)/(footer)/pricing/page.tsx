@@ -22,29 +22,29 @@ const premiumPlanFeatures = [
 
 const faqs = [
   {
-    question: "How long does it takes to get my offers running?",
+    question: "What is Awoofhub?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "AwoofHub is a centralized marketplace where you can discover verified deals, discounts, promos, and freebies from businesses across Nigeria — all in one place. Instead of hunting for offers, the deals come to you.",
   },
   {
-    question: "How long does it takes to get my offers running?",
+    question: "How do I redeem a deal on AwoofHub?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      " Each deal comes with clear step-by-step instructions to guide you through the redemption process. Depending on the offer, you may need to copy a promo code, click a redemption link, use a USSD code, or complete an action on a partner platform.",
   },
   {
-    question: "How long does it takes to get my offers running?",
+    question: "Are the deals on AwoofHub verified?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Yes. Our team actively reviews and moderates deals before they are published. We also use community feedback and user confirmations to identify active deals, expired, or potentially misleading.",
   },
   {
-    question: "How long does it takes to get my offers running?",
+    question: "How do I find deals on AwoofHub?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Simply browse or search by category, location, or business name on our web platform or mobile app (available on iOS and Android). You can also set preferences so we surface the most relevant deals for you automatically.",
   },
   {
-    question: "How long does it takes to get my offers running?",
+    question: "How can my business post deals on AwoofHub?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Getting started is easy. Create a business account on AwoofHub, submit your deal or promo for review, and once verified, it goes live to thousands of deal-seekers. It's a fast, affordable way to drive traffic and boost sales.",
   },
 ];
 

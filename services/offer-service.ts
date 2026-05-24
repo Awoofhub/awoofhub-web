@@ -24,6 +24,14 @@ async function offersByUser(id: string, search: string, category: string, minRat
   return res;
 }
 
+async function offersByBusiness(search: string, category: string, minRating: number, createdFrom: string, createdTo: string, page: number, limit: number): Promise<ApiResponse<Offer[]>> {
+  const res: ApiResponse<Offer[]> = await apiClient.get(`/offers/business/`, {
+    params: { search, category, minRating, createdFrom, createdTo, page, limit },
+  })
+
+  return res;
+}
+
 async function offerById(id: string): Promise<ApiResponse<Offer>> {
   const res: ApiResponse<Offer> = await apiClient.get(`/offers/${id}`)
 
@@ -69,6 +77,7 @@ const OfferService = {
   createOffer,
   offers,
   offersByUser,
+  offersByBusiness,
   offerById,
   offersByCategory,
   businessDashboard,

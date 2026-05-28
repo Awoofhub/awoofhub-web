@@ -55,7 +55,7 @@ export default function OfferPage({ params }: Props) {
       <section className="p-4 sm:p-8 mx-auto max-w-[1440px] bg-white text-gray-800 border-b border-gray-300 pb-30">
         <div className="mx-auto flex justify-between items-center mb-7 md:mb-10">
           <nav className="flex items-center text-sm text-gray-500 gap-2"> 
-            <Link href={`/categories/${offer.category.slug}`}>{offer.category.name}</Link> <ChevronRight size={14} />
+            <Link href={`/offers?category=${offer.category.slug}`}>{offer.category.name}</Link> <ChevronRight size={14} />
             <span className="font-semibold text-[10px] xs:text-sm text-gray-900">{offer.id}</span>
           </nav>
           <ShareModal offerId={offer.id} />

@@ -1,6 +1,10 @@
+"use client";
+
+import ReportModal from "@/components/modals/ReportModal";
 import { Offer } from "@/types/offer";
 import Image from 'next/image';
 import Link from "next/link";
+import { useState } from "react";
 import ChatButton from "../../chat/ChatButton";
 import Comment from "../../comment/Comment";
 import ReviewChart from "../../review/ReviewChart";
@@ -13,6 +17,8 @@ interface Props {
 }
 
 export default function SingleOffer({ offer }: Props) {
+    const [isReportOpen, setIsReportOpen] = useState(false);
+
     return (
         <>
             <div className="grid grid-cols-1 md:grid-cols-9 gap-10 pb-10">
@@ -24,7 +30,7 @@ export default function SingleOffer({ offer }: Props) {
                             width={500}
                             height={500}
                             priority
-                            className="w-full aspect-[10/9] p-10 "
+                            className="w-full aspect-[10/9] p-10"
                         />
                     </div>
 
@@ -35,9 +41,12 @@ export default function SingleOffer({ offer }: Props) {
                             </div>
                         </ChatButton>
 
-                        <Link href="/report" className="w-1/5 md:w-full border border-red-500 text-red-500 text-xs xs:text-sm font-bold py-3 rounded-lg flex items-center justify-center hover:text-white hover:bg-red-500 transition-colors">
+                        <button
+                            onClick={() => setIsReportOpen(true)}
+                            className="w-1/5 md:w-full border border-red-500 text-red-500 text-xs xs:text-sm font-bold py-3 rounded-lg flex items-center justify-center hover:text-white hover:bg-red-500 transition-colors"
+                        >
                             Report
-                        </Link>
+                        </button>
                     </div>
                 </div>
 
@@ -48,25 +57,30 @@ export default function SingleOffer({ offer }: Props) {
                             Available
                         </span>
                     </div>
-
                     <OfferInfo offer={offer} />
-
                 </div>
-
             </div>
+
             <TrustSection offer={offer} />
 
             <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mt-12">
                 <div className="md:col-span-4 space-y-6">
                     <ReviewChart offer={offer} />
                 </div>
-
-
                 <div className="md:col-start-6 lg:col-start-5 md:col-span-6 space-y-8">
                     <Comment offer={offer} />
                 </div>
             </div>
 
+            <ReportModal
+                isOpen={isReportOpen}
+                onClose={() => setIsReportOpen(false)}
+                targetType="offer"
+                targetId={offer.id}
+                targetName={offer.title}
+                targetImage={offer.imageUrl}
+                targetBadge={offer.business.name}
+            />
         </>
     );
 }

@@ -20,21 +20,21 @@ export default function FeatureRequest() {
     <main className="bg-white">
       {/* Hero */}
       <div className="bg-background my-5">
-      <section className="px-6 md:px-12 py-16 max-w-[1440px] mx-auto">
-        <h1 className="text-3xl md:text-4xl font-semibold text-black mb-6">
+      <section className="px-6 md:px-12 py-8 md:py-10 lg:py-16 max-w-[1440px] mx-auto">
+        <h1 className="text-3xl md:text-4xl font-semibold text-black mb-4 md:mb-6">
           Got a <span className="text-primary">Feature</span> Request?
         </h1>
-        <p className="text-muted text-base md:text-lg lg:text-xl font-medium  mb-6">
+        <p className="text-muted text-base md:text-lg lg:text-xl font-medium  mb-4 md:mb-6">
           Have an idea that would make AwoofHub work better for you? We want to
           hear it. Whether you're a deal hunter looking for smarter discovery or
           a business owner wanting more from your profile your feedback shapes
           what we build next.
         </p>
-        <p className="font-semibold text-black text-base md:text-lg lg:text-xl mb-6">
+        <p className="font-semibold text-black text-base md:text-lg lg:text-xl mb-4 md:mb-6">
           Submit your suggestion through the in-app feedback form or reach us
           directly at <span className="text-black">support@awoofhub.com</span>.
         </p>
-        <p className="text-muted text-base md:text-lg lg:text-xl font-medium mb-6">
+        <p className="text-muted text-base md:text-lg lg:text-xl font-medium mb-4 md:mb-6">
           Our team reviews every request, and the most-requested features get
           prioritised in upcoming updates.
         </p>
@@ -46,7 +46,7 @@ export default function FeatureRequest() {
 
       {/* Feature Request Form */}
       <div className="bg-background my-5">
-      <section className="px-6 md:px-12 py-16 max-w-[1440px] mx-auto">
+      <section className="px-6 md:px-12 py-8 md:py-10 lg:py-16 max-w-[1440px] mx-auto">
         <h2 className="text-2xl md:text-3xl font-semibold text-black mb-8">
           Feature request form
         </h2>
@@ -60,7 +60,7 @@ export default function FeatureRequest() {
             <input
               type="text"
               placeholder="Your feature request"
-              className="w-full p-4 border border-[#D9D9D9] rounded-md text-sm md:text-base font-montserrat outline-none focus:border-primary transition-colors placeholder:text-muted/50"
+              className="w-full p-4 border border-[#D9D9D9] rounded-md text-xs md:text-sm font-montserrat outline-none focus:border-primary transition-colors placeholder:text-muted/50"
             />
           </div>
 
@@ -72,12 +72,12 @@ export default function FeatureRequest() {
             <textarea
               placeholder="Describe your ultimate goal for this feature"
               rows={5}
-              className="w-full p-4 border border-[#D9D9D9] rounded-md text-sm md:text-base font-montserrat outline-none focus:border-primary transition-colors placeholder:text-muted/50 resize-none"
+              className="w-full p-4 border border-[#D9D9D9] rounded-md text-xs md:text-sm font-montserrat outline-none focus:border-primary transition-colors placeholder:text-muted/50 resize-none"
             />
           </div>
 
           {/* Submit Button */}
-          <button className="w-full py-4 bg-primary text-white font-bold text-base rounded-md hover:bg-orange-600 transition-colors">
+          <button className="w-full py-3 bg-primary font-baloo text-white font-semibold text-base rounded-md hover:bg-orange-600 transition-colors">
             Submit
           </button>
         </div>
@@ -86,7 +86,7 @@ export default function FeatureRequest() {
 
       {/* Social Media */}
       <div className="bg-background my-5">
-        <section className="py-16 px-6 md:px-12 max-w-[1440px] mx-auto">
+        <section className="py-8 md:py-10 lg:py-16 px-6 md:px-12 max-w-[1440px] mx-auto">
           <h2 className="text-2xl md:text-3xl font-semibold text-black mb-10">
             Connect with us:
           </h2>

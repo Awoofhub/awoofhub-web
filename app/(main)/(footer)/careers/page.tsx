@@ -20,9 +20,9 @@ export default function Careers() {
     <main className="bg-white">
       {/* Hero Section */}
       <div className="bg-background my-5">
-      <section className="px-6 md:px-12 py-16 max-w-[1440px] mx-auto">
+      <section className="px-6 md:px-12 py-8 md:py-12 lg:py-16 max-w-[1440px] mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="w-full md:w-1/2 lg:w-2/3">
+          <div className="w-full flex flex-col items-center md:items-start text-center md:text-start md:w-1/2 lg:w-2/3">
             <h4 className="text-primary px-4 py-2 rounded-xl mb-4 text-lg font-semibold inline-flex uppercase bg-gray-50 border border-gray-100 shadow-md">
               Careers
             </h4>
@@ -151,7 +151,7 @@ export default function Careers() {
       {/* Contact Info */}
       <div className="bg-background my-5">
         <section className="py-12 px-6 md:px-12 max-w-[1440px] mx-auto">
-          <div className="flex flex-col md:flex-row gap-8 justify-between">
+          <div className="flex flex-col md:flex-row gap-12 justify-between">
             <div className="flex flex-col items-start gap-2">
               <div className="flex gap-1 items-center ">
                 <FaLocationDot className="w-6 h-6" />

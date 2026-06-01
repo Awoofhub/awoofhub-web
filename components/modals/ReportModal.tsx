@@ -1,20 +1,17 @@
 "use client";
 
+import { useReport } from "@/features/report/useReport";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { BsImage } from "react-icons/bs";
 import Image from "next/image";
-import axios from "axios";
 
 const reportReasons = [
   { label: "Scam or fraudulent activities", value: "scam" },
   { label: "Misleading information", value: "misleading_information" },
   { label: "Spam or repetitive posting", value: "spam" },
   { label: "Expired or invalid offer", value: "expired_offer" },
-  {
-    label: "Inappropriate or Offensive Content",
-    value: "inappropriate_content",
-  },
+  { label: "Inappropriate or Offensive Content", value: "inappropriate_content" },
   { label: "Wrong Category", value: "wrong_category" },
   { label: "Suspicious Payment Request", value: "suspicious_payment" },
   { label: "Broken or Malicious Link", value: "malicious_link" },
@@ -31,6 +28,7 @@ interface Props {
   targetImage?: string | null;
   targetBadge?: string;
 }
+
 export default function ReportModal({
   isOpen,
   onClose,
@@ -43,51 +41,32 @@ export default function ReportModal({
 }: Props) {
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [error, setError] = useState("");
+
+  const { submit, isPending, isSuccess } = useReport();
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setImage(file);
       setImagePreview(URL.createObjectURL(file));
     }
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (!type) {
       setError("Please select a reason for this report.");
       return;
     }
-
-    setIsSubmitting(true);
     setError("");
-
-    try {
-      await axios.post("/v1/reports", {
-        type,
-        targetType,
-        targetId,
-        description,
-      });
-      setSuccess(true);
-    } catch (err) {
-      setError("Something went wrong. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
+    submit({ type, targetType, targetId, description });
   };
 
   const handleClose = () => {
     setType("");
     setDescription("");
-    setImage(null);
     setImagePreview(null);
-    setSuccess(false);
     setError("");
     onClose();
   };
@@ -107,6 +86,7 @@ export default function ReportModal({
 
       {/* Modal */}
       <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[200] w-[90%] max-w-2xl bg-[#F6F7F8] rounded-2xl p-6 shadow-xl font-baloo">
+        
         {/* Close Button */}
         <button
           onClick={handleClose}
@@ -121,9 +101,7 @@ export default function ReportModal({
             <Image src="/reportFlag.png" width={20} height={20} alt="report" />
             <div>
               <h2 className="text-lg font-semibold text-black">
-                {targetType === "offer"
-                  ? "Report this Ad"
-                  : "Report this Account"}
+                {targetType === "offer" ? "Report this Ad" : "Report this Account"}
               </h2>
               <p className="text-muted font-montserrat font-normal text-xs">
                 Your reports remain anonymous.
@@ -149,18 +127,12 @@ export default function ReportModal({
               </div>
             )}
             <div>
-              <p className="font-semibold font-baloo text-black text-xs mb-1">
-                {targetName}
-              </p>
+              <p className="font-semibold font-baloo text-black text-xs mb-1">{targetName}</p>
               {targetEmail && (
-                <p className="text-muted font-montserrat text-xs mb-1">
-                  {targetEmail}
-                </p>
+                <p className="text-muted font-montserrat text-xs mb-1">{targetEmail}</p>
               )}
               {targetBadge && (
-                <p className="text-primary font-montserrat text-xs ">
-                  {targetBadge}
-                </p>
+                <p className="text-primary font-montserrat text-xs">{targetBadge}</p>
               )}
             </div>
           </div>
@@ -169,11 +141,9 @@ export default function ReportModal({
         <hr className="text-muted/20" />
 
         {/* Success Message */}
-        {success ? (
+        {isSuccess ? (
           <div className="text-center py-8">
-            <p className="text-green-500 font-bold text-lg mb-2">
-              Report Submitted!
-            </p>
+            <p className="text-green-500 font-bold text-lg mb-2">Report Submitted!</p>
             <p className="text-gray-400 text-sm mb-6">
               Thank you for helping keep AwoofHub safe.
             </p>
@@ -186,21 +156,19 @@ export default function ReportModal({
           </div>
         ) : (
           <>
+            {/* Reason Dropdown */}
             <div className="mb-4 mt-4 md:px-6">
               <label className="block text-sm font-baloo font-medium text-muted mb-2">
                 Reason for this report
               </label>
               <div className="relative">
-                {/* Trigger */}
                 <button
                   type="button"
                   onClick={() => setIsDropdownOpen((prev) => !prev)}
                   className="w-full px-3 py-3 border border-[#D9D9D9] rounded-md text-sm font-baloo outline-none focus:border-primary transition-colors bg-[#F6F7F8] flex items-center justify-between cursor-pointer"
                 >
                   <span className={type ? "text-muted" : "text-muted/30"}>
-                    {type
-                      ? reportReasons.find((r) => r.value === type)?.label
-                      : "Select option"}
+                    {type ? reportReasons.find((r) => r.value === type)?.label : "Select option"}
                   </span>
                   <svg
                     className={`w-4 h-4 text-muted/30 transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : ""}`}
@@ -208,16 +176,10 @@ export default function ReportModal({
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
 
-                {/* Dropdown list */}
                 {isDropdownOpen && (
                   <ul className="absolute z-10 mt-1 w-full bg-[#F6F7F8] border border-gray-200 rounded-md shadow-md overflow-y-auto max-h-60">
                     {reportReasons.map((reason) => (
@@ -228,9 +190,7 @@ export default function ReportModal({
                           setIsDropdownOpen(false);
                         }}
                         className={`px-4 py-2.5 text-sm font-baloo cursor-pointer transition-colors hover:bg-primary hover:text-white ${
-                          type === reason.value
-                            ? "bg-primary/10 text-primary"
-                            : "text-gray-600"
+                          type === reason.value ? "bg-primary/10 text-primary" : "text-gray-600"
                         }`}
                       >
                         {reason.label}
@@ -285,7 +245,7 @@ export default function ReportModal({
             </div>
 
             {/* Error */}
-            {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+            {error && <p className="text-red-500 text-sm mb-4 md:px-6">{error}</p>}
 
             {/* Buttons */}
             <div className="flex justify-end gap-2 md:px-4">
@@ -297,10 +257,10 @@ export default function ReportModal({
               </button>
               <button
                 onClick={handleSubmit}
-                disabled={isSubmitting}
+                disabled={isPending}
                 className="px-6 py-2 bg-primary text-white font-medium rounded-md hover:bg-orange-600 transition-colors disabled:opacity-50"
               >
-                {isSubmitting ? "Submitting..." : "Submit"}
+                {isPending ? "Submitting..." : "Submit"}
               </button>
             </div>
           </>

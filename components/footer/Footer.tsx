@@ -39,7 +39,7 @@ export default function Footer() {
   return (
     <footer className="bg-black text-white py-10 px-6 md:px-12 lg:px-10 font-baloo">
       <div className="max-w-[1440px] mx-auto mb-[60px] lg:mb-[0]">
-        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-14 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-14 gap-8 mb-16">
           {/* Brand Column */}
           <div className="lg:col-span-3">
             <Image

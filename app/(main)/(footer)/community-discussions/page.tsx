@@ -20,7 +20,7 @@ export default function CommunityDiscussions() {
     <main className="bg-white">
       {/* Hero */}
       <div className="bg-background my-5">
-        <section className="px-6 md:px-12 py-12 max-w-[1440px] mx-auto text-center">
+        <section className="px-6 md:px-12 py-6 md:py-8 max-w-[1440px] mx-auto text-center">
           <h2 className="text-primary px-6 py-2 rounded-xl mb-8 font-semibold inline-flex uppercase bg-gray-50 border border-gray-100 shadow-md">
             For Devs & Products
           </h2>
@@ -36,7 +36,7 @@ export default function CommunityDiscussions() {
           </p>
 
           {/* Quick Links */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
+          <div className="flex flex-col flex-wrap md:flex-row items-center text-center justify-center gap-4 lg:gap-6 mb-12">
             <Link
               href="/contribute-github"
               className="px-6 py-2 border border-primary font-baloo text-black font-semibold rounded-xl bg-[#F2F2F2] hover:bg-orange-50 transition-colors text-base lg:text-lg"
@@ -78,8 +78,8 @@ export default function CommunityDiscussions() {
 
       {/* Contribute on GitHub */}
       <div className="bg-background my-5">
-        <section className="px-6 md:px-12 py-16 max-w-[1440px] mx-auto">
-          <div className="flex flex-col md:flex-row items-center gap-12">
+        <section className="px-6 md:px-12 py-10 md:py-12 lg:py-16 max-w-[1440px] mx-auto">
+          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-12">
             <div className="w-full md:w-1/2 flex justify-center md:justify-between">
               <Image
                 src="/github-contribute.png"
@@ -89,7 +89,7 @@ export default function CommunityDiscussions() {
                 className="w-[250px] md:w-[350px] lg:w-[400px] h-auto"
               />
             </div>
-            <div className="w-full md:w-1/2">
+            <div className="flex flex-col text-center items-center md:text-start md:items-start w-full md:w-1/2">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-black mb-4">
                 Contribute on GitHub
               </h2>
@@ -117,8 +117,8 @@ export default function CommunityDiscussions() {
 
       {/* Feature Request */}
       <div className="bg-background my-5">
-        <section className="px-6 md:px-12 py-16 max-w-[1440px] mx-auto">
-          <div className="flex flex-col md:flex-row-reverse items-center gap-12">
+        <section className="px-6 md:px-12 py-10 md:py-12 lg:py-16 max-w-[1440px] mx-auto">
+          <div className="flex flex-col md:flex-row-reverse items-center gap-6 md:gap-12">
             <div className="w-full md:w-1/2 flex justify-center">
               <Image
                 src="/feature-request.png"
@@ -128,7 +128,7 @@ export default function CommunityDiscussions() {
                 className="w-[250px] md:w-[350px] lg:w-[400px] h-auto"
               />
             </div>
-            <div className="w-full md:w-1/2">
+            <div className="flex flex-col text-center items-center md:text-start md:items-start w-full md:w-1/2">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-black mb-4">
                 Feature Request
               </h2>
@@ -154,8 +154,8 @@ export default function CommunityDiscussions() {
 
       {/* Developers Documentation */}
       <div className="bg-background my-5">
-        <section className="px-6 md:px-12 py-16 max-w-[1440px] mx-auto">
-          <div className="flex flex-col md:flex-row items-center gap-12">
+        <section className="px-6 md:px-12 py-10 md:py-12 lg:py-16 max-w-[1440px] mx-auto">
+          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-12">
             <div className="w-full md:w-1/2 flex justify-center md:justify-between">
               <Image
                 src="/dev-docs.png"
@@ -165,7 +165,7 @@ export default function CommunityDiscussions() {
                 className="w-[250px] md:w-[350px] lg:w-[400px] h-auto"
               />
             </div>
-            <div className="w-full md:w-1/2">
+            <div className="flex flex-col text-center items-center md:text-start md:items-start w-full md:w-1/2">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-black mb-4">
                 Developers Documentation
               </h2>
@@ -188,8 +188,8 @@ export default function CommunityDiscussions() {
 
       {/* Beta Testing */}
       <div className="bg-background my-5">
-        <section className="px-6 md:px-12 py-16 max-w-[1440px] mx-auto">
-          <div className="flex flex-col md:flex-row-reverse items-center gap-12">
+        <section className="px-6 md:px-12 py-10 md:py-12 lg:py-16 max-w-[1440px] mx-auto">
+          <div className="flex flex-col md:flex-row-reverse items-center gap-6 md:gap-12">
             <div className="w-full md:w-1/2 flex justify-center">
               <Image
                 src="/beta-testing.png"
@@ -199,7 +199,7 @@ export default function CommunityDiscussions() {
                 className="w-[250px] md:w-[350px] lg:w-[400px] h-auto"
               />
             </div>
-            <div className="w-full md:w-1/2">
+            <div className="flex flex-col text-center items-center md:text-start md:items-start w-full md:w-1/2">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-black mb-4">
                 Beta Testing
               </h2>
@@ -225,7 +225,7 @@ export default function CommunityDiscussions() {
 
       {/* Social Media */}
       <div className="bg-background my-5">
-        <section className="py-16 px-6 md:px-12 max-w-[1440px] mx-auto">
+        <section className="py-8 md:py-10 lg:py-16 px-6 md:px-12 max-w-[1440px] mx-auto">
           <h2 className="text-2xl md:text-3xl font-semibold text-black mb-10">
             Connect with us:
           </h2>

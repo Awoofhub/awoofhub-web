@@ -55,12 +55,12 @@ export default function Pricing() {
     <main className="bg-white">
       {/* Why Premium */}
       <div className="bg-background my-5">
-        <section className="px-6 md:px-12 py-16 max-w-[1440px] mx-auto">
+        <section className="px-6 md:px-12 py-10 md:py-12 lg:py-16 max-w-[1440px] mx-auto">
           <div className="max-w-3xl mx-auto">
             <h1 className="text-3xl md:text-4xl font-semibold text-black mb-4">
               Why <span className="text-primary">Premium</span>?
             </h1>
-            <p className="text-muted text-lg md:text-xl font-medium max-w-2xl">
+            <p className="text-muted text-base md:text-lg lg:text-xl font-medium max-w-2xl">
               Premium members get priority visibility, advanced discovery tools,
               and exclusive features built to help you grow faster and connect
               deeper.
@@ -71,7 +71,7 @@ export default function Pricing() {
 
       {/* Our Pricing Plans */}
       <div className="bg-background my-5">
-        <section className="px-6 md:px-12 py-16 max-w-[1440px] mx-auto">
+        <section className="px-6 md:px-12 py-10 md:py-12 lg:py-16 max-w-[1440px] mx-auto">
           <h2 className="text-3xl md:text-4xl font-semibold text-center mb-4">
             Our Pricing Plans
           </h2>
@@ -166,7 +166,7 @@ export default function Pricing() {
 
       {/* FAQs */}
       <div className="bg-background my-5">
-        <section className="px-6 md:px-12 py-16 max-w-[1440px] mx-auto">
+        <section className="px-6 md:px-12 py-10 md:py-12 lg:py-16 max-w-[1440px] mx-auto">
           <h2 className="text-2xl md:text-4xl font-semibold mb-2">FAQs</h2>
           <p className="text-muted text-base md:text-lg lg:text-xl font-medium mb-8">
             Your questions on our premium features answered.
@@ -179,7 +179,7 @@ export default function Pricing() {
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  className="w-full flex items-center gap-6 px-6 py-8 text-left hover:bg-gray-50 transition-colors"
+                  className="w-full flex items-center gap-4 px-6 py-8 text-left hover:bg-gray-50 transition-colors"
                 >
                   {openFaq === index ? (
                     <HiMinus className="text-[#52BD95] w-5 h-5 flex-shrink-0" />

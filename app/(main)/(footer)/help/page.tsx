@@ -87,8 +87,8 @@ export default function HelpPage() {
     <main className="bg-white">
       {/* Hero */}
       <div className="bg-background my-5">
-        <section className="py-20 px-6 md:px-12 text-center max-w-[1440px] mx-auto">
-          <h1 className="text-3xl md:text-4xl font-semibold text-black mb-4">
+        <section className="py-10 md:py-12 lg:py-16 px-6 md:px-12 text-center max-w-[1440px] mx-auto">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-black mb-4">
             How can we help you today?
           </h1>
           <p className="text-muted text-base md:text-lg font-medium max-w-4xl mx-auto mb-8">
@@ -96,13 +96,13 @@ export default function HelpPage() {
             issues, or reach our support team directly. We're committed to
             keeping your experience smooth.
           </p>
-          <div className="flex items-center max-w-2xl mx-auto rounded-2xl overflow-hidden border border-muted/50 bg-white">
+          <div className="flex items-center max-w-2xl mx-auto rounded-2xl overflow-hidden border border-muted/20 bg-white">
             <input
               type="text"
               placeholder="Search for topics, or questions.."
-              className="flex-1 px-4 py-4 text-base outline-none text-muted"
+              className="flex-1 px-4 py-4 text-sm outline-none text-muted"
             />
-            <button className="bg-primary w-[100px] font-semibold flex items-center justify-center py-5 text-white text-xl">
+            <button className="bg-primary w-15 md:w-25 font-semibold flex items-center justify-center py-4 text-white text-xl">
               <FiSearch />
             </button>
           </div>
@@ -111,7 +111,7 @@ export default function HelpPage() {
 
       {/* Topics Grid */}
       <div className="bg-background my-5">
-        <section className="py-16 px-6 md:px-12 max-w-[1440px] mx-auto">
+        <section className="py-10 md:py-12 lg:py-16 px-6 md:px-12 max-w-[1440px] mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {topics.map((topic) => (
               <div
@@ -141,14 +141,14 @@ export default function HelpPage() {
 
       {/* Send a Message */}
       <div className="bg-background my-5">
-        <section className="py-16 px-6 md:px-12 max-w-[1440px] mx-auto">
-          <h2 className="text-2xl md:text-3xl font-semibold text-black mb-8">
+        <section className="py-10 md:py-12 lg:py-16 px-6 md:px-12 max-w-[1440px] mx-auto">
+          <h2 className="text-2xl md:text-3xl font-semibold text-black mb-4 md:mb-8">
             Not resolved? Send us a Message
           </h2>
 
           {/* Custom Dropdown */}
           <div className="mb-6">
-            <label className="block font-baloo text-lg text-black font-medium mb-2">
+            <label className="block font-baloo text-base md:text-lg text-black font-medium mb-2">
               Select Category
             </label>
             <div className="relative w-full">
@@ -156,7 +156,7 @@ export default function HelpPage() {
                 type="button"
                 onClick={() => setOpen(!open)}
                 className={`w-full border border-[#D9D9D9] rounded-lg px-4 py-4 outline-none flex items-center justify-between ${
-                  selected ? "text-muted" : "text-muted/50"
+                  selected ? "text-muted text-xs md:text-sm" : "text-muted/50 text-xs md:text-sm"
                 }`}
               >
                 {selected || "Select category"}
@@ -186,7 +186,7 @@ export default function HelpPage() {
           </div>
 
           <div className="mb-6">
-            <label className="block font-baloo text-lg text-black font-medium mb-2">
+            <label className="block font-baloo text-base md:text-lg text-black font-medium mb-2">
               Message
             </label>
             <textarea
@@ -194,13 +194,13 @@ export default function HelpPage() {
               rows={6}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="w-full border border-[#D9D9D9] text-lg rounded-lg px-4 py-4 text-muted outline-none resize-none"
+              className="w-full border border-[#D9D9D9] text-xs md:text-sm rounded-lg px-4 py-4 text-muted outline-none resize-none"
             />
           </div>
-          <div className="flex justify-end">
+          <div className="flex justify-center md:justify-end">
             <button
               onClick={handleSend}
-              className="bg-primary cursor-pointer text-white font-semibold text-lg px-8 py-3 font-baloo rounded-lg hover:bg-orange-600 transition-colors"
+              className="bg-primary w-[250px] cursor-pointer text-white font-semibold text-lg px-8 py-3 font-baloo rounded-lg hover:bg-orange-600 transition-colors"
             >
               Send Message
             </button>
@@ -210,11 +210,11 @@ export default function HelpPage() {
 
       {/* Social Media */}
       <div className="bg-background my-5">
-        <section className="py-16 px-6 md:px-12 max-w-[1440px] mx-auto border-t border-gray-100">
-          <h2 className="text-2xl md:text-3xl font-semibold text-black mb-10">
+        <section className="py-10 md:py-12 lg:py-16 md:px-12 max-w-[1440px] mx-auto border-t border-gray-100">
+          <h2 className="text-2xl px-4 md:px-0 md:text-3xl font-semibold text-black mb-10">
             Reach out through Social Media
           </h2>
-          <div className="flex flex-wrap gap-16">
+          <div className="flex flex-wrap px-6 md:px-0 gap-16">
             {socials.map((s) => (
               <div key={s.id} className="flex flex-col gap-2">
                 <span className="text-primary text-3xl">{s.icon}</span>
@@ -228,7 +228,7 @@ export default function HelpPage() {
       {/* Contact Info */}
       <div className="bg-background my-5">
         <section className="py-12 px-6 md:px-12 max-w-[1440px] mx-auto">
-          <div className="flex flex-col md:flex-row gap-8 justify-between">
+          <div className="flex flex-col md:flex-row gap-12 justify-between">
             <div className="flex flex-col items-start gap-2">
               <div className="flex gap-1 items-center ">
                 <FaLocationDot className="w-6 h-6" />

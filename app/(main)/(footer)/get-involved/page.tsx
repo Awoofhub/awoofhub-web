@@ -20,7 +20,7 @@ export default function GetInvolved() {
     <main className="bg-white">
       {/* Hero */}
       <div className="bg-background my-5">
-        <section className="px-6 md:px-12 py-8 max-w-[1440px] mx-auto text-center">
+        <section className="px-6 md:px-12 py-6 md:py-8 max-w-[1440px] mx-auto text-center">
           <h2 className="text-primary px-6 py-2 rounded-xl mb-8 font-semibold inline-flex uppercase bg-gray-50 border border-gray-100 shadow-md">
             Community
           </h2>
@@ -56,8 +56,9 @@ export default function GetInvolved() {
       </div>
 
       {/* Get Involved */}
-        <section className="px-6 md:px-12 py-16 max-w-[1440px] mx-auto text-center">
-          <h2 className="text-2xl md:text-4xl font-semibold text-black mb-6">
+      <div className="bg-background md:bg-white my-5">
+        <section className="px-6 md:px-12 py-8 md:py-10 lg:py-14 max-w-[1440px] mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-semibold text-black mb-2 md:mb-6">
             Get Involved
           </h2>
           <p className="text-muted text-base md:text-lg lg:text-xl font-medium max-w-5xl mx-auto mb-10">
@@ -71,15 +72,16 @@ export default function GetInvolved() {
             href="https://slack.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block px-12 py-2 font-baloo bg-primary text-base md:text-lg lg:text-xl text-white font-semibold rounded-md hover:bg-orange-600 transition-colors mb-12"
+            className="inline-block px-12 py-2 font-baloo bg-primary text-base md:text-lg lg:text-xl text-white font-semibold rounded-md hover:bg-orange-600 transition-colors md:mb-8"
           >
             Join us on Slack
           </Link>
         </section>
+        </div>
 
       {/* Social Media */}
       <div className="bg-background my-5">
-        <section className="py-16 px-6 md:px-12 max-w-[1440px] mx-auto">
+        <section className="py-8 md:py-10 lg:py-16 px-6 md:px-12 max-w-[1440px] mx-auto">
           <h2 className="text-2xl md:text-3xl font-semibold text-black mb-10">
             Connect with us:
           </h2>

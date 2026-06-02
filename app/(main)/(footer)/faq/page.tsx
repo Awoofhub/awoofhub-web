@@ -88,15 +88,15 @@ export default function FAQs() {
     <main className="bg-white">
       {/* Hero */}
       <div className="bg-background my-5">
-        <section className="px-6 md:px-12 xl:px-24 py-16 max-w-[1440px] mx-auto">
-          <h2 className="text-primary px-6 py-2 rounded-xl mb-8 font-semibold inline-flex uppercase bg-gray-50 border border-gray-100 shadow-md">
+        <section className="px-6 md:px-12 xl:px-24 py-8 md:py-12 lg:py-16 max-w-[1440px] mx-auto">
+          <h2 className="text-primary hidden px-6 py-2 rounded-xl mb-8 font-semibold md:inline-flex uppercase bg-gray-50 border border-gray-100 shadow-md">
             FAQs
           </h2>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-black mb-6 ">
+          <h1 className="text-3xl text-center md:text-start md:text-4xl lg:text-5xl font-semibold text-black mb-4 md:mb-6 ">
             Most of your frequently asked{" "}
             <span className="text-primary">questions</span> answered
           </h1>
-          <p className="text-muted text-base md:text-lg lg:text-xl font-medium max-w-6xl">
+          <p className="text-muted text-center md:text-start text-base md:text-lg lg:text-xl font-medium max-w-6xl">
             On this page, the AwoofHub team has answered all your questions
             related to the product and services. If you can't find an answer
             that you're looking for, feel free to drop us a line.
@@ -106,7 +106,7 @@ export default function FAQs() {
 
       {/* FAQ Accordion */}
       <div className="bg-background my-5">
-        <section className="px-6 md:px-12 py-16 max-w-[1440px] mx-auto">
+        <section className="px-6 md:px-12 py-8 md:py-12 lg:py-16 max-w-[1440px] mx-auto">
           <div className="space-y-3">
             {faqs.map((faq, index) => (
               <div
@@ -115,7 +115,7 @@ export default function FAQs() {
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  className="w-full flex items-center gap-6 px-6 py-8 text-left hover:bg-gray-50 transition-colors"
+                  className="w-full flex items-center gap-4 px-6 py-8 text-left hover:bg-gray-50 transition-colors"
                 >
                   {openFaq === index ? (
                     <HiMinus className="text-[#52BD95] w-5 h-5 flex-shrink-0" />
@@ -142,14 +142,14 @@ export default function FAQs() {
 
       {/* Send a Message */}
       <div className="bg-background my-5">
-        <section className="py-16 px-6 md:px-12 max-w-[1440px] mx-auto">
-          <h2 className="text-2xl md:text-3xl font-semibold text-black mb-8">
+        <section className="py-10 md:py-12 lg:py-16 px-6 md:px-12 max-w-[1440px] mx-auto">
+          <h2 className="text-2xl md:text-3xl font-semibold text-black mb-4 md:mb-8">
             Not resolved? Send us a Message
           </h2>
 
           {/* Custom Dropdown */}
           <div className="mb-6">
-            <label className="block font-baloo text-lg text-black font-medium mb-2">
+            <label className="block font-baloo text-base md:text-lg text-black font-medium mb-2">
               Select Category
             </label>
             <div className="relative w-full">
@@ -157,7 +157,7 @@ export default function FAQs() {
                 type="button"
                 onClick={() => setOpen(!open)}
                 className={`w-full border border-[#D9D9D9] rounded-lg px-4 py-4 outline-none flex items-center justify-between ${
-                  selected ? "text-muted" : "text-muted/50"
+                  selected ? "text-muted text-xs md:text-sm" : "text-muted/50 text-xs md:text-sm"
                 }`}
               >
                 {selected || "Select category"}
@@ -187,7 +187,7 @@ export default function FAQs() {
           </div>
 
           <div className="mb-6">
-            <label className="block font-baloo text-lg text-black font-medium mb-2">
+            <label className="block font-baloo text-base md:text-lg text-black font-medium mb-2">
               Message
             </label>
             <textarea
@@ -195,13 +195,13 @@ export default function FAQs() {
               rows={6}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="w-full border border-[#D9D9D9] text-lg rounded-lg px-4 py-4 text-muted outline-none resize-none"
+              className="w-full border border-[#D9D9D9] text-xs md:text-sm rounded-lg px-4 py-4 text-muted outline-none resize-none"
             />
           </div>
-          <div className="flex justify-end">
+          <div className="flex justify-center md:justify-end">
             <button
               onClick={handleSend}
-              className="bg-primary cursor-pointer text-white font-semibold text-lg px-8 py-3 font-baloo rounded-lg hover:bg-orange-600 transition-colors"
+              className="bg-primary w-[250px] cursor-pointer text-white font-semibold text-lg px-8 py-3 font-baloo rounded-lg hover:bg-orange-600 transition-colors"
             >
               Send Message
             </button>

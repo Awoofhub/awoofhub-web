@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ExpandableSearch from '../search/ExpandableSearch';
 import SearchInput from '../search/SearchInput';
 import DesktopMenu from './desktop/DesktopMenu';
@@ -9,6 +9,10 @@ import MobileMenu from './mobile/MobileMenu';
 
 export default function Header() {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
+    useEffect(() => {
+        console.log("HEADER MOUNTED");
+        return () => console.log("HEADER UNMOUNTED");
+    }, []);
 
     return (
         <header className="sticky top-0 left-0 z-[99] bg-white shadow-lg shadow-black/5 relative">

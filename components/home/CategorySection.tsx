@@ -19,9 +19,9 @@ export default function CategorySection({ category }: Props) {
     });
 
     return (
-        <section id={category.id} className="pb-16 px-6 md:px-12">
+        <section id={category.id}  className="pb-16 px-6 md:px-12">
             <div className="flex justify-between items-baseline mb-3 sm:mb-6">
-                <h3 className="text-xl sm:text-2xl font-bold">
+                <h3 id={`cat-heading-${category.id}`} className="text-xl sm:text-2xl font-bold">
                     {category.name}
                 </h3>
 

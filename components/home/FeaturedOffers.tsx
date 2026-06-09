@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useCategory } from "@/features/category/useCategory";
 import { useEffect, useState } from "react";
 import Loading from "../loading/Loading";
@@ -6,33 +6,38 @@ import CategorizedOffers from "./CategorizedOffers";
 import CategoryLinks from "./CategoryLinks";
 
 export default function FeaturedOffers() {
-  const { data, isFetching, isFetched } = useCategory()
-  const [activeId, setActiveId] = useState("")
+  const { data, isFetching, isFetched } = useCategory();
+  const [activeId, setActiveId] = useState("");
 
   useEffect(() => {
-    if (!data || data.length === 0) return
+    if (!data || data.length === 0) return;
 
-    const observers: IntersectionObserver[] = []
+    const stickyOffset = window.innerWidth < 768 ? 112 : 128;
+
+    const observers: IntersectionObserver[] = [];
 
     data.forEach((cat) => {
-      const el = document.getElementById(cat.id)
-      if (!el) return
+      const heading = document.getElementById(`cat-heading-${cat.id}`);
+      if (!heading) return;
 
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
-            setActiveId(cat.id)
+            setActiveId(cat.id);
           }
         },
-        { threshold: 0.3 } // triggers when 30% of section is visible
-      )
+        {
+          rootMargin: `-${stickyOffset}px 0px -50% 0px`,
+          threshold: 0,
+        },
+      );
 
-      observer.observe(el)
-      observers.push(observer)
-    })
+      observer.observe(heading);
+      observers.push(observer);
+    });
 
-    return () => observers.forEach((obs) => obs.disconnect())
-  }, [data])
+    return () => observers.forEach((obs) => obs.disconnect());
+  }, [data]);
 
   return (
     <>

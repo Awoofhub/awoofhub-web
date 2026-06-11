@@ -29,12 +29,10 @@ export default function ProfilePageWrapper({ userId, children }: Props) {
   }
 
   const isOwnProfile = currentUser?.id === user.id;
-  const isOwnBusiness = currentUser?.role === "business"
-
+ 
   return (
     <>     
       <ProfileHeader
-        isOwnBusiness={isOwnBusiness}
         isOwnProfile={isOwnProfile}
         profile={user}
       />

@@ -13,14 +13,12 @@ import ProfileActionButtons from "./ProfileActionButtons";
 import Tabs from "./Tabs";
 
 interface Props {
-  isOwnBusiness: boolean;
   isOwnProfile: boolean;
   profile: User;
 }
 
 export default function ProfileHeader({
   isOwnProfile,
-  isOwnBusiness,
   profile,
 }: Props) {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
@@ -91,12 +89,12 @@ export default function ProfileHeader({
                 >
                   Edit Profile
                 </Link>
-              ) : isOwnBusiness ? null : (
+              ) : (
                 <ProfileActionButtons targetUserId={profile.id} />
               )}
             </div>
 
-            <Tabs isOwnBusiness={isOwnBusiness} />
+            <Tabs />
           </div>
         </div>
 

@@ -1,7 +1,9 @@
 "use client"
-import SingleOfferSkeleton from "@/components/offer/user/SingleOfferSkeleton";
+
 import ShareModal from "@/components/modals/ShareModal";
-import SingleOffer from "@/components/offer/user/SingleOffer";
+import SingleOffer from "@/components/offer/SingleOffer";
+import SingleOfferSkeleton from "@/components/offer/SingleOfferSkeleton";
+
 import OfferList from "@/components/offers/OfferList";
 import OfferListSkeleton from "@/components/offers/OfferListSkeleton";
 import { useOffer } from "@/features/offers/useOffer";

@@ -3,12 +3,11 @@
 import ReportModal from "@/components/modals/ReportModal";
 import { Offer } from "@/types/offer";
 import Image from 'next/image';
-import Link from "next/link";
 import { useState } from "react";
-import ChatButton from "../../chat/ChatButton";
-import Comment from "../../comment/Comment";
-import ReviewChart from "../../review/ReviewChart";
-import BusinessLink from "./BusinessLink";
+import ChatButton from "../chat/ChatButton";
+import Comment from "../comment/Comment";
+import ReviewChart from "../review/ReviewChart";
+import CreatorLink from "./CreatorLink";
 import OfferInfo from "./OfferInfo";
 import TrustSection from "./TrustSection";
 
@@ -52,7 +51,7 @@ export default function SingleOffer({ offer }: Props) {
 
                 <div className="md:col-span-5">
                     <div className="flex justify-between items-center mb-6">
-                        <BusinessLink offer={offer} />
+                        <CreatorLink offer={offer} />
                         <span className="bg-green-100 text-green-700 text-xs animate-pulse font-bold px-2 py-1 rounded">
                             Available
                         </span>

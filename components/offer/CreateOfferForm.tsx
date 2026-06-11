@@ -16,10 +16,6 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
-import { DatePickerField } from "../../date/DatePickerField";
-import { GoogleAutocompleteNew } from "../../form/AutoComplete";
-import { InputField } from "../../form/InputField";
-
 import { FiGlobe } from "react-icons/fi";
 
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
@@ -29,6 +25,10 @@ import { FilePond, registerPlugin } from "react-filepond";
 import { Button } from '@/components/button/Button';
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import "filepond/dist/filepond.min.css";
+
+import { DatePickerField } from "../date/DatePickerField";
+import { GoogleAutocompleteNew } from "../form/AutoComplete";
+import { InputField } from "../form/InputField";
 
 registerPlugin(
     FilePondPluginImagePreview,
@@ -103,7 +103,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                                         color: "#374151",
                                     },
 
-                                    "&.Mui-focused": {
+                                    "&.Mui-focused": { 
                                         color: "#f56600",
                                     },
 

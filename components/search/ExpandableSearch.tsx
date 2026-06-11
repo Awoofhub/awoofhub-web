@@ -1,7 +1,6 @@
 "use client"
 import { useFilter } from '@/features/offers/useFilter';
-import { useUser } from '@/features/user/useUser';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { Suspense } from "react";
 import { IoMdClose } from "react-icons/io";
 import { IoSearchSharp } from "react-icons/io5";
@@ -15,13 +14,8 @@ interface Props {
 
 function ExpandableSearchContent({ isOverlay, isOpen, onOpen, onClose }: Props) {
     const searchParams = useSearchParams();
-    const router = useRouter();
-    const { data } = useUser();
 
-    const isBusiness = data?.role === "business";
-    const basePath = isBusiness ? "/business/offers" : "/offers";
-
-    const updateFilter = useFilter(basePath);
+    const updateFilter = useFilter("/offers");
 
 
     if (isOverlay) {

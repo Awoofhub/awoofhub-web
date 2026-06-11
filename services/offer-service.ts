@@ -1,6 +1,6 @@
 import { apiClient } from "@/lib/api-client";
 import { ApiResponse } from "@/types/api-response";
-import { BusinessDashboard, CreateOfferData, Offer, UpdateOfferData } from "@/types/offer";
+import { CreateOfferData, Offer, UpdateOfferData } from "@/types/offer";
 
 async function createOffer(payload: CreateOfferData): Promise<ApiResponse<Offer>> {
   const res: ApiResponse<Offer> = await apiClient.post('/offers/', payload)
@@ -18,14 +18,6 @@ async function offers(search: string, category: string, minRating: number, creat
 
 async function offersByUser(id: string, search: string, category: string, minRating: number, createdFrom: string, createdTo: string, page: number, limit: number): Promise<ApiResponse<Offer[]>> {
   const res: ApiResponse<Offer[]> = await apiClient.get(`/offers/user/${id}`, {
-    params: { search, category, minRating, createdFrom, createdTo, page, limit },
-  })
-
-  return res;
-}
-
-async function offersByBusiness(search: string, category: string, minRating: number, createdFrom: string, createdTo: string, page: number, limit: number): Promise<ApiResponse<Offer[]>> {
-  const res: ApiResponse<Offer[]> = await apiClient.get(`/offers/business/`, {
     params: { search, category, minRating, createdFrom, createdTo, page, limit },
   })
 
@@ -66,21 +58,13 @@ async function deleteOffer(id: string): Promise<ApiResponse<Offer>> {
   return res;
 }
 
-async function businessDashboard(): Promise<ApiResponse<BusinessDashboard>> {
-  const res: ApiResponse<BusinessDashboard> = await apiClient.get("/offers/business/dashboard/")
-
-  return res;
-}
-
 
 const OfferService = {
   createOffer,
   offers,
   offersByUser,
-  offersByBusiness,
   offerById,
   offersByCategory,
-  businessDashboard,
   randomOffers,
   updateOffer,
   deleteOffer,

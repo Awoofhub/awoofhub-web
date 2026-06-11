@@ -22,4 +22,3 @@ export const useLatestModeration = ({ id }: GetLatestModerationOptions) => {
         isLoading
     };
 };
-

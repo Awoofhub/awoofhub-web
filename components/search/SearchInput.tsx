@@ -1,6 +1,5 @@
 'use client'
 import { useFilter } from '@/features/offers/useFilter';
-import { useUser } from '@/features/user/useUser';
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { FiSearch } from 'react-icons/fi';
@@ -8,12 +7,7 @@ import { FiSearch } from 'react-icons/fi';
 
 function SearchInputContent() {
   const searchParams = useSearchParams();
-  const { data } = useUser();
-
-  const isBusiness = data?.role === "business";
-  const basePath = isBusiness ? "/business/offers" : "/offers";
-
-  const updateFilter = useFilter(basePath);
+  const updateFilter = useFilter("/offers");
 
   return (
     <div className="hidden lg:flex items-center w-[434px] h-[46px] px-6 rounded-2xl border border-muted/30 bg-background-light">

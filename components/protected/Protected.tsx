@@ -5,36 +5,32 @@ import { ReactNode, useEffect } from 'react';
 import Loading from '../loading/Loading';
 
 export type ProtectedProps = {
-    role?: "user" | "business";
     children: ReactNode;
 };
 
-export default function Protected({ role, children }: ProtectedProps) {
+export default function Protected({ children }: ProtectedProps) {
     const router = useRouter();
     const pathname = usePathname();
     const user = useUser();
+
+    const REQUIRED_ROLE = "user";
 
     useEffect(() => {
         if (!user.isLoading) {
             if (!user.data) {
                 router.replace(`/login?redirect=${pathname}`);
             }
-            else if (role && user.data.role !== role) {
+            else if (user.data && user.data?.role !== REQUIRED_ROLE) {
                 router.replace('/unauthorized');
             }
         }
-    }, [user.data, user.isLoading, pathname, router, role]);
+    }, [user.data, user.isLoading, pathname, router]);
 
     if (user.isLoading) {
         return <Loading />;
     }
 
-    const userRole = user.data?.role;
-
-    const canAccess = user.data && (role ? userRole === role : (userRole === 'user' || userRole === 'business')
-    );
-
-    if (!canAccess) {
+     if (user.data?.role !== REQUIRED_ROLE) {
         return null;
     }
 

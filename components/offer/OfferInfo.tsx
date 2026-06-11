@@ -1,9 +1,9 @@
 import { Offer } from "@/types/offer";
 import Rating from "@mui/material/Rating";
 import { MapPin } from "lucide-react";
-import WishlistButton from "../../wishlist/WishlistButton";
-import Action from "../Action";
-import Terms from "../Terms";
+import WishlistButton from "../wishlist/WishlistButton";
+import Action from "./Action";
+import Terms from "./Terms";
 
 interface Props {
     offer: Offer;

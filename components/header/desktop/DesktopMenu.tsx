@@ -10,7 +10,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
 import { FiHelpCircle, FiHome, FiLogOut, FiUser } from "react-icons/fi";
-import { GoArrowSwitch } from "react-icons/go";
 import { HiOutlineEnvelope } from "react-icons/hi2";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { PiHeart } from "react-icons/pi";
@@ -59,77 +58,47 @@ export default function DesktopMenu() {
     <ul className="hidden lg:flex items-center list-none p-0 m-0">
       {isLoggedIn && (
         <>
-          {isBusiness ? (
-            <>
-              {/* Message */}
-              <li className="px-[10px] flex items-center text-[1.7rem] relative group border-r border-gray-300">
-                <Link
-                  href="/message"
-                  className={`relative ${pathname === "/message" ? "text-primary" : ""}`}
-                >
-                  <HiOutlineEnvelope size={28} />
-                  {!!messageCount && messageCount > 0 && (
-                    <div className="absolute -top-1 -right-2 w-6 h-6 bg-red-500 text-white text-[12px] font-bold flex items-center justify-center rounded-full border-2 border-white">
-                      {messageCount > 99 ? "99+" : messageCount}
-                    </div>
-                  )}
-                </Link>
-              </li>
+          <li className="px-[10px] flex items-center text-[1.7rem] relative group border-r border-gray-300">
+            <Link
+              href="/"
+              className={`${pathname === "/" ? "text-primary" : ""}`}
+            >
+              <FiHome size={26} />
+            </Link>
+          </li>
 
-              <li className="px-[10px] flex items-center text-[1.7rem] relative group border-r border-gray-300">
-                <Link
-                  href="/notifications"
-                  className={`${pathname === "/notifications" ? "text-primary" : ""}`}
-                >
-                  <IoNotificationsOutline size={28} />
-                </Link>
-              </li>
-            </>
-          ) : (
-            <>
-              <li className="px-[10px] flex items-center text-[1.7rem] relative group border-r border-gray-300">
-                <Link
-                  href="/"
-                  className={`${pathname === "/" ? "text-primary" : ""}`}
-                >
-                  <FiHome size={26} />
-                </Link>
-              </li>
+          {/* Message */}
+          <li className="px-[10px] flex items-center text-[1.7rem] relative group border-r border-gray-300">
+            <Link
+              href="/message"
+              className={`relative ${pathname === "/message" ? "text-primary" : ""}`}
+            >
+              <HiOutlineEnvelope size={28} />
+              {!!messageCount && messageCount > 0 && (
+                <div className="absolute -top-1 -right-2 w-6 h-6 bg-red-500 text-white text-[12px] font-bold flex items-center justify-center rounded-full border-2 border-white">
+                  {messageCount > 99 ? "99+" : messageCount}
+                </div>
+              )}
+            </Link>
+          </li>
 
-              {/* Message */}
-              <li className="px-[10px] flex items-center text-[1.7rem] relative group border-r border-gray-300">
-                <Link
-                  href="/message"
-                  className={`relative ${pathname === "/message" ? "text-primary" : ""}`}
-                >
-                  <HiOutlineEnvelope size={28} />
-                  {!!messageCount && messageCount > 0 && (
-                    <div className="absolute -top-1 -right-2 w-6 h-6 bg-red-500 text-white text-[12px] font-bold flex items-center justify-center rounded-full border-2 border-white">
-                      {messageCount > 99 ? "99+" : messageCount}
-                    </div>
-                  )}
-                </Link>
-              </li>
+          <li className="px-[10px] flex items-center text-[1.7rem] relative group border-r border-gray-300">
+            <Link
+              href="/wishlist"
+              className={`${pathname === "/wishlist" ? "text-primary" : ""}`}
+            >
+              <PiHeart size={28} />
+            </Link>
+          </li>
 
-              <li className="px-[10px] flex items-center text-[1.7rem] relative group border-r border-gray-300">
-                <Link
-                  href="/wishlist"
-                  className={`${pathname === "/wishlist" ? "text-primary" : ""}`}
-                >
-                  <PiHeart size={28} />
-                </Link>
-              </li>
-
-              <li className="px-[10px] flex items-center text-[1.7rem] relative group border-r border-gray-300">
-                <Link
-                  href="/notifications"
-                  className={`${pathname === "/notifications" ? "text-primary" : ""}`}
-                >
-                  <IoNotificationsOutline size={28} />
-                </Link>
-              </li>
-            </>
-          )}
+          <li className="px-[10px] flex items-center text-[1.7rem] relative group border-r border-gray-300">
+            <Link
+              href="/notifications"
+              className={`${pathname === "/notifications" ? "text-primary" : ""}`}
+            >
+              <IoNotificationsOutline size={28} />
+            </Link>
+          </li>
 
           <li
             ref={dropdownRef}
@@ -178,11 +147,6 @@ export default function DesktopMenu() {
                       label: "Help & Support",
                       icon: <FiHelpCircle />,
                       href: "/help",
-                    },
-                    {
-                      label: "Account Type",
-                      icon: <GoArrowSwitch />,
-                      href: "/switch-account",
                     },
                   ].map((item, idx) => (
                     <li

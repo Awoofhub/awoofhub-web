@@ -1,8 +1,9 @@
 import { Offer } from "@/types/offer";
 import { CheckCircle2 } from "lucide-react";
-import AlertButton from "../../alert/Alert";
-import Review from "../../review/Review";
-import BusinessLink from "./BusinessLink";
+
+import AlertButton from "../alert/Alert";
+import Review from "../review/Review";
+import CreatorLink from "./CreatorLink";
 
 interface Props {
     offer: Offer;
@@ -13,7 +14,7 @@ export default function TrustSection({ offer }: Props) {
         <section className="border-t border-b border-gray-300 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 py-5 items-start">
             {/* Store Info */}
             <div className="flex flex-col items-center gap-3">
-                <BusinessLink offer={offer} />
+                <CreatorLink offer={offer} />
                 <AlertButton businessId={offer.business.id} />
             </div>
 

@@ -3,34 +3,22 @@
 import { usePathname } from 'next/navigation';
 import { TabButton } from '../tabButton/TabButton';
 
-
-interface Props {
-  isOwnBusiness: boolean;
-}
-
-export default function Tabs({ isOwnBusiness }: Props) {
+export default function Tabs() {
   const pathname = usePathname();
 
   const segments = pathname.split('/').filter(Boolean);
 
   const basePath = `/${segments[0]}/${segments[1]}`;
 
-  const allTabs = [
-    { title: 'Offers', href: `${basePath}/offers`, businessHidden: true },
-    { title: 'About', href: basePath, businessHidden: false },
-  ];
-
-  const visibleTabs = allTabs.filter(tab => {
-    if (isOwnBusiness && tab.businessHidden) {
-      return false;
-    }
-    return true;
-  });
+  const currentPath = pathname;
 
   return (
     <div className="mt-4 inline-flex gap-6 overflow-x-auto">
-      {visibleTabs.map((item) => {
-        const isActive = pathname === item.href;
+      {[
+        { title: 'Offers', href: basePath },
+        { title: 'About', href: `${basePath}/about` },
+      ].map((item) => {
+        const isActive = currentPath === item.href;
 
         return (
           <TabButton

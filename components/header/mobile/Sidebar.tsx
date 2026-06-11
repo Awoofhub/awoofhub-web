@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FiHelpCircle, FiLogOut, FiUser } from "react-icons/fi";
-import { GoArrowSwitch } from "react-icons/go";
 
 interface Props {
   user: User;
@@ -51,11 +50,6 @@ export default function Sidebar({ user, isOpen, onClose }: Props) {
           {[
             { label: "Profile", icon: <FiUser />, href: `/profile/${user.id}` },
             { label: "Help & Support", icon: <FiHelpCircle />, href: "/help" },
-            {
-              label: "Account Type",
-              icon: <GoArrowSwitch />,
-              href: "/switch-account",
-            },
           ].map((item, idx) => (
             <li key={idx} className="border-b border-muted/10 last:border-none">
               <Link

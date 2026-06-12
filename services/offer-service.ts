@@ -58,6 +58,22 @@ async function deleteOffer(id: string): Promise<ApiResponse<Offer>> {
   return res;
 }
 
+async function trendingOffers(page: number, limit: number): Promise<ApiResponse<Offer[]>> {
+  const res: ApiResponse<Offer[]> = await apiClient.get('/offers/trending', {
+    params: { page, limit },
+  })
+
+  return res;
+}
+
+async function expiringOffers(page: number, limit: number): Promise<ApiResponse<Offer[]>> {
+  const res: ApiResponse<Offer[]> = await apiClient.get('/offers/expiring', {
+    params: { page, limit },
+  })
+
+  return res;
+}
+
 
 const OfferService = {
   createOffer,
@@ -66,6 +82,8 @@ const OfferService = {
   offerById,
   offersByCategory,
   randomOffers,
+  trendingOffers,
+  expiringOffers,
   updateOffer,
   deleteOffer,
 };

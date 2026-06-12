@@ -1,3 +1,4 @@
+import { useGrabOffer } from '@/features/offers/useGrabOffer';
 import { Offer } from '@/types/offer';
 import { formatDate } from '@/utils/formatDate';
 import { CopyAll } from '@mui/icons-material'; // Or use any Lucide/Heroicon
@@ -9,12 +10,23 @@ interface Props {
 export default function Action({ offer }: Props) {
     const [copied, setCopied] = useState(false);
 
+    const grab = useGrabOffer({ id: offer.id });
+
+
     const handleCopy = () => {
         if (!offer.couponCode) return;
 
         navigator.clipboard.writeText(offer.couponCode);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
+    };
+
+    const handleClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+
+        grab.grabOffer();
+
+        window.open(offer.dealUrl, "_blank", "noopener,noreferrer");
     };
 
     const getActionText = () => {
@@ -75,6 +87,7 @@ export default function Action({ offer }: Props) {
                     href={offer.dealUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={handleClick}
                     className="w-45 cursor-pointer flex justify-center items-center bg-[#006400] text-white font-bold py-2 px-8 rounded-sm"
                 >
                     {getActionText()}

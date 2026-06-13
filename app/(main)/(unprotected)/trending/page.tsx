@@ -5,7 +5,7 @@ import OfferInfiniteList from "@/components/offers/OfferInfiniteList";
 import OfferListSkeleton from "@/components/offers/OfferListSkeleton";
 import { useTrendingOffers } from "@/features/offers/useTrendingOffers";
 import { Spinner } from "@chakra-ui/react";
-import { Suspense, useMemo } from "react";
+import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 function TrendingResults() {

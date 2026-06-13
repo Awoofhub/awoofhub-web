@@ -25,7 +25,7 @@ export default function TrendingOffers() {
           </span>
 
           <Link
-            href="/offers/trending"
+            href="/trending"
             className="group inline-flex items-center gap-2 text-white font-medium hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
           >
             <span className="text-white text-xs sm:text-sm font-bold">

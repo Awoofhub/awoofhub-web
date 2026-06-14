@@ -23,7 +23,7 @@ export default function CategoryLinks({ categories, activeId }: Props) {
   }, [activeId]);
 
   return (
-    <div className="sticky bg-white top-16 lg:top-20 z-40 mb-10 border-b border-gray-200 py-3 px-6 md:px-12">
+    <div className="max-w-[1440px] mx-auto sticky bg-white top-16 lg:top-20 z-40 mb-10 border-b border-gray-200 py-3 px-6 md:px-12">
       <div className="flex flex-col md:flex-row md:gap-10 md:items-center md:justify-between">
         <h2 className="text-primary font-bold text-xl py-2 mb-2 md:mb-0">
           Categories

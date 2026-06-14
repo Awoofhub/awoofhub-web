@@ -1,4 +1,4 @@
-export interface CreateOfferData { 
+export interface CreateOfferData {
   title: string;
   description: string;
   category: string;
@@ -8,18 +8,17 @@ export interface CreateOfferData {
   couponCode: string;
   termsAndConditions: string;
   location: string;
-  endDate: string | null; 
-};
+  endDate: string | null;
+}
 
 export interface UpdateOfferData {
   title?: string;
-  highlight?: string
+  highlight?: string;
   description?: string;
   category?: string;
   imageUrl?: string;
   location?: string;
-};
-
+}
 
 export interface Offer {
   id: string;
@@ -33,6 +32,7 @@ export interface Offer {
   business: {
     id: string;
     name: string;
+    username: string;
   };
   category: {
     id: string;
@@ -43,14 +43,15 @@ export interface Offer {
   status: "pending" | "approved" | "rejected";
   createdAt: string;
   endDate: string;
-  avgRating: number,
-  reviewCount: number,
-  ratingDistribution: {}
-};
+  avgRating: number;
+  reviewCount: number;
+  clickCount: number;
+  ratingDistribution: {};
+}
 
 export interface Stats {
   totalAds: number;
-  activeAds: number
+  activeAds: number;
   pendingAds: number;
   rejectedAds: number;
   expiredAds: number;
@@ -81,4 +82,3 @@ export interface BusinessDashboard {
     expiringOffers: ExpiringOffers;
   };
 }
-

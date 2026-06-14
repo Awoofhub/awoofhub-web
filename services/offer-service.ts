@@ -16,6 +16,14 @@ async function offers(search: string, category: string, minRating: number, creat
   return res;
 }
 
+
+async function grab(id: string): Promise<ApiResponse<any>> {
+  const res: ApiResponse<any> = await apiClient.post(`/clicks/offer/${id}`)
+
+  return res;
+}
+
+
 async function offersByUser(id: string, search: string, category: string, minRating: number, createdFrom: string, createdTo: string, page: number, limit: number): Promise<ApiResponse<Offer[]>> {
   const res: ApiResponse<Offer[]> = await apiClient.get(`/offers/user/${id}`, {
     params: { search, category, minRating, createdFrom, createdTo, page, limit },
@@ -58,14 +66,33 @@ async function deleteOffer(id: string): Promise<ApiResponse<Offer>> {
   return res;
 }
 
+async function trendingOffers(page: number, limit: number): Promise<ApiResponse<Offer[]>> {
+  const res: ApiResponse<Offer[]> = await apiClient.get('/offers/trending', {
+    params: { page, limit },
+  })
+
+  return res;
+}
+
+async function expiringOffers(page: number, limit: number): Promise<ApiResponse<Offer[]>> {
+  const res: ApiResponse<Offer[]> = await apiClient.get('/offers/expiring', {
+    params: { page, limit },
+  })
+
+  return res;
+}
+
 
 const OfferService = {
   createOffer,
   offers,
+  grab,
   offersByUser,
   offerById,
   offersByCategory,
   randomOffers,
+  trendingOffers,
+  expiringOffers,
   updateOffer,
   deleteOffer,
 };

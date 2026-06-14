@@ -1,6 +1,6 @@
 'use client'
 import { useUser } from '@/features/user/useUser';
-import { capitalizeFirstLetter, firstFiveLetters } from '@/utils/truncate';
+import { capitalizeFirstLetter } from '@/utils/truncate';
 import Image from "next/image";
 import Link from 'next/link';
 import { useState } from 'react';
@@ -18,9 +18,6 @@ export default function MobileMenu() {
                 {currentUser ? (
                     <>
                         <div className="flex items-center text-[24px] relative">
-                            <span className="mr-3 text-[18px] sm:text-[20px] font-medium">
-                                {"Hi " + firstFiveLetters(currentUser.name)}
-                            </span>
 
                             <div role="button" className="flex items-center gap-2 cursor-pointer" onClick={() => setIsOpenSideBar(!isOpenSideBar)}>
                                 <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden">

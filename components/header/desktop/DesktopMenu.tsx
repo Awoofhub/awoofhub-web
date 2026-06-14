@@ -1,14 +1,16 @@
 "use client";
+import { Button } from '@/components/button/Button';
 import LogoutModal from "@/components/modals/LogoutModal";
 import { useLogout } from "@/features/auth/useLogout";
 import { useMessageCount } from "@/features/chat/useMessageCount";
 import { useUser } from "@/features/user/useUser";
-import { capitalizeFirstLetter, firstFiveLetters } from "@/utils/truncate";
+import { capitalizeFirstLetter } from "@/utils/truncate";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
+import { FaList } from "react-icons/fa6";
 import { FiHelpCircle, FiHome, FiLogOut, FiUser } from "react-icons/fi";
 import { HiOutlineEnvelope } from "react-icons/hi2";
 import { IoNotificationsOutline } from "react-icons/io5";
@@ -67,18 +69,12 @@ export default function DesktopMenu() {
             </Link>
           </li>
 
-          {/* Message */}
           <li className="px-[10px] flex items-center text-[1.7rem] relative group border-r border-gray-300">
             <Link
-              href="/message"
-              className={`relative ${pathname === "/message" ? "text-primary" : ""}`}
+              href="/my-offers"
+              className={`relative ${pathname === "/my-offers" ? "text-primary" : ""}`}
             >
-              <HiOutlineEnvelope size={28} />
-              {!!messageCount && messageCount > 0 && (
-                <div className="absolute -top-1 -right-2 w-6 h-6 bg-red-500 text-white text-[12px] font-bold flex items-center justify-center rounded-full border-2 border-white">
-                  {messageCount > 99 ? "99+" : messageCount}
-                </div>
-              )}
+              <FaList size={24} />
             </Link>
           </li>
 
@@ -97,6 +93,20 @@ export default function DesktopMenu() {
               className={`${pathname === "/notifications" ? "text-primary" : ""}`}
             >
               <IoNotificationsOutline size={28} />
+              {/*
+                {!!messageCount && messageCount > 0 && (
+                <div className="absolute -top-1 -right-2 w-6 h-6 bg-red-500 text-white text-[12px] font-bold flex items-center justify-center rounded-full border-2 border-white">
+                  {messageCount > 99 ? "99+" : messageCount}
+                </div>
+              )} */}
+            </Link>
+          </li>
+
+          <li>
+            <Link href="/offer/create">
+              <Button type="button">
+                Post Offer
+              </Button>
             </Link>
           </li>
 
@@ -104,10 +114,6 @@ export default function DesktopMenu() {
             ref={dropdownRef}
             className="pl-[10px] flex items-center text-[1.7rem] relative"
           >
-            <span className="mr-3 text-[1.4rem] font-medium">
-              {"Hi " + firstFiveLetters(currentUser.name)}
-            </span>
-
             <div
               role="button"
               tabIndex={-1}
@@ -144,6 +150,12 @@ export default function DesktopMenu() {
                       href: `/profile/${currentUser.id}`,
                     },
                     {
+                      label: "Message",
+                      icon: <HiOutlineEnvelope />,
+                      href: "/message",
+                      badge: messageCount,
+                    },
+                    {
                       label: "Help & Support",
                       icon: <FiHelpCircle />,
                       href: "/help",
@@ -164,6 +176,12 @@ export default function DesktopMenu() {
                         <span className="text-foreground text-[20px] font-light">
                           {item.label}
                         </span>
+
+                        {!!item.badge && item.badge > 0 && (
+                          <div className="min-w-6 h-6 px-1 bg-red-500 text-white text-sm font-bold flex items-center justify-center rounded-full">
+                            {item.badge > 99 ? "99+" : item.badge}
+                          </div>
+                        )}
                       </Link>
                     </li>
                   ))}

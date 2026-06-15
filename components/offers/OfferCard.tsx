@@ -72,7 +72,7 @@ export default function OfferCard({ offer, index = 0 }: Props) {
 
       {/* Card Image & Badges */}
       <div className="relative mb-2 lg:mb-3 rounded-lg overflow-hidden flex-grow bg-white">
-        <div className="absolute top-4 left-2 right-2 flex justify-between items-center z-10">
+        <div className="absolute top-0 left-0 right-0 flex justify-between items-center z-10">
           {variant === "trending" || variant === "trending-expiring" ? (
             <div className="w-7 h-7 lg:w-9 lg:h-9 bg-white rounded-full flex items-center justify-center">
               <Image src="/flame.svg" alt="trending" width={16} height={16} className="lg:w-7 lg:h-7" />
@@ -124,7 +124,7 @@ export default function OfferCard({ offer, index = 0 }: Props) {
             <div className="flex items-center gap-1">
               <Rating
                 name="readonly"
-                className="ml-[-3px] sm:!text-[24px] md:!text-[18px] lg:!text-[24px]"
+                className="ml-[-3px] sm:!text-[24px] md:!text-[18px] lg:!text-[22px]"
                 value={offer.avgRating}
                 precision={0.1}
                 readOnly
@@ -135,7 +135,7 @@ export default function OfferCard({ offer, index = 0 }: Props) {
                   "& .MuiRating-iconEmpty": { color: "#ccc" },
                 }}
               />
-              <span className="font-medium font-baloo text-[10px] sm:text-[15px] md:text-[10px] lg:text-[15px] text-gray-400 ml-1">
+              <span className="font-medium font-baloo text-[10px] sm:text-[16px] md:text-[10px] lg:text-[16px] text-gray-400 ml-1">
                 ({offer.reviewCount})
               </span>
             </div>

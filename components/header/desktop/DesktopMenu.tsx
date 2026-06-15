@@ -103,7 +103,7 @@ export default function DesktopMenu() {
           </li>
 
           <li>
-            <Link href="/offer/create">
+            <Link href="/offers/create">
               <Button type="button">
                 Post Offer
               </Button>

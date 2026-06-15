@@ -1,13 +1,13 @@
 'use client'
 import { Offer } from "@/types/offer";
 import Rating from "@mui/material/Rating";
+import { differenceInSeconds, parseISO } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
-import { differenceInSeconds, parseISO } from "date-fns";
-import { FiUsers } from "react-icons/fi";
-import { FaRegUser } from "react-icons/fa6";
-import { IoAlarmOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
+import { FaRegUser } from "react-icons/fa6";
+import { FiUsers } from "react-icons/fi";
+import { IoAlarmOutline } from "react-icons/io5";
 import WishlistButton from "../wishlist/WishlistButton";
 
 interface Props {
@@ -22,7 +22,7 @@ function getOfferVariant(
   const isTrending = offer.clickCount >= 1;
   const daysLeft = differenceInSeconds(parseISO(offer.endDate), new Date());
   const isExpiring = daysLeft >= 0 && daysLeft <= 259200; // 3 days in seconds
-  
+
   if (isTrending && isExpiring) return "trending-expiring";
   if (isTrending) return "trending";
   if (isExpiring) return "expiring";
@@ -68,11 +68,11 @@ export default function OfferCard({ offer, index = 0 }: Props) {
   }, [hasCountdown, secondsLeft]);
 
   return (
-    <div className="bg-white w-[174px] h-[320px] sm:w-[300px] sm:h-[500px] md:w-[174px] md:h-[320px] lg:w-[300px] lg:h-[500px] rounded-xl shadow-sm border border-gray-100 p-2 md:p-2 lg:p-3 flex flex-col group hover:shadow-md transition-shadow">
+    <Link href={`/offers/${offer.id}`} className="bg-white w-[174px] h-[320px] sm:w-[300px] sm:h-[400px] md:w-[174px] md:h-[320px] lg:w-[300px] lg:h-[400px] rounded-xl shadow-sm border border-gray-100 p-2 md:p-2 lg:p-3 flex flex-col group hover:shadow-md transition-shadow">
 
       {/* Card Image & Badges */}
       <div className="relative mb-2 lg:mb-3 rounded-lg overflow-hidden flex-grow bg-white">
-        <div className="absolute top-4 left-2 right-2 flex justify-between items-center z-10">
+        <div className="absolute top-0 left-0 right-0 flex justify-between items-center z-10">
           {variant === "trending" || variant === "trending-expiring" ? (
             <div className="w-7 h-7 lg:w-9 lg:h-9 bg-white rounded-full flex items-center justify-center">
               <Image src="/flame.svg" alt="trending" width={16} height={16} className="lg:w-7 lg:h-7" />
@@ -80,7 +80,11 @@ export default function OfferCard({ offer, index = 0 }: Props) {
           ) : (
             <span />
           )}
-          <div className="w-7 h-7 lg:w-9 lg:h-9 bg-white rounded-full flex items-center justify-center">
+          <div className="w-7 h-7 lg:w-9 lg:h-9 bg-white rounded-full flex items-center justify-center"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+            }}>
             <WishlistButton position="relative" size="text-[20px] lg:text-[30px]" offerId={offer.id} />
           </div>
         </div>
@@ -96,7 +100,7 @@ export default function OfferCard({ offer, index = 0 }: Props) {
 
       {/* Username and Awoofer badge */}
       <div className="flex items-center justify-between mb-1 lg:mb-2">
-       <span className="text-primary text-[10px] lg:text-xs font-medium">
+        <span className="text-primary text-[10px] lg:text-xs font-medium">
           @{offer.business.username}
         </span>
         <span className="flex items-center gap-1 bg-[#FFF0EC] text-primary text-[9px] lg:text-[11px] font-semibold px-1.5 py-0.5 rounded-full">
@@ -120,7 +124,7 @@ export default function OfferCard({ offer, index = 0 }: Props) {
             <div className="flex items-center gap-1">
               <Rating
                 name="readonly"
-                className="ml-[-3px] sm:!text-[24px] md:!text-[18px] lg:!text-[24px]"
+                className="ml-[-3px] sm:!text-[24px] md:!text-[18px] lg:!text-[22px]"
                 value={offer.avgRating}
                 precision={0.1}
                 readOnly
@@ -131,7 +135,7 @@ export default function OfferCard({ offer, index = 0 }: Props) {
                   "& .MuiRating-iconEmpty": { color: "#ccc" },
                 }}
               />
-              <span className="font-medium font-baloo text-[10px] sm:text-[15px] md:text-[10px] lg:text-[15px] text-gray-400 ml-1">
+              <span className="font-medium font-baloo text-[10px] sm:text-[16px] md:text-[10px] lg:text-[16px] text-gray-400 ml-1">
                 ({offer.reviewCount})
               </span>
             </div>
@@ -139,7 +143,7 @@ export default function OfferCard({ offer, index = 0 }: Props) {
             {/* Grabs for expiring condition */}
             {hasCountdown && (
               <div className="flex items-center gap-1 text-muted text-[10px] lg:text-xs">
-                <FiUsers size={12} className="text-primary/60"/>
+                <FiUsers size={12} className="text-primary/60" />
                 <span>{offer.clickCount} grabs</span>
               </div>
             )}
@@ -154,20 +158,13 @@ export default function OfferCard({ offer, index = 0 }: Props) {
               </div>
             ) : (
               <div className="flex items-center gap-1 text-muted text-[10px] lg:text-xs">
-                <FiUsers size={12} className="text-primary/60"/>
+                <FiUsers size={12} className="text-primary/60" />
                 <span >{offer.clickCount} grabs</span>
               </div>
             )}
           </div>
         </div>
       </div>
-
-      <Link
-        href={`/offers/${offer.id}`}
-        className="w-full flex items-center justify-center bg-primary text-white py-2 sm:py-2.5 md:py-2 lg:py-2.5 rounded-sm font-bold text-sm sm:text-base md:text-sm lg:text-base hover:bg-orange-700 active:scale-95 transition-all"
-      >
-        View More
-      </Link>
-    </div>
+    </Link>
   );
 }

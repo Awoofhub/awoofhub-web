@@ -132,7 +132,6 @@ Global context providers.
 
 Purpose: App-wide context + configuration
 
-
 ## 3. Tech Stack
 
 | Category | Technologies |

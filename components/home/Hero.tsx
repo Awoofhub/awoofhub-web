@@ -1,13 +1,13 @@
 "use client";
 
+import heroImg from "@/public/heroImg.svg";
 import Image from "next/image";
 import Link from "next/link";
-import heroImg from "@/public/heroImg.svg";
 
 export default function Hero() {
   return (
-    <section className="px-6 py-6 md:px-12 lg:py-14 bg-white">
-      <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center gap-12">
+    <section className=" bg-white">
+      <div className="max-w-[1440px] mx-auto px-6 py-6 md:px-12 lg:py-14 flex flex-col md:flex-row items-center gap-12">
         {/* Left Content Side */}
         <div className="w-full md:w-1/2 space-y-3 md:space-y-2">
           {/* Badge */}
@@ -59,7 +59,7 @@ export default function Hero() {
             </div>
             <div>
               <p className="text-2xl font-baloo font-semibold text-[#313131]">350+</p>
-              <p className="text-xs lg:text-sm text-[#61646B]">Trusted Merchants</p>
+              <p className="text-xs lg:text-sm text-[#61646B]">Trusted Contributors</p>
             </div>
           </div>
         </div>

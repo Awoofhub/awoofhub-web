@@ -3,7 +3,6 @@ import Rating from "@mui/material/Rating";
 import { MapPin } from "lucide-react";
 import WishlistButton from "../wishlist/WishlistButton";
 import Action from "./Action";
-import Terms from "./Terms";
 
 interface Props {
     offer: Offer;
@@ -60,7 +59,6 @@ export default function OfferInfo({ offer }: Props) {
             </section>
 
             <Action offer={offer} />
-            <Terms prop={offer.termsAndConditions} />
         </>
     )
 }

@@ -4,14 +4,14 @@ import { Bell } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface Props {
-    businessId: string;
+    contributorId: string;
 }
 
-export default function AlertButton({ businessId }: Props) {
+export default function AlertButton({ contributorId }: Props) {
 
     const router = useRouter();
 
-    const { toggleAlert, isSubscribed } = useAlert(businessId);
+    const { toggleAlert, isSubscribed } = useAlert(contributorId);
     const { data: currentUser } = useUser();
 
     const handleWishlistChange = async () => {

@@ -192,14 +192,14 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                     placeholder="https://www.glowspa-demo.com"
                     compulsory
                     icon={<FiGlobe size={18} color="gray" />}
-                    {...register("dealUrl", {
+                    {...register("externalLink", {
                         required: "URL is required",
                         pattern: {
                             value: /^https?:\/\/.+$/,
                             message: "Enter a valid URL (must include http/https)",
                         },
                     })}
-                    error={formState.errors.dealUrl}
+                    error={formState.errors.externalLink}
                 />
 
                 {/* Coupon Code */}
@@ -234,22 +234,6 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                     )}
                 />
 
-                {/* Terms */}
-                <InputField
-                    label="Terms & Condition"
-                    type="textarea"
-                    placeholder="Offer valid for first-time customers only and limited to one redemption per person. Appointment booking is required before visiting any participating location."
-                    textAreaRows={2}
-                    compulsory
-                    {...register("termsAndConditions", {
-                        required: "Terms & Conditions is required",
-                        minLength: {
-                            value: 100,
-                            message: "Must be more than 100 characters",
-                        },
-                    })}
-                    error={formState.errors.termsAndConditions}
-                />
 
                 {/* End Date */}
                 <Controller

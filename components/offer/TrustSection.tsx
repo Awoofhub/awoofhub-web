@@ -15,7 +15,7 @@ export default function TrustSection({ offer }: Props) {
             {/* Store Info */}
             <div className="flex flex-col items-center gap-3">
                 <CreatorLink offer={offer} />
-                <AlertButton businessId={offer.business.id} />
+                <AlertButton contributorId={offer.contributor.id} />
             </div>
 
             {/* Leave a Rating */}

@@ -101,7 +101,7 @@ export default function OfferCard({ offer, index = 0 }: Props) {
       {/* Username and Awoofer badge */}
       <div className="flex items-center justify-between mb-1 lg:mb-2">
         <span className="text-primary text-[10px] lg:text-xs font-medium">
-          @{offer.business.username}
+          @{offer.contributor.username}
         </span>
         <span className="flex items-center gap-1 bg-[#FFF0EC] text-primary text-[9px] lg:text-[11px] font-semibold px-1.5 py-0.5 rounded-full">
           <FaRegUser size={10} /> Awoofer

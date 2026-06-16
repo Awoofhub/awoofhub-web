@@ -38,18 +38,8 @@ async function offerById(id: string): Promise<ApiResponse<Offer>> {
   return res;
 }
 
-async function offersByCategory(id: string, page: number, limit: number): Promise<ApiResponse<Offer[]>> {
-  const res: ApiResponse<Offer[]> = await apiClient.get(`/offers/category/id/${id}`, {
-    params: { page, limit },
-  })
-
-  return res;
-}
-
-async function randomOffers(page: number, limit: number): Promise<ApiResponse<Offer[]>> {
-  const res: ApiResponse<Offer[]> = await apiClient.get('/offers/', {
-    params: { page, limit },
-  })
+async function randomOffers(): Promise<ApiResponse<Offer[]>> {
+  const res: ApiResponse<Offer[]> = await apiClient.get('/offers/random')
 
   return res;
 }
@@ -89,7 +79,6 @@ const OfferService = {
   grab,
   offersByUser,
   offerById,
-  offersByCategory,
   randomOffers,
   trendingOffers,
   expiringOffers,

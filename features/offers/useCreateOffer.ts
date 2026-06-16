@@ -18,7 +18,7 @@ export const useCreateOffer = ({ onSuccess }: UseCreateOfferOptions = {}) => {
         mutationFn: createOffer,
         onSuccess: (data) => {
             queryClient.setQueryData(['offers', data.id], data);
-            queryClient.invalidateQueries({ queryKey: ['offers', "userId", data.business.id]});
+            queryClient.invalidateQueries({ queryKey: ['offers', "userId", data.contributor.id]});
             onSuccess?.(data);
         },
     });

@@ -1,22 +1,27 @@
 export interface CreateOfferData {
   title: string;
   description: string;
+  dealType: 'cashback' | 'freebie' | 'discount' | 'bogo' | 'promo_code' | 'free_trial' | 'free_delivery',
   category: string;
   imageUrl: string;
   value: string;
-  dealUrl: string;
-  couponCode: string;
-  termsAndConditions: string;
+  externalLink: string;
+  couponCode?: string;
+  brandName: string;
   location: string;
   endDate: string | null;
 }
 
 export interface UpdateOfferData {
   title?: string;
-  highlight?: string;
   description?: string;
+  dealType?: 'cashback' | 'freebie' | 'discount' | 'bogo' | 'promo_code' | 'free_trial' | 'free_delivery',
   category?: string;
   imageUrl?: string;
+  value?: string;
+  externalLink?: string;
+  couponCode?: string;
+  brandName?: string;
   location?: string;
 }
 
@@ -25,11 +30,11 @@ export interface Offer {
   title: string;
   description: string;
   imageUrl: string;
-  termsAndConditions: string;
   value: string;
-  dealUrl: string;
+  dealType: 'cashback' | 'freebie' | 'discount' | 'bogo' | 'promo_code' | 'free_trial' | 'free_delivery',
+  externalLink: string;
   couponCode?: string;
-  business: {
+  contributor: {
     id: string;
     name: string;
     username: string;
@@ -40,6 +45,7 @@ export interface Offer {
     slug: string;
   };
   location: string;
+  brandName: string;
   status: "pending" | "approved" | "rejected";
   createdAt: string;
   endDate: string;

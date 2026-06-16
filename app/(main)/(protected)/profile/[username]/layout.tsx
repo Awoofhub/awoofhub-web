@@ -2,16 +2,16 @@ import ProfilePageWrapper from "@/components/profile/ProfilePageWrapper";
 import { ReactNode, use } from "react";
 
 interface Props {
-    params: Promise<{ userId: string }>;
+    params: Promise<{ username: string }>;
     children: ReactNode
 }
 
 export default function AboutLayout({ children, params }: Props) {
 
-    const { userId } = use(params);
+    const { username } = use(params);
 
     return (
-        <ProfilePageWrapper userId={userId}>
+        <ProfilePageWrapper username={username}>
             {children}
         </ProfilePageWrapper>
     )

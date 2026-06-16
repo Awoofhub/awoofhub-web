@@ -1,16 +1,16 @@
 "use client"
-import { useUserById } from "@/features/user/useUserById";
+import { useUserByUsername } from "@/features/user/useUserByUsername";
 import { use } from "react";
 import { About } from "./About";
 
 
 interface Props {
-    params: Promise<{ userId: string }>;
+    params: Promise<{ username: string }>;
 }
 
 export default function AboutPage({ params }: Props) {
-    const { userId } = use(params);
-    const { data: user } = useUserById({ id: userId });
+    const { username } = use(params);
+    const { data: user } = useUserByUsername({ username });
     if (!user) return null
 
     return (

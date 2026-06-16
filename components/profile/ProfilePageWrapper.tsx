@@ -1,20 +1,20 @@
 "use client";
 
 import { useUser } from "@/features/user/useUser";
-import { useUserById } from "@/features/user/useUserById";
+import { useUserByUsername } from "@/features/user/useUserByUsername";
 import { ReactNode } from "react";
 import Loading from "../loading/Loading";
 import ProfileHeader from "./ProfileHeader";
 
 
 interface Props {
-  userId: string;
+  username: string;
   children: ReactNode
 }
 
-export default function ProfilePageWrapper({ userId, children }: Props) {
+export default function ProfilePageWrapper({ username, children }: Props) {
   const { data: currentUser } = useUser();
-  const { data: user, isLoading } = useUserById({ id: userId });
+  const { data: user, isLoading } = useUserByUsername({ username });
 
   if (isLoading) {
     return <Loading />

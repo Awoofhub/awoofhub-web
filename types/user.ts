@@ -2,6 +2,7 @@ export interface User {
   id: string;
   email: string;
   name: string;
+  username: string;
   profileImageUrl: string | null;
   role: "user" | "business";
   bio: string | null;

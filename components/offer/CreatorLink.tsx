@@ -10,7 +10,7 @@ interface Props {
 
 export default function CreatorLink({ offer }: Props) {
     return (
-        <Link href={`/profile/${offer.contributor.id}`} className="flex items-center gap-2">
+        <Link href={`/profile/${offer.contributor.username}`} className="flex items-center gap-2">
             <div className="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center text-pink-600 font-bold text-lg">
                 {capitalizeFirstLetter(`${offer.contributor.name}`)}
             </div>

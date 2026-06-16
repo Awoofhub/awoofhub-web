@@ -2,9 +2,14 @@ import { apiClient } from "@/lib/api-client";
 import { ApiResponse } from "@/types/api-response";
 import { CreateOfferData, Offer, UpdateOfferData } from "@/types/offer";
 
+/**
+ * Creates an offer.
+ *
+ * Sends a plain JSON body.  The image must have been uploaded separately
+ * before calling this — `payload.imageUrl` should be the returned URL string.
+ */
 async function createOffer(payload: CreateOfferData): Promise<ApiResponse<Offer>> {
-  const res: ApiResponse<Offer> = await apiClient.post('/offers/', payload)
-
+  const res: ApiResponse<Offer> = await apiClient.post('/offers/', payload);
   return res;
 }
 

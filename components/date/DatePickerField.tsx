@@ -6,9 +6,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
 
 export const DatePickerField = ({ label, error, compulsory, value, onChange }: any) => {
-  
+
   // Get 'now' so we can block the past
-  const today = dayjs();
+  const today = dayjs().add(1, 'day');
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -20,24 +20,23 @@ export const DatePickerField = ({ label, error, compulsory, value, onChange }: a
         )}
 
         <DatePicker
-          value={value || null} 
+          value={value || null}
           onChange={(newValue) => onChange(newValue)}
           // THIS BLOCKS THE PAST:
-          minDate={today} 
+          minDate={today}
           slotProps={{
             textField: {
               variant: 'standard',
               fullWidth: true,
               slotProps: {
                 input: {
-                    disableUnderline: true,
-                    className: `!mt-2 !w-full !px-3 !py-[9px] !bg-[#F6F7F8] !border ${
-                      error ? '!border-red-500' : '!border-gray-300'
+                  disableUnderline: true,
+                  className: `!mt-2 !w-full !px-3 !py-[9px] !bg-[#F6F7F8] !border ${error ? '!border-red-500' : '!border-gray-300'
                     } !rounded-md !shadow-sm !font-baloo !text-lg focus-within:!border-orange-500`,
                 },
                 htmlInput: {
-                    placeholder: "Select date",
-                    className: "!font-baloo !text-lg !placeholder-gray-400 !py-0",
+                  placeholder: "Select date",
+                  className: "!font-baloo !text-lg !placeholder-gray-400 !py-0",
                 }
               }
             },

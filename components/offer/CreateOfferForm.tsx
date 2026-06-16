@@ -1,7 +1,7 @@
 "use client";
 
 import dayjs from "dayjs";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import { useCategory } from "@/features/category/useCategory";
@@ -11,199 +11,304 @@ import { useUploadSinglePhoto } from "@/features/upload/useUpdateProfilePhoto";
 import { CreateOfferFormProps } from "@/types/form-props";
 import { CreateOfferData } from "@/types/offer";
 
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
+import { FiUploadCloud } from "react-icons/fi";
+import { MdClose } from "react-icons/md";
 
-import { FiGlobe } from "react-icons/fi";
-
-import FilePondPluginImagePreview from "filepond-plugin-image-preview";
-import FilePondPluginImageValidateSize from "filepond-plugin-image-validate-size";
-import { FilePond, registerPlugin } from "react-filepond";
-
-import { Button } from '@/components/button/Button';
-import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-import "filepond/dist/filepond.min.css";
-
+import { Button } from "@/components/button/Button";
 import { DatePickerField } from "../date/DatePickerField";
 import { GoogleAutocompleteNew } from "../form/AutoComplete";
 import { InputField } from "../form/InputField";
+import { SuccessModal } from "./SuccessModal";
 
-registerPlugin(
-    FilePondPluginImagePreview,
-    FilePondPluginImageValidateSize
-);
+// Deal-type options
+const DEAL_TYPES: { label: string; value: CreateOfferData["dealType"] }[] = [
+    { label: "Cash Back", value: "cashback" },
+    { label: "Freebie", value: "freebie" },
+    { label: "Discount", value: "discount" },
+    { label: "Buy One Get One", value: "bogo" },
+    { label: "Promo Code", value: "promo_code" },
+    { label: "Free Trial", value: "free_trial" },
+    { label: "Free Delivery", value: "free_delivery" },
+];
+
+// Shared select class
+const SELECT_CLS =
+    "w-full h-12 px-3 border border-gray-300 rounded-md bg-[#F6F7F8] " +
+    "text-gray-700 font-baloo text-base " +
+    "focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 " +
+    "transition-shadow appearance-none cursor-pointer";
+
+// Shared label class 
+const LABEL_CLS = "block font-baloo text-lg font-semibold text-gray-700 mb-1";
+
 
 export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
-
     const { data: categories } = useCategory();
-    const createOffer = useCreateOffer({ onSuccess });
-    const { uploadPhoto } = useUploadSinglePhoto();
+    const { uploadPhoto, isPending: isUploading } = useUploadSinglePhoto();
 
-    const filePondRef = useRef<any>(null);
 
+    const [showSuccess, setShowSuccess] = useState(false);
+
+
+    const createOffer = useCreateOffer({
+        onSuccess: () => setShowSuccess(true),
+    });
+
+    const [imagePreview, setImagePreview] = useState<string | null>(null);
+    const [imageError, setImageError] = useState<string>("");
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    //React Hook Form 
     const {
         register,
         handleSubmit,
         formState,
         control,
-        setValue,
         watch,
+        setValue,
     } = useForm<CreateOfferData>({
         defaultValues: {
             category: "",
+            dealType: undefined,
             imageUrl: "",
             endDate: null,
+            brandName: "",
+            value: "",
+            location: "",
+            externalLink: "",
         },
     });
 
     const category = watch("category");
+    // Watch dealType so we can conditionally show the Coupon Code field
+    const dealType = watch("dealType");
 
-    const onSubmit = (data: CreateOfferData) => {
-        createOffer.submit(data);
+
+    const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        if (!file.type.startsWith("image/")) {
+            setImageError("Please select a valid image file.");
+            return;
+        }
+        if (file.size > 5 * 1024 * 1024) {
+            setImageError("Image must be smaller than 5 MB.");
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = () => setImagePreview(reader.result as string);
+        reader.readAsDataURL(file);
+        setImageError("");
+
+        try {
+            const res = await uploadPhoto(file);
+            const url: string = res.data;
+
+            setValue("imageUrl", url, { shouldValidate: true, shouldDirty: true });
+        } catch {
+            setImageError("Image upload failed. Please try again.");
+            setImagePreview(null);
+            setValue("imageUrl", "", { shouldValidate: true, shouldDirty: true });
+            if (fileInputRef.current) fileInputRef.current.value = "";
+        }
+    };
+
+    // ── Remove image ──
+    const removeImage = () => {
+        setImagePreview(null);
+        setImageError("");
+        setValue("imageUrl", "", { shouldValidate: true, shouldDirty: true });
+        if (fileInputRef.current) fileInputRef.current.value = "";
     };
 
 
+    const onSubmit = (data: CreateOfferData) => {
+        if (!data.imageUrl) {
+            setImageError("Please upload an offer image.");
+            return;
+        }
+
+        createOffer.submit({
+            ...data,
+            // Normalise the date to a full ISO-8601 string the backend expects
+            endDate: data.endDate
+                ? dayjs(data.endDate).toISOString()
+                : null,
+        });
+    };
+
+    const isBusy = createOffer.isPending || isUploading;
+
     return (
         <div className="mt-5 mb-30 lg:mb-10 mx-auto w-full max-w-2xl">
-            <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-                {/* Category */}
-                <Controller
-                    name="category"
-                    control={control}
-                    rules={{ required: "Category is required" }}
-                    render={({ field, fieldState }) => (
-                        <FormControl error={!!fieldState.error} className={`!mb-4 !w-full !rounded-md !shadow-sm !font-baloo !text-lg`}
-                            sx={{
-                                "& .MuiOutlinedInput-notchedOutline": {
-                                    border: "1px solid #D1D5DB",
-                                },
-                                "&:hover .MuiOutlinedInput-notchedOutline": {
-                                    border: "1px solid #D1D5DB",
-                                },
-                                "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                                    border: "1px solid #F97316",
-                                },
-                                "& .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline": {
-                                    borderColor: "#e73e3e",
-                                },
-                            }}
-                        >
 
-                            <InputLabel className=" !font-baloo !text-lg"
-                                sx={{
-                                    color: "#6B7280",
-
-                                    "&:not(.MuiInputLabel-shrink)": {
-                                        marginTop: "-5px", // adjust as you like
-                                    },
-
-                                    "&.MuiInputLabel-shrink": {
-                                        color: "#374151",
-                                    },
-
-                                    "&.Mui-focused": { 
-                                        color: "#f56600",
-                                    },
-
-                                    "&.Mui-error": {
-                                        color: "#f13939",
-                                    },
-
-                                }}
-                            >
-
-                                Category</InputLabel>
-                            <Select
-                                {...field}
-                                label="Category"
-                                className={`!h-12 !font-baloo !text-lg`}
-                            >
-                                {categories?.map((cat) => (
-                                    <MenuItem key={cat.id} value={cat.name}>
-                                        {cat.name}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-
-                            {fieldState.error && (
-                                <p className="text-red-500 text-xs mt-1">
-                                    {fieldState.error.message}
-                                </p>
-                            )}
-                        </FormControl>
-                    )}
+            {/*  Success modal  */}
+            {showSuccess && (
+                <SuccessModal
+                    onDone={() => {
+                        setShowSuccess(false);
+                        onSuccess();
+                    }}
                 />
+            )}
 
-                {/* Title */}
+            <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
+
+                {/*  Category  */}
+                <div className="space-y-1">
+                    <label className={LABEL_CLS}>
+                        Category <span className="text-red-500">*</span>
+                    </label>
+                    <div className="relative">
+                        <select
+                            {...register("category", {
+                                required: "Category is required",
+                            })}
+                            className={SELECT_CLS}
+                        >
+                            <option value="" disabled>Select option</option>
+                            {categories?.map((cat) => (
+                                <option key={cat.id} value={cat.name}>
+                                    {cat.name}
+                                </option>
+                            ))}
+                        </select>
+                        <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-500">▾</span>
+                    </div>
+                    {formState.errors.category && (
+                        <p className="text-red-500 text-xs mt-1">{formState.errors.category.message}</p>
+                    )}
+                </div>
+
+                {/*  Deal Type  */}
+                <div className="space-y-1">
+                    <label className={LABEL_CLS}>
+                        Deal Type <span className="text-red-500">*</span>
+                    </label>
+                    <div className="relative">
+                        <select
+                            {...register("dealType", {
+                                required: "Deal type is required",
+                            })}
+                            className={SELECT_CLS}
+                        >
+                            <option value="" disabled>Select option</option>
+                            {DEAL_TYPES.map((dt) => (
+                                <option key={dt.value} value={dt.value}>{dt.label}</option>
+                            ))}
+                        </select>
+                        <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-500">▾</span>
+                    </div>
+                    {formState.errors.dealType && (
+                        <p className="text-red-500 text-xs mt-1">{formState.errors.dealType.message}</p>
+                    )}
+                </div>
+
+                {/* ── Title  ─── */}
                 <InputField
                     label="Title"
                     type="text"
                     compulsory
-                    placeholder="Free Facial Spa Treatment for First-Time Visitors"
+                    placeholder="e.g Get 50% off Dominos pizza of any size and choice"
                     {...register("title", {
                         required: "Title is required",
-                        maxLength: {
-                            value: 50,
-                            message: "Must be less than 50 characters",
-                        },
+                        maxLength: { value: 100, message: "Must be less than 100 characters" },
                     })}
                     error={formState.errors.title}
                 />
 
-                {/* Description */}
+                {/*  Description  */}
                 <InputField
                     label="Description"
-                    placeholder="First-time customers can enjoy a complimentary facial spa treatment at participating GlowSpa locations in Lagos. This limited-time offer includes a full skin consultation, deep cleansing treatment, and facial massage session designed to refresh and revitalize your skin. To redeem the offer, customers must schedule an appointment online and present their confirmation upon arrival."
+                    placeholder="What's the offer? Any conditions? Briefly describe this deal"
                     type="textarea"
                     textAreaRows={5}
                     compulsory
                     {...register("description", {
                         required: "Description is required",
-                        minLength: {
-                            value: 400,
-                            message: "Must be more than 400 characters",
-                        },
+                        minLength: { value: 20, message: "Must be more than 20 characters" },
                     })}
                     error={formState.errors.description}
                 />
 
-                {/* Value */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <InputField
+                        label="Brand Name"
+                        type="text"
+                        compulsory
+                        placeholder="e.g Domino"
+                        {...register("brandName", {
+                            required: "Brand name is required",
+                        })}
+                        error={formState.errors.brandName}
+                    />
+                    <Controller
+                        name="endDate"
+                        control={control}
+                        rules={{
+                            required: "Please select an end date",
+                            validate: (val) =>
+                                // Minimum is tomorrow — today is not allowed
+                                dayjs(val).isAfter(dayjs(), "day") ||
+                                "Expiry date must be at least tomorrow",
+                        }}
+                        render={({ field }) => (
+                            <DatePickerField
+                                label="Expiry Date"
+                                compulsory
+                                value={field.value}
+                                onChange={field.onChange}
+                                error={formState.errors.endDate}
+                            />
+                        )}
+                    />
+                </div>
+
                 <InputField
                     label="Value"
                     type="text"
-                    placeholder="Free Spa Treatment"
                     compulsory
+                    placeholder="e.g 50% off"
                     {...register("value", {
                         required: "Value is required",
-                         maxLength: {
-                            value: 50,
-                            message: "Must not be more than 50 characters",
-                        },
+                        maxLength: { value: 50, message: "Must not be more than 50 characters" },
                     })}
                     error={formState.errors.value}
                 />
+                <Controller
+                    name="location"
+                    control={control}
+                    rules={{ required: "Location is required" }}
+                    render={({ field, fieldState }) => (
+                        <GoogleAutocompleteNew
+                            label="Location"
+                            compulsory
+                            value={field.value}
+                            onPlaceSelect={field.onChange}
+                            error={fieldState.error}
+                        />
+                    )}
+                />
 
-                {/* Deal URL */}
                 <InputField
-                    label="Link"
+                    label="External Link Address"
                     type="text"
-                    placeholder="https://www.glowspa-demo.com"
+                    placeholder="https://..."
                     compulsory
-                    icon={<FiGlobe size={18} color="gray" />}
                     {...register("externalLink", {
                         required: "URL is required",
                         pattern: {
                             value: /^https?:\/\/.+$/,
-                            message: "Enter a valid URL (must include http/https)",
+                            message: "Enter a valid URL (must start with http/https)",
                         },
                     })}
                     error={formState.errors.externalLink}
                 />
 
                 {/* Coupon Code */}
-                {category === "Coupons" && (
+                {dealType === "promo_code" && (
                     <InputField
                         label="Coupon Code"
                         type="text"
@@ -216,46 +321,6 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                     />
                 )}
 
-                {/* Location */}
-                <Controller
-                    name="location"
-                    control={control}
-                    rules={{
-                        required: "Location is required",
-                    }}
-                    render={({ field, fieldState }) => (
-                        <GoogleAutocompleteNew
-                            label="Location"
-                            compulsory
-                            value={field.value}
-                            onPlaceSelect={field.onChange}
-                            error={fieldState.error}
-                        />
-                    )}
-                />
-
-
-                {/* End Date */}
-                <Controller
-                    name="endDate"
-                    control={control}
-                    rules={{
-                        required: "Please select an end date",
-                        validate: (val) =>
-                            !val ||
-                            dayjs(val).isAfter(dayjs().subtract(1, "day")) ||
-                            "Date cannot be in the past",
-                    }}
-                    render={({ field }) => (
-                        <DatePickerField
-                            label="End Date"
-                            compulsory
-                            value={field.value}
-                            onChange={field.onChange}
-                            error={formState.errors.endDate}
-                        />
-                    )}
-                />
 
                 <input
                     type="hidden"
@@ -263,66 +328,79 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                         required: "Image is required",
                     })}
                 />
-
-                <div className={`my-8 [&_.filepond--credits]:hidden 
-                    [&_.filepond--panel-root]:bg-slate-50 
-                    [&_.filepond--panel-root]:border-2 
-                    [&_.filepond--panel-root]:border-dashed 
-                    ${formState.errors.imageUrl ? "[&_.filepond--panel-root]:border-red-500" : "[&_.filepond--panel-root]:border-blue-200"}
-                    [&_.filepond--label-action]:text-blue-600 
-                    [&_.filepond--label-action]:font-bold 
-                    [&_.filepond--label-action]:no-underline
-                    [&_.filepond--drop-label]:text-slate-600 
-                    [&_.filepond--drop-label]:cursor-pointer
-                    hover:[&_.filepond--panel-root]:border-blue-400`}>
-                    <FilePond
-                        allowMultiple={false}
-                        ref={filePondRef}
-                        maxFiles={1}
-                        name="image"
-                        imageValidateSizeMinWidth={500}
-                        imageValidateSizeMinHeight={500}
-                        imageValidateSizeMaxWidth={2000}
-                        imageValidateSizeMaxHeight={2000}
-                        onremovefile={() => {
-                            setValue("imageUrl", "", {
-                                shouldValidate: true,
-                                shouldDirty: true,
-                            });
-                        }}
-                        labelIdle='Drag & Drop Image or <span class="filepond--label-action">Browse</span>'
-                        server={{
-                            process: async (fieldName, file, metadata, load, error, progress) => {
-                                try {
-                                    const res = await uploadPhoto(file as File);
-                                    setValue('imageUrl', res.data, {
-                                        shouldValidate: true,
-                                        shouldDirty: true,
-                                    });
-                                    load(res.data);
-                                } catch (err) {
-                                    error('Upload failed');
-                                }
-                            },
-                        }}
+                <div>
+                    <input
+                        ref={fileInputRef}
+                        id="offer-image-input"
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={handleImageChange}
                     />
-                    {formState.errors.imageUrl && (
-                        <p className="text-red-500 text-center text-sm mt-1">
-                            {formState.errors.imageUrl.message}
+
+                    {imagePreview ? (
+                        /* ── Preview card with remove + uploading overlay ──── */
+                        <div className="relative w-full rounded-xl overflow-hidden border border-gray-200 shadow-sm">
+                            <img
+                                src={imagePreview}
+                                alt="Offer preview"
+                                className={`w-full max-h-64 object-cover transition-opacity ${isUploading ? "opacity-50" : "opacity-100"}`}
+                            />
+                            {isUploading && (
+                                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-white/60">
+                                    <svg className="animate-spin h-7 w-7 text-orange-500" viewBox="0 0 24 24" fill="none">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+                                    </svg>
+                                    <span className="text-sm font-baloo text-orange-600 font-semibold">Uploading…</span>
+                                </div>
+                            )}
+                            {!isUploading && (
+                                <button
+                                    type="button"
+                                    onClick={removeImage}
+                                    className="absolute top-2 right-2 bg-white border border-gray-200 rounded-full p-1 shadow hover:bg-red-50 transition-colors"
+                                    aria-label="Remove image"
+                                >
+                                    <MdClose size={18} className="text-red-500" />
+                                </button>
+                            )}
+                        </div>
+                    ) : (
+                        <button
+                            type="button"
+                            onClick={() => fileInputRef.current?.click()}
+                            className={`w-full h-32 flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed transition-colors cursor-pointer bg-[#F6F7F8]
+                                ${imageError || formState.errors.imageUrl
+                                    ? "border-red-400 bg-red-50"
+                                    : "border-gray-300 hover:border-orange-400 hover:bg-orange-50"
+                                }`}
+                        >
+                            <FiUploadCloud
+                                size={30}
+                                className={imageError || formState.errors.imageUrl ? "text-red-400" : "text-gray-400"}
+                            />
+                            <span className="font-baloo text-sm text-gray-500">Upload photo here</span>
+                        </button>
+                    )}
+
+                    {/* Validation / upload error */}
+                    {(imageError || formState.errors.imageUrl) && (
+                        <p className="text-red-500 text-xs mt-1">
+                            {imageError || formState.errors.imageUrl?.message}
                         </p>
                     )}
                 </div>
 
+                {/* ── Submit ─── */}
                 <Button
-                    isLoading={createOffer.isPending}
-                    isDisabled={createOffer.isPending}
+                    isLoading={isBusy}
+                    isDisabled={isBusy}
                     type="submit"
-
                 >
-                    Create Offer
+                    {isUploading ? "Uploading image…" : "Post an Awoof"}
                 </Button>
             </form>
-
         </div>
     );
 };

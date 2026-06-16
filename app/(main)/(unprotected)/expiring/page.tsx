@@ -1,7 +1,7 @@
 "use client";
 
 import { OfferError } from "@/components/offers/OfferError";
-import OfferInfiniteList from "@/components/offers/OfferInfiniteList";
+import OfferList from "@/components/offers/OfferList";
 import OfferListSkeleton from "@/components/offers/OfferListSkeleton";
 import { useExpiringOffers } from "@/features/offers/useExpiringOffers";
 import { Spinner } from "@chakra-ui/react";
@@ -18,11 +18,8 @@ function ExpiringResults() {
         <p className="text-gray-500 text-center">No expiring offers available.</p>
       )}
       {isFetched && data.length > 0 && (
-        <OfferInfiniteList
+        <OfferList
           offers={data}
-          hasNextPage={false}
-          isFetchingNextPage={false}
-          fetchNextPage={() => {}}
         />
       )}
     </section>

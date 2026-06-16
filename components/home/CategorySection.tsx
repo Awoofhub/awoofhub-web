@@ -1,7 +1,8 @@
 'use client'
-import { useOffersByCategory } from "@/features/offers/useOffersByCategory";
+import { useOffers } from "@/features/offers/useOffers";
 import { Category } from "@/types/category";
 import Link from 'next/link';
+import { useMemo } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { FiArrowRight } from "react-icons/fi";
 import { OfferError } from "../offers/OfferError";
@@ -14,12 +15,22 @@ interface Props {
 
 export default function CategorySection({ category }: Props) {
 
-    const { data, isFetching, isFetched } = useOffersByCategory({
-        categoryId: category.id, page: 1, limit: 4
+    const { data, isFetching, isFetched } = useOffers({
+        search: "",
+        category: category.slug ?? "",
+        minRating: 0,
+        createdFrom: "",
+        createdTo: "",
+        limit: 4
     });
 
+       const allOffers = useMemo(() => {
+            return data?.pages.flatMap((page) => page.data) ?? [];
+        }, [data]);
+    
+
     return (
-        <section id={category.id}  className="pb-16 px-6 md:px-12">
+        <section id={category.id} className="pb-16 px-6 md:px-12">
             <div className="flex justify-between items-baseline mb-3 sm:mb-6">
                 <h3 id={`cat-heading-${category.id}`} className="text-xl sm:text-2xl font-bold">
                     {category.name}
@@ -37,10 +48,10 @@ export default function CategorySection({ category }: Props) {
 
             <ErrorBoundary fallback={<OfferError />}>
                 {isFetching && <OfferListSkeleton number={4} />}
-                {!isFetching && data.length === 0 && (
+                {!isFetching && allOffers.length === 0 && (
                     <p className="text-gray-500">No offers available.</p>
                 )}
-                {isFetched && data.length > 0 && <OfferList offers={data} />}
+                {isFetched && allOffers.length > 0 && <OfferList offers={allOffers} />}
             </ErrorBoundary>
 
         </section>

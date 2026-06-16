@@ -1,10 +1,10 @@
 "use client";
 import { useCategory } from "@/features/category/useCategory";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import Loading from "../loading/Loading";
 import CategorizedOffers from "./CategorizedOffers";
 import CategoryLinks from "./CategoryLinks";
-import Image from "next/image";
 
 export default function FeaturedOffers() {
   const { data, isFetching, isFetched } = useCategory();

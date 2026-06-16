@@ -34,7 +34,7 @@ export default function SingleOffer({ offer }: Props) {
                     </div>
 
                     <div className="w-full mt-4 xs:mt-8 md:mt-12 flex md:flex-col gap-3">
-                        <ChatButton targetUserId={offer.business.id}>
+                        <ChatButton targetUserId={offer.contributor.id}>
                             <div className="w-4/5 md:w-full bg-orange-600 hover:bg-orange-700 text-white font-bold p-1 xs:py-3 px-6 rounded-lg flex items-center justify-center gap-2 transition-all">
                                 Message
                             </div>
@@ -78,7 +78,7 @@ export default function SingleOffer({ offer }: Props) {
                 targetId={offer.id}
                 targetName={offer.title}
                 targetImage={offer.imageUrl}
-                targetBadge={offer.business.name}
+                targetBadge={offer.contributor.name}
             />
         </>
     );

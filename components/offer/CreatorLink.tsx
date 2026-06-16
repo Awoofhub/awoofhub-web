@@ -10,12 +10,12 @@ interface Props {
 
 export default function CreatorLink({ offer }: Props) {
     return (
-        <Link href={`/profile/${offer.business.id}`} className="flex items-center gap-2">
+        <Link href={`/profile/${offer.contributor.id}`} className="flex items-center gap-2">
             <div className="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center text-pink-600 font-bold text-lg">
-                {capitalizeFirstLetter(`${offer.business.name}`)}
+                {capitalizeFirstLetter(`${offer.contributor.name}`)}
             </div>
             <span className="text-orange-500 text-base sm:text-xl font-bold hover:underline cursor-pointer flex items-center">
-                {offer.business.name} <ChevronRight size={23} />
+                {offer.contributor.name} <ChevronRight size={23} />
             </span>
         </Link>
 

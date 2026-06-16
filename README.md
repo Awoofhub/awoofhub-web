@@ -23,8 +23,6 @@ Next.js App Router structure. Contains all routes, layouts, and route groups.
 - not-found.tsx → 404 page
 - unauthorized/ → Access denied page
 
----
-
 ### components/
 Reusable UI components grouped by domain.
 
@@ -44,8 +42,6 @@ Reusable UI components grouped by domain.
 
 Purpose: UI layer only — no business logic here.
 
----
-
 ### features/
 Domain logic hooks (React Query / stateful logic).
 
@@ -62,8 +58,6 @@ Domain logic hooks (React Query / stateful logic).
 
 Purpose: Business logic layer (data + state + API orchestration)
 
----
-
 ### services/
 API layer (backend communication abstraction).
 
@@ -76,29 +70,21 @@ API layer (backend communication abstraction).
 
 Purpose: Single place for all backend requests.
 
----
-
 ### lib/
 Core utilities and infrastructure setup.
 
 - api-client.ts → Base HTTP client (fetch/axios wrapper)
 - utils.ts → Shared low-level helpers
 
----
-
 ### store/
 Global state management.
 
 - notifications/ → Notification state logic + tests
 
----
-
 ### hooks (inside features/)
 Custom reusable hooks tied to business features.
 
 Purpose: Encapsulates reusable logic per domain.
-
----
 
 ### types/
 TypeScript domain models.
@@ -110,8 +96,6 @@ TypeScript domain models.
 
 Purpose: Shared type definitions across app
 
----
-
 ### utils/
 Pure helper functions.
 
@@ -120,8 +104,6 @@ Pure helper functions.
 - uid.ts → ID generation helpers
 
 Purpose: Stateless utility functions
-
----
 
 ### providers/
 Global context providers.
@@ -132,40 +114,12 @@ Global context providers.
 
 Purpose: App-wide context + configuration
 
-
 ## 3. Tech Stack
 
-### Core
-- Next.js 16
-- React 19
-- TypeScript
-
-### UI & Styling
-- Chakra UI
-- Material UI (MUI)
-- Tailwind CSS v4
-- Emotion
-
-### State & Data
-- TanStack Query
-- Zustand
-- Axios
-
-### Features
-- Google OAuth
-- Stream Chat
-- Google Maps API
-- FilePond
-
-### Data Visualization
-- MUI X Charts
-- Recharts
-
-### Testing
-- Vitest
-- Testing Library
-- MSW
-
-### Tooling
-- ESLint
-- PostCSS
+| Category | Technologies |
+|----------|------------|
+| Frontend | Next.js, React, TypeScript |
+| UI | Chakra UI, MUI, Tailwind CSS |
+| State | Zustand, TanStack Query |
+| API | Axios |
+| Testing | Vitest, Testing Library, MSW |

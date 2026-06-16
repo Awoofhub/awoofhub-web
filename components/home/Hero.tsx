@@ -33,7 +33,7 @@ export default function Hero() {
           {/* Action Buttons */}
           <div className="flex flex-wrap gap-4 mt-4">
             <Link 
-              href="/createAwoof" 
+              href="/offers/create" 
               className="w-full md:w-1/3 lg:w-1/4 p-2 border border-orange-600 cursor-pointer font-baloo text-orange-600 text-base font-medium rounded-sm hover:bg-orange-50 transition-colors text-center"
             >
               Post an Awoof

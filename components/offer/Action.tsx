@@ -26,7 +26,7 @@ export default function Action({ offer }: Props) {
 
         grab.grabOffer();
 
-        window.open(offer.dealUrl, "_blank", "noopener,noreferrer");
+        window.open(offer.externalLink, "_blank", "noopener,noreferrer");
     };
 
     const getActionText = () => {
@@ -84,7 +84,7 @@ export default function Action({ offer }: Props) {
                 </span>
 
                 <a
-                    href={offer.dealUrl}
+                    href={offer.externalLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={handleClick}

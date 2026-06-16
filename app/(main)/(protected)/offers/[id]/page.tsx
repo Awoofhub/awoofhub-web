@@ -7,11 +7,10 @@ import SingleOfferSkeleton from "@/components/offer/SingleOfferSkeleton";
 import OfferList from "@/components/offers/OfferList";
 import OfferListSkeleton from "@/components/offers/OfferListSkeleton";
 import { useOffer } from "@/features/offers/useOffer";
-import { useRandomInfiniteOffers } from "@/features/offers/useRandomInfiniteOffers";
+import { useRandomOffers } from "@/features/offers/useRandomOffers";
 import { ChevronRight } from "lucide-react";
 import Link from 'next/link';
-import { use, useEffect, useMemo } from "react";
-import { useInView } from "react-intersection-observer";
+import { use } from "react";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -19,22 +18,11 @@ interface Props {
 
 export default function OfferPage({ params }: Props) {
   const { id } = use(params);
-  const [ref, inView] = useInView();
+
   const { data: offer, isLoading } = useOffer({ id });
 
-  const { data, isFetching, isFetchingNextPage, fetchNextPage, hasNextPage, isError, error } = useRandomInfiniteOffers({
-    limit: 4,
-  });
+  const { data, isFetching, isFetched } = useRandomOffers();
 
-  const allOffers = useMemo(() => {
-    return data?.pages.flatMap((page) => page.data) ?? [];
-  }, [data]);
-
-  useEffect(() => {
-    if (inView && hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  }, [inView, hasNextPage, fetchNextPage, isFetchingNextPage]);
 
   if (isLoading) {
     return (
@@ -74,21 +62,15 @@ export default function OfferPage({ params }: Props) {
           Explore more offers like this
         </h3>
 
-        {isFetching && allOffers.length === 0 ? (
-          <section className="pt-14 px-6">
-            <OfferListSkeleton number={4} />
-          </section>
-        ) : isError ? (
-          <div>{error?.message}</div>
-        ) : (
-          <>
-            <OfferList offers={allOffers} />
-            <div ref={ref} className="h-10 flex items-center justify-center mt-6">
-              {!hasNextPage && allOffers.length > 0 && (
-                <p className="text-center text-[14px] sm:text-[16px]">No more offers</p>
-              )}
-            </div>
-          </>
+
+        {isFetching && <OfferListSkeleton number={8} />}
+        {!isFetching && data.length === 0 && (
+          <p className="text-gray-500 text-center">No offers available.</p>
+        )}
+        {isFetched && data.length > 0 && (
+          <OfferList
+            offers={data}
+          />
         )}
       </section>
     </>

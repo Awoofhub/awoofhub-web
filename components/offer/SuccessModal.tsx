@@ -1,5 +1,8 @@
 "use client";
 
+import Image from "next/image";
+import Success from "./Success.png"
+
 type SuccessModalProps = {
     onDone: () => void;
 };
@@ -11,37 +14,9 @@ export const SuccessModal = ({ onDone }: SuccessModalProps) => (
 
         <div className="relative z-10 bg-white rounded-2xl shadow-2xl w-full max-w-sm px-8 py-10 flex flex-col items-center text-center">
 
-            <div className="relative mb-6">
+            <div className=" relative z-99">
+                <Image src={Success} alt={"success image"} />
 
-                <svg className="absolute -top-4 -left-4 w-6 h-6 text-green-400" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2l1.5 4.5L18 8l-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5z" />
-                </svg>
-                <svg className="absolute -top-2 -right-3 w-4 h-4 text-green-300" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2l1.5 4.5L18 8l-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5z" />
-                </svg>
-                <svg className="absolute bottom-0 -right-5 w-5 h-5 text-green-400" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2l1.5 4.5L18 8l-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5z" />
-                </svg>
-                <svg className="absolute bottom-2 -left-5 w-3 h-3 text-green-300" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2l1.5 4.5L18 8l-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5z" />
-                </svg>
-
-                <div className="w-24 h-28 bg-gray-100 rounded-2xl flex items-center justify-center shadow-inner">
-                    {/* Green circle with white tick */}
-                    <div className="w-14 h-14 rounded-full bg-green-500 flex items-center justify-center shadow-lg">
-                        <svg
-                            className="w-7 h-7 text-white"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="3"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        >
-                            <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                    </div>
-                </div>
             </div>
 
 
@@ -49,8 +24,9 @@ export const SuccessModal = ({ onDone }: SuccessModalProps) => (
                 Submitted!
             </h2>
             <p className="font-baloo text-base text-gray-500 leading-relaxed">
-                We&apos;re reviewing your post.<br />
-                You&apos;ll receive an update within 24 hours.
+                Thanks for sharing! Your post is being <br />
+                reviewed, we&apos;ll keep you posted every step of the way.
+
             </p>
             <button
                 onClick={onDone}

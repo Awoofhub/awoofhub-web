@@ -147,10 +147,11 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
             {/*  Success modal  */}
             {showSuccess && (
                 <SuccessModal
+
                     onDone={() => {
                         setShowSuccess(false);
                         onSuccess();
-                    }}
+                    }} 
                 />
             )}
 
@@ -168,7 +169,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                             })}
                             className={SELECT_CLS}
                         >
-                            <option value="" disabled>Select option</option>
+                            <option value="" >Select option</option>
                             {categories?.map((cat) => (
                                 <option key={cat.id} value={cat.name}>
                                     {cat.name}
@@ -194,7 +195,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                             })}
                             className={SELECT_CLS}
                         >
-                            <option value="" disabled>Select option</option>
+                            <option value="" >Select option</option>
                             {DEAL_TYPES.map((dt) => (
                                 <option key={dt.value} value={dt.value}>{dt.label}</option>
                             ))}
@@ -401,6 +402,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                     {isUploading ? "Uploading image…" : "Post an Awoof"}
                 </Button>
             </form>
+
         </div>
     );
 };

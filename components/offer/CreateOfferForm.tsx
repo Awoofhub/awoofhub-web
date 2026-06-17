@@ -402,7 +402,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                     {isUploading ? "Uploading image…" : "Post an Awoof"}
                 </Button>
             </form>
-            <SuccessModal />
+
         </div>
     );
 };

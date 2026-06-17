@@ -1,33 +1,43 @@
-import { Offer } from "@/types/offer";
 import Link from "next/link";
 import OfferInfiniteList from "../offers/OfferInfiniteList";
 import Image from "next/image";
 import ProfileDealsSkeleton from "./ProfileDealsSkeleton";
+import { useOffersByUsername } from "@/features/offers/useOffersByUsername";
+import { useMemo } from "react";
+import { User } from "@/types/user";
 
 interface Props {
   isOwnProfile: boolean;
-  offers: Offer[];
-  isLoading: boolean;
-  hasNextPage: boolean;
-  isFetchingNextPage: boolean;
-  fetchNextPage: () => void;
+  profile: User;
 }
 
 export default function ProfileDeals({
   isOwnProfile,
-  offers,
-  isLoading,
-  hasNextPage,
-  isFetchingNextPage,
-  fetchNextPage,
+  profile,
 }: Props) {
+    const { data, isFetching, hasNextPage, isFetchingNextPage, fetchNextPage } =
+      useOffersByUsername({
+        username: profile?.username ?? "",
+        search: "",
+        category: "",
+        minRating: 0,
+        createdFrom: "",
+        createdTo: "",
+        limit: 20,
+      });
+  
+    const offers = useMemo(
+      () => data?.pages.flatMap((page) => page.data) ?? [],
+      [data],
+    );
+
   return (
     <div className="flex-1 min-w-0 flex flex-col">
       <h2 className="text-2xl font-semibold text-black mb-4">Active Deals</h2>
 
-      {isLoading && <ProfileDealsSkeleton />}
+      {isFetching && <ProfileDealsSkeleton />}
 
-      {!isLoading && offers.length === 0 && (
+      {!isFetching && offers.length === 0 && (
         <div className="flex-1 flex flex-col items-center justify-center text-center min-h-[60vh]">
           <Image
             className="mb-4"
@@ -53,7 +63,7 @@ export default function ProfileDeals({
         </div>
       )}
 
-      {!isLoading && offers.length > 0 && (
+      {!isFetching && offers.length > 0 && (
         <OfferInfiniteList
           offers={offers}
           hasNextPage={hasNextPage}

@@ -10,6 +10,9 @@ export interface User {
   website: string | null;
   createdAt: string;
   updatedAt: string;
+  numOfDealPosted?: number;
+  offerClicks?: number;
+  usernameChangeLockedUntil: string;
 };
 
 export interface UpdateUserData {

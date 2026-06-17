@@ -3,7 +3,6 @@ import AlertButton from "../alert/Alert";
 import ChatButton from "../chat/ChatButton";
 import ReportModal from "@/components/modals/ReportModal";
 import { User } from "@/types/user";
-import { Offer } from "@/types/offer";
 import { capitalizeFirstLetter } from "@/utils/truncate";
 import { format } from "date-fns";
 import Image from "next/image";
@@ -18,10 +17,9 @@ import { MdOutlineChat } from "react-icons/md";
 interface Props {
   isOwnProfile: boolean;
   profile: User;
-  offers: Offer[];
 }
 
-export default function ProfileCard({ isOwnProfile, profile, offers }: Props) {
+export default function ProfileCard({ isOwnProfile, profile }: Props) {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const [isReportOpen, setIsReportOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -131,15 +129,15 @@ export default function ProfileCard({ isOwnProfile, profile, offers }: Props) {
               DEALS POSTED
             </span>
             <span className="font-bold text-lg text-black">
-              {offers.length}
+              {profile.numOfDealPosted ?? 0}
             </span>
           </div>
           <div className="flex justify-between px-4 py-6 border border-muted/10 shadow-lg rounded-md items-center">
             <span className="text-muted text-sm font-semibold">
-              {isOwnProfile ? "GRABS EARNED" : "TOTAL GRABS"}
+              OFFER CLICKS
             </span>
             <span className="font-bold text-lg text-black">
-              {offers.reduce((acc, o) => acc + (o.clickCount ?? 0), 0)}
+              {profile.offerClicks ?? 0}
             </span>
           </div>
         </div>

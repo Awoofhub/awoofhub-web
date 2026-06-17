@@ -1,34 +1,31 @@
 import { Offer } from "@/types/offer";
 import Link from "next/link";
-import OfferCard from "../offers/OfferCard";
-import OfferListSkeleton from "../offers/OfferListSkeleton";
+import OfferInfiniteList from "../offers/OfferInfiniteList";
 import Image from "next/image";
+import ProfileDealsSkeleton from "./ProfileDealsSkeleton";
 
 interface Props {
   isOwnProfile: boolean;
   offers: Offer[];
   isLoading: boolean;
+  hasNextPage: boolean;
+  isFetchingNextPage: boolean;
+  fetchNextPage: () => void;
 }
 
 export default function ProfileDeals({
   isOwnProfile,
   offers,
   isLoading,
+  hasNextPage,
+  isFetchingNextPage,
+  fetchNextPage,
 }: Props) {
   return (
     <div className="flex-1 min-w-0 flex flex-col">
       <h2 className="text-2xl font-semibold text-black mb-4">Active Deals</h2>
 
-      {isLoading && (
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className="skeleton rounded-xl h-[320px] lg:h-[500px]"
-            />
-          ))}
-        </div>
-      )}
+      {isLoading && <ProfileDealsSkeleton />}
 
       {!isLoading && offers.length === 0 && (
         <div className="flex-1 flex flex-col items-center justify-center text-center min-h-[60vh]">
@@ -57,11 +54,13 @@ export default function ProfileDeals({
       )}
 
       {!isLoading && offers.length > 0 && (
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-          {offers.map((offer, index) => (
-            <OfferCard key={offer.id} offer={offer} index={index} />
-          ))}
-        </div>
+        <OfferInfiniteList
+          offers={offers}
+          hasNextPage={hasNextPage}
+          isFetchingNextPage={isFetchingNextPage}
+          fetchNextPage={fetchNextPage}
+          gridClassName="grid grid-cols-2 lg:grid-cols-3 gap-4"
+        />
       )}
     </div>
   );

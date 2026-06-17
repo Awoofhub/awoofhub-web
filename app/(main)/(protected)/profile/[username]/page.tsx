@@ -13,11 +13,11 @@ interface Props {
 }
 
 export default function ProfilePage({ params }: Props) {
-  const {  username } = use(params);
+  const { username } = use(params);
   const { data: currentUser } = useUser();
   const { data: user, isLoading: userLoading } = useUserByUsername({ username });
 
-  const { data, isFetching } = useOffersByUsername({
+  const { data, isFetching, hasNextPage, isFetchingNextPage, fetchNextPage } = useOffersByUsername({
     username: user?.username ?? "",
     search: "",
     category: "",
@@ -45,7 +45,14 @@ export default function ProfilePage({ params }: Props) {
     <div className="max-w-[1440px] mx-auto px-4 lg:px-8 py-6">
       <div className="flex flex-col md:flex-row gap-6 items-start">
         <ProfileCard isOwnProfile={isOwnProfile} profile={user} offers={offers} />
-        <ProfileDeals isOwnProfile={isOwnProfile} offers={offers} isLoading={isFetching} />
+        <ProfileDeals
+          isOwnProfile={isOwnProfile}
+          offers={offers}
+          isLoading={isFetching}
+          hasNextPage={!!hasNextPage}
+          isFetchingNextPage={isFetchingNextPage}
+          fetchNextPage={fetchNextPage}
+        />
       </div>
     </div>
   );

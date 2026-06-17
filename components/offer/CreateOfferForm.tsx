@@ -15,10 +15,11 @@ import { FiUploadCloud } from "react-icons/fi";
 import { MdClose } from "react-icons/md";
 
 import { Button } from "@/components/button/Button";
+
 import { DatePickerField } from "../date/DatePickerField";
 import { GoogleAutocompleteNew } from "../form/AutoComplete";
 import { InputField } from "../form/InputField";
-import { SuccessModal } from "./SuccessModal";
+import { PostOfferSuccessModal } from "../modals/PostOfferSuccessModal";
 
 // Deal-type options
 const DEAL_TYPES: { label: string; value: CreateOfferData["dealType"] }[] = [
@@ -132,21 +133,18 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
 
         createOffer.submit({
             ...data,
-            // Normalise the date to a full ISO-8601 string the backend expects
             endDate: data.endDate
                 ? dayjs(data.endDate).toISOString()
                 : null,
         });
     };
 
-    const isBusy = createOffer.isPending || isUploading;
-
     return (
         <div className="mt-5 mb-30 lg:mb-10 mx-auto w-full max-w-2xl">
 
             {/*  Success modal  */}
             {showSuccess && (
-                <SuccessModal
+                <PostOfferSuccessModal
                     onDone={() => {
                         setShowSuccess(false);
                         onSuccess();
@@ -224,7 +222,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                     label="Description"
                     placeholder="What's the offer? Any conditions? Briefly describe this deal"
                     type="textarea"
-                    textAreaRows={5}
+                    textAreaRows={3}
                     compulsory
                     {...register("description", {
                         required: "Description is required",
@@ -394,11 +392,11 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
 
                 {/* ── Submit ─── */}
                 <Button
-                    isLoading={isBusy}
-                    isDisabled={isBusy}
+                    isLoading={createOffer.isPending}
+                    isDisabled={isUploading}
                     type="submit"
                 >
-                    {isUploading ? "Uploading image…" : "Post an Awoof"}
+                    Post an Awoof
                 </Button>
             </form>
         </div>

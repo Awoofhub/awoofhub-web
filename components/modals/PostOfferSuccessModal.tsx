@@ -4,7 +4,7 @@ type SuccessModalProps = {
     onDone: () => void;
 };
 
-export const SuccessModal = ({ onDone }: SuccessModalProps) => (
+export const PostOfferSuccessModal = ({ onDone }: SuccessModalProps) => (
     <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
 
         <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px]" />

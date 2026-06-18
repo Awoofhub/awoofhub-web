@@ -28,9 +28,16 @@ async function grab(id: string): Promise<ApiResponse<any>> {
   return res;
 }
 
+async function myOffers(search: string, category: string, minRating: number, createdFrom: string, createdTo: string, page: number, limit: number): Promise<ApiResponse<Offer[]>> {
+  const res: ApiResponse<Offer[]> = await apiClient.get(`/offers/mine`, {
+    params: { search, category, minRating, createdFrom, createdTo, page, limit },
+  })
 
-async function offersByUser(id: string, search: string, category: string, minRating: number, createdFrom: string, createdTo: string, page: number, limit: number): Promise<ApiResponse<Offer[]>> {
-  const res: ApiResponse<Offer[]> = await apiClient.get(`/offers/user/${id}`, {
+  return res;
+}
+
+async function offersByUsername(username: string, search: string, category: string, minRating: number, createdFrom: string, createdTo: string, page: number, limit: number): Promise<ApiResponse<Offer[]>> {
+  const res: ApiResponse<Offer[]> = await apiClient.get(`/offers/username/${username}`, {
     params: { search, category, minRating, createdFrom, createdTo, page, limit },
   })
 
@@ -82,7 +89,8 @@ const OfferService = {
   createOffer,
   offers,
   grab,
-  offersByUser,
+  offersByUsername,
+  myOffers,
   offerById,
   randomOffers,
   trendingOffers,

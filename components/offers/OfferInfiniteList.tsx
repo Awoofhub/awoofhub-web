@@ -9,9 +9,10 @@ interface Props {
   isFetchingNextPage: boolean;
   hasNextPage: boolean;
   fetchNextPage: () => void;
+   gridClassName?: string;
 }
 
-export default function OfferInfiniteList({ offers, hasNextPage, fetchNextPage, isFetchingNextPage }: Props) {
+export default function OfferInfiniteList({ offers, hasNextPage, fetchNextPage, isFetchingNextPage, gridClassName }: Props) {
   const [ref, inView] = useInView();
 
   useEffect(() => {
@@ -22,9 +23,9 @@ export default function OfferInfiniteList({ offers, hasNextPage, fetchNextPage, 
 
   return (
     <>
-      <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center">
-        {offers.map((offer) => (
-          <OfferCard offer={offer} key={offer.id} />
+      <div className={gridClassName ?? "grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center"}>
+        {offers.map((offer, index) => (
+          <OfferCard offer={offer} key={offer.id} index={index} />
         ))}
       </div>
       <div ref={ref} className="h-10 flex items-center justify-center mt-6">

@@ -48,7 +48,7 @@ export default function Sidebar({ user, isOpen, onClose }: Props) {
         <ul className="flex flex-col">
           {/* Standard Items */}
           {[
-            { label: "Profile", icon: <FiUser />, href: `/profile/${user.id}` },
+            { label: "Profile", icon: <FiUser />, href: `/profile/${user.username}` },
             { label: "Help & Support", icon: <FiHelpCircle />, href: "/help" },
           ].map((item, idx) => (
             <li key={idx} className="border-b border-muted/10 last:border-none">

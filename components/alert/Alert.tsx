@@ -1,49 +1,28 @@
+"use client";
 import { useAlert } from "@/features/alert/useAlert";
-import { useUser } from "@/features/user/useUser";
-import { Bell } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 interface Props {
-    contributorId: string;
+  contributorId: string;
 }
 
 export default function AlertButton({ contributorId }: Props) {
+  const { isSubscribed, toggleAlert } = useAlert(contributorId);
 
-    const router = useRouter();
-
-    const { toggleAlert, isSubscribed } = useAlert(contributorId);
-    const { data: currentUser } = useUser();
-
-    const handleWishlistChange = async () => {
-        if (!currentUser) {
-            return router.push('/login');
-        }
-
-        toggleAlert()
-    }
-
-    return (
-        <button
-            onClick={handleWishlistChange}
-            className={`cursor-pointer   text-white px-4 py-2 rounded-lg flex items-center justify-center gap-2 font-medium transition-colors text-sm
-            ${isSubscribed
-                    ? "bg-[#FDBA6B] border-[orange-600]"
-                    : "bg-orange-600"
-                }`}
-        >
-
-            {isSubscribed ? (
-                <>
-                    <Bell size={15} /> Alert Set
-                </>
-            ) : (
-                <>
-                    <Bell size={15} /> Set Alert 
-                </>
-            )}
-        </button>
-    );
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={isSubscribed}
+      onClick={toggleAlert}
+      className={`relative inline-flex h-6 w-11 cursor-pointer items-center rounded-full transition-colors ${
+        isSubscribed ? "bg-primary" : "bg-[#CCCCCC]"
+      }`}
+    >
+      <span
+        className={`inline-block h-4 w-5 transform rounded-full border border-[#F7D9CC] bg-white shadow transition-transform ${
+          isSubscribed ? "translate-x-5" : "translate-x-1"
+        }`}
+      />
+    </button>
+  );
 }
-
-
-

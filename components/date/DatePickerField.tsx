@@ -31,7 +31,7 @@ export const DatePickerField = ({ label, error, compulsory, value, onChange }: a
               slotProps: {
                 input: {
                   disableUnderline: true,
-                  className: `!mt-2 !w-full !px-3 !py-[9px] !bg-[#F6F7F8] !border ${error ? '!border-red-500' : '!border-gray-300'
+                  className: `!mt-2 !w-full !px-3 !py-[4px] !bg-[#F6F7F8] !border ${error ? '!border-red-500' : '!border-gray-300'
                     } !rounded-md !shadow-sm !font-baloo !text-lg focus-within:!border-orange-500`,
                 },
                 htmlInput: {

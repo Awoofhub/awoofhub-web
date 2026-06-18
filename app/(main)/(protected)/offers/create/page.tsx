@@ -15,7 +15,7 @@ export default function CreateOffersPage() {
         <section className="bg-white p-4 sm:p-8">
             <div className="text-center mb-5 sm:mb-8">
                 <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 flex gap-2 items-center justify-center">
-                    Create New Offer <span className="text-orange-600"><MdPostAdd size={30} /></span>
+                    Post New Offer <span className="text-orange-600"><MdPostAdd size={30} /></span>
                 </h1>
             </div>
             <CreateOfferForm onSuccess={onSuccess} />

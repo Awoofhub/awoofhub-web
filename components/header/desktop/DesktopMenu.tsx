@@ -147,7 +147,7 @@ export default function DesktopMenu() {
                     {
                       label: "Profile",
                       icon: <FiUser />,
-                      href: `/profile/${currentUser.id}`,
+                      href: `/profile/${currentUser.username}`,
                     },
                     {
                       label: "Message",

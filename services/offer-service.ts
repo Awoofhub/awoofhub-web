@@ -2,9 +2,14 @@ import { apiClient } from "@/lib/api-client";
 import { ApiResponse } from "@/types/api-response";
 import { CreateOfferData, Offer, UpdateOfferData } from "@/types/offer";
 
+/**
+ * Creates an offer.
+ *
+ * Sends a plain JSON body.  The image must have been uploaded separately
+ * before calling this — `payload.imageUrl` should be the returned URL string.
+ */
 async function createOffer(payload: CreateOfferData): Promise<ApiResponse<Offer>> {
-  const res: ApiResponse<Offer> = await apiClient.post('/offers/', payload)
-
+  const res: ApiResponse<Offer> = await apiClient.post('/offers/', payload);
   return res;
 }
 
@@ -23,9 +28,16 @@ async function grab(id: string): Promise<ApiResponse<any>> {
   return res;
 }
 
+async function myOffers(search: string, category: string, minRating: number, createdFrom: string, createdTo: string, page: number, limit: number): Promise<ApiResponse<Offer[]>> {
+  const res: ApiResponse<Offer[]> = await apiClient.get(`/offers/mine`, {
+    params: { search, category, minRating, createdFrom, createdTo, page, limit },
+  })
 
-async function offersByUser(id: string, search: string, category: string, minRating: number, createdFrom: string, createdTo: string, page: number, limit: number): Promise<ApiResponse<Offer[]>> {
-  const res: ApiResponse<Offer[]> = await apiClient.get(`/offers/user/${id}`, {
+  return res;
+}
+
+async function offersByUsername(username: string, search: string, category: string, minRating: number, createdFrom: string, createdTo: string, page: number, limit: number): Promise<ApiResponse<Offer[]>> {
+  const res: ApiResponse<Offer[]> = await apiClient.get(`/offers/username/${username}`, {
     params: { search, category, minRating, createdFrom, createdTo, page, limit },
   })
 
@@ -77,7 +89,8 @@ const OfferService = {
   createOffer,
   offers,
   grab,
-  offersByUser,
+  offersByUsername,
+  myOffers,
   offerById,
   randomOffers,
   trendingOffers,

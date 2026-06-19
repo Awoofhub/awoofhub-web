@@ -30,11 +30,11 @@ function getOfferVariant(
 }
 
 function formatCountdown(seconds: number) {
-  if (seconds <= 0) return "Expired";
-  const h = Math.floor(seconds / 3600);
-  const m = Math.floor((seconds % 3600) / 60);
-  const s = seconds % 60;
-  return `${String(h).padStart(2, "0")}h ${String(m).padStart(2, "0")}m ${String(s).padStart(2, "0")}s`;
+  const days = Math.floor(seconds / 86400);
+  const hours = Math.floor((seconds % 86400) / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+
+  return `${days}d ${hours}h ${minutes}m`;
 }
 
 export default function OfferCard({ offer, index = 0 }: Props) {
@@ -94,7 +94,7 @@ export default function OfferCard({ offer, index = 0 }: Props) {
           alt={offer.title}
           width={500}
           height={500}
-          className="w-full h-full object-contain group-hover:scale-105 transition-transform"
+          className="w-full h-full object-fill group-hover:scale-105 transition-transform"
         />
       </div>
 

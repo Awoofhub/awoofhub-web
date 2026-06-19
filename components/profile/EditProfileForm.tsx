@@ -1,187 +1,205 @@
-"use client"
-import { Button } from '@/components/button/Button';
-import { InputField } from '@/components/form/InputField';
-import { useUploadSinglePhoto } from '@/features/upload/useUpdateProfilePhoto';
-import { useUpdateUser } from '@/features/user/useUpdateUser';
-import { useUser } from '@/features/user/useUser';
-import { notificationsStore } from '@/store/notifications/notifications';
-import { EditProfileFormProps } from '@/types/form-props';
-import { UpdateUserData } from '@/types/user';
-import { capitalizeFirstLetter } from '@/utils/truncate';
-import Image from 'next/image';
-import { useEffect, useRef } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { FiCamera, FiGlobe, FiUser } from 'react-icons/fi';
-import { ImSpinner2 } from 'react-icons/im';
-import { GoogleAutocompleteNew } from '../form/AutoComplete';
+"use client";
+import { Button } from "@/components/button/Button";
+import { InputField } from "@/components/form/InputField";
+import { useUploadSinglePhoto } from "@/features/upload/useUpdateProfilePhoto";
+import { useUpdateUser } from "@/features/user/useUpdateUser";
+import { useUser } from "@/features/user/useUser";
+import { notificationsStore } from "@/store/notifications/notifications";
+import { EditProfileFormProps } from "@/types/form-props";
+import { UpdateUserData, UsernameCheckResult } from "@/types/user";
+import { capitalizeFirstLetter } from "@/utils/truncate";
+import { differenceInDays, parseISO } from "date-fns";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { FiCamera } from "react-icons/fi";
+import { ImSpinner2 } from "react-icons/im";
+import { GoogleAutocompleteNew } from "../form/AutoComplete";
+import UsernameChecker from "../form/UsernameChecker";
 
 export const EditProfileForm = ({ onSuccess }: EditProfileFormProps) => {
-    const { data: currentUser } = useUser();
-    const updateUser = useUpdateUser({ onSuccess });
+  const { data: currentUser } = useUser();
+  const updateUser = useUpdateUser({ onSuccess });
+  const { uploadPhoto, isPending: isUploading } = useUploadSinglePhoto();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-    const { uploadPhoto, isPending: isUploading } = useUploadSinglePhoto();
-    const fileInputRef = useRef<HTMLInputElement>(null);
+  const { register, handleSubmit, formState, control, reset, setValue, watch } =
+    useForm<UpdateUserData>();
 
+  const { isDirty } = formState;
+  const [usernameResult, setUsernameResult] = useState<UsernameCheckResult>();
+  const photoUrl = watch("profileImageUrl");
 
-    const { register, handleSubmit, formState, control, reset, setValue, watch } = useForm<UpdateUserData>();
+  const isUsernameLocked = currentUser?.usernameChangeLockedUntil
+    ? differenceInDays(
+        parseISO(currentUser.usernameChangeLockedUntil),
+        new Date(),
+      ) > 0
+    : false;
 
-    const photoUrl = watch('profileImageUrl');
+  const currentUsername = currentUser?.username ?? "";
+  const enteredUsername = watch("username") ?? "";
 
-    const onSubmit = (data: UpdateUserData) => {
-        updateUser.submit(data);
-    };
+  const usernameChanged = enteredUsername !== currentUsername;
 
-    const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            try {
-                const res = await uploadPhoto(file);
-                setValue('profileImageUrl', res.data);
-            } catch (err) {
-                const message =
-                    err instanceof Error
-                        ? err.message
-                        : 'Something went wrong';
+  const canSubmitUsername =
+    !usernameChanged ||
+    usernameResult === undefined ||
+    usernameResult.available === true;
 
-                notificationsStore.getState().showNotification({
-                    type: 'error',
-                    title: 'Error',
-                    duration: 5000,
-                    message,
-                });
-            }
-        }
-    };
+  const onSubmit = (data: UpdateUserData) => {
+    if (
+      usernameChanged &&
+      usernameResult &&
+      usernameResult.available === false
+    ) {
+      return;
+    }
+    updateUser.submit(data);
+  };
 
+  const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      try {
+        const res = await uploadPhoto(file);
+        setValue("profileImageUrl", res.data, {
+          shouldDirty: true,
+        });
+      } catch (err) {
+        const message =
+          err instanceof Error ? err.message : "Something went wrong";
+        notificationsStore.getState().showNotification({
+          type: "error",
+          title: "Error",
+          duration: 5000,
+          message,
+        });
+      }
+    }
+  };
 
-    useEffect(() => {
-        if (currentUser) {
-            reset({
-                name: currentUser.name || '',
-                bio: currentUser.bio || '',
-                address: currentUser.address || '',
-                website: currentUser.website || '',
-                profileImageUrl: currentUser.profileImageUrl || '',
-            });
-        }
-    }, [currentUser, reset]);
+  useEffect(() => {
+    if (currentUser) {
+      reset({
+        name: currentUser.name || "",
+        username: currentUser.username || "",
+        bio: currentUser.bio || "",
+        address: currentUser.address || "",
+        website: currentUser.website || "",
+        profileImageUrl: currentUser.profileImageUrl || "",
+      });
+    }
+  }, [currentUser, reset]);
 
-
-    return (
-        <div className="mt-5 mb-30 lg:mb-10 mx-auto w-full max-w-2xl">
-
-            {/* Photo Upload Section */}
-            <div className="flex flex-col items-center mb-8">
-                <div className="relative h-32 w-32">
-                    <div className="h-full w-full rounded-full border-4 border-gray-200 overflow-hidden bg-gray-100 flex items-center justify-center">
-                        {photoUrl ? (
-                            <Image width={500} height={500} src={photoUrl} alt="profile" className="w-full h-full object-cover" />
-                        ) : (
-                            <div className="bg-green-500 text-white text-[70px] font-semibold flex items-center justify-center w-full h-full">
-                                {capitalizeFirstLetter(currentUser?.name || "User")}
-                            </div>
-                        )}
-                    </div>
-
-                    {/* Camera Button */}
-                    <Button
-                        type="button"
-                        onClick={() => fileInputRef.current?.click()}
-                        className="!absolute !bottom-0 !right-0 !p-2 !bg-primary !text-white !rounded-full !shadow-lg !hover:bg-primary-dark !transition-colors !w-10 !h-10"
-                        isDisabled={isUploading}
-                    >
-                        {isUploading ? <ImSpinner2 className="animate-spin" size={18} /> : <FiCamera size={18} />}
-                    </Button>
-
-                    <input
-                        type="file"
-                        ref={fileInputRef}
-                        onChange={handlePhotoUpload}
-                        className="hidden"
-                        accept="image/*"
-                    />
-                </div>
-                <p className="text-sm text-gray-700 mt-2">Click the camera to update photo</p>
-            </div>
-
-            <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-
-                <InputField
-                    label="Name"
-                    type="text"
-                    compulsory={true}
-                    icon={<FiUser size={18} color="gray" />}
-                    {...register('name', {
-                        required: 'Name is required',
-                        maxLength: {
-                            value: 50,
-                            message: 'Name must be less than 50 characters',
-                        },
-                    })}
-                    error={formState.errors['name']}
-                />
-                <InputField
-                    label="Bio"
-                    type="textarea"
-                    {...register('bio', {
-                        maxLength: {
-                            value: 200,
-                            message: 'Bio must be less than 200 characters',
-                        },
-                    })}
-                    error={formState.errors['bio']}
-                />
-
-                <InputField
-                    label="Website"
-                    type="text"
-                    icon={<FiGlobe size={18} color="gray" />}
-                    {...register('website', {
-                        pattern: {
-                            value: /^(https?:\/\/)?([\w\d-]+\.)+\w{2,}(\/.*)?$/,
-                            message: 'Enter a valid URL',
-                        },
-                    })}
-                    error={formState.errors['website']}
-                />
-
-                <Controller
-                    name="address"
-                    control={control}
-                    render={({ field, fieldState }) => (
-                        <GoogleAutocompleteNew
-                            label="Address"
-                            error={fieldState.error}
-                            // field.value will be the string from currentUser.address initially
-                            value={field.value}
-                            // This sends the formattedAddress string back to React Hook Form
-                            onPlaceSelect={field.onChange}
-                            compulsory={false}
-                        />
-                    )}
-                />
-
-                <div className="flex w-60 gap-3 mt-10">
-                    <Button
-                        type="button"
-                        onClick={() => reset()}
-                        isDisabled={updateUser.isPending}
-                        className="!bg-gray-300 !text-black !rounded-2xl"
-                    >
-                        Reset
-                    </Button>
-
-                    <Button
-                        isLoading={updateUser.isPending}
-                        isDisabled={updateUser.isPending}
-                        type="submit"
-                        className="!rounded-2xl"
-                    >
-                        Update
-                    </Button>
-                </div>
-
-            </form >
+  return (
+    <div className="w-full">
+      {/* Photo Upload Section */}
+      <div className="flex flex-col items-center mb-8">
+        <div className="relative h-24 w-24">
+          <div className="h-full w-full rounded-full border-2 border-primary overflow-hidden bg-gray-100 flex items-center justify-center">
+            {photoUrl ? (
+              <Image
+                width={200}
+                height={200}
+                src={photoUrl}
+                alt="profile"
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="bg-green-500 text-white text-4xl font-semibold flex items-center justify-center w-full h-full">
+                {capitalizeFirstLetter(currentUser?.name || "U")}
+              </div>
+            )}
+          </div>
+          <Button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            className="!absolute !bottom-0 !right-0 !p-1 !bg-white border-2 !border-primary !text-black !rounded-full !shadow-lg !w-8 !h-8"
+            isDisabled={isUploading}
+          >
+            {isUploading ? (
+              <ImSpinner2 className="animate-spin" size={14} />
+            ) : (
+              <FiCamera size={17} />
+            )}
+          </Button>
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handlePhotoUpload}
+            className="hidden"
+            accept="image/*"
+          />
         </div>
-    );
+      </div>
+
+      <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
+        <InputField
+          label="Name"
+          type="text"
+          {...register("name", {
+            required: "Name is required",
+            maxLength: {
+              value: 50,
+              message: "Name must be less than 50 characters",
+            },
+          })}
+          error={formState.errors["name"]}
+        />
+
+        {/* Username */}
+        <UsernameChecker
+          value={watch("username") ?? currentUser?.username ?? ""}
+          onChange={(val) =>
+            setValue("username", val, {
+              shouldDirty: true,
+            })
+          }
+          onResult={setUsernameResult}
+          disabled={isUsernameLocked}
+        />
+
+        <InputField
+          label="Bio"
+          type="textarea"
+          {...register("bio", {
+            maxLength: {
+              value: 200,
+              message: "Bio must be less than 200 characters",
+            },
+          })}
+          error={formState.errors["bio"]}
+        />
+
+        <Controller
+          name="address"
+          control={control}
+          render={({ field, fieldState }) => (
+            <GoogleAutocompleteNew
+              label="Location"
+              error={fieldState.error}
+              value={field.value}
+              onPlaceSelect={field.onChange}
+              compulsory={false}
+            />
+          )}
+        />
+        <div className="flex justify-center mt-8">
+          <Button
+            type="submit"
+            isLoading={updateUser.isPending}
+            isDisabled={updateUser.isPending || !isDirty}
+            className={`!font-baloo !rounded-md !py-3 !w-full !max-w-[400px] ${
+              !isDirty
+                ? "!bg-[#FFD5C3] !text-white cursor-not-allowed"
+                : "!bg-primary !text-white"
+            }`}
+          >
+            Save Changes
+          </Button>
+        </div>
+      </form>
+    </div>
+  );
 };

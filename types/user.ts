@@ -13,16 +13,19 @@ export interface User {
   numOfDealPosted?: number;
   offerClicks?: number;
   usernameChangeLockedUntil: string;
-};
+}
 
 export interface UpdateUserData {
   name?: string;
+  username?: string;
   profileImageUrl?: string;
   bio?: string;
   address?: string;
   website?: string;
   role?: "user" | "business";
-};
+}
 
-
-
+export interface UsernameCheckResult {
+  available: boolean;
+  suggestion: string | null;
+}

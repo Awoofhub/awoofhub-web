@@ -1,81 +1,78 @@
 "use client";
+
 import { useCategory } from "@/features/category/useCategory";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import Loading from "../loading/Loading";
-import CategorizedOffers from "./CategorizedOffers";
-import CategoryLinks from "./CategoryLinks";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import ScrollSync from "./ScrollSync";
 
 export default function FeaturedOffers() {
-  const { data, isFetching, isFetched } = useCategory();
-  const [activeId, setActiveId] = useState("");
+    const { data: categories = [], isFetching: isCategoryFetching } = useCategory();
 
-  useEffect(() => {
-    if (!data || data.length === 0) return;
+    const [visibleSection, setVisibleSection] = useState("");
 
-    const stickyOffset = window.innerWidth < 768 ? 112 : 128;
-    const observers: IntersectionObserver[] = [];
+    const headerRef = useRef<HTMLElement | null>(null);
 
-    data.forEach((cat) => {
-      const heading = document.getElementById(`cat-heading-${cat.id}`);
-      if (!heading) return;
+    const navRef = useRef<HTMLUListElement | null>(null);
+    const itemRefs = useRef<Record<string, HTMLLIElement | null>>({});
 
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveId(cat.id);
-          }
-        },
-        {
-          rootMargin: `-${stickyOffset}px 0px -50% 0px`,
-          threshold: 0,
-        },
-      );
+    useEffect(() => {
+        const activeEl = itemRefs.current[visibleSection];
+        const container = navRef.current;
 
-      observer.observe(heading);
-      observers.push(observer);
-    });
+        if (!activeEl || !container) return;
 
-    return () => observers.forEach((obs) => obs.disconnect());
-  }, [data]);
+        const containerWidth = container.offsetWidth;
+        const elementLeft = activeEl.offsetLeft;
+        const elementWidth = activeEl.offsetWidth;
 
-  if (isFetching) return <Loading />;
+        const scrollLeft =
+            elementLeft - containerWidth / 2 + elementWidth / 2;
 
-  if (isFetched && (!data || data.length === 0)) {
-    return <p className="text-center pb-10 text-gray-500">No offers available.</p>;
-  }
+        container.scrollTo({
+            left: scrollLeft,
+            behavior: "smooth",
+        });
+    }, [visibleSection]);
 
-  if (!data) return null;
+    if (isCategoryFetching) {
+        return <p>Loading categories...</p>;
+    }
 
-  const firstHalf = data.slice(0, 3);
-  const secondHalf = data.slice(3);
+    return (
+        <div className="bg-gray-50 pt-6 md:pt-12">
 
-  return (
-    <div className="bg-gray-50 pt-6 md:pt-12">
-      <CategoryLinks categories={data} activeId={activeId} />
+            <header ref={headerRef} className="max-w-[1440px] mx-auto sticky bg-white top-16 lg:top-20 z-40 mb-10 border-b border-gray-200 py-3 px-6 md:px-12">
+                <div className="flex flex-col md:flex-row md:gap-10 md:items-center md:justify-between">
+                    <h2 className="text-primary font-bold text-xl py-2 mb-2 md:mb-0">
+                        Categories
+                    </h2>
 
-      {/* First 3 categories */}
-      <div className="max-w-[1440px] mx-auto">
-        <CategorizedOffers categories={firstHalf} />
-      </div>
+                    <ul ref={navRef} className="flex gap-4 flex-nowrap whitespace-nowrap no-scrollbar scroll-smooth overflow-x-auto">
+                        {categories.map((category) => (
+                            <li
+                                key={category.id}
+                                ref={(el) => {itemRefs.current[category.slug] = el}}
+                                className={`px-5 py-1.5 font-semibold rounded-full text-sm whitespace-nowrap transition-all duration-200 ease-in-out ${visibleSection === category.slug
+                                    ? "bg-primary text-white"
+                                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                                    }`}
+                            >
+                                <Link href={`#${category.slug}`}>{category.name}</Link>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </header>
 
-      {/* Banner*/}
-      <div className="w-full mb-16">
-        <div className="max-w-[1600px] mx-auto">
-          <Image
-            src="/Banner2.svg"
-            alt="Don't miss deals again"
-            width={1600}
-            height={300}
-            className="w-full"
-          />
+            <main>
+                {categories.map((category) => (
+                    <ScrollSync
+                        key={category.id}
+                        category={category}
+                        setVisibleSection={setVisibleSection}
+                    />
+                ))}
+            </main>
         </div>
-      </div>
-
-      {/* Last 3 categories */}
-      <div className="max-w-[1440px] mx-auto">
-        <CategorizedOffers categories={secondHalf} />
-      </div>
-    </div>
-  );
+    );
 }

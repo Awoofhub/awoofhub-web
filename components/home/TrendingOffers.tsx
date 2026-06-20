@@ -1,6 +1,7 @@
 import { useTrendingOffers } from "@/features/offers/useTrendingOffers";
 import Image from "next/image";
 import Link from "next/link";
+import { useMemo } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { FiArrowRight } from "react-icons/fi";
 import { OfferError } from "../offers/OfferError";
@@ -8,10 +9,15 @@ import OfferList from "../offers/OfferList";
 import OfferListSkeleton from "../offers/OfferListSkeleton";
 
 export default function TrendingOffers() {
+
   const { data, isFetching, isFetched } = useTrendingOffers({
-    page: 1,
-    limit: 8,
+    limit: 4,
   });
+
+  const allOffers = useMemo(
+    () => data?.pages.flatMap((page) => page.data) ?? [],
+    [data],
+  );
 
   return (
     <section className="bg-gray-50">
@@ -37,10 +43,10 @@ export default function TrendingOffers() {
 
         <ErrorBoundary fallback={<OfferError />}>
           {isFetching && <OfferListSkeleton number={4} />}
-          {!isFetching && data.length === 0 && (
-            <p className="text-gray-500">No trending offers available.</p>
+          {!isFetching && allOffers.length === 0 && (
+            <p className="text-gray-500">No offers available.</p>
           )}
-          {isFetched && data.length > 0 && <OfferList offers={data} />}
+          {isFetched && allOffers.length > 0 && <OfferList offers={allOffers} />}
         </ErrorBoundary>
       </div>
     </section>

@@ -1,36 +1,54 @@
-'use client'
+"use client";
+
 import { useOffers } from "@/features/offers/useOffers";
-import { Category } from "@/types/category";
-import Link from 'next/link';
+import Link from "next/link";
 import { useMemo } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { FiArrowRight } from "react-icons/fi";
+import { useInView } from "react-intersection-observer";
 import { OfferError } from "../offers/OfferError";
 import OfferList from "../offers/OfferList";
 import OfferListSkeleton from "../offers/OfferListSkeleton";
 
 interface Props {
-    category: Category;
+    category: {
+        id: string;
+        name: string;
+        slug: string;
+    };
+    setVisibleSection: (section: string) => void;
 }
 
-export default function CategorySection({ category }: Props) {
+export default function ScrollSync({
+    category,
+    setVisibleSection,
+}: Props) {
+    const { ref } = useInView({
+        threshold: 0.5,
+        onChange: (inView, entry) => {
+            if (!inView) return;
+
+            setVisibleSection(category.slug);
+
+        },
+    });
 
     const { data, isFetching, isFetched } = useOffers({
         search: "",
-        category: category.slug ?? "",
+        category: category.slug,
         minRating: 0,
         createdFrom: "",
         createdTo: "",
-        limit: 4
+        limit: 4,
     });
 
-       const allOffers = useMemo(() => {
-            return data?.pages.flatMap((page) => page.data) ?? [];
-        }, [data]);
-    
+    const offers = useMemo(
+        () => data?.pages.flatMap((page) => page.data) ?? [],
+        [data]
+    );
 
     return (
-        <section id={category.id} className="pb-16 px-6 md:px-12">
+        <section id={category.id} ref={ref} className="pb-16 px-6 md:px-12">
             <div className="flex justify-between items-baseline mb-3 sm:mb-6">
                 <h3 id={`cat-heading-${category.id}`} className="text-xl sm:text-2xl font-bold">
                     {category.name}
@@ -48,14 +66,11 @@ export default function CategorySection({ category }: Props) {
 
             <ErrorBoundary fallback={<OfferError />}>
                 {isFetching && <OfferListSkeleton number={4} />}
-                {!isFetching && allOffers.length === 0 && (
+                {!isFetching && offers.length === 0 && (
                     <p className="text-gray-500">No offers available.</p>
                 )}
-                {isFetched && allOffers.length > 0 && <OfferList offers={allOffers} />}
+                {isFetched && offers.length > 0 && <OfferList offers={offers} />}
             </ErrorBoundary>
-
         </section>
-
     );
 }
-

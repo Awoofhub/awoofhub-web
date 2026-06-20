@@ -1,28 +1,43 @@
 'use client'
 import OfferService from '@/services/offer-service';
+import { ApiResponse } from '@/types/api-response';
 import { Offer } from '@/types/offer';
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 type GetTrendingOffersOptions = {
-    page: number,
+    page?: number,
     limit: number,
 };
 
-export const getTrendingOffers = async ({ page, limit }: GetTrendingOffersOptions): Promise<Offer[]> => {
-    const result = await OfferService.trendingOffers(page, limit);
-    return result.data;
+export const getTrendingOffers = async ({ page = 1, limit }: GetTrendingOffersOptions): Promise<ApiResponse<Offer[]>> => {
+    return OfferService.trendingOffers(page, limit);
 };
 
-export const useTrendingOffers = ({ page = 1, limit = 8 }: GetTrendingOffersOptions) => {
-    const { data, isFetching, isFetched } = useQuery({
-        queryKey: ["trendingOffers"],
-        queryFn: () => getTrendingOffers({ page, limit }),
-        initialData: []
+export const useTrendingOffers = ({ limit = 8 }: GetTrendingOffersOptions) => {
+    const { data, isFetchingNextPage, isLoading, isFetched, isFetching, fetchNextPage, hasNextPage, isError, error } = useInfiniteQuery({
+        queryKey: ["trendingOffers", limit],
+        queryFn: ({ pageParam = 1 }) => getTrendingOffers({ page: pageParam, limit }),
+
+        getNextPageParam: (lastPage) => {
+            if (!lastPage.meta) return undefined;
+
+            const currentPage = Number(lastPage.meta.page);
+            const totalPages = Number(lastPage.meta.totalPages);
+
+            return currentPage < totalPages ? currentPage + 1 : undefined;
+        },
+        initialPageParam: 1,
     });
 
     return {
         data,
+        isFetchingNextPage,
+        isLoading,
         isFetching,
-        isFetched
+        isFetched,
+        fetchNextPage,
+        hasNextPage,
+        isError,
+        error
     };
 };

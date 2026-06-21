@@ -1,6 +1,6 @@
 import { apiClient } from "@/lib/api-client";
 import { ApiResponse } from "@/types/api-response";
-import { CreateOfferData, Offer, UpdateOfferData } from "@/types/offer";
+import { CreateOfferData, Offer, UpdateOfferData, MyOffersTabsCount } from "@/types/offer";
 
 /**
  * Creates an offer.
@@ -28,11 +28,16 @@ async function grab(id: string): Promise<ApiResponse<any>> {
   return res;
 }
 
-async function myOffers(search: string, category: string, minRating: number, createdFrom: string, createdTo: string, page: number, limit: number): Promise<ApiResponse<Offer[]>> {
+async function myOffers(search: string, category: string, minRating: number, createdFrom: string, createdTo: string, page: number, limit: number , tab: string = "all"): Promise<ApiResponse<Offer[]>> {
   const res: ApiResponse<Offer[]> = await apiClient.get(`/offers/mine`, {
-    params: { search, category, minRating, createdFrom, createdTo, page, limit },
+    params: { search, category, minRating, createdFrom, createdTo, page, limit, tab },
   })
 
+  return res;
+}
+
+async function myOffersTabsCount(): Promise<ApiResponse<MyOffersTabsCount>> {
+  const res: ApiResponse<MyOffersTabsCount> = await apiClient.get(`/offers/mine/tabs-count`)
   return res;
 }
 
@@ -91,6 +96,7 @@ const OfferService = {
   grab,
   offersByUsername,
   myOffers,
+  myOffersTabsCount,
   offerById,
   randomOffers,
   trendingOffers,

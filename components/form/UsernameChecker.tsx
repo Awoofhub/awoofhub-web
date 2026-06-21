@@ -4,7 +4,8 @@ import { useUser } from "@/features/user/useUser";
 import { ImSpinner2 } from "react-icons/im";
 import { CgDanger } from "react-icons/cg";
 import { UsernameCheckResult } from "@/types/user";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
+import { debounce } from "lodash";
 
 interface Props {
   value: string;
@@ -31,21 +32,37 @@ export default function UsernameChecker({
     onResult?.(result);
   }, [result, onResult]);
 
-  console.log("result", result);
-
   const hasChanged = value !== currentUser?.username;
 
-  const handleBlur = () => {
-    if (!hasChanged || !value) return;
+  const debouncedCheck = useMemo(
+    () =>
+      debounce((username: string) => {
+        if (!username) return;
+        checkUsername(username);
+      }, 500),
+    [checkUsername]
+  );
 
-    console.log("Checking:", value);
-    checkUsername(value);
+  useEffect(() => {
+    return () => debouncedCheck.cancel();
+  }, [debouncedCheck]);
+
+  const handleBlur = () => {
+    debouncedCheck.cancel();
+    if (hasChanged && value) checkUsername(value);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.value);
-    // reset result when user starts typing again
+    const newValue = e.target.value;
+    onChange(newValue);
+
     if (result) reset();
+
+    if (newValue !== currentUser?.username) {
+      debouncedCheck(newValue);
+    } else {
+      debouncedCheck.cancel();
+    }
   };
 
   const handleSuggestionClick = (suggestion: string) => {
@@ -82,7 +99,6 @@ export default function UsernameChecker({
         )}
       </div>
 
-      {/* Result message */}
       {!isChecking && result && (
         <p
           className={`text-xs mt-1 ${result.available ? "text-green-500" : "text-red-500"}`}
@@ -93,11 +109,9 @@ export default function UsernameChecker({
         </p>
       )}
 
-      {/* Suggestions */}
       {!isChecking && result && !result.available && result.suggestion && (
         <div className="mt-2">
           <p className="text-xs text-gray-400 mb-1">Suggested username:</p>
-
           <button
             type="button"
             onClick={() => handleSuggestionClick(result.suggestion!)}
@@ -107,6 +121,7 @@ export default function UsernameChecker({
           </button>
         </div>
       )}
+
       {disabled && (
         <p className="text-muted text-xs mt-1 flex items-center gap-1">
           <span className="text-[#E70606]">

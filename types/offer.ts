@@ -39,7 +39,9 @@ export interface Offer {
     id: string;
     name: string;
     username: string;
-    createdAt: string;
+    profileImageUrl?: string;
+    role?: string;
+    createdAt?: string;
   };
   category: {
     id: string;
@@ -54,7 +56,7 @@ export interface Offer {
   avgRating: number;
   reviewCount: number;
   clickCount: number;
-  ratingDistribution: Record<string, number>;
+  ratingDistribution: {};
 }
 
 export interface Stats {
@@ -72,7 +74,7 @@ export interface CategoryData {
 
 export interface OffersByMonthData {
   month: string; // e.g., "2026-03"
-  [category: string]: string | number;
+  [category: string]: any;
 }
 
 export interface ExpiringOffers {

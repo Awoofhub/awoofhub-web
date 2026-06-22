@@ -9,10 +9,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
-import { FiMapPin } from "react-icons/fi";
+import { GoDotFill } from "react-icons/go";
 import { FaRegUser } from "react-icons/fa6";
 import { Plus } from "lucide-react";
 import { MdOutlineChat } from "react-icons/md";
+import EditProfileModal from "../modals/EditProfileModal";
 
 interface Props {
   isOwnProfile: boolean;
@@ -23,6 +24,7 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const [isReportOpen, setIsReportOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [isEditOpen, setIsEditOpen] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (e: Event) => {
@@ -88,14 +90,13 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
             </span>
           </div>
 
-          <div className="flex items-start gap-1 text-black text-sm lg:text-base font-medium mt-1 flex-wrap">
+          <div className="flex items-start gap-2 text-black text-sm lg:text-base font-medium mt-1 flex-wrap">
             <span>@{profile.username}</span>
             {profile.address && (
-              <>
-                <span>•</span>
-                <FiMapPin size={12} />
+              <span className="flex items-center gap-1">
+                <GoDotFill size={14} />
                 <span>{profile.address}</span>
-              </>
+              </span>
             )}
           </div>
 
@@ -144,12 +145,12 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
 
         {isOwnProfile && (
           <div className="flex flex-col gap-3 my-6">
-            <Link
-              href="/profile/edit"
-              className="w-full text-center border border-primary text-primary py-3 rounded-md text-base font-semibold hover:bg-orange-50 transition-colors"
+            <button
+              onClick={() => setIsEditOpen(true)}
+              className="w-full text-center border cursor-pointer border-primary text-primary py-3 rounded-md text-base font-semibold hover:bg-orange-50 transition-colors"
             >
               Edit Profile
-            </Link>
+            </button>
             <Link
               href="/offers/create"
               className="w-full text-center bg-primary text-white py-3 rounded-md text-base font-semibold hover:bg-orange-700 transition-colors flex items-center justify-center gap-1"
@@ -190,6 +191,10 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
             ? "Business Account"
             : "Individual Account"
         }
+      />
+      <EditProfileModal
+        isOpen={isEditOpen}
+        onClose={() => setIsEditOpen(false)}
       />
     </>
   );

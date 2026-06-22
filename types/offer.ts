@@ -39,9 +39,7 @@ export interface Offer {
     id: string;
     name: string;
     username: string;
-    profileImageUrl?: string;
-    role?: string;
-    createdAt?: string;
+    createdAt: string;
   };
   category: {
     id: string;
@@ -73,8 +71,13 @@ export interface CategoryData {
 }
 
 export interface OffersByMonthData {
+<<<<<<< HEAD
   month: string; // e.g., "2026-03"
   [category: string]: string | number;
+=======
+  month: string;
+  [category: string]: any;
+>>>>>>> 23864cb8a5ad266b88ac128fc412e622d0ddea31
 }
 
 export interface ExpiringOffers {

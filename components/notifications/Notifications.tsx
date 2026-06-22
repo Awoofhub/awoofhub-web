@@ -16,7 +16,7 @@ export const Notifications = () => {
       position="fixed"
       className="bottom-[80px] md:bottom-[50px]"
       right="0"
-      zIndex="1"
+      zIndex="1000"
     >
       <Flex gap="4" direction="column-reverse"> 
         {notifications.map((notification) => (

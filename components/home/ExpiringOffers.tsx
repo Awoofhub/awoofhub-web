@@ -3,7 +3,7 @@
 import { useExpiringOffers } from "@/features/offers/useExpiringOffers";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { FiArrowRight } from "react-icons/fi";
 import { OfferError } from "../offers/OfferError";
@@ -15,9 +15,14 @@ const RESET_SECONDS = 2 * 24 * 60 * 60 + 23 * 60 * 60 + 58 * 60; // 2d 23h 58m 0
 
 export default function ExpiringOffers() {
   const { data, isFetching, isFetched } = useExpiringOffers({
-    page: 1,
-    limit: 8,
+    limit: 4,
   });
+
+  const allOffers = useMemo(
+    () => data?.pages.flatMap((page) => page.data) ?? [],
+    [data],
+  );
+
 
   const [secondsLeft, setSecondsLeft] = useState(START_SECONDS);
 
@@ -72,10 +77,10 @@ export default function ExpiringOffers() {
 
         <ErrorBoundary fallback={<OfferError />}>
           {isFetching && <OfferListSkeleton number={4} />}
-          {!isFetching && data.length === 0 && (
-            <p className="text-gray-500">No expiring offers available.</p>
+          {!isFetching && allOffers.length === 0 && (
+            <p className="text-gray-500">No offers available.</p>
           )}
-          {isFetched && data.length > 0 && <OfferList offers={data} />}
+          {isFetched && allOffers.length > 0 && <OfferList offers={allOffers} />}
         </ErrorBoundary>
       </div>
     </section>

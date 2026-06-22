@@ -56,7 +56,7 @@ export interface Offer {
   avgRating: number;
   reviewCount: number;
   clickCount: number;
-  ratingDistribution: {};
+  ratingDistribution: Record<string, number>;
 }
 
 export interface Stats {
@@ -74,7 +74,7 @@ export interface CategoryData {
 
 export interface OffersByMonthData {
   month: string; // e.g., "2026-03"
-  [category: string]: any;
+  [category: string]: string | number;
 }
 
 export interface ExpiringOffers {

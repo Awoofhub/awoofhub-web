@@ -10,8 +10,12 @@ export default function ReviewChart({ offer }: Props) {
     const { ratingDistribution, avgRating, reviewCount } = offer;
     const starRatings = [5, 4, 3, 2, 1];
     const chartData = starRatings.map((star) => {
-        const count = ratingDistribution[star as keyof typeof ratingDistribution] || 0;
+        const count = ratingDistribution[String(star) as keyof typeof ratingDistribution] || 0;
         const percentage = reviewCount > 0 ? (count / reviewCount) * 100 : 0;
+
+
+
+
 
         return {
             rating: `${star} star`,

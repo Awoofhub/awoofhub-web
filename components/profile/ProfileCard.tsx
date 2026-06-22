@@ -193,4 +193,6 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
       />
     </>
   );
+
+
 }

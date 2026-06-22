@@ -20,5 +20,10 @@ export async function getUserService(): Promise<ApiResponse<User>> {
   return res;
 }
 
+export async function getUserByIdService(id: string): Promise<ApiResponse<User>> {
+  const res: ApiResponse<User> = await apiClient.get(`/users/${id}`)
+
+  return res;
+}
 
 

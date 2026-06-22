@@ -34,10 +34,14 @@ export interface Offer {
   dealType: 'cashback' | 'freebie' | 'discount' | 'bogo' | 'promo_code' | 'free_trial' | 'free_delivery',
   externalLink: string;
   couponCode?: string;
+  varient?: number;
   contributor: {
     id: string;
     name: string;
     username: string;
+    profileImageUrl?: string;
+    role?: string;
+    createdAt?: string;
   };
   category: {
     id: string;

@@ -1,6 +1,8 @@
 "use client"
 
 import ShareModal from "@/components/modals/ShareModal";
+import ReportModal from "@/components/modals/ReportModal";
+import WishlistButton from "@/components/wishlist/WishlistButton";
 import SingleOffer from "@/components/offer/SingleOffer";
 import SingleOfferSkeleton from "@/components/offer/SingleOfferSkeleton";
 
@@ -8,9 +10,9 @@ import OfferList from "@/components/offers/OfferList";
 import OfferListSkeleton from "@/components/offers/OfferListSkeleton";
 import { useOffer } from "@/features/offers/useOffer";
 import { useRandomOffers } from "@/features/offers/useRandomOffers";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Flag } from "lucide-react";
 import Link from 'next/link';
-import { use } from "react";
+import { use, useState } from "react";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -22,6 +24,8 @@ export default function OfferPage({ params }: Props) {
   const { data: offer, isLoading } = useOffer({ id });
 
   const { data, isFetching, isFetched } = useRandomOffers();
+
+  const [isReportOpen, setIsReportOpen] = useState(false);
 
 
   if (isLoading) {
@@ -49,12 +53,34 @@ export default function OfferPage({ params }: Props) {
       <section className="p-4 sm:p-8 mx-auto max-w-[1440px] bg-white text-gray-800 border-b border-gray-300 pb-30">
         <div className="mx-auto flex justify-between items-center mb-7 md:mb-10">
           <nav className="flex items-center text-sm text-gray-500 gap-2">
+            <Link href={'/'}>Home</Link> <ChevronRight size={14} />
             <Link href={`/offers?category=${offer.category.slug}`}>{offer.category.name}</Link> <ChevronRight size={14} />
             <span className="font-semibold text-[10px] xs:text-sm text-gray-900">{offer.id}</span>
           </nav>
-          <ShareModal offerId={offer.id} />
+
+          <div className="flex items-center gap-4 text-sm font-bold">
+            <button onClick={() => setIsReportOpen(true)} className=" flex items-center gap-1 border-2 border-red-500 rounded p-1 sm:p-2 sm:text-red-500 hover:bg-red-500 hover:text-white cursor-pointer">
+              <span className="block">Report this deal</span>
+            </button>
+            <span className="text-gray-300">|</span>
+            <div className="flex items-center gap-1 cursor-pointer">
+              <WishlistButton offerId={offer.id} size="text-[18px]" /> <span className="text-gray-600">Save</span>
+            </div>
+            <span className="text-gray-300">|</span>
+            <ShareModal offerId={offer.id} />
+          </div>
         </div>
         <SingleOffer offer={offer} />
+
+        <ReportModal
+          isOpen={isReportOpen}
+          onClose={() => setIsReportOpen(false)}
+          targetType="offer"
+          targetId={offer.id}
+          targetName={offer.title}
+          targetImage={offer.imageUrl}
+          targetBadge={offer.contributor.name}
+        />
       </section>
 
       <section className="p-4 sm:p-8 bg-white mx-auto max-w-[1440px] pb-10 mb-15 lg:mb-0">

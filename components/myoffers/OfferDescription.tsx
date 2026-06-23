@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useTruncateLength } from "./useTruncateLength";
+import { useTruncateLength } from "@/features/offers/useTruncateLength";
 
 interface Props {
   description: string;

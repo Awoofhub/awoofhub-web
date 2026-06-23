@@ -77,7 +77,7 @@ export default function OfferStatusModal({ offer, onClose }: Props) {
                 Submitted: {format(new Date(offer.createdAt), "do MMM yyyy")}
               </span>
               <span className="text-sm font-baloo bg-[#EA4B48]/10 text-primary font-semibold px-4 py-1 rounded-full">
-                20% off
+               {offer.value}
               </span>
             </div>
 

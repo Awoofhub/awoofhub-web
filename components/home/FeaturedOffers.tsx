@@ -64,10 +64,11 @@ export default function FeaturedOffers() {
                 </div>
             </header>
 
-            <main>
-                {categories.map((category) => (
+            <main className="max-w-[1440px] mx-auto">
+                {categories.map((category, index) => (
                     <ScrollSync
                         key={category.id}
+                         index={index}
                         category={category}
                         setVisibleSection={setVisibleSection}
                     />

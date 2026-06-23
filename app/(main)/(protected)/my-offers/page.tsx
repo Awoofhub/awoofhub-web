@@ -25,11 +25,6 @@ export default function MyOffersPage() {
 
   const { data, isFetching, isFetchingNextPage, fetchNextPage, hasNextPage } =
     useMyOffers({
-      search: "",
-      category: "",
-      minRating: 0,
-      createdFrom: "",
-      createdTo: "",
       limit: 20,
       tab: activeTab,
     });

@@ -13,10 +13,12 @@ export default function TrustSection({ offer }: Props) {
     return (
         <section className="border-t border-b border-gray-300 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 py-8 items-center">
             {/* Store Info */}
-            <div className="flex flex-col justify-center gap-4 bg-white rounded-xl p-6 shadow-sm border-2 border-orange-500">
+            <div className="md:flex md:justify-center md:flex-center ">
+            <div className="flex flex-col justify-center gap-10 items-center bg-white rounded-xl py-3 shadow-md border-2 border-orange-500  ">
                 <CreatorLink offer={offer} variant="card" />
                 {/* AlertButton commented out to match exact UI of the reference image */}
                 {/* <AlertButton contributorId={offer.contributor.id} /> */}
+                 </div>
             </div>
 
             {/* Leave a Rating */}

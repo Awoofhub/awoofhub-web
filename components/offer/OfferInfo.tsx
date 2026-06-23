@@ -11,9 +11,7 @@ export default function OfferInfo({ offer }: Props) {
         <>
             <div className="flex justify-between items-start mb-1">
                 <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className="text-red-500 text-xl font-bold">
-                        Free!
-                    </span>
+                
                     <h1 className="text-2xl xs:text-3xl md:text-3xl font-bold text-gray-900 leading-tight">
                         {offer.title}
                     </h1>
@@ -55,12 +53,12 @@ export default function OfferInfo({ offer }: Props) {
 
             <section className="text-base leading-relaxed text-gray-600 mb-2">
                 <h3 className="text-gray-900 mb-2 text-base font-bold">Details</h3>
-                <p className="mb-4 break-all text-gray-500">
+                <p className="mb-2 break-all text-gray-500 text-[14px]">
                    {offer.description}
                 </p>
 
                 {offer.value && (
-                    <div className="inline-block bg-red-50 text-orange-500 text-sm font-bold px-4 py-2 rounded-full mb-4 mt-2">
+                    <div className="inline-block bg-red-50 text-orange-500 text-sm font-bold px-4 py-2 rounded-full mb-4 mt-1">
                         {offer.value}
                     </div>
                 )}

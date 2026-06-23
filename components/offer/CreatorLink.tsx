@@ -13,17 +13,17 @@ interface Props {
 export default function CreatorLink({ offer, variant = "top" }: Props) {
     if (variant === "card") {
         return (
-            <div className="flex items-center gap-6 w-full">
+            <div className="flex items-center justify-between px-5 gap-6">
                 <Link href={`/profile/${offer.contributor.username}`}>
-                    <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center text-pink-600 font-bold text-2xl overflow-hidden shrink-0">
+                    <div className="w-25 h-25 bg-pink-100 rounded-full flex items-center justify-center text-pink-600 font-bold text-2xl overflow-hidden shrink-0 border-2 border-orange-500">
                         {
                             offer.contributor.profileImageUrl ? (
                                 <Image
-                                    width={200}
-                                    height={200}
+                                    width={600}
+                                    height={600}
                                     src={offer.contributor.profileImageUrl}
                                     alt={offer.contributor.name}
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-cover "
                                 />
                             ) : (
                                 <div className="bg-[#F7C8D5] text-[#B85B80] text-3xl font-semibold flex items-center justify-center w-full h-full">
@@ -33,16 +33,16 @@ export default function CreatorLink({ offer, variant = "top" }: Props) {
                         }
                     </div>
                 </Link>
-                <div className="flex flex-col">
-                    <div className="flex items-center gap-2 mb-1">
+                <div className="flex flex-col justify-between gap-1">
+                    <div className="flex items-center  gap-10 ">
                         <Link href={`/profile/${offer.contributor.username}`} className="font-bold text-gray-900 text-base hover:underline">
                             {offer.contributor.name}
                         </Link>
-                        <span className="flex items-center gap-1 bg-[#FFF0EC] text-primary text-[10px] lg:text-xs font-semibold px-2 py-0.5 rounded-full">
+                        <span className="flex items-center gap-1 bg-[#FFF0EC] text-primary text-[10px] lg:text-xs font-semibold px-2.5 py-2 rounded-full">
                                   <FaRegUser size={12} /> Awoofer
                                 </span>
                     </div>
-                    <span className="text-gray-500 text-sm mb-0.5">@{offer.contributor.username}</span>
+                    <span className="text-gray-500 text-sm">@{offer.contributor.username}</span>
                     <span className="text-gray-400 text-xs">Awoofer since {format(new Date(offer.contributor.createdAt || "2023-01-01"), "MMMM yyyy")}</span>
                 </div>
             </div>

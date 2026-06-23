@@ -47,13 +47,22 @@ export interface Offer {
   };
   location: string;
   brandName: string;
-  status: "pending" | "approved" | "rejected";
+  status: "pending" | "approved" | "rejected" | "suspended";
   createdAt: string;
   endDate: string;
   avgRating: number;
   reviewCount: number;
   clickCount: number;
   ratingDistribution: {};
+}
+
+export interface MyOffersTabsCount {
+  all: number;
+  pending: number;
+  approved: number;
+  rejected: number;
+  suspended: number;
+  expired: number;
 }
 
 export interface Stats {

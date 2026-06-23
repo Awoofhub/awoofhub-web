@@ -1,24 +1,31 @@
-import ModerationService from '@/services/moderation-service';
-import { Moderation } from '@/types/moderation';
-import { useQuery } from '@tanstack/react-query';
+import ModerationService from "@/services/moderation-service";
+import { Moderation } from "@/types/moderation";
+import { useQuery } from "@tanstack/react-query";
 
 type GetLatestModerationOptions = {
-    id: string;
+  id: string;
 };
 
-export const getLatestModeration = async ({ id }: GetLatestModerationOptions): Promise<Moderation> => {
-    const result = await ModerationService.latestHistory(id);
-    return result.data;
+export const getLatestModeration = async ({
+  id,
+}: GetLatestModerationOptions): Promise<Moderation> => {
+  const result = await ModerationService.latestHistory(id);
+  return result.data;
 };
 
-export const useLatestModeration = ({ id }: GetLatestModerationOptions) => {
-    const { data, isLoading } = useQuery({
-        queryKey: ['moderation', 'latest'],
-        queryFn: () => getLatestModeration({ id }),
-    });
+export const useLatestModeration = (
+  { id }: GetLatestModerationOptions,
+  enabled: boolean = true,
+) => {
+  const { data, isLoading } = useQuery({
+    queryKey: ["moderation", "latest", id],
+    queryFn: () => getLatestModeration({ id }),
+    enabled,
+  });
 
-    return {
-        data,
-        isLoading
-    };
+  
+  return {
+    data,
+    isLoading,
+  };
 };

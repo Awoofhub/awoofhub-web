@@ -4,7 +4,6 @@ import { Comment } from "@/types/comment";
 import { formatDate } from "@/utils/formatDate";
 import { capitalizeFirstLetter } from "@/utils/truncate";
 import Image from 'next/image';
-import { getUserByIdService } from '@/services/user-service';
 
 interface Props {
     comments: Comment[];
@@ -15,7 +14,6 @@ export default function CommentContainer({ comments }: Props) {
     const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
     const visibleComments = comments.slice(0, visibleCount);
-    const [userMap, setUserMap] = useState<Record<string,string>>({});
 
     const handleShowMore = () => {
         if (visibleCount >= comments.length) {
@@ -26,25 +24,7 @@ export default function CommentContainer({ comments }: Props) {
     };
 
     // Fetch usernames for commenters where username is not provided
-    useEffect(() => {
-        const missingIds = Array.from(new Set(comments
-            .filter(c => !c.user.username && !userMap[c.user.id])
-            .map(c => c.user.id)));
-
-        if (!missingIds.length) return;
-
-        missingIds.forEach(async (id) => {
-            try {
-                const res = await getUserByIdService(id);
-                if (res?.data?.username) {
-                    setUserMap(prev => ({ ...prev, [id]: res.data.username }));
-                }
-            } catch {
-                // ignore failures
-            }
-        });
-    }, [comments, userMap]);
-
+  
     return (
         <>
             <div className="bg-gray-100 rounded-lg overflow-y-auto" style={{ maxHeight: 350 }}>
@@ -54,7 +34,6 @@ export default function CommentContainer({ comments }: Props) {
                         <div key={comment.id} className="rounded-lg flex flex-col gap-1 p-4 bg-white max-w-2xl">
                             {/* Header Section */}
                             <div className="flex items-center gap-4">
-                                <Link href={`/profile/${comment.user.username ?? userMap[comment.user.id] ?? comment.user.id}`} target="_blank" className="flex items-center gap-4">
                                     <div className="w-10 h-10 rounded-full overflow-hidden">
                                         {comment.user.profileImageUrl ? (
                                             <Image
@@ -73,7 +52,7 @@ export default function CommentContainer({ comments }: Props) {
                                     <span className="font-medium text-gray-900 text-lg hover:underline">
                                         {comment.user.name}
                                     </span>
-                                </Link>
+    
                             </div>
 
                             {/* Meta Section */}

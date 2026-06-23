@@ -40,7 +40,7 @@ export interface Offer {
     name: string;
     username: string;
     profileImageUrl?: string;
-    role?: string;
+    
     createdAt?: string;
   };
   category: {

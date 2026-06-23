@@ -57,11 +57,11 @@ export default function OfferInfo({ offer }: Props) {
                    {offer.description}
                 </p>
 
-                {offer.value && (
+               
                     <div className="inline-block bg-red-50 text-orange-500 text-sm font-bold px-4 py-2 rounded-full mb-4 mt-1">
                         {offer.value}
                     </div>
-                )}
+            
             </section>
         </>
     )

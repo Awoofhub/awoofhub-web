@@ -21,7 +21,7 @@ export default function TrustSection({ offer }: Props) {
                  </div>
             </div>
 
-            {/* Leave a Rating */}
+            
             <div className="text-center md:border-x border-gray-300 xs:col-span-2 order-3 md:col-span-1 md:order-none px-4 flex flex-col items-center justify-center h-full">
                 <h3 className="font-bold text-gray-800 text-lg">Leave a Rating</h3>
                 <p className="text-gray-400 text-sm mb-4">Rate your experience about this offer</p>

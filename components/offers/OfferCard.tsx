@@ -100,20 +100,20 @@ export default function OfferCard({ offer, index = 0 }: Props) {
 
       {/* Username and Awoofer badge */}
       <div className="flex items-center justify-between mb-1 lg:mb-2">
-        <span className="text-primary text-xs lg:text-sm font-medium">
+        <span className="text-primary text-[10px] lg:text-xs font-medium">
           @{offer.contributor.username}
         </span>
-        <span className="flex items-center gap-1 bg-[#FFF0EC] text-primary text-[10px] lg:text-xs font-semibold px-2 py-0.5 rounded-full">
-          <FaRegUser size={12} /> Awoofer
+        <span className="flex items-center gap-1 bg-[#FFF0EC] text-primary text-[9px] lg:text-[11px] font-semibold px-1.5 py-0.5 rounded-full">
+          <FaRegUser size={10} /> Awoofer
         </span>
       </div>
 
       {/* Card Content Wrapper */}
       <div className="flex flex-col">
-        <h4 className="font-bold text-black text-base sm:text-lg md:text-base lg:text-lg mb-1 line-clamp-1">
+        <h4 className="font-bold text-black text-sm sm:text-base md:text-sm lg:text-base mb-1 line-clamp-1">
           {offer.title}
         </h4>
-        <p className="text-muted text-sm sm:text-base md:text-sm lg:text-base mb-1 lg:mb-2 line-clamp-2">
+        <p className="text-muted text-xs sm:text-sm md:text-xs lg:text-sm mb-1 lg:mb-2 line-clamp-2">
           {offer.description}
         </p>
 
@@ -135,15 +135,15 @@ export default function OfferCard({ offer, index = 0 }: Props) {
                   "& .MuiRating-iconEmpty": { color: "#ccc" },
                 }}
               />
-              <span className="font-medium font-baloo text-xs sm:text-[18px] md:text-xs lg:text-[18px] text-gray-400 ml-1">
+              <span className="font-medium font-baloo text-[10px] sm:text-[16px] md:text-[10px] lg:text-[16px] text-gray-400 ml-1">
                 ({offer.reviewCount})
               </span>
             </div>
 
             {/* Grabs for expiring condition */}
             {hasCountdown && (
-              <div className="flex items-center gap-1 text-muted text-xs lg:text-sm">
-                <FiUsers size={14} className="text-primary/60" />
+              <div className="flex items-center gap-1 text-muted text-[10px] lg:text-xs">
+                <FiUsers size={12} className="text-primary/60" />
                 <span>{offer.clickCount} grabs</span>
               </div>
             )}
@@ -152,13 +152,13 @@ export default function OfferCard({ offer, index = 0 }: Props) {
           {/* Bottom Row: Displays either the Countdown OR the Grabs count */}
           <div className="flex items-center gap-1 mb-2">
             {hasCountdown ? (
-              <div className="flex items-center gap-1 text-[#E70606] text-sm lg:text-base font-medium">
-                <IoAlarmOutline size={20} />
+              <div className="flex items-center gap-1 text-[#E70606] text-xs lg:text-sm font-medium">
+                <IoAlarmOutline size={18} />
                 {formatCountdown(secondsLeft)}
               </div>
             ) : (
-              <div className="flex items-center gap-1 text-muted text-xs lg:text-sm">
-                <FiUsers size={14} className="text-primary/60" />
+              <div className="flex items-center gap-1 text-muted text-[10px] lg:text-xs">
+                <FiUsers size={12} className="text-primary/60" />
                 <span >{offer.clickCount} grabs</span>
               </div>
             )}

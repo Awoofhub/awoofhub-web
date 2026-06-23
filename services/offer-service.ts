@@ -28,9 +28,9 @@ async function grab(id: string): Promise<ApiResponse<any>> {
   return res;
 }
 
-async function myOffers(search: string, category: string, minRating: number, createdFrom: string, createdTo: string, page: number, limit: number , tab: string = "all"): Promise<ApiResponse<Offer[]>> {
+async function myOffers(page: number, limit: number, tab: string = "all"): Promise<ApiResponse<Offer[]>> {
   const res: ApiResponse<Offer[]> = await apiClient.get(`/offers/mine`, {
-    params: { search, category, minRating, createdFrom, createdTo, page, limit, tab },
+    params: { page, limit, tab },
   })
 
   return res;

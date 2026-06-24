@@ -14,7 +14,7 @@ export default function Home() {
       <TrendingOffers/>
       <div className="max-w-[1600px] mx-auto">
         <Image
-          src="/Banner1.svg"
+          src="/homeBanner1.svg"
           alt="Don't miss deals again"
           width={1600}
           height={300}

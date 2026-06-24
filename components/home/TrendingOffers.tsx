@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMemo } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { FiArrowRight } from "react-icons/fi";
+import { IoIosArrowForward } from "react-icons/io";
 import { OfferError } from "../offers/OfferError";
 import OfferList from "../offers/OfferList";
 import OfferListSkeleton from "../offers/OfferListSkeleton";
@@ -21,11 +21,11 @@ export default function TrendingOffers() {
 
   return (
     <section className="bg-gray-50">
-      <div className="pb-12 px-6 md:px-12 max-w-[1440px] mx-auto">
-        <div className="px-4 py-2 mb-4 bg-primary flex justify-between items-center">
-          <span className="flex gap-2">
-            <Image src="yellowFlame.svg" alt="flame" width={20} height={20} />
-            <h3 className="text-xl md:text-2xl font-semibold  text-white">
+      <div className="pb-8 lg:pb-12 px-4 md:px-6 lg:px-12 max-w-[1440px] mx-auto">
+        <div className="px-2 md:px-4 py-2 bg-primary flex justify-between items-center">
+          <span className="flex items-center gap-2">
+            <Image src="yellowFlame.svg" alt="flame" width={20} height={20} className="w-5 h-5 md:w-6 md:h-6"/>
+            <h3 className="text-base md:text-xl lg:text-2xl font-semibold  text-white">
               Trending now
             </h3>
           </span>
@@ -34,17 +34,17 @@ export default function TrendingOffers() {
             href="/trending"
             className="group inline-flex items-center gap-2 text-white font-medium hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
           >
-            <span className="text-white text-xs sm:text-sm font-bold">
+            <span className="text-white text-sm md:text-base  font-medium font-baloo">
               View all
             </span>
-            <FiArrowRight className=" text-white transition-transform duration-200 group-hover:translate-x-1" />
+            <IoIosArrowForward className=" text-white transition-transform duration-200 group-hover:translate-x-1" />
           </Link>
         </div>
 
         <ErrorBoundary fallback={<OfferError />}>
           {isFetching && <OfferListSkeleton number={4} />}
           {!isFetching && allOffers.length === 0 && (
-            <p className="text-gray-500">No offers available.</p>
+            <p className="text-gray-500 mt-2">No offers available.</p>
           )}
           {isFetched && allOffers.length > 0 && <OfferList offers={allOffers} />}
         </ErrorBoundary>

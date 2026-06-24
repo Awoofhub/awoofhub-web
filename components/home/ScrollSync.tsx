@@ -1,10 +1,9 @@
 "use client";
-
 import { useOffers } from "@/features/offers/useOffers";
 import Link from "next/link";
 import { useMemo } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { FiArrowRight } from "react-icons/fi";
+import { IoIosArrowForward } from "react-icons/io";
 import { useInView } from "react-intersection-observer";
 import { OfferError } from "../offers/OfferError";
 import OfferList from "../offers/OfferList";
@@ -51,22 +50,26 @@ export default function ScrollSync({
 
   return (
     <>
-      <section id={category.slug} ref={ref} className="pb-16 px-6 md:px-12 scroll-mt-40">
+      <section
+        id={category.slug}
+        ref={ref}
+        className="max-w-[1440px] mx-auto pb-10 lg:pb-14 px-4 md:px-6 lg:px-12 scroll-mt-40"
+      >
         <div className="flex justify-between items-baseline mb-3 sm:mb-6">
           <h3
             id={`cat-heading-${category.id}`}
-            className="text-xl sm:text-2xl font-bold"
+            className="text-base md:text-xl lg:text-2xl font-bold"
           >
             {category.name}
           </h3>
 
           <Link
             href={`/offers?category=${category.slug}`}
-            className="group inline-flex items-center gap-2 text-orange-600 font-medium hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
+            className="group inline-flex items-center gap-2 font-baloo text-orange-600 font-medium hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
             aria-label={`View all offers in ${category.name}`}
           >
             <span className="text-xs sm:text-sm font-bold">View all</span>
-            <FiArrowRight className="transition-transform duration-200 group-hover:translate-x-1" />
+            <IoIosArrowForward className="transition-transform duration-200 group-hover:translate-x-1" />
           </Link>
         </div>
 
@@ -79,13 +82,13 @@ export default function ScrollSync({
         </ErrorBoundary>
       </section>
       {index === 3 && (
-        <div className="mb-16">
+        <div className="mb-6 md:mb-10 lg:mb-14 max-w-[1600px] mx-auto">
           <Image
-            src="/Banner2.svg"
+            src="/homeBanner2.svg"
             alt="Don't miss deals again"
             width={1600}
             height={300}
-            className="w-full h-auto"
+            className="w-full"
           />
         </div>
       )}

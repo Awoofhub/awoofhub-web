@@ -14,20 +14,13 @@ export default function Home() {
       <TrendingOffers />
       <div className="max-w-[1600px] mx-auto">
         <Image
-          src="/homeBanner1.svg"
-          alt="Don't miss deals again"
-          width={1600}
+          src="/Banner1.svg"
+          alt="the marketplace where deals find you"
+          width={800}
           height={300}
-          className="w-full hidden md:block"
+          className="w-full"
         />
       </div>
-      <Image
-        src="/mobileBanner1.svg"
-        alt="Don't miss deals again"
-        width={390}
-        height={128}
-        className="w-full md:hidden"
-      />
       <FeaturedOffers />
       <Footer />
     </>

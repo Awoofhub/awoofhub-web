@@ -25,7 +25,7 @@ export default function SingleOffer({ offer }: Props) {
                             width={500}
                             height={500}
                             priority
-                            className="w-full aspect-[10/9] p-4 md:p-10 object-cover rounded-sm md:rounded-2xl"
+                            className="w-full aspect-[10/9] object-fill rounded-sm md:rounded-2xl"
                         />
                     </div>
                 </div>
@@ -33,7 +33,7 @@ export default function SingleOffer({ offer }: Props) {
                 <div className="md:col-span-5 flex flex-col pt-2">
                     <div className="flex justify-between items-start mb-3">
                         <CreatorLink offer={offer} />
-                        <span className="bg-green-100 text-green-700 text-[10px] uppercase tracking-wider font-bold px-5 py-3 rounded-sm mt-1">
+                        <span className="bg-green-100 text-green-700 text-[10px] uppercase animate-pulse tracking-wider font-bold px-5 py-2 rounded-sm mt-1">
                             Available
                         </span>
                     </div>

@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import Link from 'next/link';
 import { Comment } from "@/types/comment";
 import { formatDate } from "@/utils/formatDate";
 import { capitalizeFirstLetter } from "@/utils/truncate";
 import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from "react";
 
 interface Props {
     comments: Comment[];
@@ -31,7 +31,7 @@ export default function CommentContainer({ comments }: Props) {
                 <div className="space-y-0.5">
                     {visibleComments.map(comment => (
 
-                        <div key={comment.id} className="rounded-lg flex flex-col gap-1 p-4 bg-white max-w-2xl">
+                        <Link href={`/profile/${comment.user.username}`} key={comment.id} className="rounded-lg flex flex-col gap-1 p-4 bg-white max-w-2xl">
                             {/* Header Section */}
                             <div className="flex items-center gap-4">
                                     <div className="w-10 h-10 rounded-full overflow-hidden">
@@ -64,7 +64,7 @@ export default function CommentContainer({ comments }: Props) {
                             <div className="text-gray-800 leading-relaxed text-base">
                                 {comment.comment}
                             </div>
-                        </div>
+                        </Link>
 
                     ))}
                 </div>

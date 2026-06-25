@@ -34,10 +34,12 @@ export interface Offer {
   dealType: 'cashback' | 'freebie' | 'discount' | 'bogo' | 'promo_code' | 'free_trial' | 'free_delivery',
   externalLink: string;
   couponCode?: string;
+  varient?: number;
   contributor: {
     id: string;
     name: string;
     username: string;
+    profileImageUrl: string;
     createdAt: string;
   };
   category: {
@@ -79,7 +81,7 @@ export interface CategoryData {
 }
 
 export interface OffersByMonthData {
-  month: string;
+  month: string; // e.g., "2026-03"
   [category: string]: any;
 }
 

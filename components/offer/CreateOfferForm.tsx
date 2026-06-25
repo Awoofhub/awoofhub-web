@@ -226,7 +226,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                     compulsory
                     {...register("description", {
                         required: "Description is required",
-                        minLength: { value: 20, message: "Must be more than 20 characters" },
+                        minLength: { value: 100, message: "Must be more than 100 characters" },
                     })}
                     error={formState.errors.description}
                 />

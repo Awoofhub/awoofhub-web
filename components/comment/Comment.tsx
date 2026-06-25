@@ -47,14 +47,14 @@ export default function Comment({ offer }: Props) {
                                     maxLength: { value: 300, message: "Max 300 characters" }
                                 })}
                                 pr="4.5rem"
-                                className="w-full p-2 pr-12 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
+                                className="w-full  p-2 pr-12 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
                                 type='text'
                                 placeholder="Comments"
 
                             />
 
-                            <InputRightElement className="mx-3 my-[5px] text-gray-500">
-                                <Button type="submit" className="cursor-pointer bg-orange-600 text-white p-2 rounded-lg" isLoading={isPending}>
+                            <InputRightElement className=" text-gray-500">
+                                <Button type="submit" className="cursor-pointer bg-orange-600 text-white w-[100%] p-[13px] rounded-r-lg" isLoading={isPending}>
                                     <Send size={16} />
                                 </Button>
                             </InputRightElement>
@@ -69,7 +69,10 @@ export default function Comment({ offer }: Props) {
                 </form>
 
             </div>
+                <div className="border-b border-gray-300 w-full"/>
+
             <div>
+                
                 {isLoading && !comments?.length ? (
                     <Spinner className="mt-5 w-17 h-17 text-primary" />
                 ) : !comments?.length ? (

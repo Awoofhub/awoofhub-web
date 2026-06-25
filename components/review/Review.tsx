@@ -15,13 +15,14 @@ export default function Review({ offer }: Props) {
     const router = useRouter();
     const { review, submitReview } = useReview(offer.id);
     const { data: currentUser } = useUser();
-    const [value, setValue] = useState<number | null>(0);
+    const [value, setValue] = useState<number | null>(() => review?.rating ?? 0);
 
     useEffect(() => {
-        if (review) {
+        // only update local state if review rating is different to avoid unnecessary state updates
+        if (review && (review.rating ?? 0) !== value) {
             setValue(review.rating ?? 0);
         }
-    }, [review]);
+    }, [review, value]);
 
     return (
         <>

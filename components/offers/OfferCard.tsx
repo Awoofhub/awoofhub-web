@@ -44,11 +44,9 @@ export default function OfferCard({ offer, index = 0 }: Props) {
     differenceInSeconds(parseISO(offer.endDate), new Date()),
   );
 
-  // Track both current seconds and previous total seconds to handle background data changes safely
   const [secondsLeft, setSecondsLeft] = useState(totalSeconds);
   const [prevTotalSeconds, setPrevTotalSeconds] = useState(totalSeconds);
 
-  // The official React way to sync prop changes directly during render (prevents cascading renders)
   if (totalSeconds !== prevTotalSeconds) {
     setPrevTotalSeconds(totalSeconds);
     setSecondsLeft(totalSeconds);
@@ -77,7 +75,7 @@ export default function OfferCard({ offer, index = 0 }: Props) {
   return (
     <Link
       href={`/offers/${offer.id}`}
-      className="bg-white  h-[270px]  md:h-[350px] lg:h-[380px] xl:h-[440px] rounded-xl shadow-sm border border-gray-100 p-1.5 md:p-2 lg:p-3 flex flex-col group hover:shadow-md transition-shadow"
+      className="bg-white h-[270px] xxs:h-[300px] xs:h-[270px] md:h-[350px] lg:h-[380px] xl:h-[440px] rounded-xl shadow-sm border border-gray-100 p-1.5 md:p-2 lg:p-3 flex flex-col group hover:shadow-md transition-shadow"
     >
       {/* Card Image & Badges */}
       <div className="relative mb-2 lg:mb-3 rounded-lg overflow-hidden flex-grow bg-white">

@@ -10,19 +10,26 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <ExpiringOffers/>
-      <TrendingOffers/>
+      <ExpiringOffers />
+      <TrendingOffers />
       <div className="max-w-[1600px] mx-auto">
         <Image
           src="/homeBanner1.svg"
           alt="Don't miss deals again"
           width={1600}
           height={300}
-          className="w-full"
+          className="w-full hidden md:block"
         />
       </div>
+      <Image
+        src="/mobileBanner1.svg"
+        alt="Don't miss deals again"
+        width={390}
+        height={128}
+        className="w-full md:hidden"
+      />
       <FeaturedOffers />
       <Footer />
-  </>
+    </>
   );
 }

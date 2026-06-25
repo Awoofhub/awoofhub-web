@@ -82,15 +82,24 @@ export default function ScrollSync({
         </ErrorBoundary>
       </section>
       {index === 3 && (
-        <div className="mb-6 md:mb-10 lg:mb-14 max-w-[1600px] mx-auto">
+        <>
+          <div className="mb-6 md:mb-10 lg:mb-14 max-w-[1600px] mx-auto">
+            <Image
+              src="/homeBanner2.svg"
+              alt="Don't miss deals again"
+              width={1600}
+              height={300}
+              className="w-full hidden md:block"
+            />
+          </div>
           <Image
-            src="/homeBanner2.svg"
+            src="/mobileBanner2.svg"
             alt="Don't miss deals again"
-            width={1600}
-            height={300}
-            className="w-full"
+            width={390}
+            height={128}
+            className="w-full md:hidden mb-6"
           />
-        </div>
+        </>
       )}
     </>
   );

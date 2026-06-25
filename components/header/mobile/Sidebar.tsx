@@ -6,7 +6,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { FiHelpCircle, FiLogOut, FiUser } from "react-icons/fi";
+import {
+  FiHelpCircle,
+  FiLogOut,
+  FiUser,
+} from "react-icons/fi";
+import { FaRegEnvelope } from "react-icons/fa6";
+import { IoCreateOutline } from "react-icons/io5";
 
 interface Props {
   user: User;
@@ -27,7 +33,7 @@ export default function Sidebar({ user, isOpen, onClose }: Props) {
   return (
     <>
       <div
-        className={`fixed top-0 right-0 h-full w-[50%] bg-white z-[100] transform transition-transform duration-300 ease-in ${isOpen ? "translate-x-0 visible" : "translate-x-full invisible"}`}
+        className={`fixed top-0 right-0 h-full w-[60%] bg-white z-[100] transform transition-transform duration-300 ease-in ${isOpen ? "translate-x-0 visible" : "translate-x-full invisible"}`}
       >
         <div className="mx-auto my-7 w-20 h-20 rounded-full overflow-hidden">
           {user.profileImageUrl ? (
@@ -48,14 +54,25 @@ export default function Sidebar({ user, isOpen, onClose }: Props) {
         <ul className="flex flex-col">
           {/* Standard Items */}
           {[
-            { label: "Profile", icon: <FiUser />, href: `/profile/${user.username}` },
+            {
+              label: "Profile",
+              icon: <FiUser />,
+              href: `/profile/${user.username}`,
+            },
+            {
+              label: "Post Offer",
+              icon: <IoCreateOutline />,
+              href: "/offers/create",
+            },
+            { label: "Messages", icon: <FaRegEnvelope />, href: "/message" },
+
             { label: "Help & Support", icon: <FiHelpCircle />, href: "/help" },
           ].map((item, idx) => (
             <li key={idx} className="border-b border-muted/10 last:border-none">
               <Link
                 href={item.href}
                 onClick={onClose}
-                className="flex items-center gap-4 px-4 sm:px-6 py-4 hover:bg-primary/5 transition-colors"
+                className="flex items-center gap-4 px-4 xxs:px-6 py-4 hover:bg-primary/5 transition-colors"
               >
                 <span className="text-primary text-xl">{item.icon}</span>
                 <span className="text-foreground text-lg sm:text-[20px] font-light">
@@ -69,7 +86,7 @@ export default function Sidebar({ user, isOpen, onClose }: Props) {
           <li>
             <button
               onClick={() => setIsLogoutModalOpen(true)}
-              className="cursor-pointer w-full flex items-center gap-4 px-4 sm:px-6 py-4 hover:bg-primary/5 transition-colors text-primary"
+              className="cursor-pointer w-full flex items-center gap-4 px-4 xxs:px-6 py-4 hover:bg-primary/5 transition-colors text-primary"
             >
               <FiLogOut className="text-xl" />
               <span className="text-xl font-medium">Logout</span>

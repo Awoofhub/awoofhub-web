@@ -1,6 +1,7 @@
 "use client";
 
-import heroImg from "@/public/heroImg.svg";
+import heroImg from "@/public/heroImage.svg";
+import mobileHero from "@/public/mobileHero.svg";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -25,7 +26,7 @@ export default function Hero() {
           </h1>
 
           {/* Description */}
-          <p className="text-sm lg:text-lg font-medium text-muted max-w-lg">
+          <p className="text-sm mx-auto md:mx-0 lg:text-lg font-medium text-muted max-w-lg">
             We bring together verified discounts, freebies and cashback offers
             from your most-loved merchants, all in one place. Save money on
             things you love.
@@ -51,7 +52,7 @@ export default function Hero() {
           {/* Stats */}
           <div className="flex justify-center md:justify-start gap-6 lg:gap-8 mt-6 lg:mt-10">
             <div>
-              <p className="text-xl lg:text-2xl font-baloo font-semibold text-[#313131]">
+              <p className="text-xl lg:text-2xl font-baloo font-bold text-[#313131]">
                 900+
               </p>
               <p className="text-[12px] lg:text-sm text-[#61646B]">
@@ -59,13 +60,15 @@ export default function Hero() {
               </p>
             </div>
             <div>
-              <p className="text-xl lg:text-2xl font-baloo font-semibold text-[#313131]">
+              <p className="text-xl lg:text-2xl font-baloo font-bold text-[#313131]">
                 5000+
               </p>
-              <p className="text-[12px] lg:text-sm text-[#61646B]">Active users</p>
+              <p className="text-[12px] lg:text-sm text-[#61646B]">
+                Active users
+              </p>
             </div>
             <div>
-              <p className="text-xl lg:text-2xl font-baloo font-semibold text-[#313131]">
+              <p className="text-xl lg:text-2xl font-baloo font-bold text-[#313131]">
                 350+
               </p>
               <p className="text-[12px] lg:text-sm text-[#61646B]">
@@ -75,10 +78,22 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Right image */}
-        <div className="w-full md:w-1/2 flex justify-center">
+        {/* Right image */}  {/* desktop hero image */}
+        <div className="hidden md:flex w-1/2  justify-center">
           <Image
             src={heroImg}
+            alt="Hero illustration"
+            width={560}
+            height={500}
+            priority
+            className="w-full max-w-[650px] h-auto"
+          />
+        </div>
+
+        {/* mobile hero image */}
+        <div className="w-full flex md:hidden justify-center">
+          <Image
+            src={mobileHero}
             alt="Hero illustration"
             width={560}
             height={500}

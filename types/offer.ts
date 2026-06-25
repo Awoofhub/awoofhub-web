@@ -38,6 +38,7 @@ export interface Offer {
     id: string;
     name: string;
     username: string;
+    profileImageUrl?: string;
     createdAt: string;
   };
   category: {
@@ -79,7 +80,7 @@ export interface CategoryData {
 }
 
 export interface OffersByMonthData {
-  month: string;
+  month: string; // e.g., "2026-03"
   [category: string]: any;
 }
 

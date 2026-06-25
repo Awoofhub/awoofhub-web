@@ -1,12 +1,10 @@
 "use client";
 
-import ReportModal from "@/components/modals/ReportModal";
 import { Offer } from "@/types/offer";
 import Image from 'next/image';
-import { useState } from "react";
-import ChatButton from "../chat/ChatButton";
 import Comment from "../comment/Comment";
 import ReviewChart from "../review/ReviewChart";
+import Action from "./Action";
 import CreatorLink from "./CreatorLink";
 import OfferInfo from "./OfferInfo";
 import TrustSection from "./TrustSection";
@@ -16,8 +14,6 @@ interface Props {
 }
 
 export default function SingleOffer({ offer }: Props) {
-    const [isReportOpen, setIsReportOpen] = useState(false);
-
     return (
         <>
             <div className="grid grid-cols-1 md:grid-cols-9 gap-10 pb-10">
@@ -25,38 +21,26 @@ export default function SingleOffer({ offer }: Props) {
                     <div className="bg-gray-100 rounded-sm md:rounded-2xl w-full">
                         <Image
                             src={offer.imageUrl}
-                            alt="Logo"
+                            alt={offer.title}
                             width={500}
                             height={500}
                             priority
-                            className="w-full aspect-[10/9] p-10"
+                            className="w-full aspect-[10/9] object-fill rounded-sm md:rounded-2xl"
                         />
-                    </div>
-
-                    <div className="w-full mt-4 xs:mt-8 md:mt-12 flex md:flex-col gap-3">
-                        <ChatButton targetUserId={offer.contributor.id}>
-                            <div className="w-4/5 md:w-full bg-orange-600 hover:bg-orange-700 text-white font-bold p-1 xs:py-3 px-6 rounded-lg flex items-center justify-center gap-2 transition-all">
-                                Message
-                            </div>
-                        </ChatButton>
-
-                        <button
-                            onClick={() => setIsReportOpen(true)}
-                            className="w-1/5 md:w-full border border-red-500 text-red-500 text-xs xs:text-sm font-bold py-3 rounded-lg flex items-center justify-center hover:text-white hover:bg-red-500 transition-colors"
-                        >
-                            Report
-                        </button>
                     </div>
                 </div>
 
-                <div className="md:col-span-5">
-                    <div className="flex justify-between items-center mb-6">
+                <div className="md:col-span-5 flex flex-col pt-2">
+                    <div className="flex justify-between items-start mb-3">
                         <CreatorLink offer={offer} />
-                        <span className="bg-green-100 text-green-700 text-xs animate-pulse font-bold px-2 py-1 rounded">
+                        <span className="bg-green-100 text-green-700 text-[10px] uppercase animate-pulse tracking-wider font-bold px-5 py-2 rounded-sm mt-1">
                             Available
                         </span>
                     </div>
                     <OfferInfo offer={offer} />
+
+                    <span className="border-b border-gray-300 w-full"/>
+                    <Action offer={offer} />
                 </div>
             </div>
 
@@ -70,16 +54,6 @@ export default function SingleOffer({ offer }: Props) {
                     <Comment offer={offer} />
                 </div>
             </div>
-
-            <ReportModal
-                isOpen={isReportOpen}
-                onClose={() => setIsReportOpen(false)}
-                targetType="offer"
-                targetId={offer.id}
-                targetName={offer.title}
-                targetImage={offer.imageUrl}
-                targetBadge={offer.contributor.name}
-            />
         </>
     );
 }

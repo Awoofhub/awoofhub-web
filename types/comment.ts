@@ -11,8 +11,9 @@ export interface Comment {
     comment: string,
     user: {
         id: string,
-        name: string,
-        profileImageUrl: string,
+    name: string,
+    username: string,
+    profileImageUrl?: string,
     },
     offer: Offer
     createdAt: string;

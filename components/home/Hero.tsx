@@ -95,10 +95,10 @@ export default function Hero() {
           <Image
             src={mobileHero}
             alt="Hero illustration"
-            width={560}
-            height={500}
+            width={360}
+            height={240}
             priority
-            className="w-full max-w-[650px] h-auto"
+            className="w-full max-w-[500px] h-auto"
           />
         </div>
       </div>

@@ -23,7 +23,7 @@ export default function OfferInfiniteList({ offers, hasNextPage, fetchNextPage, 
 
   return (
     <>
-      <div className={gridClassName ?? "grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center"}>
+      <div className={gridClassName ?? "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 xl:gap-4 justify-items-center"}>
         {offers.map((offer, index) => (
           <OfferCard offer={offer} key={offer.id} index={index} />
         ))}

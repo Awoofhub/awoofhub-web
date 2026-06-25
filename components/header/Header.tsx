@@ -16,7 +16,7 @@ export default function Header() {
 
     return (
         <header className="sticky top-0 left-0 z-[99] bg-white shadow-lg shadow-black/5 relative">
-            <div className="flex justify-between items-center max-w-[1440px] mx-auto h-[70px] lg:h-[80px] px-3 xl:px-8">
+            <div className="flex justify-between items-center max-w-[1440px] mx-auto h-[70px] lg:h-[80px] px-4 md:px-6 lg:px-12">
                 <Link href="/">
                     <Image src="/Logo.png" alt="Logo" width={180} height={60} priority className="w-[120px] sm:w-[160px] lg:w-[170px] xl:w-[180px] h-auto" />
                 </Link>

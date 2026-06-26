@@ -13,9 +13,9 @@ interface Props {
 export default function CreatorLink({ offer, variant = "top" }: Props) {
     if (variant === "card") {
         return (
-            <div className="flex items-center justify-between px-5 gap-6">
+            <div className="flex items-center justify-between px-2 md:px-5 gap-6">
                 <Link href={`/profile/${offer.contributor.username}`}>
-                    <div className="w-25 h-25 bg-pink-100 rounded-full flex items-center justify-center text-pink-600 font-bold text-2xl overflow-hidden shrink-0 border-2 border-orange-500">
+                    <div className="w-18 h-18 md:w-25 md:h-25 bg-pink-100 rounded-full flex items-center justify-center text-pink-600 font-bold text-2xl overflow-hidden shrink-0 border-2 border-orange-500">
                         {
                             offer.contributor.profileImageUrl ? (
                                 <Image
@@ -34,16 +34,16 @@ export default function CreatorLink({ offer, variant = "top" }: Props) {
                     </div>
                 </Link>
                 <div className="flex flex-col justify-between gap-1">
-                    <div className="flex items-center  gap-10 ">
-                        <Link href={`/profile/${offer.contributor.username}`} className="font-bold text-gray-900 text-base hover:underline">
+                    <div className="flex gap-12 justify-between items-center">
+                        <Link href={`/profile/${offer.contributor.username}`} className="font-semibold font-baloo text-black  text-sm md:text-base lg:text-lg hover:underline">
                             {offer.contributor.name}
                         </Link>
                         <span className="flex items-center gap-1 bg-[#FFF0EC] text-primary text-[10px] lg:text-xs font-semibold px-2.5 py-2 rounded-full">
                                   <FaRegUser size={12} /> Awoofer
                                 </span>
                     </div>
-                    <span className="text-gray-500 text-sm">@{offer.contributor.username}</span>
-                    <span className="text-gray-400 text-xs">Awoofer since {format(new Date(offer.contributor.createdAt || "2023-01-01"), "MMMM yyyy")}</span>
+                    <span className="text-muted font-medium text-xs md:text-sm">@{offer.contributor.username}</span>
+                    <span className="text-muted font-medium text-xs md:text-sm">Awoofer since {format(new Date(offer.contributor.createdAt || "2023-01-01"), "MMMM yyyy")}</span>
                 </div>
             </div>
         )
@@ -51,7 +51,7 @@ export default function CreatorLink({ offer, variant = "top" }: Props) {
 
     return (
         <Link href={`/profile/${offer.contributor.username}`} className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center text-pink-600 font-bold text-sm overflow-hidden">
+            <div className="w-7 h-7 md:w-9 md:h-9 border border-primary bg-pink-100 rounded-full flex items-center justify-center text-pink-600 font-bold text-sm overflow-hidden">
                 {
                     offer.contributor.profileImageUrl ? (
                         <Image
@@ -66,8 +66,8 @@ export default function CreatorLink({ offer, variant = "top" }: Props) {
                     )
                 }
             </div>
-            <span className="text-orange-500 text-sm font-bold hover:underline">
-                @{offer.contributor.username}
+            <span className="text-orange-500 text-xs md:text-sm font-semibold hover:underline">
+                {offer.contributor.username}
             </span>
         </Link>
     )

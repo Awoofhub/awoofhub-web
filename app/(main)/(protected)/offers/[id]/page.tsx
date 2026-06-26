@@ -1,17 +1,16 @@
-"use client"
+"use client";
 
 import ReportModal from "@/components/modals/ReportModal";
 import ShareModal from "@/components/modals/ShareModal";
 import SingleOffer from "@/components/offer/SingleOffer";
 import SingleOfferSkeleton from "@/components/offer/SingleOfferSkeleton";
 import WishlistButton from "@/components/wishlist/WishlistButton";
-
 import OfferList from "@/components/offers/OfferList";
 import OfferListSkeleton from "@/components/offers/OfferListSkeleton";
 import { useOffer } from "@/features/offers/useOffer";
 import { useRandomOffers } from "@/features/offers/useRandomOffers";
 import { ChevronRight } from "lucide-react";
-import Link from 'next/link';
+import Link from "next/link";
 import { use, useRef, useState } from "react";
 
 interface Props {
@@ -28,7 +27,7 @@ export default function OfferPage({ params }: Props) {
   const [isReportOpen, setIsReportOpen] = useState(false);
 
   const wishlistWrapperRef = useRef<HTMLDivElement>(null);
-  
+
   if (isLoading) {
     return (
       <section className="p-4 sm:p-8 mx-auto max-w-[1440px] bg-white text-gray-800 border-b border-gray-300 pb-30">
@@ -50,22 +49,65 @@ export default function OfferPage({ params }: Props) {
   }
 
   return (
-    <>
-      <section className="p-4 sm:p-8 mx-auto max-w-[1440px] bg-white text-gray-800 border-b border-gray-300 pb-30">
-        <div className="mx-auto flex justify-between items-center mb-7 md:mb-10">
-          <nav className="flex items-center text-sm text-gray-500 gap-2">
-            <Link href={'/'}>Home</Link> <ChevronRight size={14} />
-            <Link href={`/offers?category=${offer.category.slug}`}>{offer.category.name}</Link> <ChevronRight size={14} />
-            <span className="font-semibold text-[10px] xs:text-sm text-gray-900">{offer.id}</span>
+    <div className="bg-white">
+      <section className="px-4 md:px-6 lg:px-12 py-6 lg:py-10 mx-auto max-w-[1440px] border-b border-gray-300 pb-30">
+        <div className="mx-auto flex flex-wrap gap-2 justify-between lg:items-center mb-4 md:mb-6 lg:mb-10">
+          <nav className="flex items-center gap-0.25 md:gap-1 lg:gap-2">
+            <Link
+              className="text-[10px] xs:text-xs md:text-sm lg:text-base font-baloo font-medium text-muted/50"
+              href={"/"}
+            >
+              Home
+            </Link>{" "}
+            <ChevronRight size={14} className="text-muted" />
+            <Link
+              className="text-[10px] xs:text-xs md:text-sm lg:text-base font-baloo font-medium text-muted/50"
+              href={`/offers?category=${offer.category.slug}`}
+            >
+              <span className="md:hidden">
+                {offer.category.name.length > 10
+                  ? `${offer.category.name.slice(0, 10)}...`
+                  : offer.category.name}
+              </span>
+              <span className="hidden md:inline">{offer.category.name}</span>
+            </Link>
+            <ChevronRight size={14} className="text-muted" />
+            <span className="font-medium xs:text-xs text-[10px] md:text-sm lg:text-base font-baloo text-black">
+              <span className="lg:hidden">
+                {offer.id.length > 5 ? `${offer.id.slice(0, 6)}...` : offer.id}
+              </span>
+              <span className="hidden lg:inline">{offer.id}</span>
+            </span>
           </nav>
 
-          <div className="flex items-center gap-4 text-sm font-bold">
-            <button onClick={() => setIsReportOpen(true)} className=" flex items-center gap-1 border-2 border-red-500 rounded p-1 sm:p-2 sm:text-red-500 hover:bg-red-500 hover:text-white cursor-pointer">
-              <span className="block">Report this deal</span>
+          <div className="flex items-center gap-1 md:gap-4 font-semibold font-baloo">
+            <button
+              onClick={() => setIsReportOpen(true)}
+              className="hidden xs:inline border-2 border-[#E70606] rounded-md md:rounded-lg py-2 px-2 lg:px-3 text-[10px] xs:text-xs lg:text-sm text-[#E70606] hover:bg-red-500 hover:text-white cursor-pointer"
+            >
+              Report this deal
             </button>
+            <button
+              onClick={() => setIsReportOpen(true)}
+              className="xs:hidden border border-[#E70606] rounded-lg py-1 px-2 text-[10px] text-[#E70606] hover:bg-red-500 hover:text-white cursor-pointer"
+            >
+              Report
+            </button>
+
             <span className="text-gray-300">|</span>
-            <div ref={wishlistWrapperRef} className="flex items-center gap-1 cursor-pointer">
-              <WishlistButton offerId={offer.id} size="text-[25px]" /> <span className="text-gray-600" onClick={() => wishlistWrapperRef.current?.querySelector("button")?.click()}>Save</span>
+            <div
+              ref={wishlistWrapperRef}
+              className="flex items-center gap-1 cursor-pointer text-[10px] xs:text-xs lg:text-sm"
+            >
+              <WishlistButton offerId={offer.id} size="text-[25px]" />{" "}
+              <span
+                className="text-black"
+                onClick={() =>
+                  wishlistWrapperRef.current?.querySelector("button")?.click()
+                }
+              >
+                Save
+              </span>
             </div>
             <span className="text-gray-300">|</span>
             <ShareModal offerId={offer.id} />
@@ -84,22 +126,17 @@ export default function OfferPage({ params }: Props) {
         />
       </section>
 
-      <section className="p-4 sm:p-8 bg-white mx-auto max-w-[1440px] pb-10 mb-15 lg:mb-0">
-        <h3 className="text-xl xs:text-2xl md:text-3xl font-bold mb-6">
+      <section className="px-4 md:px-6 lg:px-12 py-10 lg:py-12 mx-auto max-w-[1440px] mb-16 lg:mb-0">
+        <h3 className="text-xl xs:text-2xl md:text-3xl font-bold mb-4 lg:mb-6">
           Explore more offers like this
         </h3>
-
 
         {isFetching && <OfferListSkeleton number={8} />}
         {!isFetching && data.length === 0 && (
           <p className="text-gray-500 text-center">No offers available.</p>
         )}
-        {isFetched && data.length > 0 && (
-          <OfferList
-            offers={data}
-          />
-        )}
+        {isFetched && data.length > 0 && <OfferList offers={data} />}
       </section>
-    </>
+    </div>
   );
 }

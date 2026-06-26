@@ -31,10 +31,10 @@ export default function Comment({ offer }: Props) {
     return (
         <>
             <div>
-                <h3 className="font-bold text-lg">
+                <h3 className="font-bold text-sm md:text-lg">
                     Leave a Comment
                 </h3>
-                <p className="text-gray-400 text-sm mb-5 font-medium">
+                <p className="text-muted text-xs md:text-sm mb-3 md:mb-5 font-medium">
                     Share your thoughts about this offer with others
                 </p>
 
@@ -47,14 +47,14 @@ export default function Comment({ offer }: Props) {
                                     maxLength: { value: 300, message: "Max 300 characters" }
                                 })}
                                 pr="4.5rem"
-                                className="w-full  p-2 pr-12 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
+                                className="w-full text-xs md:text-base  p-2 pr-12 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
                                 type='text'
                                 placeholder="Comments"
 
                             />
 
                             <InputRightElement className=" text-gray-500">
-                                <Button type="submit" className="cursor-pointer bg-orange-600 text-white w-[100%] p-[13px] rounded-r-lg" isLoading={isPending}>
+                                <Button type="submit" className="cursor-pointer bg-orange-600 text-white w-[100%] px-4 py-[8px] md:py-[13px] rounded-r-lg" isLoading={isPending}>
                                     <Send size={16} />
                                 </Button>
                             </InputRightElement>
@@ -76,7 +76,7 @@ export default function Comment({ offer }: Props) {
                 {isLoading && !comments?.length ? (
                     <Spinner className="mt-5 w-17 h-17 text-primary" />
                 ) : !comments?.length ? (
-                    <p className="text-center text-gray-500">No Comment found.</p>
+                    <p className="text-center text-sm md:text-base text-gray-500">No Comment found.</p>
                 ) : (
                     <CommentContainer comments={comments} />
                 )}

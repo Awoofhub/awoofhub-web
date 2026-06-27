@@ -6,18 +6,11 @@ import { formatDate } from "@/utils/formatDate";
 import { FiCopy } from "react-icons/fi";
 import { IoCheckmarkSharp } from "react-icons/io5";
 import { differenceInSeconds, parseISO } from "date-fns";
-import { IoAlarmOutline } from "react-icons/io5";
+import { formatCountdown } from "@/utils/formatCountdown";
+
 
 interface Props {
   offer: Offer;
-}
-
-function formatCountdown(seconds: number) {
-  const days = Math.floor(seconds / 86400);
-  const hours = Math.floor((seconds % 86400) / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-
-  return `${days}d ${hours}h ${minutes}m`;
 }
 
 export default function Action({ offer }: Props) {
@@ -81,7 +74,7 @@ export default function Action({ offer }: Props) {
               Expiring:
               <Image
                 src="/clockk.svg"
-                alt="trending"
+                alt="expiring"
                 width={16}
                 height={16}
                 className="w-4 h-4 ml-0.5"

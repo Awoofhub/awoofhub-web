@@ -12,6 +12,7 @@ import { useRandomOffers } from "@/features/offers/useRandomOffers";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { use, useRef, useState } from "react";
+import { truncateId } from "@/utils/truncate";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -19,13 +20,9 @@ interface Props {
 
 export default function OfferPage({ params }: Props) {
   const { id } = use(params);
-
   const { data: offer, isLoading } = useOffer({ id });
-
   const { data, isFetching, isFetched } = useRandomOffers();
-
   const [isReportOpen, setIsReportOpen] = useState(false);
-
   const wishlistWrapperRef = useRef<HTMLDivElement>(null);
 
   if (isLoading) {
@@ -64,17 +61,22 @@ export default function OfferPage({ params }: Props) {
               className="text-[10px] xs:text-xs md:text-sm lg:text-base font-baloo font-medium text-muted/50"
               href={`/offers?category=${offer.category.slug}`}
             >
-              <span className="md:hidden">
-                {offer.category.name.length > 10
-                  ? `${offer.category.name.slice(0, 10)}...`
-                  : offer.category.name}
+              <span className="xs:hidden">
+                {truncateId(offer.category.name, 10)}
               </span>
-              <span className="hidden md:inline">{offer.category.name}</span>
+              <span className="hidden xs:inline">{offer.category.name}</span>
             </Link>
             <ChevronRight size={14} className="text-muted" />
-            <span className="font-medium xs:text-xs text-[10px] md:text-sm lg:text-base font-baloo text-black">
-              <span className="lg:hidden">
-                {offer.id.length > 5 ? `${offer.id.slice(0, 6)}...` : offer.id}
+            <span className="font-medium text-[10px] xs:text-xs md:text-sm lg:text-base font-baloo text-black">
+              <span className="xxs:hidden">{truncateId(offer.id, 6)}</span>
+              <span className="hidden xxs:inline xs:hidden">
+                {truncateId(offer.id, 12)}
+              </span>
+              <span className="hidden xs:inline md:hidden">
+                {truncateId(offer.id, 15)}
+              </span>
+              <span className="hidden md:inline lg:hidden">
+                {truncateId(offer.id, 20)}
               </span>
               <span className="hidden lg:inline">{offer.id}</span>
             </span>
@@ -83,7 +85,7 @@ export default function OfferPage({ params }: Props) {
           <div className="flex items-center gap-1 md:gap-4 font-semibold font-baloo">
             <button
               onClick={() => setIsReportOpen(true)}
-              className="hidden xs:inline border-2 border-[#E70606] rounded-md md:rounded-lg py-2 px-2 lg:px-3 text-[10px] xs:text-xs lg:text-sm text-[#E70606] hover:bg-red-500 hover:text-white cursor-pointer"
+              className="hidden xs:inline border-2 border-[#E70606] rounded-md md:rounded-lg py-2 px-2 lg:px-3 xs:text-xs md:text-sm lg:text-base text-[#E70606] hover:bg-red-500 hover:text-white cursor-pointer"
             >
               Report this deal
             </button>
@@ -97,7 +99,7 @@ export default function OfferPage({ params }: Props) {
             <span className="text-gray-300">|</span>
             <div
               ref={wishlistWrapperRef}
-              className="flex items-center gap-1 cursor-pointer text-[10px] xs:text-xs lg:text-sm"
+              className="flex items-center gap-1 cursor-pointer text-[10px] xs:text-xs md:text-sm lg:text-base"
             >
               <WishlistButton offerId={offer.id} size="text-[25px]" />{" "}
               <span

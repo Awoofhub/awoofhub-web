@@ -31,7 +31,7 @@ export default function Comment({ offer }: Props) {
     return (
         <>
             <div>
-                <h3 className="font-bold text-sm md:text-lg">
+                <h3 className="font-bold text-lg lg:text-xl">
                     Leave a Comment
                 </h3>
                 <p className="text-muted text-xs md:text-sm mb-3 md:mb-5 font-medium">

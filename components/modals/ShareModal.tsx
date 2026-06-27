@@ -26,7 +26,7 @@ export default function ShareModal({ offerId }: Props) {
  
     return (
         <>
-            <div className="flex gap-4 text-sm text-gray-600">
+            <div className="flex gap-4 text-[10px] xs:text-xs lg:text-sm text-black">
                 <button onClick={() => setOpen(true)} className="cursor-pointer flex items-center gap-1 hover:text-blue-500 transition-colors">
                     <Share2 size={18} /> Share
                 </button>

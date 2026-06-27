@@ -28,7 +28,7 @@ export default function ReviewChart({ offer }: Props) {
         <div className="max-w-[320px] mx-auto md:mx-0">
             {/* Header Section */}
             <div>
-                <h2 className="text-base md:text-xl  font-bold mb-2 text-muted">All Rating</h2>
+                <h2 className="text-lg lg:text-xl  font-bold mb-1 text-muted">All Rating</h2>
                 <div className="flex items-center gap-2">
                     <div className="flex ml-[-5px] text-orange-400">
                         <Rating

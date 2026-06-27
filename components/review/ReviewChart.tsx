@@ -25,10 +25,10 @@ export default function ReviewChart({ offer }: Props) {
     });
 
     return (
-        <>
+        <div className="max-w-[320px] mx-auto md:mx-0">
             {/* Header Section */}
             <div>
-                <h2 className="text-xl font-bold mb-2">All Rating</h2>
+                <h2 className="text-base md:text-xl  font-bold mb-2 text-muted">All Rating</h2>
                 <div className="flex items-center gap-2">
                     <div className="flex ml-[-5px] text-orange-400">
                         <Rating
@@ -49,17 +49,17 @@ export default function ReviewChart({ offer }: Props) {
                             }}
                         />
                     </div>
-                    <span className="font-bold text-gray-900">{avgRating} out of 5</span>
+                    <span className="font-semibold text-xs text-black">{avgRating} out of 5</span>
                 </div>
                 <p className="text-sm text-gray-500 mt-1 ">
                    <span className="font-bold text-gray-950">{reviewCount.toLocaleString()}</span>  total global rating
                 </p>
             </div>
 
-            <div className="mt-6 space-y-3 ">
+            <div className="mt-6 space-y-3">
                 {chartData.map((item) => (
                     <div key={item.rating} className="space-y-2">
-                        <div className="flex items-center justify-start gap-2 text-sm font-medium text-gray-700">
+                        <div className="flex items-center justify-start gap-2 text-xs font-medium text-gray-700">
                             <span>{item.rating}</span>
                              <div className=" rounded bg-gray-200 overflow-hidden h-[2.2em] w-[20em] box-border border-2 border-gray-300">
                             <div
@@ -73,7 +73,7 @@ export default function ReviewChart({ offer }: Props) {
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     );
 }
 

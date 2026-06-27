@@ -9,6 +9,7 @@ import { FaRegUser } from "react-icons/fa6";
 import { FiUsers } from "react-icons/fi";
 import { IoAlarmOutline } from "react-icons/io5";
 import WishlistButton from "../wishlist/WishlistButton";
+import { formatCountdown } from "@/utils/formatCountdown";
 
 interface Props {
   offer: Offer;
@@ -27,14 +28,6 @@ function getOfferVariant(
   if (isTrending) return "trending";
   if (isExpiring) return "expiring";
   return "regular";
-}
-
-function formatCountdown(seconds: number) {
-  const days = Math.floor(seconds / 86400);
-  const hours = Math.floor((seconds % 86400) / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-
-  return `${days}d ${hours}h ${minutes}m`;
 }
 
 export default function OfferCard({ offer, index = 0 }: Props) {

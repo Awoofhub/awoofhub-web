@@ -13,7 +13,7 @@ export default function OfferDescription({ description }: Props) {
   const truncatedText = isLong ? description.slice(0, truncateLength).trimEnd() : description;
 
   return (
-    <p className="text-sm text-muted mb-2">
+    <p className="text-[10px] md:text-sm text-muted mb-2">
       {showFull ? description : truncatedText}
       {isLong && (
         <button

@@ -44,7 +44,7 @@ export default function FeaturedOffers() {
         ref={headerRef}
         className=" sticky bg-white top-16 lg:top-20 z-40 mb-10 border-b border-gray-200 py-3 "
       >
-        <div className=" max-w-[1440px] mx-auto px-4 md:px-6 lg:px-12 flex flex-col md:flex-row md:gap-10 md:items-center md:justify-between">
+        <div className=" max-w-[1440px] mx-auto px-4 md:px-6 lg:px-8 xl:px-12 flex flex-col md:flex-row md:gap-10 md:items-center md:justify-between">
           <h2 className="text-primary font-bold text-base md:text-lg  lg:text-xl py-2 mb-2 md:mb-0">
             Categories
           </h2>

@@ -21,7 +21,7 @@ export default function EditProfileModal({ isOpen, onClose }: Props) {
     <>
       {isOpen && (
         <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/50 px-4">
-          <div className="max-w-200 bg-white rounded-2xl w-full max-h-[100vh] overflow-y-auto p-8 lg:py-10 lg:px-20 relative">
+          <div className="max-w-[360px] lg:max-w-200 bg-white rounded-2xl w-full max-h-[100vh] overflow-y-auto p-4 lg:py-10 lg:px-20 relative">
             <button
               onClick={onClose}
               className="absolute top-4 right-4 p-1 rounded-full hover:bg-gray-100 transition-colors"

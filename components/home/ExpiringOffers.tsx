@@ -44,7 +44,7 @@ export default function ExpiringOffers() {
 
   return (
     <section className="bg-gray-50">
-      <div className="py-8 lg:py-12 px-4 md:px-6 lg:px-12 max-w-[1440px] mx-auto">
+      <div className="py-8 lg:py-12 px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto">
         {/* desktop screen view */}
         <div className="hidden md:flex px-4 py-2 bg-primary justify-between items-center ">
           <span className="flex gap-2 items-center">

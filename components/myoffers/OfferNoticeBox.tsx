@@ -12,7 +12,7 @@ interface Props {
 export default function OfferNoticeBox({ status, moderation, isLoading }: Props) {
   if (status === "pending") {
     return (
-      <div className="text-[#C29A06] text-sm font-semibold">
+      <div className="text-[#C29A06] text-xs md:text-sm font-semibold">
         This post is under review - usually within 24 hours.
       </div>
     );
@@ -20,7 +20,7 @@ export default function OfferNoticeBox({ status, moderation, isLoading }: Props)
 
   if (status === "rejected") {
     return (
-      <div className="text-red-600 text-sm font-semibold">
+      <div className="text-red-600 text-xs md:text-sm font-semibold">
         <span className="font-semibold">Reason:</span>{" "}
         <p>
           {isLoading ? (
@@ -35,7 +35,7 @@ export default function OfferNoticeBox({ status, moderation, isLoading }: Props)
 
   if (status === "suspended") {
     return (
-      <div className="text-orange-600 text-sm font-semibold">
+      <div className="text-orange-600 text-xs md:text-sm font-semibold">
         <span className="font-semibold">Reason:</span>{" "}
         {isLoading ? (
           <ImSpinner2 className="animate-spin" />
@@ -53,7 +53,7 @@ export default function OfferNoticeBox({ status, moderation, isLoading }: Props)
 
   if (status === "expired") {
     return (
-      <div className="text-gray-500 text-sm font-semibold">
+      <div className="text-gray-500 text-xs md:text-sm font-semibold">
         This deal has expired and is no longer visible to users.
       </div>
     );

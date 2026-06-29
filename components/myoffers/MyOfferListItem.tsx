@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import Image from "next/image";
 import { FiUsers, FiMapPin, FiArrowUpRight } from "react-icons/fi";
 import StatusBadge from "./StatusBadge";
+import { truncateId } from "@/utils/truncate";
 
 interface Props {
   offer: Offer;
@@ -29,10 +30,10 @@ export default function MyOfferListItem({ offer, onClick }: Props) {
     <button
       onClick={onClick}
       className={`w-full flex flex-col xs:flex-row gap-3 md:gap-4 p-2 md:px-6 md:py-3 items-start md:items-center rounded-lg cursor-pointer border ${
-        isActive ? "border border-[#00A95D]" : "border-gray-100"
+        isActive ? "border border-[#00A95D]" : "border-gray-100 border-2"
       } hover:shadow-md transition-shadow text-left bg-white`}
     >
-      <div className="w-full h-[150px] xs:w-[110px] xs:h-[110px] md:w-[130px] md:h-[130px] lg:w-[150px] lg:h-[150px] shrink-0 overflow-hidden rounded-md">
+      <div className="w-full h-[130px] xxs:h-[150px] xs:w-[110px] xs:h-[110px] md:w-[130px] md:h-[130px] lg:w-[150px] lg:h-[150px] shrink-0 overflow-hidden rounded-md">
         <Image
           src={offer.imageUrl}
           alt={offer.title}
@@ -54,7 +55,10 @@ export default function MyOfferListItem({ offer, onClick }: Props) {
         </p>
         <div className="flex items-center gap-1 text-muted text-[10px] md:text-xs mt-1">
           <FiMapPin size={11} />
-          <span>{offer.location}</span>
+          <span className="xxs:hidden">{truncateId(offer.location, 15)}</span>
+          <span className="hidden xxs:inline xs:hidden">{truncateId(offer.location, 30)}</span>
+          <span className="hidden xs:inline md:hidden">{truncateId(offer.location, 40)}</span>
+          <span className="hidden md:inline">{offer.location}</span>
         </div>
         <div className="md:mt-2 flex flex-wrap justify-between items-center gap-1">
           <p className="text-muted text-[10px] md:text-xs">{dateLabel}</p>

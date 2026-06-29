@@ -31,9 +31,9 @@ interface Props {
 
 export default function StatusBadge({ status }: Props) {
   return (
-    <span className={`inline-flex items-center gap-1 text-xs font-semibold ${STATUS_STYLES[status]}`}>
+    <span className={`inline-flex items-center gap-1 text-[8px] xs:text-xs font-semibold ${STATUS_STYLES[status]}`}>
       {STATUS_LABEL[status]}
-      <Image src={STATUS_ICON[status]} alt={status} width={15} height={15} className="w-[20px] h-[20px] "/>
+      <Image src={STATUS_ICON[status]} alt={status} width={15} height={15} className="w-[10px] h-[10px] xs:w-[20px] xs:h-[20px] "/>
     </span>
   );
 }

@@ -10,7 +10,7 @@ interface Props {
 export default function OfferDateLabel({ offer, status }: Props) {
   if (status === "active") {
     return (
-      <p className="text-xs mb-3">
+      <p className="flex items-center justify-between md:justify-start gap-4 text-xs mb-3">
         <span className="text-[#006400] font-semibold">
           Live since: {format(new Date(offer.createdAt), "d/M/yyyy")}
         </span>

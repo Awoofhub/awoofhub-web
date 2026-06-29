@@ -4,16 +4,14 @@ import { useMyOffersTabsCount } from "@/features/offers/useMyOffersTabsCount";
 import { useMemo, useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { useRouter, useSearchParams } from "next/navigation";
-import Link from "next/link";
 import MyOffersTabs from "@/components/myoffers/MyOffersTabs";
 import MyOfferListItem from "@/components/myoffers/MyOfferListItem";
 import MyOfferModal from "@/components/myoffers/MyOfferModal";
 import { Offer } from "@/types/offer";
 import { Spinner } from "@chakra-ui/react";
 import { getDisplayStatus } from "@/utils/offerStatus";
-import Image from "next/image";
-import { Plus } from "lucide-react";
 import MyOfferListItemSkeleton from "@/components/myoffers/MyOfferListItemSkeleton";
+import MyOffersEmptyState from "@/components/myoffers/MyOffersEmptyState";
 
 export default function MyOffersPage() {
   const router = useRouter();
@@ -62,9 +60,11 @@ export default function MyOffersPage() {
   };
 
   return (
-    <div className="px-6 md:px-12 max-w-[1440px] mx-auto py-6 mb-10 lg:mb-6">
-      <h1 className="text-2xl font-semibold text-black">My Posts</h1>
-      <p className="text-muted text-sm lg:text-base mb-4">
+    <div className="px-4 md:px-6 lg:px-12 max-w-[1440px] mx-auto py-6 mb-10 lg:mb-6">
+      <h1 className="text-xl lg:text-2xl font-semibold text-black mb-2">
+        My Posts
+      </h1>
+      <p className="text-muted text-xs md:text-sm lg:text-base mb-4">
         Track the status of every deal you've shared.
       </p>
 
@@ -75,8 +75,9 @@ export default function MyOffersPage() {
           counts={counts}
         />
       </div>
+      
       {isFetching && offers.length === 0 && (
-        <div className="space-y-3">
+        <div className="grid grid-cols-2 xs:flex xs:flex-col gap-2">
           {[...Array(5)].map((_, i) => (
             <MyOfferListItemSkeleton key={i} />
           ))}
@@ -84,32 +85,10 @@ export default function MyOffersPage() {
       )}
 
       {!isFetching && offers.length === 0 && (
-        <div className="flex flex-col items-center justify-center py-20 text-center">
-          <Image
-            className="mb-4"
-            src="/emptyMyPost.svg"
-            alt="empty post"
-            width={40}
-            height={40}
-          />
-          <p className="font-semibold text-black font-baloo text-lg mb-1">
-            Your next great deal starts here
-          </p>
-          <p className="text-muted max-w-125 text-sm mb-4">
-            You haven't posted any deals yet. Share an offer, earn trust, and
-            help others discover amazing savings!
-          </p>
-          <Link
-            href="/offers/create"
-            className="bg-primary text-white px-6 py-2 rounded-md text-sm font-baloo font-semibold hover:bg-orange-700 transition-colors flex items-center justify-center gap-2"
-          >
-            <Plus className="w-5 h-5" /> Post an Awoof
-          </Link>
-        </div>
+        <MyOffersEmptyState tab={activeTab} />
       )}
-
       {!isFetching && offers.length > 0 && (
-        <div className="space-y-3">
+        <div className="grid grid-cols-2 xs:flex xs:flex-col gap-2">
           {offers.map((offer) => (
             <MyOfferListItem
               key={offer.id}
@@ -119,7 +98,6 @@ export default function MyOffersPage() {
           ))}
         </div>
       )}
-
       <div ref={ref} className="h-10 flex items-center justify-center mt-4">
         {isFetchingNextPage && <Spinner className="text-primary" size="md" />}
       </div>

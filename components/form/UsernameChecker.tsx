@@ -72,9 +72,9 @@ export default function UsernameChecker({
 
   return (
     <div>
-      <label className="text-sm text-gray-500 mb-1 block">Username</label>
+      <label className="text-sm lg:text-lg font-baloo  mb-1 block">Username</label>
       <div
-        className={`flex items-center border rounded-lg px-4 py-3 transition-colors
+        className={`flex items-center border rounded-lg px-3 py-3 transition-colors
         ${
           disabled
             ? "bg-gray-50 border-gray-200"
@@ -92,7 +92,7 @@ export default function UsernameChecker({
           onBlur={handleBlur}
           disabled={disabled}
           placeholder="Enter username"
-          className="flex-1 outline-none text-sm bg-transparent disabled:text-gray-400"
+          className="flex-1 outline-none text-sm lg:text-base bg-transparent disabled:text-gray-400"
         />
         {isChecking && (
           <ImSpinner2 className="animate-spin text-gray-400" size={14} />
@@ -123,7 +123,7 @@ export default function UsernameChecker({
       )}
 
       {disabled && (
-        <p className="text-muted text-xs mt-1 flex items-center gap-1">
+        <p className="text-muted text-[10px] lg:text-xs mt-1 flex items-center gap-1">
           <span className="text-[#E70606]">
             <CgDanger size={12} />
           </span>{" "}

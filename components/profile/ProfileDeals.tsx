@@ -32,8 +32,8 @@ export default function ProfileDeals({
     );
 
   return (
-    <div className="flex-1 min-w-0 flex flex-col">
-      <h2 className="text-2xl font-semibold text-black mb-4">Active Deals</h2>
+    <div className=" flex-1 min-w-0 flex flex-col">
+      <h2 className=" text-xl lg:text-2xl font-semibold text-black mb-4">Active Deals</h2>
 
       {isFetching && <ProfileDealsSkeleton />}
 
@@ -69,7 +69,7 @@ export default function ProfileDeals({
           hasNextPage={hasNextPage}
           isFetchingNextPage={isFetchingNextPage}
           fetchNextPage={fetchNextPage}
-          gridClassName="grid grid-cols-2 lg:grid-cols-3 gap-4"
+          gridClassName="grid grid-cols-2 xxs:grid-cols-3 xs:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-3"
         />
       )}
     </div>

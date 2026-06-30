@@ -21,7 +21,7 @@ export default function TrendingOffers() {
 
   return (
     <section className="bg-gray-50">
-      <div className="pb-8 lg:pb-12 px-4 md:px-6 lg:px-12 max-w-[1440px] mx-auto">
+      <div className="pb-8 lg:pb-12 px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto">
         <div className="px-2 md:px-4 py-2 bg-primary flex justify-between items-center">
           <span className="flex items-center gap-2">
             <Image src="yellowFlame.svg" alt="flame" width={20} height={20} className="w-5 h-5 md:w-6 md:h-6"/>

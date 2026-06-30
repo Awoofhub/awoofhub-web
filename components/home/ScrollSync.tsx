@@ -53,7 +53,7 @@ export default function ScrollSync({
       <section
         id={category.slug}
         ref={ref}
-        className="max-w-[1440px] mx-auto pb-10 lg:pb-14 px-4 md:px-6 lg:px-12 scroll-mt-40"
+        className="max-w-[1440px] mx-auto pb-10 lg:pb-14 px-4 md:px-6 lg:px-8 xl:px-12 scroll-mt-40"
       >
         <div className="flex justify-between items-baseline mb-3 sm:mb-6">
           <h3

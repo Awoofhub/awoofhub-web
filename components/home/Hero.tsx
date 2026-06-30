@@ -8,7 +8,7 @@ import Link from "next/link";
 export default function Hero() {
   return (
     <section className=" bg-white">
-      <div className="max-w-[1440px] mx-auto px-4 py-6 md:px-6 lg:px-12 lg:py-14 flex flex-col text-center md:text-start md:flex-row items-center gap-6 lg:gap-12 ">
+      <div className="max-w-[1440px] mx-auto  py-6 px-4 md:px-6 lg:px-8 xl:px-12 lg:py-14 flex flex-col text-center md:text-start md:flex-row items-center gap-6 lg:gap-12 ">
         {/* Left Content Side */}
         <div className="w-full md:w-1/2 space-y-3 md:space-y-2">
           {/* Badge */}

@@ -96,8 +96,8 @@ export const EditProfileForm = ({ onSuccess }: EditProfileFormProps) => {
     <div className="w-full">
       {/* Photo Upload Section */}
       <div className="flex flex-col items-center mb-8">
-        <div className="relative h-24 w-24">
-          <div className="h-full w-full rounded-full border-2 border-primary overflow-hidden bg-gray-100 flex items-center justify-center">
+        <div className="relative mt-10 lg:mt-0 h-24 w-24">
+          <div className="h-full  w-full rounded-full border-2 border-primary overflow-hidden bg-gray-100 flex items-center justify-center">
             {photoUrl ? (
               <Image
                 width={200}

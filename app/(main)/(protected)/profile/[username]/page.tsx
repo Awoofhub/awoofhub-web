@@ -30,10 +30,10 @@ export default function ProfilePage({ params }: Props) {
   const isOwnProfile = currentUser?.id === user.id;
 
   return (
-    <div className="max-w-[1440px] mx-auto px-4 lg:px-8 py-6">
-      <div className="flex flex-col md:flex-row gap-6 items-start">
+    <div className="max-w-[1440px] mx-auto px-4 md:px-6 lg:px-8 xl:px-12 py-6">
+      <div className="flex flex-col xs:flex-row gap-4 lg:gap-6 items-start">
         <ProfileCard isOwnProfile={isOwnProfile} profile={user} />
-        <ProfileDeals isOwnProfile={isOwnProfile} profile={user} />
+        <ProfileDeals  isOwnProfile={isOwnProfile} profile={user} />
       </div>
     </div>
   );

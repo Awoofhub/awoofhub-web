@@ -69,7 +69,7 @@ export const GoogleAutocompleteNew = ({ label, error, compulsory, onPlaceSelect,
     return (
         <FormControl isInvalid={!!error} className="w-full mb-4">
             {label && (
-                <FormLabel className="font-baloo text-lg">
+                <FormLabel className="font-baloo  text-sm lg:text-lg">
                     {label} {compulsory && <span className="text-red-500">*</span>}
                 </FormLabel>
             )}
@@ -110,12 +110,12 @@ export const GoogleAutocompleteNew = ({ label, error, compulsory, onPlaceSelect,
                             input: {
                                 ...params.InputProps,
                                 disableUnderline: true,
-                               className: `!mt-2 !w-full !px-3 !py-[9px] !bg-[#F6F7F8] !border ${error ? '!border-red-500' : '!border-gray-300'} !rounded-md !shadow-sm !font-baloo !text-lg focus-within:!border-orange-500
+                               className: `!mt-2 !w-full !px-3 !py-3 !bg-white !border ${error ? '!border-red-500' : '!border-gray-300'} !rounded-md !shadow-sm !text-sm !lg:text-base  focus-within:!border-orange-500
                                 [&_.MuiAutocomplete-endAdornment]:!px-3`,
                             },
                             htmlInput: {
                                 ...params.inputProps,
-                                className: "!font-baloo !text-lg !placeholder-gray-400 !pr-8 !py-0",
+                                className: "!text-sm !lg:text-base !placeholder-gray-400 !pr-8 !py-0",
                             },
                         }}
                         className="[&_svg]:!fill-gray-500"

@@ -1,13 +1,13 @@
 export default function ProfileDealsSkeleton() {
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="grid grid-cols-2 xxs:grid-cols-3 xs:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-3">
       {[...Array(3)].map((_, i) => (
         <div
           key={i}
-          className="bg-white w-[174px] h-[320px]  md:w-[174px] md:h-[320px] lg:w-[300px] lg:h-[400px] rounded-xl shadow-sm border border-gray-100 p-2 lg:p-3 flex flex-col"
+          className="bg-white  w-full h-[270px] xxs:h-[300px] xs:h-[270px] md:h-[350px] lg:h-[380px] xl:h-[440px] rounded-xl shadow-sm border border-gray-100 p-2 lg:p-3 flex flex-col"
         >
           {/* Image area */}
-          <div className="mb-2 lg:mb-3 h-[160px] lg:h-[200px] w-full bg-[#E0E0E0] animate-pulse rounded-lg" />
+          <div className="h-[150px] md:h-[200px] lg:h-[200px] xl:h-[240px] mb-2 bg-[#E0E0E0] animate-pulse rounded-lg" />
 
           {/* Username + Awoofer badge */}
           <div className="flex items-center justify-between mb-1 lg:mb-2">

@@ -39,25 +39,25 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
 
   return (
     <>
-      <div className="w-full md:w-[280px] lg:w-[320px] shrink-0 bg-white rounded-2xl px-4 py-8 shadow-sm border border-gray-100 relative">
+      <div className="w-full xs:w-1/3 lg:w-1/4 shrink-0 bg-white rounded-2xl px-4 xs:px-2 xl:px-4 py-6 xl:py-8 shadow-sm border border-gray-100 relative">
         {!isOwnProfile && (
           <div ref={dropdownRef} className="absolute right-3 top-3">
             <button
               onClick={() => setIsOpenDropdown((prev) => !prev)}
-              className="cursor-pointer p-2 rounded-xl bg-white"
+              className="cursor-pointer pt-4"
             >
-              <BsThreeDots className="text-black" />
+              <BsThreeDots className="text-black" size={25} />
             </button>
             {isOpenDropdown && (
-              <div className="w-40  absolute text-[#E70606] border border-[#E70606] right-0 mt-2 bg-white rounded-lg overflow-hidden z-50">
+              <div className="w-32 absolute text-[#E70606] border border-[#E70606] right-0 bg-white rounded-lg overflow-hidden z-50">
                 <button
                   onClick={() => {
                     setIsReportOpen(true);
                     setIsOpenDropdown(false);
                   }}
-                  className="w-full flex items-center justify-center gap-2 px-4 py-3 hover:bg-gray-100 font-medium"
+                  className="text-sm w-full flex items-center justify-center gap-2 px-4 py-3 hover:bg-gray-100 font-medium"
                 >
-                  <span>Report User</span>
+                 Report User
                 </button>
               </div>
             )}
@@ -65,7 +65,7 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
         )}
 
         <div className="flex flex-col mb-4">
-          <div className="w-30 h-30  border-2 border-[#FF4D0D] rounded-full overflow-hidden mb-3 mx-auto">
+          <div className={`w-25 h-25 xs:w-20 xs:h-20 md:w-22 md:h-22 lg:w-24 lg:h-24 xl:w-30 xl:h-30 border-2 border-[#FF4D0D] rounded-full overflow-hidden mb-3 ${isOwnProfile ? 'xs:mx-auto' : ''}`}>
             {profile.profileImageUrl ? (
               <Image
                 width={200}
@@ -81,8 +81,8 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
             )}
           </div>
 
-          <div className="flex items-center gap-1 lg:gap-2 flex-wrap">
-            <h1 className="text-[22px] lg:text-2xl font-semibold text-black">
+          <div className="flex items-center gap-4 xs:gap-2 lg:gap-4 flex-wrap">
+            <h1 className="text-xl  md:text-lg xl:text-2xl font-semibold text-black">
               {profile.name}
             </h1>
             <span className="flex items-center gap-1 bg-[#FFF0EC] text-primary text-xs font-semibold px-2 py-1 rounded-full">
@@ -90,7 +90,7 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
             </span>
           </div>
 
-          <div className="flex items-start gap-2 text-black text-sm lg:text-base font-medium mt-1 flex-wrap">
+          <div className="flex items-start gap-2 text-black text-base xs:text-sm lg:text-base font-medium mt-1 flex-wrap">
             <span>@{profile.username}</span>
             {profile.address && (
               <span className="flex items-center gap-1">
@@ -101,32 +101,32 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
           </div>
 
           {profile.bio ? (
-            <p className="text-muted text-sm lg:text-base mt-3 text-start">
+            <p className="text-muted text-base xs:text-sm lg:text-base mt-3 text-start">
               {profile.bio}
             </p>
           ) : (
-            <p className="text-muted text-sm lg:text-base mt-3 py-2">
+            <p className="text-muted text-base xs:text-sm lg:text-base mt-3 py-2">
               No bio added.
             </p>
           )}
 
-          <p className="text-primary text-sm font-medium mt-3">
+          <p className="text-primary text-sm xs:text-sm font-medium mt-3">
             Awoofer since {format(new Date(profile.createdAt), "MMMM yyyy")}
           </p>
         </div>
 
         {!isOwnProfile && (
           <ChatButton targetUserId={profile.id}>
-            <span className="w-full mt-8 mb-6 text-center border border-primary text-primary py-2 rounded-md text-sm lg:text-base font-medium font-baloo hover:bg-gray-50 transition-colors flex items-center justify-center gap-1">
+            <span className="w-full mt-6 mb-4 text-center border border-primary text-primary py-2 rounded-md text-sm lg:text-base font-medium font-baloo hover:bg-gray-50 transition-colors flex items-center justify-center gap-1">
               <MdOutlineChat className="w-5 h-5" />
               Message
             </span>
           </ChatButton>
         )}
 
-        <div className=" py-4 space-y-3">
+        <div className=" xs:py-4 space-y-2 xs:space-y-3">
           <div className="flex justify-between px-4 py-6 border border-muted/10 shadow-lg rounded-md items-center">
-            <span className=" text-muted text-sm font-semibold">
+            <span className=" text-muted text-sm xs:text-xs lg:text-sm font-semibold">
               DEALS POSTED
             </span>
             <span className="font-bold text-lg text-black">
@@ -134,7 +134,7 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
             </span>
           </div>
           <div className="flex justify-between px-4 py-6 border border-muted/10 shadow-lg rounded-md items-center">
-            <span className="text-muted text-sm font-semibold">
+            <span className="text-muted text-sm xs:text-xs lg:text-sm font-semibold">
               OFFER CLICKS
             </span>
             <span className="font-bold text-lg text-black">
@@ -147,13 +147,13 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
           <div className="flex flex-col gap-3 my-6">
             <button
               onClick={() => setIsEditOpen(true)}
-              className="w-full text-center border cursor-pointer border-primary text-primary py-3 rounded-md text-base font-semibold hover:bg-orange-50 transition-colors"
+              className="w-full font-baloo text-center border cursor-pointer border-primary text-primary py-3 rounded-md text-base xs:text-sm lg:text-base font-semibold hover:bg-orange-50 transition-colors"
             >
               Edit Profile
             </button>
             <Link
               href="/offers/create"
-              className="w-full text-center bg-primary text-white py-3 rounded-md text-base font-semibold hover:bg-orange-700 transition-colors flex items-center justify-center gap-1"
+              className="w-full font-baloo  text-center bg-primary text-white py-3 rounded-md text-base xs:text-sm lg:text-base font-semibold hover:bg-orange-700 transition-colors flex items-center justify-center gap-1"
             >
               <Plus className="w-5 h-5" />
               Post Awoof
@@ -162,13 +162,13 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
         )}
 
         {!isOwnProfile && (
-          <div className="bg-[#FFF6F2] border shadow-md border-[#F7D9CC] p-3 rounded-lg my-4">
+          <div className="bg-[#FFF6F2] border shadow-md border-[#F7D9CC] p-3 xs:p-2 xl:p-3 rounded-lg my-4">
             <div className="flex justify-between items-center">
               <div>
                 <p className="text-base font-medium font-baloo text-black">
                   Post alerts
                 </p>
-                <p className="text-sm text-muted">
+                <p className="text-xs xs:text-[10px] xl:text-xs text-muted">
                   Get notified when {profile.name.split(" ")[0]} posts.
                 </p>
               </div>

@@ -10,7 +10,7 @@ export default function WishlistOffers() {
   const hasItems = !isLoading && data && data.length > 0;
 
   return (
-    <section className="pt-6 pb-24 lg:pb-10 px-4 md:px-6 lg:px-12 max-w-[1440px] mx-auto">
+    <section className="pt-6 pb-24 lg:pb-10 px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto">
       {(isLoading || hasItems) && (
         <h1 className="text-lg md:text-xl xl:text-2xl font-semibold mb-2">Saved Deals</h1>
       )}

@@ -61,7 +61,7 @@ export default function MyOffersPage() {
 
   return (
     <div className="bg-white">
-    <div className="px-4 md:px-6 lg:px-12 max-w-[1440px] mx-auto py-6 mb-10 lg:mb-6">
+    <div className="px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto py-6 mb-10 lg:mb-6">
       <h1 className="text-xl lg:text-2xl font-semibold text-black mb-2">
         My Posts
       </h1>

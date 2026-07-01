@@ -32,7 +32,7 @@ export default function ProfileDeals({
     );
 
   return (
-    <div className=" flex-1 min-w-0 flex flex-col">
+    <div className="flex-1 w-full xs:min-w-0 flex flex-col">
       <h2 className=" text-xl lg:text-2xl font-semibold text-black mb-4">Active Deals</h2>
 
       {isFetching && <ProfileDealsSkeleton />}

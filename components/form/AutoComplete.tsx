@@ -8,7 +8,7 @@ import { debounce } from 'lodash';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 
-export const GoogleAutocompleteNew = ({ label, error, compulsory, onPlaceSelect, value }: any) => {
+export const GoogleAutocompleteNew = ({ label, error, compulsory, onPlaceSelect, value, placeholder  }: any) => {
 
     useEffect(() => {
         setOptions({
@@ -105,7 +105,7 @@ export const GoogleAutocompleteNew = ({ label, error, compulsory, onPlaceSelect,
                     <TextField
                         {...params}
                         variant="standard"
-                        placeholder="Search address..."
+                         placeholder={placeholder ?? "Search address..."}
                         slotProps={{
                             input: {
                                 ...params.InputProps,

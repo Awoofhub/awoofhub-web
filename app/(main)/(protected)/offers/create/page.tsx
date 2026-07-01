@@ -1,24 +1,28 @@
-"use client"
+"use client";
 import { CreateOfferForm } from "@/components/offer/CreateOfferForm";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { MdPostAdd } from "react-icons/md";
 
 export default function CreateOffersPage() {
-    const router = useRouter();
+  const router = useRouter();
 
-    const onSuccess = () => {
-        const redirect = "/offers";
-        router.push(redirect);
-    }
+  const onSuccess = () => {
+    const redirect = "/";
+    router.push(redirect);
+  };
 
-    return (
-        <section className="bg-white p-4 sm:p-8">
-            <div className="text-center mb-5 sm:mb-8">
-                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 flex gap-2 items-center justify-center">
-                    Post New Offer <span className="text-orange-600"><MdPostAdd size={30} /></span>
-                </h1>
-            </div>
-            <CreateOfferForm onSuccess={onSuccess} />
-        </section>
-    );
+  return (
+    <section className="xs:p-8">
+      <div className="bg-white max-w-3xl mx-auto p-6 rounded-xl">
+        <h1 className="mb-3 xs:mb-5 text-center text-xl md:text-2xl lg:text-3xl font-semibold text-black flex gap-2 items-center justify-center">
+          Post New Offer{" "}
+          <span className="text-primary">
+            <Image src="/addPost.png" alt="add-post" width={30} height={30} className="w-6 md:w-7 lg:w-8"/>
+          </span>
+        </h1>
+        <hr className="xs:hidden border-muted/20 border"/>
+        <CreateOfferForm onSuccess={onSuccess} />
+      </div>
+    </section>
+  );
 }

@@ -5,7 +5,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
 
-export const DatePickerField = ({ label, error, compulsory, value, onChange }: any) => {
+export const DatePickerField = ({ label, error, compulsory, value, onChange, labelClassName }: any) => {
 
   // Get 'now' so we can block the past
   const today = dayjs().add(1, 'day');
@@ -14,7 +14,7 @@ export const DatePickerField = ({ label, error, compulsory, value, onChange }: a
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <FormControl isInvalid={!!error} className="w-full mb-4">
         {label && (
-          <FormLabel className="font-baloo text-lg">
+          <FormLabel className={labelClassName ?? "font-baloo text-sm lg:text-lg"}>
             {label} {compulsory && <span className="text-red-500">*</span>}
           </FormLabel>
         )}
@@ -31,12 +31,12 @@ export const DatePickerField = ({ label, error, compulsory, value, onChange }: a
               slotProps: {
                 input: {
                   disableUnderline: true,
-                  className: `!mt-2 !w-full !px-3 !py-[4px] !bg-[#F6F7F8] !border ${error ? '!border-red-500' : '!border-gray-300'
-                    } !rounded-md !shadow-sm !font-baloo !text-lg focus-within:!border-orange-500`,
+                  className: `!mt-2 !w-full !px-3 !py-1.5 lg:py-2! !bg-white !border ${error ? '!border-red-500' : '!border-gray-300'
+                    } !rounded-md !shadow-sm text-sm lg:text-base focus-within:!border-orange-500`,
                 },
                 htmlInput: {
                   placeholder: "Select date",
-                  className: "!font-baloo !text-lg !placeholder-gray-400 !py-0",
+                  className: "!font-baloo text-sm lg:text-base !placeholder-gray-400",
                 }
               }
             },

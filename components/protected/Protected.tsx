@@ -15,16 +15,12 @@ export default function Protected({ children }: ProtectedProps) {
 
     const REQUIRED_ROLE = "user";
 
-    useEffect(() => {
-        if (!user.isLoading) {
-            if (!user.data) {
-                router.replace(`/login?redirect=${pathname}`);
-            }
-            else if (user.data && user.data?.role !== REQUIRED_ROLE) {
-                router.replace('/unauthorized');
-            }
+     useEffect(() => {
+        if (!user.isLoading && user.data?.role !== REQUIRED_ROLE) {
+            router.replace(`/login?redirect=${pathname}`);
         }
     }, [user.data, user.isLoading, pathname, router]);
+
 
     if (user.isLoading) {
         return <Loading />;

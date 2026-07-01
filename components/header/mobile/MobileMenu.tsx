@@ -15,12 +15,12 @@ export default function MobileMenu() {
         <>
             <div className="flex lg:hidden items-center list-none p-0 m-0">
 
-                {currentUser ? (
+                {currentUser?.role === "user" ? (
                     <>
                         <div className="flex items-center text-[24px] relative">
 
                             <div role="button" className="flex items-center gap-2 cursor-pointer" onClick={() => setIsOpenSideBar(!isOpenSideBar)}>
-                                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden">
+                                <div className="w-10 h-10 rounded-full overflow-hidden"> 
                                     {currentUser.profileImageUrl ? (
                                         <Image
                                             width={500}

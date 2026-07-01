@@ -6,13 +6,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { FaRegEnvelope } from "react-icons/fa6";
 import {
   FiHelpCircle,
   FiLogOut,
   FiUser,
 } from "react-icons/fi";
-import { FaRegEnvelope } from "react-icons/fa6";
-import { IoCreateOutline } from "react-icons/io5";
 
 interface Props {
   user: User;
@@ -59,13 +58,7 @@ export default function Sidebar({ user, isOpen, onClose }: Props) {
               icon: <FiUser />,
               href: `/profile/${user.username}`,
             },
-            {
-              label: "Post Offer",
-              icon: <IoCreateOutline />,
-              href: "/offers/create",
-            },
             { label: "Messages", icon: <FaRegEnvelope />, href: "/message" },
-
             { label: "Help & Support", icon: <FiHelpCircle />, href: "/help" },
           ].map((item, idx) => (
             <li key={idx} className="border-b border-muted/10 last:border-none">

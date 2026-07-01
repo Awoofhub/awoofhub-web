@@ -53,8 +53,7 @@ export default function DesktopMenu() {
     setIsOpenDropdown((prev) => !prev);
   };
 
-  const isLoggedIn = !!currentUser;
-  const isBusiness = currentUser?.role === "business";
+  const isLoggedIn = currentUser?.role === "user";
 
   return (
     <ul className="hidden lg:flex items-center list-none p-0 m-0">

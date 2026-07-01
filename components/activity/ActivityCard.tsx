@@ -101,14 +101,7 @@ export default function ActivityCard({
 
                  
             </div>
-               {payloadTitle ? (
-                            <p className=" text-sm text-gray-600 line-clamp-1">
-                                {payloadTitle}
-                            </p>
-                        ): (
-                        null
-
-                        )}
+              <payloadTitle />
                 </div> 
 
                

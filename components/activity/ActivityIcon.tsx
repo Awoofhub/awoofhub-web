@@ -8,7 +8,7 @@ function OfferPendingIcon() {
     return <Clock className="w-6 h-6 text-amber-600" />;
 }
 
-const ActivityIcons: Record<string, () => TSX.Element> = {
+const ActivityIcons: Record<string, () => JSX.Element> = {
     OFFER_CREATED: () => <DefaultNotificationIcon />,
     offer_pending: () => <OfferPendingIcon />,
     POST_LIKE: () => <DefaultNotificationIcon />,

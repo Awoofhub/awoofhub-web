@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import { Bell, Clock } from 'lucide-react';
 
 function DefaultNotificationIcon() {
@@ -8,10 +9,10 @@ function OfferPendingIcon() {
     return <Clock className="w-6 h-6 text-amber-600" />;
 }
 
-const ActivityIcons: Record<string, () => JSX.Element> = {
+const ActivityIcons: Record<string, () => ReactElement> = {
     OFFER_CREATED: () => <DefaultNotificationIcon />,
     offer_pending: () => <OfferPendingIcon />,
-    POST_LIKE: () => <DefaultNotificationIcon />,
+    
 };
 
 export type ActivityType = string;

@@ -1,9 +1,9 @@
 'use client';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useRef } from 'react';
+import { Suspense, useEffect, useRef } from 'react';
 
-export default function OfferModalBridge() {
+function OfferModalBridgeContent() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -52,4 +52,12 @@ export default function OfferModalBridge() {
   }, [pathname, searchParams, router]);
 
   return null;
+}
+
+export default function OfferModalBridge() {
+  return (
+    <Suspense fallback={null}>
+      <OfferModalBridgeContent />
+    </Suspense>
+  );
 }

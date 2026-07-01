@@ -57,7 +57,7 @@ export function useMarkAllActivityRead() {
     const queryClient = useQueryClient();
     const queryKey = ['notifications'];
 
-    const { mutate, isLoading } = useMutation({
+    const { mutate, isPending } = useMutation({
         mutationFn: () => markAllAsRead(),
         onMutate: async () => {
             await queryClient.cancelQueries({ queryKey });
@@ -85,7 +85,7 @@ export function useMarkAllActivityRead() {
         },
     });
 
-    return { markAllAsRead: mutate, isMarkingAll: isLoading };
+    return { markAllAsRead: mutate, isMarkingAll: isPending };
 }
 
 

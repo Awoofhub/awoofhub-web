@@ -26,6 +26,7 @@ export type InputFieldProps = {
   icon?: React.ReactNode;
   placeholder?: string;
   compulsory?: boolean;
+  labelClassName?: string;
 } & Partial<
   ReturnType<UseFormRegister<Record<string, unknown>>>
 >;
@@ -40,6 +41,7 @@ export const InputField = forwardRef(
       placeholder,
       textAreaRows=3,
       compulsory,
+      labelClassName,
       ...inputProps
     } = props;
 
@@ -50,7 +52,7 @@ export const InputField = forwardRef(
     return (
       <FormControl>
         {label &&
-          <FormLabel className="font-baloo text-sm lg:text-lg">
+          <FormLabel className={labelClassName ?? "font-baloo text-sm lg:text-lg"}>
             {label}
             {compulsory && <span className="text-red-500"> *</span>}
           </FormLabel>}

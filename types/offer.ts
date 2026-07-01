@@ -38,9 +38,8 @@ export interface Offer {
     id: string;
     name: string;
     username: string;
-    profileImageUrl: string;
-    role?: string;
-    createdAt?: string;
+    profileImageUrl?: string;
+    createdAt: string;
   };
   category: {
     id: string;

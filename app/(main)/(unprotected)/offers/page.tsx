@@ -61,7 +61,7 @@ function FilterResults({ searchParams }: FilterProps) {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <section className="px-3 md:px-6 py-6 mb-15 lg:mb-0 max-w-[1440px] mx-auto">
+      <section className="px-4 md:px-6 lg:px-8 xl:px-12 py-6 mb-15 lg:mb-0 max-w-[1440px] mx-auto">
         {/* Filters */}
         <div className="flex flex-wrap gap-3 mb-6 items-center">
           {/* Category */}

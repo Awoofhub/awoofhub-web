@@ -12,6 +12,11 @@ export const markAsRead = async ({ id }: ActivityOptions): Promise<{}> => {
     return result.data
 };
 
+export const markAllAsRead = async (): Promise<{}> => {
+    const result = await ActivityService.markAllAsRead();
+    return result.data;
+};
+
 export function useActivityReadStatus({ id }: ActivityOptions) {
     const queryClient = useQueryClient();
     const queryKey = ['notifications']
@@ -46,7 +51,41 @@ export function useActivityReadStatus({ id }: ActivityOptions) {
     });
 
     return { markAsRead: mutate };
+}
 
+export function useMarkAllActivityRead() {
+    const queryClient = useQueryClient();
+    const queryKey = ['notifications'];
+
+    const { mutate, isLoading } = useMutation({
+        mutationFn: () => markAllAsRead(),
+        onMutate: async () => {
+            await queryClient.cancelQueries({ queryKey });
+            const previousNotifications = queryClient.getQueryData(queryKey);
+
+            queryClient.setQueryData<InfiniteData<ApiResponse<ActivityData[]>>>(queryKey, (oldData) => {
+                if (!oldData) return oldData;
+
+                return {
+                    ...oldData,
+                    pages: oldData.pages.map((page) => ({
+                        ...page,
+                        data: page.data.map((activity) => ({
+                            ...activity,
+                            isRead: true,
+                        })),
+                    })),
+                };
+            });
+
+            return { previousNotifications };
+        },
+        onError: (err, variables, context) => {
+            queryClient.setQueryData(queryKey, context?.previousNotifications);
+        },
+    });
+
+    return { markAllAsRead: mutate, isMarkingAll: isLoading };
 }
 
 

@@ -21,11 +21,16 @@ async function markAsRead(id: string): Promise<ApiResponse<{}>> {
     return res;
 }
 
+async function markAllAsRead(): Promise<ApiResponse<{}>> {
+    const res: ApiResponse<{}> = await apiClient.patch('/notifications/read-all');
+    return res;
+}
 
 const ActivityService = {
     getAllActivities,
     getActivityCount,
-    markAsRead
+    markAsRead,
+    markAllAsRead,
 };
 
 export default ActivityService;

@@ -1,5 +1,11 @@
 import { User } from "@/types/user";
 
+export interface NotificationPayload {
+    id: string;
+    title: string;
+    imageUrl?: string;
+}
+
 export interface ActivityData {
     id: string;
     user: User;
@@ -7,7 +13,10 @@ export interface ActivityData {
     title: string;
     message: string;
     entityId: string;
+    entityType?: string;
     isRead: boolean;
     createdAt: string;
+    imageUrl?: string;
+    payload?: NotificationPayload;
 }; 
 

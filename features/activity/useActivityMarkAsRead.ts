@@ -12,7 +12,7 @@ export const markAsRead = async ({ id }: ActivityOptions): Promise<{}> => {
     return result.data
 };
 
-export function useActivityReadStatus({ id }: ActivityOptions) {
+export function useActivityMarkAsRead({ id }: ActivityOptions) {
     const queryClient = useQueryClient();
     const queryKey = ['notifications']
 

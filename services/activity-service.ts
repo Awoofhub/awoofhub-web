@@ -11,8 +11,8 @@ async function getAllActivities(page: number, limit: number): Promise<ApiRespons
     return res;
 }
 
-async function getActivityCount(): Promise<ApiResponse<number>> {
-    const res: ApiResponse<number> = await apiClient.get("/notifications/unread/")
+async function getActivityCount(): Promise<ApiResponse<{unread: number}>> {
+    const res: ApiResponse<{unread: number}> = await apiClient.get("/notifications/unread/")
     return res;
 }
 
@@ -22,10 +22,17 @@ async function markAsRead(id: string): Promise<ApiResponse<{}>> {
 }
 
 
+async function markAllAsRead(): Promise<ApiResponse<{}>> {
+    const res: ApiResponse<{}> = await apiClient.patch('/notifications/read-all');
+    return res;
+}
+
+
 const ActivityService = {
     getAllActivities,
     getActivityCount,
-    markAsRead
+    markAsRead,
+    markAllAsRead
 };
 
 export default ActivityService;

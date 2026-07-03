@@ -17,14 +17,14 @@ export function ActivityIcon({ type }: { type: ActivityType }) {
     const config = activityConfig[type] || { bg: "bg-gray-50 text-gray-600", src: "/OfferAlertIcon.svg" };
   
     return (
-        <div className={`flex items-center justify-center w-10 h-10 rounded-full ${config.bg}`}>
+        <div className={`flex items-center justify-center w-5 h-5 xs:w-7 xs:h-7 lg:w-10 lg:h-10 rounded-full ${config.bg}`}>
             <Image 
                 src={config.src} 
                 alt="" 
                 priority 
                 width={20} 
                 height={20} 
-                className="w-6 h-6"
+                className="w-3 h-3 xs:w-4 xs:h-4 lg:w-6 lg:h-6"
             />
         </div>
     );

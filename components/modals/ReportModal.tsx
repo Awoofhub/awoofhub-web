@@ -3,7 +3,6 @@
 import { useReport } from "@/features/report/useReport";
 import { useState, useRef, useEffect } from "react";
 import { IoClose } from "react-icons/io5";
-import { BsImage } from "react-icons/bs";
 import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 import ReportConfirmationModal from "./ReportConfirmationModal";
@@ -38,7 +37,6 @@ export default function ReportModal({
 }: Props) {
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [error, setError] = useState("");
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -58,10 +56,6 @@ export default function ReportModal({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) setImagePreview(URL.createObjectURL(file));
-  };
 
   const handleSubmit = () => {
     if (!type) {
@@ -75,7 +69,6 @@ export default function ReportModal({
   const handleClose = () => {
     setType("");
     setDescription("");
-    setImagePreview(null);
     setError("");
     onClose();
   };
@@ -184,37 +177,6 @@ export default function ReportModal({
             className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-xs xs:text-sm lg:text-base  placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none"
           />
         </div>
-
-        {/* Image Upload — only for user reports */}
-        {targetType === "user" && (
-          <div className="flex items-center justify-center gap-4 mb-6 md:px-4">
-            <div className="flex flex-col text-center items-center gap-3 shrink-0">
-              <BsImage className="text-primary w-7 h-6 shrink-0" />
-              <p className="text-xs mt-1 text-muted font-montserrat font-normal w-32">
-                Upload photo or screenshot evidence (optional)
-              </p>
-            </div>
-            <label className="w-28 h-24 bg-muted/10 rounded-lg flex items-center justify-center cursor-pointer hover:bg-primary/5 transition-colors flex-shrink-0">
-              {imagePreview ? (
-                <Image
-                  src={imagePreview}
-                  alt="preview"
-                  width={80}
-                  height={80}
-                  className="w-full h-full object-cover rounded-md"
-                />
-              ) : (
-                <span className="text-primary text-2xl font-light">+</span>
-              )}
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                className="hidden"
-              />
-            </label>
-          </div>
-        )}
 
         {/* Buttons */}
         <div className="flex flex-col-reverse xs:flex-row justify-end gap-2">

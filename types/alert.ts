@@ -4,7 +4,7 @@ export interface Alert {
     user: {
         id: string,
     },
-    business: {
+    contributor: {
         id: string,
     }
     createdAt: string

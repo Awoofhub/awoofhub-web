@@ -1,5 +1,6 @@
 "use client";
 import { Offer } from "@/types/offer";
+import { formatCountdown } from "@/utils/formatCountdown";
 import Rating from "@mui/material/Rating";
 import { differenceInSeconds, parseISO } from "date-fns";
 import Image from "next/image";
@@ -9,7 +10,6 @@ import { FaRegUser } from "react-icons/fa6";
 import { FiUsers } from "react-icons/fi";
 import { IoAlarmOutline } from "react-icons/io5";
 import WishlistButton from "../wishlist/WishlistButton";
-import { formatCountdown } from "@/utils/formatCountdown";
 
 interface Props {
   offer: Offer;

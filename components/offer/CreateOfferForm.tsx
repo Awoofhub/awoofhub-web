@@ -9,7 +9,7 @@ import { useUploadSinglePhoto } from "@/features/upload/useUpdateProfilePhoto";
 import { CreateOfferData } from "@/types/offer";
 import { CreateOfferFormProps } from "@/types/form-props";
 import { MdClose } from "react-icons/md";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Globe, Flag } from "lucide-react";
 import { Button } from "@/components/button/Button";
 import { DatePickerField } from "../date/DatePickerField";
 import { GoogleAutocompleteNew } from "../form/AutoComplete";
@@ -371,7 +371,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
             {(["Online", "Nationwide"] as const).map((option) => (
               <label
                 key={option}
-                className="flex items-center gap-2 cursor-pointer font-baloo text-gray-700"
+                className="flex items-center gap-2 cursor-pointer text-sm text-gray-700"
               >
                 <input
                   type="radio"
@@ -386,7 +386,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                 {option}
               </label>
             ))}
-            <label className="flex items-center gap-2 cursor-pointer font-baloo text-gray-700">
+            <label className="flex items-center gap-2 cursor-pointer text-sm text-gray-700">
               <input
                 type="radio"
                 name="locationType"
@@ -400,18 +400,37 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
               At a location
             </label>
           </div>
+
+          {locationType && <hr className="text-primary/40 border-1 mb-0" />}
+
+          {locationType === "Online" && (
+            <div className="flex items-center gap-2 pt-1 text-primary text-xs md:text-sm ">
+              <Globe size={16} />
+              This deal is available online
+            </div>
+          )}
+
+          {locationType === "Nationwide" && (
+            <div className="flex items-center gap-2 pt-1 text-primary text-xs md:text-sm">
+              <Flag size={16} />
+              Available across Nigeria
+            </div>
+          )}
+
           {locationType === "at_a_location" && (
             <Controller
               name="location"
               control={control}
               rules={{ required: "Location is required" }}
               render={({ field, fieldState }) => (
-                <GoogleAutocompleteNew
-                  value={field.value}
-                  onPlaceSelect={field.onChange}
-                  error={fieldState.error}
-                  placeholder="Enter deal address e.g, Ikeja city mall, Lagos"
-                />
+                <div className="pt-2">
+                  <GoogleAutocompleteNew
+                    value={field.value}
+                    onPlaceSelect={field.onChange}
+                    error={fieldState.error}
+                    placeholder="Enter deal address e.g, Ikeja city mall, Lagos"
+                  />
+                </div>
               )}
             />
           )}

@@ -39,7 +39,7 @@ export default function OfferStatusModal({ offer, onClose }: Props) {
         </button>
 
         <div
-          className="bg-white rounded-xl w-[90vw] xs:w-[500px] lg:w-[600px] max-h-[90vh] overflow-y-auto"
+          className="bg-white rounded-xl w-[90vw] xs:w-[500px] lg:w-[600px] max-h-[90vh] overflow-y-auto no-scrollbar"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="relative w-full h-[240px] xxs:h-[260px] xs:h-[270px] md:h-[300px] lg:h-[320px]">

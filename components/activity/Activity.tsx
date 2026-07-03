@@ -13,22 +13,29 @@ interface Props {
 const getNavigationHref = (type: ActivityType, entityId: string): string | null => {
     switch (type) {
         case 'user_suspended':
-            return `/offers/${entityId}`
-        case 'offer_pending':
-            return `/offers/${entityId}`
-        case 'offer_alert':
-            return "/"
-        case 'offer_approved':
-            return "/"
-        case 'offer_rejected':
-            return "/"
-        case 'offer_suspended':
-            return "/"
-        case 'offer_expiring':
-            return "/"
-        case 'offer_expired':
-            return "/"
+            return "/";
 
+        case 'offer_alert':
+            return `/offers/${entityId}`;
+            
+        case 'offer_pending':
+        case 'offer_approved':
+        case 'offer_expiring':
+        case 'offer_rejected':
+        case 'offer_suspended':
+        case 'offer_expired': {
+            const tabByType: Partial<Record<ActivityType, string>> = {
+                offer_pending: 'pending',
+                offer_approved: 'approved',
+                offer_expiring: 'approved',
+                offer_rejected: 'rejected',
+                offer_suspended: 'suspended',
+                offer_expired: 'expired',
+            };
+            return `/my-offers?tab=${tabByType[type]}&offerId=${entityId}`;
+        }
+
+       
         default:
             return null;
     }

@@ -10,7 +10,7 @@ import OfferListSkeleton from "../offers/OfferListSkeleton";
 
 export default function TrendingOffers() {
 
-  const { data, isFetching, isFetched } = useTrendingOffers({
+  const { data, isFetching, isLoading, isFetched } = useTrendingOffers({
     limit: 4,
   });
 
@@ -42,8 +42,8 @@ export default function TrendingOffers() {
         </div>
 
         <ErrorBoundary fallback={<OfferError />}>
-          {isFetching && <OfferListSkeleton number={4} />}
-          {!isFetching && allOffers.length === 0 && (
+          {isLoading && <OfferListSkeleton number={4} />}
+          {!isLoading && !isFetching && allOffers.length === 0 && (
             <p className="text-gray-500 mt-2">No offers available.</p>
           )}
           {isFetched && allOffers.length > 0 && <OfferList offers={allOffers} />}

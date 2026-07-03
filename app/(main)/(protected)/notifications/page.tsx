@@ -12,7 +12,7 @@ import { useInView } from 'react-intersection-observer';
 export default function ActivityPage() {
     const [ref, inView] = useInView();
 
-    const { data, isFetching, isFetchingNextPage, fetchNextPage, hasNextPage, isError, error } = useActivity({
+    const { data, isFetching, isFetchingNextPage, fetchNextPage, hasNextPage, isError, } = useActivity({
         limit: 8,
     });
 
@@ -55,8 +55,6 @@ export default function ActivityPage() {
     }
 
     const hasUnread = (count?.unread ?? 0) > 0;
-
-
 
     return (
         <section className="p-6">

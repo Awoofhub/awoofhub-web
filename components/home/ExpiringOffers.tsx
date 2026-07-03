@@ -13,7 +13,7 @@ const START_SECONDS = 3 * 24 * 60 * 60; // 3d 0h 0m 0s = 259,200s
 const RESET_SECONDS = 2 * 24 * 60 * 60 + 23 * 60 * 60 + 58 * 60; // 2d 23h 58m 0s = 259,080s
 
 export default function ExpiringOffers() {
-  const { data, isFetching, isFetched } = useExpiringOffers({
+  const { data, isFetching, isLoading, isFetched } = useExpiringOffers({
     limit: 4,
   });
 
@@ -48,7 +48,7 @@ export default function ExpiringOffers() {
         {/* desktop screen view */}
         <div className="hidden md:flex px-4 py-2 bg-primary justify-between items-center ">
           <span className="flex gap-2 items-center">
-            <Image src="yellowClock.svg" alt="clock" width={20} height={20} className="w-6 h-6"/>
+            <Image src="yellowClock.svg" alt="clock" width={20} height={20} className="w-6 h-6" />
             <h3 className="text-xl lg:text-2xl font-semibold text-white">
               Expiring soon
             </h3>
@@ -76,7 +76,7 @@ export default function ExpiringOffers() {
         <div className="px-2 py-2 md:hidden bg-primary flex justify-between items-center">
           <div>
             <span className="flex gap-2 items-center">
-              <Image src="yellowClock.svg" alt="clock" priority width={20} height={20} className="w-5 h-5"/>
+              <Image src="yellowClock.svg" alt="clock" priority width={20} height={20} className="w-5 h-5" />
               <h3 className="text-base font-semibold text-white">
                 Expiring soon
               </h3>
@@ -102,13 +102,11 @@ export default function ExpiringOffers() {
         </div>
 
         <ErrorBoundary fallback={<OfferError />}>
-          {isFetching && <OfferListSkeleton number={4} />}
-          {!isFetching && allOffers.length === 0 && (
+          {isLoading && <OfferListSkeleton number={4} />}
+          {!isLoading && !isFetching && allOffers.length === 0 && (
             <p className="text-gray-500 mt-2">No offers available.</p>
           )}
-          {isFetched && allOffers.length > 0 && (
-            <OfferList offers={allOffers} />
-          )}
+          {isFetched && allOffers.length > 0 && <OfferList offers={allOffers} />}
         </ErrorBoundary>
       </div>
     </section>

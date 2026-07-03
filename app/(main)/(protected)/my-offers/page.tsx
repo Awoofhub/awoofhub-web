@@ -12,13 +12,28 @@ import { Spinner } from "@chakra-ui/react";
 import { getDisplayStatus } from "@/utils/offerStatus";
 import MyOfferListItemSkeleton from "@/components/myoffers/MyOfferListItemSkeleton";
 import MyOffersEmptyState from "@/components/myoffers/MyOffersEmptyState";
+import OfferService from "@/services/offer-service";
+
+const STATUS_ORDER: Record<string, number> = {
+  active: 0,
+  pending: 1,
+  rejected: 2,
+  expired: 3,
+  suspended: 4,
+};
 
 export default function MyOffersPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const activeTab = searchParams.get("tab") ?? "all";
-
-  const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
+  const targetOfferId = searchParams.get("offerId");
+  const [manualSelectedOffer, setManualSelectedOffer] = useState<Offer | null>(
+    null,
+  );
+  const [fallbackOffer, setFallbackOffer] = useState<Offer | null>(null);
+  const [fallbackAttemptedId, setFallbackAttemptedId] = useState<string | null>(
+    null,
+  );
   const [ref, inView] = useInView();
 
   const { data, isFetching, isFetchingNextPage, fetchNextPage, hasNextPage } =
@@ -28,14 +43,6 @@ export default function MyOffersPage() {
     });
 
   const { data: counts } = useMyOffersTabsCount();
-
-  const STATUS_ORDER: Record<string, number> = {
-    active: 0,
-    pending: 1,
-    rejected: 2,
-    expired: 3,
-    suspended: 4,
-  };
 
   const offers = useMemo(() => {
     const flat = data?.pages.flatMap((page) => page.data) ?? [];
@@ -55,59 +62,101 @@ export default function MyOffersPage() {
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
+  const matchedInList = targetOfferId
+    ? (offers.find((o) => o.id === targetOfferId) ?? null)
+    : null;
+
+  useEffect(() => {
+    if (!targetOfferId) return;
+    if (matchedInList) return;
+    if (isFetching) return;
+    if (fallbackAttemptedId === targetOfferId) return;
+
+    let cancelled = false;
+    OfferService.offerById(targetOfferId)
+      .then((res) => {
+        if (cancelled) return;
+        setFallbackOffer(res.data ?? null);
+      })
+      .catch((err) => {
+        console.error("Failed to load offer from notification link:", err);
+      })
+      .finally(() => {
+        if (!cancelled) setFallbackAttemptedId(targetOfferId);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [targetOfferId, matchedInList, isFetching, fallbackAttemptedId]);
+
+  const linkedOffer =
+    matchedInList ??
+    (fallbackAttemptedId === targetOfferId ? fallbackOffer : null);
+
+  const selectedOffer = manualSelectedOffer ?? linkedOffer;
+
   const handleTabChange = (tab: string) => {
     router.push(`/my-offers?tab=${tab}`);
   };
 
+  const handleCloseModal = () => {
+    setManualSelectedOffer(null);
+    if (targetOfferId) {
+      router.replace(`/my-offers?tab=${activeTab}`);
+    }
+  };
+
+  const isResolvingTarget =
+    !!targetOfferId && !matchedInList && fallbackAttemptedId !== targetOfferId;
+  const showSkeleton = (isFetching && offers.length === 0) || isResolvingTarget;
+
   return (
     <div className="bg-white">
-    <div className="px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto py-6 mb-10 lg:mb-6">
-      <h1 className="text-xl lg:text-2xl font-semibold text-black mb-2">
-        My Posts
-      </h1>
-      <p className="text-muted text-xs md:text-sm lg:text-base mb-4">
-        Track the status of every deal you've shared.
-      </p>
+      <div className="px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto py-6 mb-10 lg:mb-6">
+        <h1 className="text-xl lg:text-2xl font-semibold text-black mb-2">
+          My Posts
+        </h1>
+        <p className="text-muted text-xs md:text-sm lg:text-base mb-4">
+          Track the status of every deal you've shared.
+        </p>
 
-      <div className="mb-6">
-        <MyOffersTabs
-          activeTab={activeTab}
-          onChange={handleTabChange}
-          counts={counts}
-        />
-      </div>
-      
-      {isFetching && offers.length === 0 && (
-        <div className="grid grid-cols-2 xs:flex xs:flex-col gap-2">
-          {[...Array(5)].map((_, i) => (
-            <MyOfferListItemSkeleton key={i} />
-          ))}
+        <div className="mb-6">
+          <MyOffersTabs
+            activeTab={activeTab}
+            onChange={handleTabChange}
+            counts={counts}
+          />
         </div>
-      )}
 
-      {!isFetching && offers.length === 0 && (
-        <MyOffersEmptyState tab={activeTab} />
-      )}
-      {!isFetching && offers.length > 0 && (
-        <div className="grid grid-cols-2 xs:flex xs:flex-col gap-2">
-          {offers.map((offer) => (
-            <MyOfferListItem
-              key={offer.id}
-              offer={offer}
-              onClick={() => setSelectedOffer(offer)}
-            />
-          ))}
+        {showSkeleton && (
+          <div className="grid grid-cols-2 xs:flex xs:flex-col gap-2">
+            {[...Array(5)].map((_, i) => (
+              <MyOfferListItemSkeleton key={i} />
+            ))}
+          </div>
+        )}
+
+        {!showSkeleton && offers.length === 0 && (
+          <MyOffersEmptyState tab={activeTab} />
+        )}
+        {!showSkeleton && offers.length > 0 && (
+          <div className="grid grid-cols-2 xs:flex xs:flex-col gap-2">
+            {offers.map((offer) => (
+              <MyOfferListItem
+                key={offer.id}
+                offer={offer}
+                onClick={() => setManualSelectedOffer(offer)}
+              />
+            ))}
+          </div>
+        )}
+        <div ref={ref} className="h-10 flex items-center justify-center mt-4">
+          {isFetchingNextPage && <Spinner className="text-primary" size="md" />}
         </div>
-      )}
-      <div ref={ref} className="h-10 flex items-center justify-center mt-4">
-        {isFetchingNextPage && <Spinner className="text-primary" size="md" />}
-      </div>
 
-      <MyOfferModal
-        offer={selectedOffer}
-        onClose={() => setSelectedOffer(null)}
-      />
-    </div>
+        <MyOfferModal offer={selectedOffer} onClose={handleCloseModal} />
+      </div>
     </div>
   );
 }

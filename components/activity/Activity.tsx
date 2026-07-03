@@ -10,21 +10,35 @@ interface Props {
     prop: ActivityData;
 }
 
-const ACTIVITY_TAB_MAP: Partial<Record<ActivityType, string>> = {
-    offer_pending: "pending",
-    offer_alert: "approved",
-    offer_approved: "approved",
-    offer_expiring: "approved",
-    offer_rejected: "rejected",
-    offer_suspended: "suspended",
-    offer_expired: "expired",
-};
-
 const getNavigationHref = (type: ActivityType, entityId: string): string | null => {
-    const tab = ACTIVITY_TAB_MAP[type];
-    if (!tab) return null;
+    switch (type) {
+        case 'user_suspended':
+            return "/";
 
-    return `/my-offers?tab=${tab}&offerId=${entityId}`;
+        case 'offer_alert':
+            return `/offers/${entityId}`;
+            
+        case 'offer_pending':
+        case 'offer_approved':
+        case 'offer_expiring':
+        case 'offer_rejected':
+        case 'offer_suspended':
+        case 'offer_expired': {
+            const tabByType: Partial<Record<ActivityType, string>> = {
+                offer_pending: 'pending',
+                offer_approved: 'approved',
+                offer_expiring: 'approved',
+                offer_rejected: 'rejected',
+                offer_suspended: 'suspended',
+                offer_expired: 'expired',
+            };
+            return `/my-offers?tab=${tabByType[type]}&offerId=${entityId}`;
+        }
+
+       
+        default:
+            return null;
+    }
 };
 
 export default function Activity({ prop }: Props) {

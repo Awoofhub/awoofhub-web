@@ -1,17 +1,15 @@
 "use client";
 import { ActivityError } from "@/components/activity/ActivityError";
+import ActivityEmptyState from "@/components/activity/ActivityEmptyState";
 import ActivityList from "@/components/activity/ActivityList";
 import ActivityListSkeleton from "@/components/activity/ActivitySkeleton";
 import { useActivity } from "@/features/activity/useActivity";
 import { useActivityCount } from "@/features/activity/useActivityCount";
 import { useActivityMarkAllAsRead } from "@/features/activity/useActivityMarkAllAsRead";
 import { Spinner } from "@chakra-ui/react";
-import { Bell } from "lucide-react";
-import Link from "next/link";
 import { useEffect, useMemo } from "react";
 import { useInView } from "react-intersection-observer";
 import { GiCheckMark } from "react-icons/gi";
-
 
 export default function ActivityPage() {
   const [ref, inView] = useInView();
@@ -48,7 +46,11 @@ export default function ActivityPage() {
 
   const hasUnread = (count?.unread ?? 0) > 0;
   const isLoading = isFetching && allActivities.length === 0;
-  const isEmpty = !allActivities.length;
+  const isEmpty = !isLoading && allActivities.length === 0;
+
+  if (isEmpty) {
+    return <ActivityEmptyState />;
+  }
 
   return (
     <section className="max-w-[1440px] mx-auto pt-6 pb-20 lg:py-8 px-4 md:px-6 lg:px-8 xl:px-12">
@@ -69,22 +71,6 @@ export default function ActivityPage() {
 
       {isLoading ? (
         <ActivityListSkeleton number={5} />
-      ) : isEmpty ? (
-        <div className="flex flex-col items-center justify-center text-center py-20">
-          <Bell size={40} className="text-primary mb-4" />
-          <h2 className="text-lg xs:text-xl lg:text-2xl font-bold text-black mb-2">
-            You’re all caught up
-          </h2>
-          <p className="text-sm lg:text-base text-black mb-6 max-w-sm">
-           No notifications right now. Check back when there’s something new.
-          </p>
-          <Link
-            href="/offers"
-            className="px-4 py-3 bg-primary text-white text-sm lg:text-base font-semibold rounded-sm hover:bg-orange-600 transition-colors"
-          >
-            Keep exploring deals
-          </Link>
-        </div>
       ) : (
         <>
           <ActivityList activities={allActivities} />

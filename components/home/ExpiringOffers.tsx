@@ -76,7 +76,7 @@ export default function ExpiringOffers() {
         <div className="px-2 py-2 md:hidden bg-primary flex justify-between items-center">
           <div>
             <span className="flex gap-2 items-center">
-              <Image src="yellowClock.svg" alt="clock" width={20} height={20} className="w-5 h-5"/>
+              <Image src="yellowClock.svg" alt="clock" priority width={20} height={20} className="w-5 h-5"/>
               <h3 className="text-base font-semibold text-white">
                 Expiring soon
               </h3>

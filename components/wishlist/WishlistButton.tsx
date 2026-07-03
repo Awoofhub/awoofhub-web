@@ -20,7 +20,6 @@ export default function WishlistButton({ offerId, size, position = "" }: Props) 
         if (!currentUser) {
             return router.push('/login');
         }
-
         toggleWishlist()
     }
 

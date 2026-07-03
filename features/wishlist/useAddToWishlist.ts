@@ -1,5 +1,6 @@
 "use client"
 import WishlistService from "@/services/wishlist-service";
+import { Offer } from "@/types/offer";
 import { Wishlist } from "@/types/wishlist";
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -30,7 +31,19 @@ export const useAddToWishlist = ({ offerId }: AddToWishlistOptions) => {
           {
             id: `temp-${Date.now()}`,
             user: { id: "temp" }, // doesn't matter
-            offer: { id: offerId, endDate: new Date().toISOString() } as any, // minimal shape needed
+            offer: {
+              id: offerId,
+              endDate: new Date().toISOString(),
+              clickCount: 0,
+              imageUrl: "/placeholder.png", // or any placeholder image
+              title: "Loading...",
+              description: "",
+              contributor: {
+                username: "",
+              },
+              avgRating: 0,
+              reviewCount: 0,
+            } as Offer
           },
         ];
       });

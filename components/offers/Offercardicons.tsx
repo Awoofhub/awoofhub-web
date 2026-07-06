@@ -1,9 +1,9 @@
 import { Offer } from "@/types/offer";
 import { Flag, Gift, Globe, MapPin, TrendingDown, Truck } from "lucide-react";
+import { FaArrowsRotate } from "react-icons/fa6";
 import { LuTags } from "react-icons/lu";
 import { RiCoupon4Line, RiFlashlightLine } from "react-icons/ri";
 import { TbCashMoveBack } from "react-icons/tb";
-import { FaArrowsRotate } from "react-icons/fa6";
 
 const LOCATION_ICON_SIZE = 14;
 const LOCATION_ICON_CLASS = "text-muted w-2.5 md:w-3 lg:w-4 shrink-0";

@@ -4,15 +4,15 @@ import ReportModal from "@/components/modals/ReportModal";
 import ShareModal from "@/components/modals/ShareModal";
 import SingleOffer from "@/components/offer/SingleOffer";
 import SingleOfferSkeleton from "@/components/offer/SingleOfferSkeleton";
-import WishlistButton from "@/components/wishlist/WishlistButton";
 import OfferList from "@/components/offers/OfferList";
 import OfferListSkeleton from "@/components/offers/OfferListSkeleton";
+import WishlistButton from "@/components/wishlist/WishlistButton";
 import { useOffer } from "@/features/offers/useOffer";
 import { useRandomOffers } from "@/features/offers/useRandomOffers";
+import { truncateId } from "@/utils/truncate";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { use, useRef, useState } from "react";
-import { truncateId } from "@/utils/truncate";
 
 interface Props {
   params: Promise<{ id: string }>;

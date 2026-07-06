@@ -1,4 +1,5 @@
 "use client";
+import { useOfferCountdown } from "@/features/offers/Useoffercountdown";
 import { Offer } from "@/types/offer";
 import { formatCountdown } from "@/utils/formatCountdown";
 import Rating from "@mui/material/Rating";
@@ -8,9 +9,8 @@ import { FaRegUser } from "react-icons/fa6";
 import { FiUsers } from "react-icons/fi";
 import { IoAlarmOutline } from "react-icons/io5";
 import WishlistButton from "../wishlist/WishlistButton";
-import { LocationIconFor, ValueIconFor } from "./Offercardicons";
 import { getOfferVariant } from "./Getoffervariant";
-import {useOfferCountdown} from "@/features/offers/Useoffercountdown"
+import { LocationIconFor, ValueIconFor } from "./Offercardicons";
 
 interface Props {
   offer: Offer;
@@ -24,7 +24,7 @@ export default function OfferCard({ offer, index = 0 }: Props) {
   return (
     <Link
       href={`/offers/${offer.id}`}
-      className="w-full bg-white h-[270px] xxs:h-[290px] xs:h-[280px] md:h-[350px] lg:h-[380px] xl:h-[420px] rounded-lg shadow-sm border border-gray-100 p-1.5 md:p-2 lg:p-3 flex flex-col group hover:shadow-md transition-shadow"
+      className="w-full bg-white h-[280px] xxs:h-[290px] xs:h-[280px] md:h-[350px] lg:h-[380px] xl:h-[420px] rounded-lg shadow-sm border border-gray-100 p-1.5 md:p-2 lg:p-3 flex flex-col group hover:shadow-md transition-shadow"
     >
       {/* Card Image & Badges */}
       <div className="relative h-[60%] md:h-[70%] rounded-md overflow-hidden bg-white">
@@ -70,7 +70,7 @@ export default function OfferCard({ offer, index = 0 }: Props) {
       <div className="h-[40%] md:px-1 flex flex-col mt-3 md:mt-4">
         {/* Username and Awoofer badge */}
         <div className="flex flex-wrap items-center justify-between mb-1">
-          <span className="max-w-[70px] xxs:max-w-[80px] xs:max-w-[100px] lg:max-w-[140px] truncate text-primary text-[10px] lg:text-xs font-medium">
+          <span className="max-w-[55%] truncate text-primary text-[10px] lg:text-xs font-medium">
             @{offer.contributor.username}
           </span>
           <span className="flex items-center gap-1 text-muted/70 text-[10px] lg:text-xs">
@@ -87,7 +87,7 @@ export default function OfferCard({ offer, index = 0 }: Props) {
 
           <div className="flex items-center mb-0.5 gap-1">
             <ValueIconFor dealType={offer.dealType} />
-            <p className="text-primary font-medium font-baloo text-xs xs:text-sm lg:text-base line-clamp-1">
+            <p className="text-primary font-medium font-baloo text-[12.5px] xs:text-sm lg:text-base line-clamp-1">
               {offer.value}
             </p>
           </div>
@@ -96,12 +96,12 @@ export default function OfferCard({ offer, index = 0 }: Props) {
             <div
               className={`flex items-center gap-1 ${
                 offer.clickCount > 0
-                  ? "max-w-[70px] xxs:max-w-[80px] xs:max-w-[80px] lg:max-w-[120px]"
+                  ? "max-w-[50%]"
                   : "w-full"
               }`}
             >
               <LocationIconFor location={offer.location} />
-              <p className="truncate text-muted text-[10px] lg:text-xs">
+              <p className="truncate text-muted text-[11px] lg:text-xs">
                 {offer.location}
               </p>
             </div>
@@ -121,7 +121,7 @@ export default function OfferCard({ offer, index = 0 }: Props) {
             <div className="flex items-center gap-1">
               <Rating
                 name="readonly"
-                className="!text-[14px] xs:!text-[16px] md:!text-[18px] lg:!text-[20px]"
+                className="!text-[16px] md:!text-[18px] lg:!text-[20px]"
                 value={offer.avgRating}
                 precision={0.1}
                 readOnly
@@ -132,13 +132,13 @@ export default function OfferCard({ offer, index = 0 }: Props) {
                   "& .MuiRating-iconEmpty": { color: "#ccc" },
                 }}
               />
-              <span className="font-medium font-baloo text-[10px]  md:text-xs lg:text-[16px] text-gray-400 ml-1">
+              <span className="font-medium font-baloo text-[12px]  md:text-xs lg:text-[16px] text-gray-400 ml-1">
                 ({offer.reviewCount})
               </span>
             </div>
 
             {hasCountdown && (
-              <div className="flex font-baloo items-center gap-1 text-[#E70606] text-[10px] xs:text-xs md:text-sm lg:text-base font-medium">
+              <div className="flex font-baloo items-center gap-1 text-[#E70606] text-[12px] xs:text-xs md:text-sm lg:text-base font-medium">
                 <IoAlarmOutline size={18} className="w-3" />
                 {formatCountdown(secondsLeft)}
               </div>

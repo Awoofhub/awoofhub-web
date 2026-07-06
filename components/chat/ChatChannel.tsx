@@ -13,8 +13,8 @@ export default function ChatChannel({ open, openSidebar }: ChatChannelProps) {
     const router = useRouter();
 
     const handleMessageClick = (event: React.BaseSyntheticEvent, user: any) => {
-        const userId = user.id;
-        router.push(`/profile/${userId}`);
+        const username = user.username;
+        router.push(`/profile/${username}`);
     };
 
     const { channel } = useChatContext();

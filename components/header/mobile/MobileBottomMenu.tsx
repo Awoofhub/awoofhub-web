@@ -12,7 +12,7 @@ export default function MobileBottomMenu() {
 
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 z-[99] flex items-center border-t border-gray-300 bg-white lg:hidden pb-3 ${isInsideChannel ? "hidden md:flex" : ""}`}
+      className={`fixed bottom-0 left-0 right-0 z-[90] flex items-center border-t border-gray-300 bg-white lg:hidden pb-3 ${isInsideChannel ? "hidden md:flex" : ""}`}
     >
       <div className="flex-1">
         <Link

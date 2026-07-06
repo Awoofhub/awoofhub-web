@@ -67,18 +67,8 @@ export default function OfferPage({ params }: Props) {
               <span className="hidden xs:inline">{offer.category.name}</span>
             </Link>
             <ChevronRight size={14} className="text-muted" />
-            <span className="font-medium text-[10px] xs:text-xs md:text-sm lg:text-base font-baloo text-black">
-              <span className="xxs:hidden">{truncateId(offer.id, 6)}</span>
-              <span className="hidden xxs:inline xs:hidden">
-                {truncateId(offer.id, 12)}
-              </span>
-              <span className="hidden xs:inline md:hidden">
-                {truncateId(offer.id, 15)}
-              </span>
-              <span className="hidden md:inline lg:hidden">
-                {truncateId(offer.id, 20)}
-              </span>
-              <span className="hidden lg:inline">{offer.id}</span>
+            <span className="max-w-[40px] xxs:max-w-[130px] xs:max-w-[140px] md:max-w-[170px] lg:max-w-[250px] xl:max-w-none truncate font-medium text-[10px] xs:text-xs md:text-sm lg:text-base font-baloo text-black">
+              {offer.id}
             </span>
           </nav>
 

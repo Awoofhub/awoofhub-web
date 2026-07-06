@@ -89,7 +89,14 @@ export default function ScrollSync({
               alt="Don't miss deals again"
               width={800}
               height={300}
-              className="w-full"
+              className="w-full hidden md:block"
+            />
+            <Image
+              src="/BannerSm2.svg"
+              alt="the marketplace where deals find you"
+              width={800}
+              height={500}
+              className="w-full md:hidden"
             />
           </div>
         </>

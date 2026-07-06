@@ -18,7 +18,14 @@ export default function Home() {
           alt="the marketplace where deals find you"
           width={800}
           height={300}
-          className="w-full"
+          className="w-full hidden md:block"
+        />
+        <Image
+          src="/BannerSm1.svg"
+          alt="the marketplace where deals find you"
+          width={800}
+          height={500}
+          className="w-full md:hidden"
         />
       </div>
       <FeaturedOffers />

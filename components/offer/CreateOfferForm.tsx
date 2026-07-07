@@ -9,13 +9,14 @@ import { useUploadSinglePhoto } from "@/features/upload/useUpdateProfilePhoto";
 import { CreateOfferData } from "@/types/offer";
 import { CreateOfferFormProps } from "@/types/form-props";
 import { MdClose } from "react-icons/md";
-import { ChevronDown, Globe, Flag } from "lucide-react";
+import { ChevronDown, Globe, Flag, Pencil } from "lucide-react";
 import { Button } from "@/components/button/Button";
 import { DatePickerField } from "../date/DatePickerField";
 import { GoogleAutocompleteNew } from "../form/AutoComplete";
 import { InputField } from "../form/InputField";
 import { PostOfferSuccessModal } from "../modals/PostOfferSuccessModal";
 import { FaRegImage } from "react-icons/fa6";
+import { ImageCropperModal } from "./ImageCropperModal";
 
 const DEAL_TYPES: { label: string; value: CreateOfferData["dealType"] }[] = [
   { label: "Cash Back", value: "cashback" },
@@ -55,6 +56,10 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
 
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [imageError, setImageError] = useState<string>("");
+  const [cropModalOpen, setCropModalOpen] = useState(false);
+  const [cropSrc, setCropSrc] = useState<string | null>(null);
+  const [originalImageSrc, setOriginalImageSrc] = useState<string | null>(null);
+  const [selectedImageFile, setSelectedImageFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [categoryOpen, setCategoryOpen] = useState(false);
@@ -114,12 +119,31 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
       setImageError("Image must be smaller than 5 MB.");
       return;
     }
+
     const reader = new FileReader();
-    reader.onload = () => setImagePreview(reader.result as string);
+    reader.onload = () => {
+      const imageDataUrl = reader.result as string;
+      setCropSrc(imageDataUrl);
+      setOriginalImageSrc(imageDataUrl);
+      setSelectedImageFile(file);
+      setImageError("");
+      setCropModalOpen(true);
+    };
     reader.readAsDataURL(file);
-    setImageError("");
+  };
+
+  const handleCropConfirm = async (croppedDataUrl: string) => {
+    if (!selectedImageFile) return;
+
     try {
-      const res = await uploadPhoto(file);
+      const croppedBlob = await (await fetch(croppedDataUrl)).blob();
+      const croppedFile = new File([croppedBlob], selectedImageFile.name, {
+        type: selectedImageFile.type || "image/jpeg",
+      });
+
+      setImagePreview(croppedDataUrl);
+      setCropModalOpen(false);
+      const res = await uploadPhoto(croppedFile);
       setValue("imageUrl", res.data, {
         shouldValidate: true,
         shouldDirty: true,
@@ -128,6 +152,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
       setImageError("Image upload failed. Please try again.");
       setImagePreview(null);
       setValue("imageUrl", "", { shouldValidate: true, shouldDirty: true });
+      setCropModalOpen(false);
       if (fileInputRef.current) fileInputRef.current.value = "";
     }
   };
@@ -135,8 +160,16 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
   const removeImage = () => {
     setImagePreview(null);
     setImageError("");
+    setCropSrc(null);
+    setOriginalImageSrc(null);
+    setSelectedImageFile(null);
     setValue("imageUrl", "", { shouldValidate: true, shouldDirty: true });
     if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  const editImage = () => {
+    setCropSrc(originalImageSrc || imagePreview);
+    setCropModalOpen(true);
   };
 
   const onSubmit = (data: CreateOfferData) => {
@@ -486,11 +519,11 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
             onChange={handleImageChange}
           />
           {imagePreview ? (
-            <div className="relative w-full rounded-xl overflow-hidden border border-gray-200 shadow-sm">
+            <div className="relative w-full rounded-xl overflow-hidden border border-gray-200 shadow-sm bg-gray-50">
               <img
                 src={imagePreview}
                 alt="Offer preview"
-                className={`w-full max-h-64 object-cover transition-opacity ${isUploading ? "opacity-50" : "opacity-100"}`}
+                className={`aspect-[4/3] w-full object-cover transition-opacity ${isUploading ? "opacity-50" : "opacity-100"}`}
               />
               {isUploading && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-white/60">
@@ -519,14 +552,24 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                 </div>
               )}
               {!isUploading && (
-                <button
-                  type="button"
-                  onClick={removeImage}
-                  className="absolute top-2 right-2 bg-white border border-gray-200 rounded-full p-1 shadow hover:bg-red-50"
-                  aria-label="Remove image"
-                >
-                  <MdClose size={18} className="text-red-500" />
-                </button>
+                <div className="absolute top-2 right-2 flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={editImage}
+                    className="bg-white border border-gray-200 rounded-full p-1.5 shadow hover:bg-orange-50"
+                    aria-label="Edit image"
+                  >
+                    <Pencil size={16} className="text-orange-500" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={removeImage}
+                    className="bg-white border border-gray-200 rounded-full p-1 shadow hover:bg-red-50"
+                    aria-label="Remove image"
+                  >
+                    <MdClose size={18} className="text-red-500" />
+                  </button>
+                </div>
               )}
             </div>
           ) : (
@@ -550,6 +593,19 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
               <span className="text-xs text-muted">Upload photo here</span>
             </button>
           )}
+          <ImageCropperModal
+            isOpen={cropModalOpen}
+            imageSrc={cropSrc}
+            onClose={() => {
+              setCropModalOpen(false);
+              if (!imagePreview) {
+                setCropSrc(null);
+                setOriginalImageSrc(null);
+                setSelectedImageFile(null);
+              }
+            }}
+            onConfirm={handleCropConfirm}
+          />
           {(imageError || formState.errors.imageUrl) && (
             <p className="text-red-500 text-xs mt-1">
               {imageError || formState.errors.imageUrl?.message}

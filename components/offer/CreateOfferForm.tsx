@@ -7,18 +7,15 @@ import { useUploadSinglePhoto } from "@/features/upload/useUpdateProfilePhoto";
 import { CreateOfferFormProps } from "@/types/form-props";
 import { CreateOfferData } from "@/types/offer";
 import dayjs from "dayjs";
-import { ChevronDown, Flag, Globe } from "lucide-react";
+import { ChevronDown, Flag, Globe, Pencil } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FaRegImage } from "react-icons/fa6";
 import { MdClose } from "react-icons/md";
-import { ChevronDown, Globe, Flag, Pencil } from "lucide-react";
-import { Button } from "@/components/button/Button";
 import { DatePickerField } from "../date/DatePickerField";
 import { TomTomAutocomplete } from "../form/AutoComplete";
 import { InputField } from "../form/InputField";
 import { PostOfferSuccessModal } from "../modals/PostOfferSuccessModal";
-import { FaRegImage } from "react-icons/fa6";
 import { ImageCropperModal } from "./ImageCropperModal";
 
 const DEAL_TYPES: { label: string; value: CreateOfferData["dealType"] }[] = [

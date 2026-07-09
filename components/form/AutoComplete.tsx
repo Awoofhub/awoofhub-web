@@ -89,7 +89,6 @@ export const TomTomAutocomplete = ({ label, error, compulsory, onPlaceSelect, va
 
                     onPlaceSelect(newValue.address.freeformAddress);
                 }}
-                // This styles the dropdown menu
                 slotProps={{
                     paper: {
                         className: "!font-baloo !text-lg",

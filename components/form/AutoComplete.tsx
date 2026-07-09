@@ -87,11 +87,7 @@ export const TomTomAutocomplete = ({ label, error, compulsory, onPlaceSelect, va
                         return;
                     }
 
-                    onPlaceSelect({
-                        address: newValue.address.freeformAddress,
-                        lat: newValue.position.lat,
-                        lng: newValue.position.lon,
-                    });
+                    onPlaceSelect(newValue.address.freeformAddress);
                 }}
                 // This styles the dropdown menu
                 slotProps={{

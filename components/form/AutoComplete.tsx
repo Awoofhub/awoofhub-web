@@ -1,70 +1,56 @@
-"use client"
-import { NEXT_PUBLIC_GOOGLE_MAP_API_KEY } from '@/config/constants';
-import { FormControl, FormHelperText, FormLabel } from '@chakra-ui/react';
-import { importLibrary, setOptions } from "@googlemaps/js-api-loader";
-import Autocomplete from '@mui/material/Autocomplete';
-import TextField from '@mui/material/TextField';
-import { debounce } from 'lodash';
-import { useEffect, useMemo, useRef, useState } from 'react';
+"use client";
+
+import { NEXT_PUBLIC_TOMTOM_API_KEY } from "@/config/constants";
+import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+import axios from "axios";
+import { debounce } from "lodash";
+import { useEffect, useMemo, useState } from "react";
 
 
-export const GoogleAutocompleteNew = ({ label, error, compulsory, onPlaceSelect, value, placeholder  }: any) => {
 
-    useEffect(() => {
-        setOptions({
-            key: NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
-        });
-    }, []);
-
-    const [options, setOptionsList] = useState<readonly any[]>([]);
-    const [sessionToken, setSessionToken] = useState<google.maps.places.AutocompleteSessionToken | null>(null);
-    const [inputValue, setInputValue] = useState('');
-
-    const placesLib = useRef<google.maps.PlacesLibrary | null>(null);
-
-    useEffect(() => {
-        const setup = async () => {
-            const lib = await importLibrary("places") as google.maps.PlacesLibrary;
-            placesLib.current = lib;
-            setSessionToken(new placesLib.current.AutocompleteSessionToken());
-        };
-        setup();
-    }, []);
+export const TomTomAutocomplete = ({ label, error, compulsory, onPlaceSelect, value, placeholder }: any) => {
+    const [options, setOptionsList] = useState<any[]>([]);
+    const [inputValue, setInputValue] = useState("");
 
     const fetchSuggestions = useMemo(
         () =>
-            debounce(async (input: string) => {
-                if (!input || !placesLib.current || !sessionToken) {
+            debounce(async (query: string) => {
+                if (!query) {
                     setOptionsList([]);
                     return;
                 }
 
-                const { AutocompleteSuggestion } = placesLib.current;
-
                 try {
-                    const { suggestions } = await AutocompleteSuggestion.fetchAutocompleteSuggestions({
-                        input,
-                        sessionToken,
-                    });
-                    setOptionsList(suggestions);
+                    const { data } = await axios.get(
+                        `https://api.tomtom.com/search/2/search/${encodeURIComponent(
+                            query
+                        )}.json`,
+                        {
+                            params: {
+                                key: NEXT_PUBLIC_TOMTOM_API_KEY,
+                                limit: 5,
+                                typeahead: true,
+                            },
+                        }
+                    );
+
+                    setOptionsList(data.results);
                 } catch (err) {
-                    console.error("Autocomplete error:", err);
+                    console.log(err)
                 }
             }, 400),
-        [sessionToken]
+        []
     );
 
     useEffect(() => {
-        setInputValue(value || '');
-    }, [value]);
+        fetchSuggestions(inputValue);
+    }, [inputValue, fetchSuggestions]);
 
     useEffect(() => {
         return () => fetchSuggestions.cancel();
     }, [fetchSuggestions]);
-
-    useEffect(() => { 
-        fetchSuggestions(inputValue);
-    }, [inputValue, fetchSuggestions]);
 
     return (
         <FormControl isInvalid={!!error} className="w-full mb-4">
@@ -78,24 +64,36 @@ export const GoogleAutocompleteNew = ({ label, error, compulsory, onPlaceSelect,
                 options={options}
                 value={value || null}
                 inputValue={inputValue}
+                getOptionKey={(option) =>
+                    typeof option === "string"
+                        ? option
+                        : option.id
+                }
                 onInputChange={(e, val) => setInputValue(val)}
                 getOptionLabel={(option) => {
-                    if (typeof option === 'string') return option;
-                    return option?.placePrediction?.text?.text || "";
+                    if (typeof option === "string") return option;
+
+                    if (option && 'address' in option && typeof option.address === 'string') {
+                        return option.address;
+                    }
+                    return option?.address?.freeformAddress ?? "";
                 }}
                 filterOptions={(x) => x}
                 autoComplete
                 includeInputInList
-                onChange={async (event, newValue) => {
-                    if (newValue && newValue.placePrediction) {
-                        const place = newValue.placePrediction.toPlace();
-                        await place.fetchFields({ fields: ['formattedAddress'] });
-                        onPlaceSelect(place.formattedAddress);
-                    } else {
+                onChange={(_, newValue) => {
+                    if (!newValue) {
                         onPlaceSelect("");
+                        return;
                     }
+
+                    onPlaceSelect({
+                        address: newValue.address.freeformAddress,
+                        lat: newValue.position.lat,
+                        lng: newValue.position.lon,
+                    });
                 }}
-                  // This styles the dropdown menu
+                // This styles the dropdown menu
                 slotProps={{
                     paper: {
                         className: "!font-baloo !text-lg",
@@ -105,17 +103,17 @@ export const GoogleAutocompleteNew = ({ label, error, compulsory, onPlaceSelect,
                     <TextField
                         {...params}
                         variant="standard"
-                         placeholder={placeholder ?? "Search address..."}
+                        placeholder={placeholder ?? "Search address..."}
                         slotProps={{
                             input: {
                                 ...params.InputProps,
                                 disableUnderline: true,
-                               className: `!mt-2 !w-full !px-3 !py-3 !bg-white !border ${error ? '!border-red-500' : '!border-gray-300'} !rounded-md !shadow-sm !text-sm !lg:text-base  focus-within:!border-orange-500
+                                className: `!mt-2 !w-full !px-3 !py-3 !bg-white !border ${error ? '!border-red-500' : '!border-gray-300'} !rounded-md !shadow-sm !text-base !lg:text-lg focus-within:!border-orange-500
                                 [&_.MuiAutocomplete-endAdornment]:!px-3`,
                             },
                             htmlInput: {
                                 ...params.inputProps,
-                                className: "!text-sm !lg:text-base !placeholder-gray-400 !pr-8 !py-0",
+                                className: "!font-montserrat !text-base !lg:text-lg !placeholder-gray-400 !pr-8 !py-0",
                             },
                         }}
                         className="[&_svg]:!fill-gray-500"

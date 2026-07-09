@@ -14,7 +14,7 @@ import { useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FiCamera } from "react-icons/fi";
 import { ImSpinner2 } from "react-icons/im";
-import { GoogleAutocompleteNew } from "../form/AutoComplete";
+import { TomTomAutocomplete } from "../form/AutoComplete";
 import UsernameChecker from "../form/UsernameChecker";
 
 export const EditProfileForm = ({ onSuccess }: EditProfileFormProps) => {
@@ -176,7 +176,7 @@ export const EditProfileForm = ({ onSuccess }: EditProfileFormProps) => {
           name="address"
           control={control}
           render={({ field, fieldState }) => (
-            <GoogleAutocompleteNew
+            <TomTomAutocomplete
               label="Location"
               error={fieldState.error}
               value={field.value}

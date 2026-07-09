@@ -1,21 +1,21 @@
 "use client";
 
-import dayjs from "dayjs";
-import { useEffect, useRef, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Button } from "@/components/button/Button";
 import { useCategory } from "@/features/category/useCategory";
 import { useCreateOffer } from "@/features/offers/useCreateOffer";
 import { useUploadSinglePhoto } from "@/features/upload/useUpdateProfilePhoto";
-import { CreateOfferData } from "@/types/offer";
 import { CreateOfferFormProps } from "@/types/form-props";
+import { CreateOfferData } from "@/types/offer";
+import dayjs from "dayjs";
+import { ChevronDown, Flag, Globe } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { FaRegImage } from "react-icons/fa6";
 import { MdClose } from "react-icons/md";
-import { ChevronDown, Globe, Flag } from "lucide-react";
-import { Button } from "@/components/button/Button";
 import { DatePickerField } from "../date/DatePickerField";
-import { GoogleAutocompleteNew } from "../form/AutoComplete";
+import { TomTomAutocomplete } from "../form/AutoComplete";
 import { InputField } from "../form/InputField";
 import { PostOfferSuccessModal } from "../modals/PostOfferSuccessModal";
-import { FaRegImage } from "react-icons/fa6";
 
 const DEAL_TYPES: { label: string; value: CreateOfferData["dealType"] }[] = [
   { label: "Cash Back", value: "cashback" },
@@ -424,7 +424,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
               rules={{ required: "Location is required" }}
               render={({ field, fieldState }) => (
                 <div className="pt-2">
-                  <GoogleAutocompleteNew
+                  <TomTomAutocomplete
                     value={field.value}
                     onPlaceSelect={field.onChange}
                     error={fieldState.error}

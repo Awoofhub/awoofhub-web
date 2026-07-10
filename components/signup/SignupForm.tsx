@@ -18,8 +18,7 @@ interface SignupFormData {
 }
 
 export default function SignupForm({ onSuccess }: SignupFormProps) {
-  const signup = useSignup({ onSuccess });
-
+  const signup = useSignup()
   const { register, handleSubmit, formState, getValues } =
     useForm<SignupFormData>({ mode: "onChange" });
 

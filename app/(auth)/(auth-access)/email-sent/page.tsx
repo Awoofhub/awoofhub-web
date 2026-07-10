@@ -6,19 +6,21 @@ import { useResendVerification } from "@/features/auth/useResendVerification";
 import { Mail } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 
 const RESEND_COOLDOWN_SECONDS = 5 * 60;
 const STORAGE_KEY = "verifyEmailResendAvailableAt";
 
-export default function VerifyEmailPage() {
+function VerifyEmailContent() {
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
-  const [secondsLeft, setSecondsLeft] = useState(RESEND_COOLDOWN_SECONDS);
-  const { submit: resendEmail, isPending: isResending } = useResendVerification();
 
-  useEffect(() => {
+  const { submit: resendEmail, isPending: isResending } =
+    useResendVerification();
+  const [secondsLeft, setSecondsLeft] = useState<number>(() => {
+    if (typeof window === "undefined") return RESEND_COOLDOWN_SECONDS;
+
     const stored = sessionStorage.getItem(STORAGE_KEY);
     let availableAt: number;
 
@@ -30,8 +32,8 @@ export default function VerifyEmailPage() {
     }
 
     const remainingMs = availableAt - Date.now();
-    setSecondsLeft(Math.max(0, Math.ceil(remainingMs / 1000)));
-  }, []);
+    return Math.max(0, Math.ceil(remainingMs / 1000));
+  });
 
   useEffect(() => {
     if (secondsLeft <= 0) return;
@@ -51,7 +53,7 @@ export default function VerifyEmailPage() {
           sessionStorage.setItem(STORAGE_KEY, availableAt.toString());
           setSecondsLeft(RESEND_COOLDOWN_SECONDS);
         },
-      }
+      },
     );
   };
 
@@ -68,7 +70,7 @@ export default function VerifyEmailPage() {
           Check your <span className="text-primary">inbox!</span>
         </h1>
         <p className="text-sm xxs:text-base xs:text-lg md:text-xl font-medium text-muted">
-         We've sent a verification link to the email{" "}
+          We've sent a verification link to the email{" "}
           {email ? (
             <span className="font-semibold text-gray-700">{email}</span>
           ) : (
@@ -88,7 +90,7 @@ export default function VerifyEmailPage() {
         <span className="font-semibold text-gray-900">
           check your spam folder,
         </span>{" "}
-        <br/>
+        <br />
         sometimes it likes to hide there.
       </p>
       <span className="text-xs xxs:text-sm xs:text-base md:text-lg text-gray-900 leading-relaxed mt-0">
@@ -112,5 +114,13 @@ export default function VerifyEmailPage() {
         Wrong Email <FaArrowRight size={15} />
       </Link>
     </div>
+  );
+}
+
+export default function VerifyEmailPage() {
+  return (
+    <Suspense fallback={null}>
+      <VerifyEmailContent />
+    </Suspense>
   );
 }

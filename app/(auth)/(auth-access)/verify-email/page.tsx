@@ -42,7 +42,7 @@ function EmailVerification() {
 
   if (!token || isPending) {
     return (
-      <div className="min-h-[90vh] flex items-center justify-center">
+      <div>
         <Loading />
       </div>
     );

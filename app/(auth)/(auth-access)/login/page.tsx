@@ -29,11 +29,9 @@ function Login() {
     }, 2500);
   };
 
-  // While we're checking auth status, or if a logged-in user is
-  // about to be redirected away, don't flash the login form at all.
   if (isCheckingUser || user) {
     return (
-      <div className="fixed inset-0 z-50 bg-white min-h-screen flex items-center justify-center">
+      <div className="fixed inset-0 z-50 bg-white">
         <Spinner />
       </div>
     );
@@ -41,12 +39,9 @@ function Login() {
 
   if (showLoading) {
     return (
-      <div className="fixed inset-0 z-50 bg-white text-center space-y-6 min-h-screen flex flex-col justify-center items-center px-4">
+      <div className="fixed inset-0 z-50 bg-white ">
         <Seo title="Welcome back!" />
         <Spinner />
-        <p className="text-base xs:text-lg md:text-xl font-baloo font-bold text-primary">
-          Loading up your Awoof space...
-        </p>
       </div>
     );
   }

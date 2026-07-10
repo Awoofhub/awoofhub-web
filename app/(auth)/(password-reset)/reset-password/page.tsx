@@ -121,7 +121,7 @@ export default function ResetPasswordPage() {
   return (
     <Suspense
       fallback={
-        <div className="pt-14 flex justify-center">
+        <div className="flex justify-center">
           <Spinner size="xl" />
         </div>
       }

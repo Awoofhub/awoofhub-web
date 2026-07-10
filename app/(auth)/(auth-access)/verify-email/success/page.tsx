@@ -61,21 +61,9 @@ function VerifiedScreen() {
 /* ─── Step 2: Great job! ────────────────────────────────────────────── */
 function LoadingScreen() {
     return (
-        <div className="text-center px-4 space-y-6 min-h-[80vh] flex flex-col justify-center items-center">
+        <div>
             <Seo title="Welcome to AwoofHub!" />
-
-            <div className="space-y-2">
-                <h1 className="text-xl xs:text-2xl md:text-3xl font-bold text-gray-900">Great job!</h1>
-                <p className="text-base xs:text-lg md:text-xl font-medium text-gray-400 leading-relaxed max-w-[450px] mx-auto">
-                    You're all set up and ready! We welcome you onboard!
-                </p>
-            </div>
-
             <Spinner />
-
-            <p className="text-base xs:text-lg md:text-xl font-baloo font-bold text-primary">
-                Loading up your Awoof space...
-            </p>
         </div>
     );
 }

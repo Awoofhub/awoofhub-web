@@ -1,7 +1,15 @@
 export interface CreateOfferData {
   title: string;
   description: string;
-  dealType: 'cashback' | 'freebie' | 'discount' | 'bogo' | 'promo_code' | 'free_trial' | 'free_delivery' | 'price_drop',
+  dealType:
+    | "cashback"
+    | "freebie"
+    | "discount"
+    | "bogo"
+    | "promo_code"
+    | "free_trial"
+    | "free_delivery"
+    | "price_drop";
   category: string;
   imageUrl: string;
   value: string;
@@ -15,7 +23,15 @@ export interface CreateOfferData {
 export interface UpdateOfferData {
   title?: string;
   description?: string;
-  dealType: 'cashback' | 'freebie' | 'discount' | 'bogo' | 'promo_code' | 'free_trial' | 'free_delivery' | 'price_drop',
+  dealType:
+    | "cashback"
+    | "freebie"
+    | "discount"
+    | "bogo"
+    | "promo_code"
+    | "free_trial"
+    | "free_delivery"
+    | "price_drop";
   category?: string;
   imageUrl?: string;
   value?: string;
@@ -31,7 +47,15 @@ export interface Offer {
   description: string;
   imageUrl: string;
   value: string;
- dealType: 'cashback' | 'freebie' | 'discount' | 'bogo' | 'promo_code' | 'free_trial' | 'free_delivery' | 'price_drop',
+  dealType:
+    | "cashback"
+    | "freebie"
+    | "discount"
+    | "bogo"
+    | "promo_code"
+    | "free_trial"
+    | "free_delivery"
+    | "price_drop";
   externalLink: string;
   couponCode?: string;
   contributor: {
@@ -54,7 +78,8 @@ export interface Offer {
   avgRating: number;
   reviewCount: number;
   clickCount: number;
-  ratingDistribution: {};
+  isTrending: boolean;
+  ratingDistribution: any;
 }
 
 export interface MyOffersTabsCount {

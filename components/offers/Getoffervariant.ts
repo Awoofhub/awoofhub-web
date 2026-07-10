@@ -9,7 +9,7 @@ export type OfferVariant =
   | "regular";
 
 export function getOfferVariant(offer: Offer, index: number): OfferVariant {
-  const isTrending = offer.clickCount >= 1;
+  const isTrending = offer.isTrending;
   const daysLeft = differenceInSeconds(parseISO(offer.endDate), new Date());
   const isExpiring = daysLeft >= 0 && daysLeft <= 259200; // 3 days in seconds
 

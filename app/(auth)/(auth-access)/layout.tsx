@@ -1,31 +1,59 @@
+"use client";
+
 import Image from "next/image";
-import Link from 'next/link';
+import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
-    return (
-        <div className="min-h-screen bg-[#FF5700] flex flex-col p-6">
+  const pathname = usePathname();
+  const isLogin = pathname?.startsWith("/login");
+  const isSignup = pathname?.startsWith("/signup");
 
+  if (isSignup) {
+    return <>{children}</>;
+  }
 
-            <div className="mb-6">
-                <Link href="/">
-                    <Image
-                        src="/LogoWhite.png"
-                        alt="AwoofHub"
-                        width={140}
-                        height={40}
-                        priority
-                    />
-                </Link>
-            </div>
+  if (!isLogin) {
+    return <div className="bg-white min-h-screen">{children}</div>;
+  }
 
-            {/* Centered form card */}
-            <div className="flex-1 flex items-start justify-center">
-                <div className="w-full max-w-2xl bg-white rounded-2xl shadow-xl px-1 sm:px-10 py-8">
-                    {children}
-                </div>
-            </div>
-
-        </div>
-    );
+  return (
+    <div className="relative bg-primary overflow-hidden min-h-screen">
+      <Image
+        src="/login-oval1.svg"
+        alt="background decoration"
+        priority
+        width={500}
+        height={400}
+        className="absolute top-0 -left-60 lg:top-20 lg:-left-10"
+      />
+      <Image
+        src="/login-oval2.svg"
+        alt="background decoration"
+        priority
+        width={500}
+        height={500}
+        className="absolute top-0 -right-50 lg:right-40"
+      />
+      <Image
+        src="/login-oval3.svg"
+        alt="background decoration"
+        priority
+        width={500}
+        height={500}
+        className="absolute -bottom-40 -left-10"
+      />
+      <Image
+        src="/login-oval4.svg"
+        alt="background decoration"
+        priority
+        width={500}
+        height={500}
+        className="absolute -bottom-40 -right-40 md:-bottom-20 md:-right-20 lg:-bottom-10 lg:-right-10"
+      />
+      <div className="relative z-10 mx-auto w-full max-w-[1440px] flex-1 flex items-start justify-center">
+        {children}
+      </div>
+    </div>
+  );
 }

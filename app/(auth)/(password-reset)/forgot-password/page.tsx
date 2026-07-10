@@ -4,72 +4,87 @@ import { Button } from "@/components/button/Button";
 import { InputField } from "@/components/form/InputField";
 import { useForgotPassword } from "@/features/auth/useForgotPassword";
 import { EmailData } from "@/types/auth";
-import { Lock } from "lucide-react";
+import { Lock, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 export default function ForgotPasswordPage() {
-    const router = useRouter();
-    const onSuccess = () => {
-        const redirect = "/forgot-password/sent/";
-        router.push(redirect);
-    }
-    const { register, handleSubmit, formState } = useForm<EmailData>();
-    const { submit, isPending } = useForgotPassword({
-        onSuccess
-    })
+  const router = useRouter();
+  const { register, handleSubmit, formState, getValues } = useForm<EmailData>();
 
-    const onSubmit = (data: EmailData) => {
-        submit(data)
-    };
+  const onSuccess = () => {
+    const email = getValues("email");
+    router.push(`/forgot-password/sent?email=${encodeURIComponent(email)}`);
+  };
 
-    return (
-        <div className="w-full max-w-sm bg-orange-400 rounded-2xl p-8 text-white text-center shadow-xl">
+  const { submit, isPending } = useForgotPassword({
+    onSuccess,
+  });
 
-            {/* Lock icon */}
-            <div className="flex justify-center mb-4">
-                <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center">
-                    <Lock size={32} className="text-[#FF5700]" />
-                </div>
-            </div>
+  const onSubmit = (data: EmailData) => {
+    submit(data);
+  };
 
-            <h1 className="text-2xl font-bold mb-2">Forgot password?</h1>
-            <p className="text-sm text-white/80 mb-6 leading-relaxed">
-                Enter the email address associated with your account and we&apos;ll send you a reset link.
-            </p>
-
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 text-left [&_input]:!bg-transparent [&_input]:!border-white [&_input]:!rounded-lg [&_input]:!text-white [&_input]:placeholder-white [&_svg]:text-white [&_svg]:stroke-white">
-                <InputField
-                    label="Enter Email address"
-                    type="email"
-                    {...register("email", { required: "Email is required" })}
-                    error={formState.errors["email"]}
-                />
-
-                <Button
-                    isLoading={isPending}
-                    isDisabled={isPending}
-                    type="submit"
-                    variant="outline"
-                >
-                    Send Reset Link
-                </Button>
-
-                <Button
-                    type="button"
-                    onClick={() => router.back()}
-                    className="!bg-[#AA3300] hover:!bg-[#922900] font-roboto"
-                >
-                    Go back
-                </Button>
-            </form>
-
-            <p className="mt-5 text-sm text-white/80">
-                Remember password?{" "}
-                <a href="/login" className="font-semibold text-white hover:underline">
-                    Login →
-                </a>
-            </p>
+  return (
+    <div className="w-full max-w-[600px] bg-white rounded-2xl px-4 py-8 xs:p-8 text-gray-900 text-center shadow-lg">
+      {/* Lock icon */}
+      <div className="flex justify-center mb-4">
+        <div className="flex items-center justify-center">
+          <Lock size={32} className="text-primary" />
         </div>
-    );
+      </div>
+
+      <h1 className="text-2xl xs:text-3xl font-bold mb-1">Forgot password?</h1>
+      <p className="text-sm xxs:text-base xs:text-lg md:text-xl mb-6 leading-relaxed">
+        Enter the email address associated with your account and we’ll send you
+        a reset link.
+      </p>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <InputField
+          label="Enter Email address"
+          placeholder="you@email.com"
+          compulsory={true}
+          type="email"
+          labelClassName="font-medium font-baloo text-base xs:test-lg lg:text-xl"
+          className="!mt-0 !py-2"
+          icon={<Mail size={18} className="text-muted" />}
+          {...register("email", {
+            required: "Email is required to verify your account",
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: "Enter a valid email address",
+            },
+          })}
+          error={formState.errors["email"]}
+        />
+        <div className="mt-10">
+          {" "}
+          <Button
+            isLoading={isPending}
+            isDisabled={isPending}
+            type="submit"
+            variant="solid"
+          >
+            Send Reset Link
+          </Button>
+        </div>
+
+        <Button
+          type="button"
+          onClick={() => router.back()}
+          className="!bg-[#AA3300] hover:!bg-[#922900] font-roboto"
+        >
+          Go back
+        </Button>
+      </form>
+
+      <p className="mt-4 text-sm font-medium text-primary">
+        Remember password?{" "}
+        <a href="/login" className="font-medium text-primary hover:underline">
+          Login
+        </a>
+      </p>
+    </div>
+  );
 }

@@ -1,17 +1,17 @@
 "use client";
-
 import { Seo } from "@/components/seo/Seo";
 import SignupForm from "@/components/signup/SignupForm";
 import { useRouter } from "next/navigation";
 
 export default function SignupPage() {
   const router = useRouter();
-  const onSuccess = () => {
-    router.push(`/email-sent/`);
+  
+  const onSuccess = (email: string) => {
+    router.push(`/email-sent?email=${encodeURIComponent(email)}`);
   };
 
   return (
-    <div className="space-y-6 px-4 md:px-0">
+    <div className="w-full px-4 md:px-6  lg:px-0">
       <Seo title="Sign Up" />
       <SignupForm onSuccess={onSuccess} />
     </div>

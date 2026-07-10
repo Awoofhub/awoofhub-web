@@ -1,8 +1,8 @@
-'use client'
-import { useLogout } from '@/features/auth/useLogout';
-import { useRouter } from 'next/navigation';
-import { IoClose } from 'react-icons/io5';
-import Link from 'next/link';
+"use client";
+import { useLogout } from "@/features/auth/useLogout";
+import { useRouter } from "next/navigation";
+import { IoClose } from "react-icons/io5";
+import Link from "next/link";
 
 interface Props {
   isOpen: boolean;
@@ -15,7 +15,7 @@ export default function LogoutModal({ isOpen, onClose }: Props) {
   const { submit: logout } = useLogout({
     onSuccess: () => {
       onClose();
-      router.push('/login');
+      router.push("/login");
     },
   });
 
@@ -34,7 +34,6 @@ export default function LogoutModal({ isOpen, onClose }: Props) {
 
       {/* Modal */}
       <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-200 w-[90%] max-w-lg bg-white rounded-2xl p-8 shadow-xl">
-        
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -44,18 +43,18 @@ export default function LogoutModal({ isOpen, onClose }: Props) {
         </button>
 
         {/* Content */}
-        <div className="text-center py-10">
-          <h2 className="text-2xl font-bold text-black mb-2">
-            Want to Logout?
-          </h2>
-          <p className="text-[#7E8492] text-lg font-montserrat">Come back soon!</p>
+        <div className="text-center py-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-black mb-2">Hold on!</h2>
+          <p className="text-[#7E8492] text-lg lg:text-xl font-montserrat max-w-[300px] mx-auto">
+            You’re about to log out. Continue?
+          </p>
         </div>
 
         {/* Buttons */}
         <div className="flex flex-col gap-4">
           <button
             onClick={() => logout()}
-            className="w-full py-2 bg-primary text-white font-semibold text-lg rounded-md hover:bg-orange-600 transition-colors"
+            className="w-full py-2 bg-primary cursor-pointer  text-white font-semibold text-lg rounded-md hover:bg-orange-700 transition-colors"
           >
             Logout
           </button>
@@ -67,7 +66,6 @@ export default function LogoutModal({ isOpen, onClose }: Props) {
             Back to Homepage
           </Link>
         </div>
-
       </div>
     </>
   );

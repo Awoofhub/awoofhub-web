@@ -9,17 +9,14 @@ import {
   InputLeftElement,
   InputRightElement,
   Textarea,
-} from '@chakra-ui/react';
-import { Eye, EyeClosed } from 'lucide-react';
-import { useState } from 'react';
+} from "@chakra-ui/react";
+import { Eye, EyeClosed } from "lucide-react";
+import { useState } from "react";
 
-import {
-  FieldError,
-  UseFormRegister,
-} from 'react-hook-form';
+import { FieldError, UseFormRegister } from "react-hook-form";
 
 export type InputFieldProps = {
-  type?: 'text' | 'email' | 'password' | 'textarea';
+  type?: "text" | "email" | "password" | "textarea";
   label?: string;
   textAreaRows?: number;
   error?: FieldError;
@@ -27,98 +24,114 @@ export type InputFieldProps = {
   placeholder?: string;
   compulsory?: boolean;
   labelClassName?: string;
-} & Partial<
-  ReturnType<UseFormRegister<Record<string, unknown>>>
->;
+  className?: string;
+} & Partial<ReturnType<UseFormRegister<Record<string, unknown>>>>;
 
-export const InputField = forwardRef(
-  (props: InputFieldProps, ref) => {
-    const {
-      type = 'text',
-      label,
-      error,
-      icon,
-      placeholder,
-      textAreaRows=3,
-      compulsory,
-      labelClassName,
-      ...inputProps
-    } = props;
+export const InputField = forwardRef((props: InputFieldProps, ref) => {
+  const {
+    type = "text",
+    label,
+    error,
+    icon,
+    placeholder,
+    textAreaRows = 3,
+    compulsory,
+    labelClassName,
+    className,
+    ...inputProps
+  } = props;
 
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
 
-    const [show, setShow] = useState(false)
-    const handleClick = () => setShow(!show)
+  return (
+    <FormControl>
+      {label && (
+        <FormLabel
+          className={labelClassName ?? "font-baloo text-sm lg:text-lg"}
+        >
+          {label}
+          {compulsory && <span className="text-red-500"> *</span>}
+        </FormLabel>
+      )}
 
-    return (
-      <FormControl>
-        {label &&
-          <FormLabel className={labelClassName ?? "font-baloo text-sm lg:text-lg"}>
-            {label}
-            {compulsory && <span className="text-red-500"> *</span>}
-          </FormLabel>}
-          
-        {type === 'text' ? (
+      {type === "text" ? (
+        <InputGroup>
+          {icon && (
+            <InputLeftElement
+              pointerEvents="none"
+              className="flex items-center justify-center h-full pl-3 text-gray-500"
+            >
+              {icon}
+            </InputLeftElement>
+          )}
           <Input
             bg="white"
             placeholder={placeholder}
-            className={`mt-2 w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 text-sm lg:text-base `}
+            className={`mt-2 w-full px-3 py-3 ${icon ? "pl-10" : ""} border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 text-sm lg:text-base ${className ?? ""}`}
             {...inputProps}
             ref={ref}
           />
-        ) : type === 'textarea' ? (
-          <Textarea
-            bg=" white"
+        </InputGroup>
+      ) : type === "textarea" ? (
+        <Textarea
+          bg=" white"
+          placeholder={placeholder}
+          className={`mt-2 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 text-sm lg:text-base ${className ?? ""}`}
+          rows={textAreaRows}
+          {...inputProps}
+          ref={ref}
+        />
+      ) : type === "password" ? (
+        <InputGroup>
+          {icon && (
+            <InputLeftElement
+              pointerEvents="none"
+              className="flex items-center justify-center h-full pl-3 text-primary"
+            >
+              {icon}
+            </InputLeftElement>
+          )}
+          <Input
+            bg="white"
+            pr="4.5rem"
+            className={`mt-2 w-full px-3 py-2 ${icon ? "pl-10" : ""} border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 text-sm lg:text-base  ${className ?? ""}`}
+            type={show ? "text" : "password"}
             placeholder={placeholder}
-            className={`mt-2 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 text-sm lg:text-base `}
-            rows={textAreaRows}
             {...inputProps}
             ref={ref}
           />
-        ) : type === 'password' ? (
-          <InputGroup>
-            {icon && (
-              <InputLeftElement pointerEvents="none" className="mx-3 my-5.5">
-                {icon}
-              </InputLeftElement>
-            )}
-            <Input
-              bg=" #F6F7F8"
-              pr="4.5rem"
-              className={`mt-2 w-full px-3 py-2 ${icon ? 'pl-12' : ''} border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 text-base sm:text-lg font-baloo`}
-              type={show ? 'text' : 'password'}
-              placeholder={placeholder}
-              {...inputProps}
-              ref={ref}
-            />
-            <InputRightElement className="mx-3 my-5.5 text-gray-500">
-              <Button onClick={handleClick}>
-                {show ? <Eye size={20} /> : <EyeClosed size={20} />}
-              </Button>
-            </InputRightElement>
-          </InputGroup>
-        ) : (
-          <InputGroup>
-            {icon && (
-              <InputLeftElement pointerEvents="none" className="mx-3 my-5.5">
-                {icon}
-              </InputLeftElement>
-            )}
-            <Input
-              bg="#F6F7F8"
-              type={type}
-              placeholder={placeholder}
-              className={`mt-2 w-full px-3 py-2 ${icon ? 'pl-12' : ''} border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 text-base sm:text-lg font-baloo`}
-              {...inputProps}
-              ref={ref}
-            />
-          </InputGroup>
-        )}
-        {error && (
-          <FormHelperText className="text-red-500 text-left text-xs mt-1">
-            {error.message}
-          </FormHelperText>
-        )}
-      </FormControl>
-    );
-  }
-);
+          <InputRightElement className="flex items-center justify-center h-full pr-3 text-gray-500">
+            <Button onClick={handleClick}>
+              {show ? <Eye size={20} /> : <EyeClosed size={20} />}
+            </Button>
+          </InputRightElement>
+        </InputGroup>
+      ) : (
+        <InputGroup>
+          {icon && (
+            <InputLeftElement
+              pointerEvents="none"
+              className="flex items-center justify-center h-full pl-3 text-gray-500"
+            >
+              {icon}
+            </InputLeftElement>
+          )}
+          <Input
+            bg="white"
+            type={type}
+            placeholder={placeholder}
+            className={`mt-2 w-full px-3 py-2 ${icon ? "pl-10" : ""} border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 text-sm lg:text-base ${className ?? ""}`}
+            {...inputProps}
+            ref={ref}
+          />
+        </InputGroup>
+      )}
+      {error && (
+        <FormHelperText className="text-red-500 text-left text-xs mt-1">
+          {error.message}
+        </FormHelperText>
+      )}
+    </FormControl>
+  );
+});

@@ -1,47 +1,38 @@
 "use client";
 
 import { Button } from "@/components/button/Button";
-import { Check } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function ResetPasswordSuccessPage() {
-    const router = useRouter();
+  const router = useRouter();
 
-    return (
-        <div className="text-center space-y-6 max-w-sm">
+  return (
+    <div className="text-center min-h-[80vh] space-y-6 max-w-lg w-full">
+      <div className="flex justify-center ">
+        <Image
+          src="/emailSuccess.png"
+          alt="Success"
+          width={500}
+          height={500}
+          priority
+          className="w-[140px] md:w-[230px] h-auto flex justify-center"
+        />
+      </div>
 
-            {/* Illustration */}
-            <div className="flex justify-center">
-                <div className="relative">
-                    <span className="absolute -top-3 -left-4 text-green-300 text-lg">✦</span>
-                    <span className="absolute top-0 -right-5 text-green-200 text-sm">✦</span>
-                    <span className="absolute bottom-2 -left-5 text-green-200 text-xs">✦</span>
-                    <span className="absolute -bottom-1 right-0 text-green-300 text-sm">✦</span>
+      <div className="space-y-2">
+        <h1 className="text-xl xs:text-2xl md:text-3xl font-bold text-gray-900">
+          Success!
+        </h1>
+        <p className="text-base xs:text-lg md:text-xl font-medium mx-auto text-gray-500 leading-relaxed">
+          Your have successfully reset your password! We welcome you back
+          onboard!
+        </p>
+      </div>
 
-                    <div className="w-24 h-28 bg-gray-200 rounded-2xl flex items-end justify-center pb-3 shadow-sm border border-gray-300">
-                        <div className="space-y-1.5 w-14">
-                            <div className="h-1.5 bg-gray-300 rounded-full" />
-                            <div className="h-1.5 bg-gray-300 rounded-full w-10" />
-                        </div>
-                    </div>
-
-                    <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-green-500 flex items-center justify-center shadow-md">
-                        <Check size={24} className="text-white" strokeWidth={3} />
-                    </div>
-                </div>
-            </div>
-
-            <div className="space-y-2">
-                <h1 className="text-2xl font-bold text-gray-900">Success!</h1>
-                <p className="text-sm text-gray-500 leading-relaxed">
-                    You have successfully reset your password!<br />
-                    We welcome you back onboard!
-                </p>
-            </div>
-
-            <Button type="button" onClick={() => router.push("/login")}>
-                Proceed to Log In
-            </Button>
-        </div>
-    );
+      <Button type="button" onClick={() => router.push("/login")}>
+        Proceed to LogIn
+      </Button>
+    </div>
+  );
 }

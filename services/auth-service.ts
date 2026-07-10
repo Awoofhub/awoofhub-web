@@ -37,6 +37,11 @@ export async function verifyEmailService(payload: VerifyEmailData): Promise<ApiR
   return res;
 }
 
+export async function resendVerificationService(payload: EmailData): Promise<ApiResponse<any>> {
+  const res: ApiResponse<any> = await apiClient.post('/auth/resend-verification/', payload)
+  return res;
+}
+
 export async function refreshTokenService(): Promise<ApiResponse<{}>> {
   const res: ApiResponse<{}> = await apiClient.post('/auth/refresh/')
   

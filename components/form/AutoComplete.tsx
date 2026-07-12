@@ -1,7 +1,7 @@
 "use client";
 
 import { NEXT_PUBLIC_TOMTOM_API_KEY } from "@/config/constants";
-import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
+import { FormControl, FormLabel } from "@chakra-ui/react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
@@ -13,6 +13,10 @@ import { useEffect, useMemo, useState } from "react";
 export const TomTomAutocomplete = ({ label, error, compulsory, onPlaceSelect, value, placeholder }: any) => {
     const [options, setOptionsList] = useState<any[]>([]);
     const [inputValue, setInputValue] = useState("");
+
+    useEffect(() => {
+        setInputValue(value ?? "");
+    }, [value]);
 
     const fetchSuggestions = useMemo(
         () =>
@@ -61,6 +65,7 @@ export const TomTomAutocomplete = ({ label, error, compulsory, onPlaceSelect, va
             )}
 
             <Autocomplete
+                freeSolo
                 options={options}
                 value={value || null}
                 inputValue={inputValue}
@@ -72,18 +77,22 @@ export const TomTomAutocomplete = ({ label, error, compulsory, onPlaceSelect, va
                 onInputChange={(e, val) => setInputValue(val)}
                 getOptionLabel={(option) => {
                     if (typeof option === "string") return option;
-
-                    if (option && 'address' in option && typeof option.address === 'string') {
-                        return option.address;
-                    }
                     return option?.address?.freeformAddress ?? "";
                 }}
                 filterOptions={(x) => x}
                 autoComplete
                 includeInputInList
+                onBlur={() => {
+                    onPlaceSelect(inputValue);
+                }}
                 onChange={(_, newValue) => {
                     if (!newValue) {
                         onPlaceSelect("");
+                        return;
+                    }
+
+                    if (typeof newValue === "string") {
+                        onPlaceSelect(newValue);
                         return;
                     }
 
@@ -115,8 +124,6 @@ export const TomTomAutocomplete = ({ label, error, compulsory, onPlaceSelect, va
                     />
                 )}
             />
-
-            {error && <FormHelperText className="text-red-500 text-left text-xs mt-1">{error.message}</FormHelperText>}
         </FormControl>
     );
 };

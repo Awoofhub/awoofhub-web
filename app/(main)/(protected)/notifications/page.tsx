@@ -1,6 +1,6 @@
 "use client";
-import { ActivityError } from "@/components/activity/ActivityError";
 import ActivityEmptyState from "@/components/activity/ActivityEmptyState";
+import { ActivityError } from "@/components/activity/ActivityError";
 import ActivityList from "@/components/activity/ActivityList";
 import ActivityListSkeleton from "@/components/activity/ActivitySkeleton";
 import { useActivity } from "@/features/activity/useActivity";
@@ -8,8 +8,8 @@ import { useActivityCount } from "@/features/activity/useActivityCount";
 import { useActivityMarkAllAsRead } from "@/features/activity/useActivityMarkAllAsRead";
 import { Spinner } from "@chakra-ui/react";
 import { useEffect, useMemo } from "react";
-import { useInView } from "react-intersection-observer";
 import { GiCheckMark } from "react-icons/gi";
+import { useInView } from "react-intersection-observer";
 
 export default function ActivityPage() {
   const [ref, inView] = useInView();
@@ -44,7 +44,7 @@ export default function ActivityPage() {
     return <ActivityError />;
   }
 
-  const hasUnread = (count?.unread ?? 0) > 0;
+  const hasUnread = (count ?? 0) > 0;
   const isLoading = isFetching && allActivities.length === 0;
   const isEmpty = !isLoading && allActivities.length === 0;
 

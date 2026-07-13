@@ -1,10 +1,12 @@
 "use client";
+import { useActivityCount } from "@/features/activity/useActivityCount";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FiBell, FiHeart, FiHome, FiPlus } from "react-icons/fi";
 import { TbListCheck } from "react-icons/tb";
 
 export default function MobileBottomMenu() {
+  const { data: notificationCount } = useActivityCount()
   const pathname = usePathname();
 
   const isInsideChannel =
@@ -69,6 +71,11 @@ export default function MobileBottomMenu() {
           <div className="text-[20px]">
             <FiBell />
           </div>
+          {!!notificationCount && notificationCount > 0 && (
+            <div className="absolute -top-1 right-2 min-w-6 h-6 px-[2px] bg-red-500 text-white text-[12px] font-bold flex items-center justify-center rounded-full border-2 border-white">
+              {notificationCount > 99 ? '99+' : notificationCount}
+            </div>
+          )}
           <span className="text-[14px] font-baloo">Notification</span>
         </Link>
       </div>

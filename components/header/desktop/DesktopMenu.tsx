@@ -1,13 +1,13 @@
 "use client";
 import { Button } from '@/components/button/Button';
 import LogoutModal from "@/components/modals/LogoutModal";
-import { useLogout } from "@/features/auth/useLogout";
+import { useActivityCount } from '@/features/activity/useActivityCount';
 import { useMessageCount } from "@/features/chat/useMessageCount";
 import { useUser } from "@/features/user/useUser";
 import { capitalizeFirstLetter } from "@/utils/truncate";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
 import { FaList } from "react-icons/fa6";
@@ -22,9 +22,9 @@ export default function DesktopMenu() {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   const { data: currentUser } = useUser();
+  const { data: notificationCount } = useActivityCount()
   const { data: messageCount } = useMessageCount(); // It needs to be below useUser() unless it keeps refreshing.
 
-  const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -41,13 +41,6 @@ export default function DesktopMenu() {
     }
     setIsOpenDropdown(false);
   };
-
-  const { submit } = useLogout({
-    onSuccess: () => {
-      const redirect = "/login";
-      router.push(redirect);
-    },
-  });
 
   const toggleDropdown = () => {
     setIsOpenDropdown((prev) => !prev);
@@ -92,12 +85,11 @@ export default function DesktopMenu() {
               className={`${pathname === "/notifications" ? "text-primary" : ""}`}
             >
               <IoNotificationsOutline size={28} />
-              {/*
-                {!!messageCount && messageCount > 0 && (
-                <div className="absolute -top-1 -right-2 w-6 h-6 bg-red-500 text-white text-[12px] font-bold flex items-center justify-center rounded-full border-2 border-white">
-                  {messageCount > 99 ? "99+" : messageCount}
+              {!!notificationCount && notificationCount > 0 && (
+                <div className="absolute -top-2 -right-0 min-w-6 h-6 px-[2px] bg-red-500 text-white text-[12px] font-bold flex items-center justify-center rounded-full border-2 border-white">
+                  {notificationCount > 99 ? "99+" : notificationCount}
                 </div>
-              )} */}
+              )}
             </Link>
           </li>
 

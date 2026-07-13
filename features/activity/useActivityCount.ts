@@ -2,9 +2,9 @@ import ActivityService from "@/services/activity-service";
 import { useQuery } from "@tanstack/react-query";
 import { useUser } from "../user/useUser";
 
-export const getActivityCount = async (): Promise<{unread: number}> => {
+export const getActivityCount = async (): Promise<number> => {
     const result = await ActivityService.getActivityCount();
-    return result.data;
+    return result.data.unread;
 };
 
 

@@ -22,7 +22,6 @@ export interface UpdateUserData {
   bio?: string;
   address?: string;
   website?: string;
-  role?: "user" | "business";
 }
 
 export interface UsernameCheckResult {

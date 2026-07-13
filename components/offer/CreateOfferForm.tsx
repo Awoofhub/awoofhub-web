@@ -30,13 +30,13 @@ const DEAL_TYPES: { label: string; value: CreateOfferData["dealType"] }[] = [
 ];
 
 const DEAL_VALUE_PLACEHOLDERS: Record<CreateOfferData["dealType"], string> = {
-  cashback: "e.g. Get ₦2,000 cashback on your first transfer",
-  freebie: "e.g. Free branded tote bag with every purchase",
-  discount: "e.g. 50% off all items this weekend",
-  promo_code: "e.g. AWOOF20",
-  bogo: "e.g. Buy 1 pair of sneakers, get 1 free",
-  free_trial: "e.g. 30 days free, no card required",
-  free_delivery: "e.g. Free delivery on orders above ₦20,000",
+  cashback: "e.g. ₦2,000 cashback",
+  freebie: "e.g. Free branded tote bag",
+  discount: "e.g. 50% off",
+  promo_code: "e.g. ₦5,000 bonus credit",
+  bogo: "e.g. Get 1 free",
+  free_trial: "e.g. 30 days free",
+  free_delivery: "e.g. Free delivery",
   price_drop: "e.g. ₦189,000 → ₦149,000",
 };
 

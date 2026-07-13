@@ -1,7 +1,7 @@
 import { Offer } from "@/types/offer";
 import { differenceInSeconds, parseISO } from "date-fns";
 import { useEffect, useState } from "react";
-import { OfferVariant } from "@/components/offers/Getoffervariant";
+import { OfferVariant } from "@/utils/offerVariant";
 
 export function useOfferCountdown(offer: Offer, variant: OfferVariant) {
   const totalSeconds = Math.max(

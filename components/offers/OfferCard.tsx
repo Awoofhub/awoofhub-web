@@ -9,7 +9,7 @@ import { FaRegUser } from "react-icons/fa6";
 import { FiUsers } from "react-icons/fi";
 import { IoAlarmOutline } from "react-icons/io5";
 import WishlistButton from "../wishlist/WishlistButton";
-import { getOfferVariant } from "./Getoffervariant";
+import { getOfferVariant } from "@/utils/offerVariant";
 import { LocationIconFor, ValueIconFor } from "./Offercardicons";
 
 interface Props {
@@ -17,8 +17,8 @@ interface Props {
   index?: number;
 }
 
-export default function OfferCard({ offer, index = 0 }: Props) {
-  const variant = getOfferVariant(offer, index);
+export default function OfferCard({ offer }: Props) {
+  const variant = getOfferVariant(offer);
   const { secondsLeft, hasCountdown } = useOfferCountdown(offer, variant);
 
   return (
@@ -94,11 +94,10 @@ export default function OfferCard({ offer, index = 0 }: Props) {
 
           <div className="flex items-center justify-between mb-1 lg:mb-2">
             <div
-              className={`flex items-center gap-1 ${
-                offer.clickCount > 0
-                  ? "max-w-[50%]"
-                  : "w-full"
-              }`}
+              className={`flex items-center gap-1 ${offer.clickCount > 0
+                ? "max-w-[50%]"
+                : "w-full"
+                }`}
             >
               <LocationIconFor location={offer.location} />
               <p className="truncate text-muted text-[11px] lg:text-xs">

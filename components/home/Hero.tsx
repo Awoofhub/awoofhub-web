@@ -27,9 +27,7 @@ export default function Hero() {
 
           {/* Description */}
           <p className="text-sm mx-auto md:mx-0 lg:text-lg font-medium text-muted max-w-lg">
-            We bring together verified discounts, freebies and cashback offers
-            from your most-loved merchants, all in one place. Save money on
-            things you love.
+            Join a community of awoofers unlocking verified discounts, freebies, and cashback from the brands you already love. All in one place.
           </p>
 
           {/* Action Buttons */}
@@ -72,7 +70,7 @@ export default function Hero() {
                 350+
               </p>
               <p className="text-[12px] lg:text-sm text-[#61646B]">
-                Trusted Merchants
+                Trusted Contributors
               </p>
             </div>
           </div>

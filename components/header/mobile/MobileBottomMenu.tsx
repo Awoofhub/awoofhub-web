@@ -21,10 +21,10 @@ export default function MobileBottomMenu() {
           href="/"
           className={`flex flex-col items-center justify-center pt-3 ${pathname === "/" ? "text-primary border-t" : "text-gray-700"}`}
         >
-          <div className="text-[20px]">
+          <div className="text-[28px] xxs:text-[20px]">
             <FiHome />
           </div>
-          <span className="text-[14px] font-baloo">Home</span>
+          <span className="hidden xxs:inline text-[14px] font-baloo">Home</span>
         </Link>
       </div>
 
@@ -33,10 +33,10 @@ export default function MobileBottomMenu() {
           href="/my-offers"
           className={`flex flex-col items-center justify-center pt-3 ${pathname === "/my-offers" ? "text-primary border-t" : "text-gray-700"}`}
         >
-          <div className="text-[20px]">
+          <div className="text-[28px] xxs:text-[20px]">
             <TbListCheck />
           </div>
-          <span className="text-[14px] font-baloo">My Posts</span>
+          <span className="hidden xxs:inline text-[14px] font-baloo">My Posts</span>
         </Link>
       </div>
 
@@ -56,10 +56,10 @@ export default function MobileBottomMenu() {
           href="/wishlist"
           className={`flex flex-col items-center justify-center pt-3 ${pathname === "/wishlist" ? "text-primary border-t" : "text-gray-700"}`}
         >
-          <div className="text-[20px]">
+          <div className="text-[28px] xxs:text-[20px]">
             <FiHeart />
           </div>
-          <span className="text-[14px] font-baloo">Wishlist</span>
+          <span className="hidden xxs:inline text-[14px] font-baloo">Wishlist</span>
         </Link>
       </div>
 
@@ -68,7 +68,7 @@ export default function MobileBottomMenu() {
           href="/notifications"
           className={`flex flex-col items-center justify-center pt-3 ${pathname === "/notifications" ? "text-primary border-t" : "text-gray-700"}`}
         >
-          <div className="text-[20px]">
+          <div className="text-[28px] xxs:text-[20px]">
             <FiBell />
           </div>
           {!!notificationCount && notificationCount > 0 && (
@@ -76,7 +76,7 @@ export default function MobileBottomMenu() {
               {notificationCount > 99 ? '99+' : notificationCount}
             </div>
           )}
-          <span className="text-[14px] font-baloo">Notification</span>
+          <span className="hidden xxs:inline text-[14px] font-baloo">Notification</span>
         </Link>
       </div>
     </div>

@@ -37,6 +37,8 @@ export default function ScrollSync({
   const { data, isFetching, isFetched } = useOffers({
     search: "",
     category: category.slug,
+    dealType: "",
+    location: "",
     minRating: 0,
     createdFrom: "",
     createdTo: "",

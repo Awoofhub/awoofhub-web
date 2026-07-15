@@ -99,7 +99,7 @@ function FilterResults({ searchParams }: FilterProps) {
             <span>Filters</span>
           </div>
           <div className="flex flex-col md:flex-row items-start md:items-center gap-2 w-full">
-            <div className="flex overflow-x-auto flex-nowrap items-start w-full md:max-w-138 lg:max-w-full no-scrollbar flex-1 pb-[400px] -mb-[400px]" style={{ WebkitOverflowScrolling: "touch" }}>
+            <div className="flex overflow-x-auto flex-nowrap items-start w-full md:max-w-138 lg:max-w-full no-scrollbar flex-1" style={{ WebkitOverflowScrolling: "touch" }}>
               <div className="flex items-center gap-4 shrink-0">
                 <OfferSelectDropdown
                   placeholder="Deal type"
@@ -141,7 +141,7 @@ function FilterResults({ searchParams }: FilterProps) {
                 />
               </div>
             </div>
-            <div className="shrink-0 relative z-10">
+            <div className="shrink-0">
               <button
                 type="button"
                 disabled={!hasActiveFilters}

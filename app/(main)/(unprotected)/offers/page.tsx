@@ -88,7 +88,7 @@ function FilterResults({ searchParams }: FilterProps) {
 
   return (
     <div className="bg-white">
-      <section className="mx-auto  w-full pt-4 px-4 md:px-6 lg:px-8 xl:px-12 pb-20 lg:mb-0">
+      <section className="mx-auto max-w-[1440px] w-full pt-4 px-4 md:px-6 lg:px-8 xl:px-12 pb-20 lg:mb-0">
         <div className="relative z-40 flex flex-col md:flex-row gap-3 py-3  items-start md:items-center mb-4 border-b border-muted/20">
           <div className="hidden md:flex shrink-0 items-center gap-2 font-baloo text-[16px] font-semibold text-primary border-r border-muted/20 pr-2 lg:pr-4">
             <IoFilterSharp className="text-[20px]" />

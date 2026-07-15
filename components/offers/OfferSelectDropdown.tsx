@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { IoCheckmark, IoChevronDown } from "react-icons/io5";
 
 type Option = {
@@ -30,22 +31,58 @@ export function OfferSelectDropdown({
   align = "left",
 }: OfferSelectDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [position, setPosition] = useState<{ top: number; left: number } | null>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
 
   const selectedOption = options.find((o) => o.value === value);
   const label = selectedOption?.label ?? placeholder;
   const hasValue = Boolean(value);
 
-  // Close dropdown when clicking outside
+  const updatePosition = () => {
+    const rect = triggerRef.current?.getBoundingClientRect();
+    if (rect) {
+      setPosition({
+        top: rect.bottom + window.scrollY + 8,
+        left: rect.left + window.scrollX,
+      });
+    }
+  };
+
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+      const target = e.target as Node;
+      if (
+        triggerRef.current && !triggerRef.current.contains(target) &&
+        panelRef.current && !panelRef.current.contains(target)
+      ) {
         setIsOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleReposition = () => updatePosition();
+    
+    window.addEventListener("scroll", handleReposition, true);
+    window.addEventListener("resize", handleReposition);
+
+    return () => {
+      window.removeEventListener("scroll", handleReposition, true);
+      window.removeEventListener("resize", handleReposition);
+    };
+  }, [isOpen]);
+
+  const toggle = () => {
+    if (!isOpen) {
+      updatePosition();
+    }
+    setIsOpen((open) => !open);
+  };
 
   const handleSelect = (optionValue: string) => {
     onChange(optionValue === value ? "" : optionValue);
@@ -55,11 +92,11 @@ export function OfferSelectDropdown({
   const isPrimary = primaryWhenEmpty && !hasValue;
 
   return (
-    <div className="relative z-20 font-baloo text-[16px] font-medium" ref={containerRef}>
-      {/* Trigger button */}
+    <div className="relative font-baloo text-[16px] font-medium">
       <button
+        ref={triggerRef}
         type="button"
-        onClick={() => setIsOpen((open) => !open)}
+        onClick={toggle}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         className={[
@@ -80,11 +117,16 @@ export function OfferSelectDropdown({
         />
       </button>
 
-      {/* Dropdown panel */}
-      {isOpen && (
+      {isOpen && position && createPortal(
         <div
+          ref={panelRef}
           role="listbox"
-          className="absolute left-0 z-30 max-h-70 overflow-y-auto no-scrollbar mt-2 whitespace-nowrap overflow-hidden font-medium rounded-xl border border-gray-100 bg-white py-1 shadow-sm"
+          style={{
+            position: "absolute",
+            top: position.top,
+            left: position.left,
+          }}
+          className="z-50 max-h-70 overflow-y-auto no-scrollbar whitespace-nowrap overflow-hidden font-medium rounded-xl border border-gray-100 bg-white py-1 shadow-sm"
         >
           {options.map((option) => {
             const isSelected = option.value === value;
@@ -104,7 +146,8 @@ export function OfferSelectDropdown({
               </button>
             );
           })}
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

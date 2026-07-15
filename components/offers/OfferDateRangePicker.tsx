@@ -151,7 +151,7 @@ export function OfferDateRangePicker({ createdFrom, createdTo, onApply }: OfferD
     : "Date";
 
   return (
-    <div className="relative font-baloo">
+    <div className="relative z-20 font-baloo">
       <button
         ref={triggerRef}
         type="button"

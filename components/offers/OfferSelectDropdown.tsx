@@ -55,7 +55,7 @@ export function OfferSelectDropdown({
   const isPrimary = primaryWhenEmpty && !hasValue;
 
   return (
-    <div className="relative font-baloo text-[16px] font-medium" ref={containerRef}>
+    <div className="relative z-20 font-baloo text-[16px] font-medium" ref={containerRef}>
       {/* Trigger button */}
       <button
         type="button"

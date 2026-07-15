@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { IoCheckmark, IoChevronDown, IoSearchOutline } from "react-icons/io5";
+import { IoCheckmark, IoChevronDown } from "react-icons/io5";
 import { TomTomAutocomplete } from "../form/AutoComplete";
 
 type LocationValue = "Online" | "Nationwide" | "specific";
@@ -89,7 +89,7 @@ export function OfferLocationFilter({
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         className={[
-          "flex py-2 items-center justify-between gap-2 rounded-2xl border px-3 text-sm xs:text-base font-medium transition",
+          "flex py-2 cursor-pointer items-center justify-between gap-2 rounded-2xl border px-3 text-sm xs:text-base font-medium transition",
           hasValue || isOpen
             ? "border-primary bg-primary text-white"
             : "border-[#595858B2] bg-white text-[#0C0C0C] hover:border-[#737373]",

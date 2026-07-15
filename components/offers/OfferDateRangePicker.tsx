@@ -159,7 +159,7 @@ export function OfferDateRangePicker({ createdFrom, createdTo, onApply }: OfferD
         aria-expanded={isOpen}
         aria-haspopup="dialog"
         className={[
-          "flex py-2 items-center justify-between gap-2 rounded-2xl border px-3 text-sm xs:text-base font-medium transition",
+          "flex py-2 cursor-pointer items-center justify-between gap-2 rounded-2xl border px-3 text-sm xs:text-base font-medium transition",
           hasRange ? "w-auto min-w-[110px]" : "w-[92px]",
           hasRange || isOpen
             ? "border-primary bg-primary text-white"

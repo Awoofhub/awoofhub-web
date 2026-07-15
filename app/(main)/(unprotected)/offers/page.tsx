@@ -86,6 +86,10 @@ function FilterResults({ searchParams }: FilterProps) {
     [data],
   );
 
+   const hasActiveFilters = Boolean(
+    dealType || location || category || minRating || createdFrom || createdTo,
+  );
+
   return (
     <div className="bg-white">
       <section className="mx-auto max-w-[1440px] w-full pt-4 px-4 md:px-6 lg:px-8 xl:px-12 pb-20 lg:mb-0">
@@ -95,8 +99,8 @@ function FilterResults({ searchParams }: FilterProps) {
             <span>Filters</span>
           </div>
           <div className="flex flex-col md:flex-row items-start md:items-center gap-2 w-full">
-            <div className="flex overflow-x-auto flex-nowrap items-start w-full md:max-w-138 lg:max-w-170 no-scrollbar md:pr-0 pb-[400px] -mb-[400px] pointer-events-none">
-              <div className="flex items-center gap-4 pointer-events-auto shrink-0">
+            <div className="flex overflow-x-auto flex-nowrap items-start w-full md:max-w-138 lg:max-w-full no-scrollbar flex-1 pb-[400px] -mb-[400px]" style={{ WebkitOverflowScrolling: "touch" }}>
+              <div className="flex items-center gap-4 shrink-0">
                 <OfferSelectDropdown
                   placeholder="Deal type"
                   options={DEAL_TYPES.map(([value, label]) => ({ value, label }))}
@@ -138,12 +142,24 @@ function FilterResults({ searchParams }: FilterProps) {
               </div>
             </div>
             <div>
+             <div className="shrink-0">
               <button
-                onClick={() => updateFilter({ dealType: "", location: "", category: "", minRating: "", createdFrom: "", createdTo: "" })}
-                className="flex items-center gap-1 px-2 text-sm  text-[#b7b7b7] transition hover:text-primary"
+                type="button"
+                disabled={!hasActiveFilters}
+                onClick={() => {
+                  if (!hasActiveFilters) return;
+                  updateFilter({ dealType: "", location: "", category: "", minRating: "", createdFrom: "", createdTo: "" });
+                }}
+                className={[
+                  "flex items-center gap-1 px-2 text-sm transition",
+                  hasActiveFilters
+                    ? "text-black font-semibold hover:text-primary cursor-pointer"
+                    : "text-gray-400 cursor-not-allowed",
+                ].join(" ")}
               >
                 Reset <RiResetLeftLine className="text-base" />
               </button>
+            </div>
             </div>
           </div>
         </div>

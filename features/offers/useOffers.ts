@@ -12,16 +12,18 @@ type GetSearchOffersOptions = {
     createdTo: string,
     page?: number,
     limit: number,
+    dealType: string,
+    location: string
 };
 
-export const getOffers = ({ search, category, minRating, createdFrom, createdTo, page = 1, limit }: GetSearchOffersOptions): Promise<ApiResponse<Offer[]>> => {
-    return OfferService.offers(search, category, minRating, createdFrom, createdTo, page, limit);
+export const getOffers = ({ search, category, minRating, createdFrom, createdTo, page = 1, limit, dealType, location }: GetSearchOffersOptions): Promise<ApiResponse<Offer[]>> => {
+    return OfferService.offers(search, category, minRating, createdFrom, createdTo, page, limit, dealType, location);
 };
 
-export const useOffers = ({ search, category, minRating, createdFrom, createdTo, limit = 8 }: GetSearchOffersOptions) => {
+export const useOffers = ({ search, category, minRating, createdFrom, createdTo, limit = 8, dealType, location }: GetSearchOffersOptions) => {
     const { data, isFetched, isFetchingNextPage, isLoading, isFetching, fetchNextPage, hasNextPage, isError, error } = useInfiniteQuery({
-        queryKey: ['offers', search, category, minRating, createdFrom, createdTo, limit],
-        queryFn: ({ pageParam = 1 }) => getOffers({ search, category, minRating, createdFrom, createdTo, page: pageParam, limit }),
+        queryKey: ['offers', search, category, minRating, createdFrom, createdTo, limit, dealType, location],
+        queryFn: ({ pageParam = 1 }) => getOffers({ search, category, minRating, createdFrom, createdTo, page: pageParam, limit, dealType ,location }),
 
         getNextPageParam: (lastPage) => {
             if (!lastPage.meta) return undefined;

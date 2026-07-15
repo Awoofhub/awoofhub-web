@@ -87,16 +87,16 @@ export default function HelpPage() {
     <main className="bg-white">
       {/* Hero */}
       <div className="bg-background my-5">
-        <section className="py-10 md:py-12 lg:py-16 px-6 md:px-12 text-center max-w-[1440px] mx-auto">
+        <section className="py-8 md:py-12 lg:py-14 px-4 md:px-6 lg:px-8 xl:px-12 text-center max-w-[1440px] mx-auto">
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-black mb-4">
             How can we help you today?
           </h1>
-          <p className="text-muted text-base md:text-lg font-medium max-w-4xl mx-auto mb-8">
+          <p className="text-muted text-base xs:text-lg lg:text-xl font-medium max-w-4xl mx-auto mb-8">
             Got questions? We're here. Browse our FAQ, troubleshoot common
             issues, or reach our support team directly. We're committed to
             keeping your experience smooth.
           </p>
-          <div className="flex items-center max-w-2xl mx-auto rounded-2xl overflow-hidden border border-muted/20 bg-white">
+          <div className="flex items-center max-w-2xl mx-auto rounded-2xl overflow-hidden border border-muted/20">
             <input
               type="text"
               placeholder="Search for topics, or questions.."
@@ -111,7 +111,7 @@ export default function HelpPage() {
 
       {/* Topics Grid */}
       <div className="bg-background my-5">
-        <section className="py-10 md:py-12 lg:py-16 px-6 md:px-12 max-w-[1440px] mx-auto">
+        <section className="py-10 md:py-12 lg:py-16 px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {topics.map((topic) => (
               <div
@@ -130,7 +130,7 @@ export default function HelpPage() {
                 <h3 className="font-semibold text-black text-lg md:text-xl mb-2">
                   {topic.title}
                 </h3>
-                <p className="text-muted font-medium text-base">
+                <p className="text-primary md:text-muted font-medium text-base">
                   {topic.description}
                 </p>
               </div>
@@ -141,7 +141,7 @@ export default function HelpPage() {
 
       {/* Send a Message */}
       <div className="bg-background my-5">
-        <section className="py-10 md:py-12 lg:py-16 px-6 md:px-12 max-w-[1440px] mx-auto">
+        <section className="py-10 md:py-12 lg:py-16 px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto">
           <h2 className="text-2xl md:text-3xl font-semibold text-black mb-4 md:mb-8">
             Not resolved? Send us a Message
           </h2>
@@ -155,15 +155,13 @@ export default function HelpPage() {
               <button
                 type="button"
                 onClick={() => setOpen(!open)}
-                className={`w-full border border-[#D9D9D9] rounded-lg px-4 py-4 outline-none flex items-center justify-between ${
-                  selected ? "text-muted text-xs md:text-sm" : "text-muted/50 text-xs md:text-sm"
-                }`}
+                className={`w-full border border-[#D9D9D9] rounded-lg px-4 py-4 outline-none flex items-center justify-between ${selected ? "text-muted text-xs md:text-sm" : "text-muted/50 text-xs md:text-sm"
+                  }`}
               >
                 {selected || "Select category"}
                 <FiChevronDown
-                  className={`transition-transform duration-200 ${
-                    open ? "rotate-180" : ""
-                  }`}
+                  className={`transition-transform duration-200 ${open ? "rotate-180" : ""
+                    }`}
                 />
               </button>
               {open && (
@@ -210,15 +208,17 @@ export default function HelpPage() {
 
       {/* Social Media */}
       <div className="bg-background my-5">
-        <section className="py-10 md:py-12 lg:py-16 md:px-12 max-w-[1440px] mx-auto border-t border-gray-100">
-          <h2 className="text-2xl px-4 md:px-0 md:text-3xl font-semibold text-black mb-10">
+        <section className="py-8 md:py-10 lg:py-16 px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto">
+          <h2 className="text-2xl xs:text-3xl lg:text-4xl font-semibold text-black mb-10">
             Reach out through Social Media
           </h2>
-          <div className="flex flex-wrap px-6 md:px-0 gap-16">
+          <div className="grid grid-cols-2 xs:grid-cols-4 gap-8">
             {socials.map((s) => (
               <div key={s.id} className="flex flex-col gap-2">
-                <span className="text-primary text-3xl">{s.icon}</span>
-                <h4 className="text-primary font-normal text-lg">{s.handle}</h4>
+                <span className="text-primary text-3xl xs:text-4xl lg:text-5xl">{s.icon}</span>
+                <h4 className="text-primary font-normal text-base md:text-lg lg:text-xl">
+                  {s.handle}
+                </h4>
               </div>
             ))}
           </div>
@@ -228,29 +228,33 @@ export default function HelpPage() {
       {/* Contact Info */}
       <div className="bg-background my-5">
         <section className="py-12 px-6 md:px-12 max-w-[1440px] mx-auto">
-          <div className="flex flex-col md:flex-row gap-12 justify-between">
+          <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-8 justify-between">
             <div className="flex flex-col items-start gap-2">
               <div className="flex gap-1 items-center ">
-                <FaLocationDot className="w-6 h-6" />
-                <h5 className="text-xl">Location</h5>
+                <FaLocationDot className="w-6 h-6 xs:w-10 xs:h-10" />
+                <h5 className="text-xl xs:text-2xl">Location</h5>
               </div>
-              <h5 className="font-semibold text-xl text-gray-900">Lagos, Nigeria</h5>
+              <h5 className="font-semibold text-2xl text-gray-900">
+                Lagos, Nigeria
+              </h5>
             </div>
 
             <div className="flex flex-col items-start gap-2">
               <div className="flex gap-1 items-center ">
-                <IoCall className=" w-6 h-6" />
-                <h5 className="text-xl">Call</h5>
+                <IoCall className="w-6 h-6 xs:w-10 xs:h-10" />
+                <h5 className="text-xl xs:text-2xl">Call</h5>
               </div>
-              <h5 className="font-semibold text-xl text-gray-900">+234 800 333 3330</h5>
+              <h5 className="font-semibold text-2xl text-gray-900">
+                +234 800 333 3330
+              </h5>
             </div>
 
             <div className="flex flex-col items-start gap-2">
               <div className="flex gap-1 items-center ">
-                <MdEmail className=" w-8 h-8 " />
-                <h5 className="text-xl">Email Address</h5>
+                <MdEmail className="w-6 h-6 xs:w-10 xs:h-10" />
+                <h5 className="text-xl xs:text-2xl">Email Address</h5>
               </div>
-              <h5 className="font-semibold text-xl text-gray-900">
+              <h5 className="font-semibold text-2xl text-gray-900">
                 supports@awoofhub.com
               </h5>
             </div>

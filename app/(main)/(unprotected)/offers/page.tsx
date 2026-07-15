@@ -87,80 +87,82 @@ function FilterResults({ searchParams }: FilterProps) {
   );
 
   return (
-    <section className="bg-white mx-auto mb-15 w-full px-4 py-6 md:px-6 lg:mb-0 lg:px-[60px] xl:px-[60px]">
-      <div className="relative z-40 flex flex-col md:flex-row gap-3 md:gap-2 lg:gap-4 items-start md:items-center left-1/2 w-screen -translate-x-1/2 border-b border-[#CECEDE] pl-4 md:px-4 lg:px-[60px] xl:px-[90px] py-[16px]">
-        <div className="hidden md:flex shrink-0 items-center gap-2 font-baloo text-[16px] font-semibold text-[#FE4F04] border-r border-[#CECEDE] pr-2 lg:pr-4">
-             <IoFilterSharp className="text-[20px]" />
-             <span>Filters</span>
+    <div className="bg-white">
+      <section className="mx-auto  w-full pt-4 px-4 md:px-6 lg:px-8 xl:px-12 pb-20 lg:mb-0">
+        <div className="relative z-40 flex flex-col md:flex-row gap-3 py-3  items-start md:items-center mb-4 border-b border-muted/20">
+          <div className="hidden md:flex shrink-0 items-center gap-2 font-baloo text-[16px] font-semibold text-primary border-r border-muted/20 pr-2 lg:pr-4">
+            <IoFilterSharp className="text-[20px]" />
+            <span>Filters</span>
           </div>
-        <div className="flex flex-col md:flex-row md:flex-nowrap items-start md:items-center gap-[14px] md:gap-2 lg:gap-[14px] w-full">
-          <div className="flex overflow-x-auto flex-nowrap items-start w-full md:w-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pr-4 md:pr-0 pb-[400px] -mb-[400px] pointer-events-none">
-            <div className="flex items-center gap-[14px] md:gap-2 lg:gap-[14px] pointer-events-auto shrink-0">
-              <OfferSelectDropdown
-                placeholder="Deal type"
-                options={DEAL_TYPES.map(([value, label]) => ({ value, label }))}
-                value={dealType ?? ""}
-                onChange={(value) => updateFilter("dealType", value)}
-                width="w-[130px] shrink-0"
-              />
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-2 w-full">
+            <div className="flex overflow-x-auto flex-nowrap items-start w-full md:max-w-138 lg:max-w-170 no-scrollbar md:pr-0 pb-[400px] -mb-[400px] pointer-events-none">
+              <div className="flex items-center gap-4 pointer-events-auto shrink-0">
+                <OfferSelectDropdown
+                  placeholder="Deal type"
+                  options={DEAL_TYPES.map(([value, label]) => ({ value, label }))}
+                  value={dealType ?? ""}
+                  onChange={(value) => updateFilter("dealType", value)}
+                  width="shrink-0"
+                  dropdownWidth="w-50"
+                />
 
-              <OfferSelectDropdown
-                placeholder="Category"
-                options={categories?.map((cat) => ({ value: cat.slug, label: cat.name })) ?? []}
-                value={category ?? ""}
-                onChange={(value) => updateFilter("category", value)}
-                width="w-[140px] shrink-0"
-                
-              />
+                <OfferSelectDropdown
+                  placeholder="Category"
+                  options={categories?.map((cat) => ({ value: cat.slug, label: cat.name })) ?? []}
+                  value={category ?? ""}
+                  onChange={(value) => updateFilter("category", value)}
+                  width="shrink-0"
+                  dropdownWidth="w-60"
+                />
 
-              <OfferSelectDropdown
-                placeholder="Offer rating"
-                options={RATING_OPTIONS}
-                value={minRating ? String(minRating) : ""}
-                onChange={(value) => updateFilter("minRating", value)}
-                width="w-[140px] shrink-0"
-                align="center"
-              />
+                <OfferSelectDropdown
+                  placeholder="Offer rating"
+                  options={RATING_OPTIONS}
+                  value={minRating ? String(minRating) : ""}
+                  onChange={(value) => updateFilter("minRating", value)}
+                  width="shrink-0"
+                  align="center"
+                  dropdownWidth="w-35"
+                />
 
+                <OfferLocationFilter
+                  location={location}
+                  onChange={(value) => updateFilter("location", value)}
+                />
 
-
-              <OfferLocationFilter
-                location={location}
-                onChange={(value) => updateFilter("location", value)}
-              />
-              
-
-              <OfferDateRangePicker
-                createdFrom={createdFrom}
-                createdTo={createdTo}
-                onApply={updateFilter}
-              />
+                <OfferDateRangePicker
+                  createdFrom={createdFrom}
+                  createdTo={createdTo}
+                  onApply={updateFilter}
+                />
+              </div>
+            </div>
+            <div>
+              <button
+                onClick={() => updateFilter({ dealType: "", location: "", category: "", minRating: "", createdFrom: "", createdTo: "" })}
+                className="flex items-center gap-1 px-2 text-sm  text-[#b7b7b7] transition hover:text-primary"
+              >
+                Reset <RiResetLeftLine className="text-base" />
+              </button>
             </div>
           </div>
-
-          <button
-            onClick={() => updateFilter({ dealType: "", location: "", category: "", minRating: "", createdFrom: "", createdTo: "" })}
-            className="flex h-12 shrink-0 items-center gap-1 px-2 text-sm font-[400] text-[#b7b7b7] transition hover:text-primary"
-          >
-            Reset <RiResetLeftLine className="text-base" />
-          </button>
         </div>
-      </div>
 
-      {isLoading && <OfferListSkeleton number={4} />}
-      {!isLoading && !isFetching && allOffers.length === 0 && (
-        <p className="text-center text-gray-500">No offers available.</p>
-      )}
-      {isError && <div>{error?.message}</div>}
-      {!isLoading && allOffers.length > 0 && (
-        <OfferInfiniteList
-          offers={allOffers}
-          hasNextPage={hasNextPage}
-          isFetchingNextPage={isFetchingNextPage}
-          fetchNextPage={fetchNextPage}
-        />
-      )}
-    </section>
+        {isLoading && <OfferListSkeleton number={4} />}
+        {!isLoading && !isFetching && allOffers.length === 0 && (
+          <p className="text-center text-gray-500">No offers available.</p>
+        )}
+        {isError && <div>{error?.message}</div>}
+        {!isLoading && allOffers.length > 0 && (
+          <OfferInfiniteList
+            offers={allOffers}
+            hasNextPage={hasNextPage}
+            isFetchingNextPage={isFetchingNextPage}
+            fetchNextPage={fetchNextPage}
+          />
+        )}
+      </section>
+    </div>
   );
 }
 

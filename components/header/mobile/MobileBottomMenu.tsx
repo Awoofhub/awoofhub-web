@@ -19,7 +19,7 @@ export default function MobileBottomMenu() {
       <div className="flex-1">
         <Link
           href="/"
-          className={`flex flex-col items-center justify-center pt-3 ${pathname === "/" ? "text-primary border-t" : "text-gray-700"}`}
+          className={`flex flex-col items-center justify-center pt-5 ${pathname === "/" ? "text-primary border-t" : "text-gray-700"}`}
         >
           <div className="text-[28px] xxs:text-[20px]">
             <FiHome />
@@ -31,7 +31,7 @@ export default function MobileBottomMenu() {
       <div className="flex-1">
         <Link
           href="/my-offers"
-          className={`flex flex-col items-center justify-center pt-3 ${pathname === "/my-offers" ? "text-primary border-t" : "text-gray-700"}`}
+          className={`flex flex-col items-center justify-center pt-5 ${pathname === "/my-offers" ? "text-primary border-t" : "text-gray-700"}`}
         >
           <div className="text-[28px] xxs:text-[20px]">
             <TbListCheck />
@@ -66,7 +66,7 @@ export default function MobileBottomMenu() {
       <div className="flex-1">
         <Link
           href="/notifications"
-          className={`flex flex-col items-center justify-center pt-3 ${pathname === "/notifications" ? "text-primary border-t" : "text-gray-700"}`}
+          className={`flex flex-col items-center justify-center pt-5 ${pathname === "/notifications" ? "text-primary border-t" : "text-gray-700"}`}
         >
           <div className="text-[28px] xxs:text-[20px]">
             <FiBell />

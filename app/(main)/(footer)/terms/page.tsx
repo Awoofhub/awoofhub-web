@@ -5,9 +5,9 @@ export default function TermsOfService() {
     <main className="bg-white">
       {/* Header */}
       <div className="bg-background my-5">
-        <section className="px-6 md:px-12 py-6 md:py-8 lg:py-12 mx-auto">
+        <section className="px-4 md:px-6 lg:px-8 xl:px-12 py-6 md:py-8 lg:py-12 mx-auto">
           <div className="flex justify-center md:justify-start">
-          <h2 className="text-primary  px-4 py-2 rounded-xl mb-8 font-semibold inline-flex uppercase bg-gray-50 border border-gray-100 shadow-md">
+          <h2 className="text-primary text-sm xs:text-base px-4 py-2 rounded-xl mb-8 font-semibold inline-flex uppercase backdrop-blur-3xl bg-gray-50 border border-gray-100 shadow-md">
             Terms of Service
           </h2>
           </div>
@@ -31,7 +31,7 @@ export default function TermsOfService() {
 
       {/* Sections */}
       <div className="space-y-8 bg-background my-5">
-        <section className="px-6 md:px-12 pt-8 pb-16 mx-auto">
+        <section className="px-4 md:px-6 lg:px-8 xl:px-12 pt-8 pb-16 mx-auto">
           <div>
             <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black">
               1. Eligibility

@@ -15,7 +15,8 @@ import {
   startOfWeek,
   subMonths,
 } from "date-fns";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { IoChevronBack, IoChevronDown, IoChevronForward } from "react-icons/io5";
 
 const WEEKDAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
@@ -57,7 +58,7 @@ function Calendar({
     : "Select date range";
 
   return (
-    <div className="rounded-xl bg-[#fafafa] p-5">
+    <div className="rounded-xl bg-white p-5">
       <div className="mb-4 flex items-center gap-3 border-b border-gray-200 pb-4 text-xs text-gray-800">
         <p className="min-w-fit font-semibold">{format(month, "MMMM yyyy")}</p>
         <p className="flex-1 truncate text-center">{rangeLabel}</p>
@@ -102,12 +103,24 @@ export function OfferDateRangePicker({ createdFrom, createdTo, onApply }: OfferD
   const [draftFrom, setDraftFrom] = useState(createdFrom ?? "");
   const [draftTo, setDraftTo] = useState(createdTo ?? "");
   const [calendarMonth, setCalendarMonth] = useState(() => createdFrom ? startOfMonth(parseISO(createdFrom)) : startOfMonth(new Date()));
+  const [position, setPosition] = useState<{ top: number; left: number } | null>(null);
+
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
 
   const toggle = () => {
     if (!isOpen) {
       setDraftFrom(createdFrom ?? "");
       setDraftTo(createdTo ?? "");
       setCalendarMonth(createdFrom ? startOfMonth(parseISO(createdFrom)) : startOfMonth(new Date()));
+
+      const rect = triggerRef.current?.getBoundingClientRect();
+      if (rect) {
+        setPosition({
+          top: rect.bottom + window.scrollY + 8,
+          left: rect.right + window.scrollX,
+        });
+      }
     }
     setIsOpen((open) => !open);
   };
@@ -117,6 +130,21 @@ export function OfferDateRangePicker({ createdFrom, createdTo, onApply }: OfferD
     setIsOpen(false);
   };
 
+  // Close on outside click — checks both the trigger and the portaled panel
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as Node;
+      if (
+        triggerRef.current && !triggerRef.current.contains(target) &&
+        panelRef.current && !panelRef.current.contains(target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const hasRange = Boolean(createdFrom && createdTo);
   const triggerLabel = hasRange
     ? `${format(parseISO(createdFrom!), "d/M/yyyy")} – ${format(parseISO(createdTo!), "d/M/yyyy")}`
@@ -125,12 +153,13 @@ export function OfferDateRangePicker({ createdFrom, createdTo, onApply }: OfferD
   return (
     <div className="relative font-baloo">
       <button
+        ref={triggerRef}
         type="button"
         onClick={toggle}
         aria-expanded={isOpen}
         aria-haspopup="dialog"
         className={[
-          "flex h-12 items-center justify-between gap-2 rounded-[8px] border px-4 text-[16px] font-medium transition",
+          "flex py-2 items-center justify-between gap-2 rounded-2xl border px-3 text-sm xs:text-base font-medium transition",
           hasRange ? "w-auto min-w-[110px]" : "w-[92px]",
           hasRange || isOpen
             ? "border-primary bg-primary text-white"
@@ -146,8 +175,20 @@ export function OfferDateRangePicker({ createdFrom, createdTo, onApply }: OfferD
           ].join(" ")}
         />
       </button>
-      {isOpen && (
-        <div className="absolute right-0 z-20 mt-2 w-[min(47rem,calc(100vw-2rem))] rounded-xl border border-gray-200 bg-white p-1 shadow-xl" role="dialog" aria-label="Choose a date range">
+
+      {isOpen && position && createPortal(
+        <div
+          ref={panelRef}
+          style={{
+            position: "absolute",
+            top: position.top,
+            left: position.left,
+            transform: "translateX(-100%)",
+          }}
+          className="z-50 w-[min(47rem,calc(100vw-2rem))] rounded-xl border border-gray-200 bg-white p-1 shadow-xl"
+          role="dialog"
+          aria-label="Choose a date range"
+        >
           <div className="grid grid-cols-1 gap-1 sm:grid-cols-2">
             <Calendar month={calendarMonth} selectedDate={draftFrom} minDate="" maxDate={draftTo} rangeStart={draftFrom} rangeEnd={draftTo} onPreviousMonth={() => setCalendarMonth((month) => subMonths(month, 1))} onNextMonth={() => setCalendarMonth((month) => addMonths(month, 1))} onSelect={setDraftFrom} />
             <Calendar month={addMonths(calendarMonth, 1)} selectedDate={draftTo} minDate={draftFrom} maxDate="" rangeStart={draftFrom} rangeEnd={draftTo} onPreviousMonth={() => setCalendarMonth((month) => subMonths(month, 1))} onNextMonth={() => setCalendarMonth((month) => addMonths(month, 1))} onSelect={setDraftTo} />
@@ -156,7 +197,8 @@ export function OfferDateRangePicker({ createdFrom, createdTo, onApply }: OfferD
             <button type="button" onClick={() => setIsOpen(false)} className="rounded-md border border-primary px-5 py-2 text-xs font-semibold text-primary hover:bg-orange-50">Cancel</button>
             <button type="button" onClick={apply} className="rounded-md bg-primary px-5 py-2 text-xs font-semibold text-white transition hover:bg-[#e64703]">Apply</button>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

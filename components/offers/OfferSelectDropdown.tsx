@@ -14,7 +14,7 @@ type OfferSelectDropdownProps = {
   value?: string;
   onChange: (value: string) => void;
   width?: string;
-  /** If true the trigger uses the primary (orange) style when no value is selected */
+  dropdownWidth?: string;
   primaryWhenEmpty?: boolean;
   align?: "left" | "center";
 };
@@ -25,6 +25,7 @@ export function OfferSelectDropdown({
   value,
   onChange,
   width = "w-[130px]",
+  dropdownWidth,
   primaryWhenEmpty = false,
   align = "left",
 }: OfferSelectDropdownProps) {
@@ -54,7 +55,7 @@ export function OfferSelectDropdown({
   const isPrimary = primaryWhenEmpty && !hasValue;
 
   return (
-    <div className="relative font-baloo text-[16px] font-[500]" ref={containerRef}>
+    <div className="relative font-baloo text-[16px] font-medium" ref={containerRef}>
       {/* Trigger button */}
       <button
         type="button"
@@ -62,7 +63,7 @@ export function OfferSelectDropdown({
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         className={[
-          "flex h-12 items-center justify-between gap-2 rounded-[8px] border px-4 text-[16px] font-medium transition",
+          "flex py-2 items-center justify-between gap-2 rounded-2xl border px-3 text-sm xs:text-base font-medium transition",
           width,
           isPrimary || hasValue || isOpen
             ? "border-primary bg-primary text-white"
@@ -83,7 +84,7 @@ export function OfferSelectDropdown({
       {isOpen && (
         <div
           role="listbox"
-          className="absolute left-0 z-30 mt-2 w-max whitespace-nowrap overflow-hidden text-[12px] font-medium rounded-2xl border border-gray-100 bg-white py-1 shadow-[0_8px_30px_rgba(0,0,0,0.08)]"
+          className="absolute left-0 z-30 max-h-70 overflow-y-auto no-scrollbar mt-2 whitespace-nowrap overflow-hidden font-medium rounded-xl border border-gray-100 bg-white py-1 shadow-sm"
         >
           {options.map((option) => {
             const isSelected = option.value === value;
@@ -94,7 +95,7 @@ export function OfferSelectDropdown({
                 role="option"
                 aria-selected={isSelected}
                 onClick={() => handleSelect(option.value)}
-                className="flex w-full items-center gap-2 border-b border-gray-100 px-4 py-[10px] text-left text-sm text-[#0C0C0C] last:border-0 hover:bg-orange-50 transition-colors"
+                className={`flex ${dropdownWidth} items-center gap-2 border-b border-gray-100 px-4 py-2 text-left text-sm text-[#0C0C0C] last:border-0 hover:bg-orange-50 transition-colors`}
               >
                 <span className="w-4 shrink-0 text-[#12B76A]">
                   {isSelected && <IoCheckmark />}

@@ -81,7 +81,7 @@ export function OfferLocationFilter({
   };
 
   return (
-    <div className="relative font-baloo text-[16px] font-[500]" ref={containerRef}>
+    <div className="relative font-baloo text-[16px] font-medium" ref={containerRef}>
       {/* Trigger button */}
       <button
         type="button"
@@ -89,7 +89,7 @@ export function OfferLocationFilter({
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         className={[
-          "flex h-12 w-[120px] items-center justify-between gap-2 rounded-[8px] border px-4 text-[16px] font-medium transition",
+          "flex py-2 items-center justify-between gap-2 rounded-2xl border px-3 text-sm xs:text-base font-medium transition",
           hasValue || isOpen
             ? "border-primary bg-primary text-white"
             : "border-[#595858B2] bg-white text-[#0C0C0C] hover:border-[#737373]",
@@ -110,7 +110,7 @@ export function OfferLocationFilter({
         <div
           role="listbox"
           aria-label="Location"
-          className="absolute left-0 z-30 mt-2 w-max whitespace-nowrap overflow-hidden rounded-2xl border border-gray-100 bg-white py-1 shadow-[0_8px_30px_rgba(0,0,0,0.08)]"
+          className="absolute left-0 z-30 mt-2 w-max whitespace-nowrap overflow-hidden rounded-xl border border-gray-100 bg-white py-1 shadow-[0_8px_30px_rgba(0,0,0,0.08)]"
         >
           {/* Options list */}
           {(["Online", "Nationwide", "specific"] as const).map((value) => {
@@ -125,7 +125,7 @@ export function OfferLocationFilter({
                 role="option"
                 aria-selected={isSelected}
                 onClick={() => chooseLocation(value)}
-                className="flex w-full items-center gap-2 border-b border-gray-100 px-4 py-[10px] text-left text-sm text-[#0C0C0C] last:border-0 hover:bg-orange-50 transition-colors"
+                className="flex w-50 items-center gap-2 border-b border-gray-100 px-4 py-[10px] text-left text-sm text-[#0C0C0C] last:border-0 hover:bg-orange-50 transition-colors"
               >
                 <span className="w-4 shrink-0 text-[#12B76A]">
                   {isSelected && <IoCheckmark />}

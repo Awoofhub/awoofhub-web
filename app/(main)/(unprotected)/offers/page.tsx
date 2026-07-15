@@ -86,7 +86,7 @@ function FilterResults({ searchParams }: FilterProps) {
     [data],
   );
 
-   const hasActiveFilters = Boolean(
+  const hasActiveFilters = Boolean(
     dealType || location || category || minRating || createdFrom || createdTo,
   );
 
@@ -141,26 +141,22 @@ function FilterResults({ searchParams }: FilterProps) {
                 />
               </div>
             </div>
-            <div>
-             <div className="shrink-0">
-              <button
-                type="button"
-                disabled={!hasActiveFilters}
-                onClick={() => {
-                  if (!hasActiveFilters) return;
-                  updateFilter({ dealType: "", location: "", category: "", minRating: "", createdFrom: "", createdTo: "" });
-                }}
-                className={[
-                  "flex items-center gap-1 px-2 text-sm transition",
-                  hasActiveFilters
-                    ? "text-black font-semibold hover:text-primary cursor-pointer"
-                    : "text-gray-400 cursor-not-allowed",
-                ].join(" ")}
-              >
-                Reset <RiResetLeftLine className="text-base" />
-              </button>
-            </div>
-            </div>
+            <button
+              type="button"
+              disabled={!hasActiveFilters}
+              onClick={() => {
+                if (!hasActiveFilters) return;
+                updateFilter({ dealType: "", location: "", category: "", minRating: "", createdFrom: "", createdTo: "" });
+              }}
+              className={[
+                "flex items-center gap-1 px-2 text-sm transition",
+                hasActiveFilters
+                  ? "text-black font-semibold hover:text-primary cursor-pointer"
+                  : "text-gray-400 cursor-not-allowed",
+              ].join(" ")}
+            >
+              Reset <RiResetLeftLine className="text-base" />
+            </button>
           </div>
         </div>
 

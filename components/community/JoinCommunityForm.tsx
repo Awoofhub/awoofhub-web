@@ -11,28 +11,29 @@ import { useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 const DEAL_DISCOVERY_OPTIONS = [
-    "Brand websites",
-    "Instagram",
-    "Facebook",
-    "X (Twitter)",
-    "Telegram",
-    "WhatsApp",
-    "Email newsletters",
-    "Retail stores",
-    "Others",
+    'Brand websites',
+    'Instagram',
+    'Facebook',
+    'X (Twitter)',
+    'Telegram',
+    'WhatsApp',
+    'Email newsletters',
+    'Retail stores',
+    'Other',
 ];
 
 const HEAR_ABOUT_US_OPTIONS = [
-    "Instagram",
-    "Facebook",
-    "LinkedIn",
-    "X (Twitter)",
-    "TikTok",
-    "WhatsApp",
-    "Internet Ads",
-    "Influencers",
-    "Referrals",
-    "Others",
+    'Instagram',
+    'Facebook',
+    'Linkedin',
+    'X (Twitter)',
+    'Tiktok',
+    'Whatsapp',
+    'Internet Ads',
+    'Influencers',
+    'From a friend',
+    'Organisation or Club',
+    'Other',
 ];
 
 const YES_NO_OPTIONS = [

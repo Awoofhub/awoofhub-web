@@ -1,14 +1,14 @@
 // components/community/JoinCommunityForm.tsx
 "use client";
 import { Button } from "@/components/button/Button";
-import { InputField } from "@/components/form/InputField";
 import { TomTomAutocomplete } from "@/components/form/AutoComplete";
+import { InputField } from "@/components/form/InputField";
 import { JoinCommunitySuccessModal } from "@/components/modals/JoinCommunitySuccessModal";
 import { useJoinCommunity } from "@/features/community/useJoinCommunity";
 import { JoinCommunityData } from "@/types/community";
 import { ChevronDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 const DEAL_DISCOVERY_OPTIONS = [
     "Brand websites",

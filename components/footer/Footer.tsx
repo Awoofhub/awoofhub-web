@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { FaTiktok } from "react-icons/fa6";
-import { RiInstagramFill } from "react-icons/ri";
 import { MdOutlineMail } from "react-icons/md";
+import { RiInstagramFill } from "react-icons/ri";
 
 const footerLinks = {
   quickLinks: [
@@ -12,7 +12,7 @@ const footerLinks = {
      { label: "Policy & Privacy", href: "/policy" },
   ],
   community: [
-    { label: "Get Involved", href: "/get-involved" },
+    { label: "Join Community", href: "/join-community" },
     { label: "Contribute on GitHub", href: "/community-discussions" },
     { label: "Feature Requests", href: "/feature-requests" },
     { label: "Beta Testing", href: "/community-discussions" },

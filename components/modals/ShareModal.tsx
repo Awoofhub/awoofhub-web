@@ -1,6 +1,6 @@
 "use client";
 
-import { Copy, Share2, X as CloseIcon } from "lucide-react";
+import { Share2, X as CloseIcon } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
 import { IoCheckmarkSharp } from "react-icons/io5";
@@ -8,10 +8,24 @@ import { FiCopy } from "react-icons/fi";
 
 interface Props {
   offerId: string;
+  variant?: "default" | "menuItem";
+  onTriggerClick?: () => void;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
-export default function ShareModal({ offerId }: Props) {
-  const [open, setOpen] = useState(false);
+export default function ShareModal({
+  offerId,
+  variant = "default",
+  onTriggerClick,
+  open: controlledOpen,
+  onOpenChange,
+}: Props) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isControlled = controlledOpen !== undefined;
+  const open = isControlled ? controlledOpen : internalOpen;
+  const setOpen = isControlled ? (onOpenChange ?? (() => {})) : setInternalOpen;
+
   const [show, setShow] = useState(false);
 
   const url =
@@ -68,16 +82,30 @@ export default function ShareModal({ offerId }: Props) {
     },
   ];
 
+  const handleTriggerClick = () => {
+    setOpen(true);
+    onTriggerClick?.();
+  };
+
   return (
     <>
-      <div className="flex gap-4 text-[10px] xs:text-xs md:text-sm lg:text-base text-black">
+      {variant === "menuItem" ? (
         <button
-          onClick={() => setOpen(true)}
-          className="cursor-pointer flex items-center gap-1 hover:text-blue-500 transition-colors"
+          onClick={handleTriggerClick}
+          className="flex items-center gap-2 font-baloo text-sm text-black hover:bg-orange-50"
         >
-          <Share2 size={18} /> Share
+         <Share2 size={15} /> Share offer
         </button>
-      </div>
+      ) : (
+        <div className="flex gap-4 text-[10px] xs:text-xs md:text-sm lg:text-base text-black">
+          <button
+            onClick={handleTriggerClick}
+            className="cursor-pointer flex items-center gap-1 hover:text-blue-500 transition-colors"
+          >
+            <Share2 size={18} /> Share
+          </button>
+        </div>
+      )}
 
       {show && (
         <div className="fixed top-20 left-1/2 -translate-x-1/2 bg-black text-white px-4 py-2 rounded-lg z-[1100]">

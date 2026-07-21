@@ -15,9 +15,9 @@ export default function CreatorLink({ offer, variant = "top" }: Props) {
     return (
       <Link
         href={`/profile/${offer.contributor.username}`}
-        className="flex items-center justify-between  md:py-2 px-2 md:px-5 gap-6"
+        className="flex items-center justify-between lg:py-2 px-2 lg:px-5 gap-3 lg:gap-4"
       >
-        <div className="w-18 h-18 md:w-25 md:h-25 bg-pink-100 rounded-full flex items-center justify-center text-pink-600 font-bold text-2xl overflow-hidden shrink-0 border-2 border-orange-500">
+        <div className="w-16 h-16 xs:w-12 xs:h-12 lg:w-25 lg:h-25 bg-pink-100 rounded-full flex items-center justify-center text-pink-600 font-bold text-2xl overflow-hidden shrink-0 border-2 border-orange-500">
           {offer.contributor.profileImageUrl ? (
             <Image
               width={600}
@@ -32,20 +32,19 @@ export default function CreatorLink({ offer, variant = "top" }: Props) {
             </div>
           )}
         </div>
-
         <div className="flex flex-col justify-between gap-1">
-          <div className="flex gap-12 justify-between items-center">
-            <span className="font-semibold font-baloo text-black text-sm md:text-base lg:text-lg hover:underline">
+          <div className="flex gap-10 xs:gap-2 lg:gap-6 justify-between items-center">
+            <span className="font-semibold font-baloo text-black text-sm lg:text-lg hover:underline">
               {offer.contributor.name}
             </span>
-            <span className="flex items-center gap-1 bg-[#FFF0EC] text-primary text-[10px] lg:text-xs font-semibold px-2.5 py-2 rounded-full">
-              <FaRegUser size={12} /> Awoofer
+            <span className="flex items-center gap-1 bg-[#FFF0EC] text-primary text-[10px] lg:text-xs font-semibold px-2.5 py-1 lg:py-2 rounded-full">
+              <FaRegUser size={11} /> Awoofer
             </span>
           </div>
-          <span className="text-muted font-medium text-xs md:text-sm">
+          <span className="text-muted font-medium text-xs xs:text-[10px] lg:text-sm">
             @{offer.contributor.username}
           </span>
-          <span className="text-muted font-medium text-xs md:text-sm">
+          <span className="text-muted font-medium mt-1 text-xs xs:text-[10px] lg:text-sm">
             Awoofer since{" "}
             {format(
               new Date(offer.contributor.createdAt || "2023-01-01"),
@@ -62,7 +61,7 @@ export default function CreatorLink({ offer, variant = "top" }: Props) {
       href={`/profile/${offer.contributor.username}`}
       className="flex items-center gap-2"
     >
-      <div className="w-7 h-7 md:w-9 md:h-9 border border-primary bg-pink-100 rounded-full flex items-center justify-center text-pink-600 font-bold text-sm overflow-hidden">
+      <div className="w-7 h-7 lg:w-9 lg:h-9 border border-primary bg-pink-100 rounded-full flex items-center justify-center text-pink-600 font-bold text-sm overflow-hidden">
         {offer.contributor.profileImageUrl ? (
           <Image
             width={50}
@@ -75,7 +74,7 @@ export default function CreatorLink({ offer, variant = "top" }: Props) {
           capitalizeFirstLetter(`${offer.contributor.name}`)
         )}
       </div>
-      <span className="text-orange-500 text-xs md:text-sm font-semibold hover:underline">
+      <span className="text-orange-500 text-xs lg:text-sm font-semibold hover:underline">
         {offer.contributor.username}
       </span>
     </Link>

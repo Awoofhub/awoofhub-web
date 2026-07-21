@@ -10,9 +10,10 @@ import WishlistButton from "@/components/wishlist/WishlistButton";
 import { useOffer } from "@/features/offers/useOffer";
 import { useRandomOffers } from "@/features/offers/useRandomOffers";
 import { truncateId } from "@/utils/truncate";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, MoreVertical } from "lucide-react";
 import Link from "next/link";
-import { use, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
+import { FaRegFlag } from "react-icons/fa6";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -23,7 +24,20 @@ export default function OfferPage({ params }: Props) {
   const { data: offer, isLoading } = useOffer({ id });
   const { data, isFetching, isFetched } = useRandomOffers();
   const [isReportOpen, setIsReportOpen] = useState(false);
+  const [isShareOpen, setIsShareOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const wishlistWrapperRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   if (isLoading) {
     return (
@@ -47,7 +61,7 @@ export default function OfferPage({ params }: Props) {
 
   return (
     <div className="bg-white">
-      <section className="px-4 md:px-6 lg:px-12 py-6 lg:py-10 mx-auto max-w-[1440px] border-b border-gray-300 pb-30">
+      <section className="px-4 md:px-6 lg:px-8 xl:px-12 py-6 lg:py-10 mx-auto max-w-[1440px] border-b border-gray-300 pb-10">
         <div className="mx-auto flex flex-wrap gap-2 justify-between lg:items-center mb-4 md:mb-6 lg:mb-10">
           <nav className="flex items-center gap-0.25 md:gap-1 lg:gap-2">
             <Link
@@ -72,24 +86,19 @@ export default function OfferPage({ params }: Props) {
             </span>
           </nav>
 
-          <div className="flex items-center gap-1 md:gap-4 font-semibold font-baloo">
+          {/* Desktop/tablet: full action row */}
+          <div className="hidden xs:flex items-center gap-1 md:gap-4 font-semibold font-baloo">
             <button
               onClick={() => setIsReportOpen(true)}
-              className="hidden xs:inline border-2 border-[#E70606] rounded-md md:rounded-lg py-2 px-2 lg:px-3 xs:text-xs md:text-sm lg:text-base text-[#E70606] hover:bg-red-500 hover:text-white cursor-pointer"
+              className="border-2 border-[#E70606] rounded-md md:rounded-lg py-2 px-2 lg:px-3 text-xs md:text-sm lg:text-base text-[#E70606] hover:bg-red-500 hover:text-white cursor-pointer"
             >
               Report this deal
-            </button>
-            <button
-              onClick={() => setIsReportOpen(true)}
-              className="xs:hidden border border-[#E70606] rounded-lg py-1 px-2 text-[10px] text-[#E70606] hover:bg-red-500 hover:text-white cursor-pointer"
-            >
-              Report
             </button>
 
             <span className="text-gray-300">|</span>
             <div
               ref={wishlistWrapperRef}
-              className="flex items-center gap-1 cursor-pointer text-[10px] xs:text-xs md:text-sm lg:text-base"
+              className="flex items-center gap-1 cursor-pointer text-xs md:text-sm lg:text-base"
             >
               <WishlistButton offerId={offer.id} size="text-[25px]" />{" "}
               <span
@@ -104,6 +113,59 @@ export default function OfferPage({ params }: Props) {
             <span className="text-gray-300">|</span>
             <ShareModal offerId={offer.id} />
           </div>
+
+          {/* Mobile */}
+          <div className="flex xs:hidden items-center gap-3">
+            <div
+              ref={wishlistWrapperRef}
+              className="flex border py-1 px-2 rounded-md items-center gap-1 cursor-pointer text-[10px]"
+            >
+              <WishlistButton offerId={offer.id} size="text-[20px]" />{" "}
+              <span
+                className="text-black"
+                onClick={() =>
+                  wishlistWrapperRef.current?.querySelector("button")?.click()
+                }
+              >
+                Save
+              </span>
+            </div>
+
+            <div ref={menuRef} className="relative">
+              <button
+                type="button"
+                onClick={() => setIsMenuOpen((open) => !open)}
+                aria-label="More options"
+                aria-expanded={isMenuOpen}
+                className="p-1 text-gray-700"
+              >
+                <MoreVertical size={20} />
+              </button>
+
+              {isMenuOpen && (
+                <div className="absolute right-0 z-30 px-3 py-2 mt-2 w-40 rounded-lg border border-gray-100 bg-white shadow-sm">
+                  <ShareModal
+                    offerId={offer.id}
+                    variant="menuItem"
+                    onTriggerClick={() => {
+                      setIsShareOpen(true);
+                      setIsMenuOpen(false);
+                    }}
+                  />
+                  <hr className="my-2 text-muted/20" />
+                  <button
+                    onClick={() => {
+                      setIsReportOpen(true);
+                      setIsMenuOpen(false);
+                    }}
+                    className="flex items-center gap-2 text-sm font-baloo text-[#E70606] hover:bg-red-50"
+                  >
+                    <FaRegFlag size={14} /> Report this offer
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
         <SingleOffer offer={offer} />
 
@@ -116,10 +178,16 @@ export default function OfferPage({ params }: Props) {
           targetImage={offer.imageUrl}
           targetBadge={offer.contributor.name}
         />
+
+        <ShareModal
+          offerId={offer.id}
+          open={isShareOpen}
+          onOpenChange={setIsShareOpen}
+        />
       </section>
 
-      <section className="px-4 md:px-6 lg:px-12 py-10 lg:py-12 mx-auto max-w-[1440px] mb-16 lg:mb-0">
-        <h3 className="text-xl xs:text-2xl md:text-3xl font-bold mb-4 lg:mb-6">
+      <section className="px-4 md:px-6 lg:px-8 xl:px-12 py-8 lg:py-10 mx-auto max-w-[1440px] mb-16 lg:mb-0">
+        <h3 className="text-xl xs:text-2xl lg:text-3xl font-bold mb-4 lg:mb-6">
           Explore more offers like this
         </h3>
 

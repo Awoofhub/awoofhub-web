@@ -25,7 +25,7 @@ export default function ReviewChart({ offer }: Props) {
     });
 
     return (
-        <div className="max-w-[320px] mx-auto md:mx-0">
+        <div className="max-w-[320px] xxs:max-w-[380px]  mx-auto md:mx-0">
             {/* Header Section */}
             <div>
                 <h2 className="text-lg lg:text-xl  font-bold mb-1 text-muted">All Rating</h2>
@@ -60,8 +60,8 @@ export default function ReviewChart({ offer }: Props) {
                 {chartData.map((item) => (
                     <div key={item.rating} className="space-y-2">
                         <div className="flex items-center justify-start gap-2 text-xs font-medium text-gray-700">
-                            <span>{item.rating}</span>
-                             <div className=" rounded bg-gray-200 overflow-hidden h-[2.2em] w-[20em] box-border border-2 border-gray-300">
+                            <span className="w-1/7 md:w-1/5 xl:w-1/8">{item.rating}</span>
+                             <div className=" rounded bg-gray-200 overflow-hidden h-[2.2em] w-full box-border border-2 border-gray-300">
                             <div
                                 className="h-full rounded bg-[#FFA41C] transition-all duration-300 ease-in-out"
                                 style={{ width: `${item.percentage}%` }}

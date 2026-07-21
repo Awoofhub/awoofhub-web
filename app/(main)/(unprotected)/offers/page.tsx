@@ -130,6 +130,7 @@ function FilterResults({ searchParams }: FilterProps) {
                 />
 
                 <OfferLocationFilter
+                  key={location ?? ""}
                   location={location}
                   onChange={(value) => updateFilter("location", value)}
                 />

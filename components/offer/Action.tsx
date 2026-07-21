@@ -66,8 +66,8 @@ export default function Action({ offer }: Props) {
   };
 
   return (
-    <div className="flex flex-col py-2 mt-2">
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
+    <div className="flex flex-col py-2 lg:mt-1">
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-2 lg:mb-4">
         <div className="flex items-center gap-2 ">
           {isExpiring ? (
             <div className="flex items-center text-sm lg:text-lg font-baloo gap-1 text-[#E70606] font-semibold">
@@ -106,20 +106,20 @@ export default function Action({ offer }: Props) {
         )}
       </div>
 
-      <div className="flex justify-center md:justify-between items-center gap-3">
+      <div className="flex justify-between items-center gap-2 lg:gap-3">
         <a
           href={offer.externalLink}
           target="_blank"
           rel="noopener noreferrer"
           onClick={handleClick}
-          className={`cursor-pointer flex justify-center items-center bg-primary text-white font-semibold py-2 md:px-8 rounded-md transition-colors text-sm lg:text-base font-baloo ${offer.dealType === "promo_code" && offer.couponCode ? "w-[35%] md:w-[70%]" : "w-full"}`}
+          className={`cursor-pointer flex justify-center items-center bg-primary text-white font-semibold py-2 md:px-8 rounded-sm transition-colors text-sm lg:text-base font-baloo ${offer.dealType === "promo_code" && offer.couponCode ? "w-[50%] md:w-[70%]" : "w-full"}`}
         >
           Grab this Deal
         </a>
         {offer.dealType === "promo_code" && offer.couponCode && (
-          <div className="w-[40%] md:w-[30%] gap-3 flex justify-between items-center rounded-md transition-colors text-sm lg:text-base font-baloo">
+          <div className="w-[50%] md:w-[30%] gap-3 flex justify-between items-center rounded-sm transition-colors text-sm lg:text-base font-baloo">
             <button
-              className="bg-[#D2F0D4] text-black cursor-pointer font-semibold text-center py-2 px-4 rounded-md w-full"
+              className="bg-[#D2F0D4] text-black cursor-pointer font-semibold text-center py-2 px-4 rounded-sm w-full"
               type="button"
               onClick={handleCopyCoupon}
             >

@@ -23,44 +23,34 @@ const categories = [
 
 const topics = [
   {
-    icon: "/pricing-icon.png",
-    title: "Premium & Pricing",
-    description: "Our pricing is simple with no hidden fees",
-  },
-  {
     icon: "/faq-icon.png",
     title: "FAQs",
-    description: "Got questions, read our frequently asked",
+    description: "Quick answers to the questions we get asked the most.",
   },
   {
     icon: "/security-icon.png",
     title: "Account & Security",
-    description: "How we protect and secure the community",
+    description: "How we keep your account — and the community — safe.",
   },
   {
     icon: "/privacy-icon.png",
     title: "Privacy Policy",
-    description: "Read through our privacy policy",
+    description: "What we collect, why, and how it's protected.",
   },
   {
     icon: "/terms-icon.png",
     title: "Terms of Service",
-    description: "Read through our terms of services",
+    description: "The rules that keep AwoofHub fair for everyone.",
   },
   {
     icon: "/community-icon.png",
     title: "Join Community",
-    description: "Stay updated on the latest verified deals & offers.",
-  },
-  {
-    icon: "/dev-icon.png",
-    title: "Dev Docs",
-    description: "Get access, learn and contribute.",
+    description: "Get verified deals and daily gist straight to your WhatsApp.",
   },
   {
     icon: "/beta-icon.png",
-    title: "Beta Testing",
-    description: "Share feedback that directly shapes the community",
+    title: "Still stuck? Message us directly.",
+    description: "Choose a category → tell us what's going on → send.",
   },
 ];
 
@@ -92,9 +82,7 @@ export default function HelpPage() {
             How can we help you today?
           </h1>
           <p className="text-muted text-base xs:text-lg lg:text-xl font-medium max-w-4xl mx-auto mb-8">
-            Got questions? We're here. Browse our FAQ, troubleshoot common
-            issues, or reach our support team directly. We're committed to
-            keeping your experience smooth.
+            Whatever's on your mind, we're here for it. Browse FAQs, sort out account issues, or reach the team directly. We're committed to keeping your experience smooth
           </p>
           <div className="flex items-center max-w-2xl mx-auto rounded-2xl overflow-hidden border border-muted/20">
             <input
@@ -112,7 +100,7 @@ export default function HelpPage() {
       {/* Topics Grid */}
       <div className="bg-background my-5">
         <section className="py-10 md:py-12 lg:py-16 px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-6">
             {topics.map((topic) => (
               <div
                 key={topic.title}
@@ -130,7 +118,7 @@ export default function HelpPage() {
                 <h3 className="font-semibold text-black text-lg md:text-xl mb-2">
                   {topic.title}
                 </h3>
-                <p className="text-primary md:text-muted font-medium text-base">
+                <p className="text-muted font-medium text-base">
                   {topic.description}
                 </p>
               </div>

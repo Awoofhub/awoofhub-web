@@ -1,4 +1,3 @@
-// components/community/JoinCommunityForm.tsx
 "use client";
 import { Button } from "@/components/button/Button";
 import { TomTomAutocomplete } from "@/components/form/AutoComplete";

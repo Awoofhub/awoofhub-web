@@ -6,30 +6,21 @@ import { MdOutlineMail } from "react-icons/md";
 import { RiInstagramFill } from "react-icons/ri";
 
 const footerLinks = {
-  quickLinks: [
-    { label: "FAQs", href: "/faq" },
+  about: [
+    { label: "About Us", href: "/about" },
+    { label: "Advertising Opportunity", href: "/advertising-opportunity" },
     { label: "Help & Support", href: "/help" },
-    { label: "Policy & Privacy", href: "/policy" },
+    { label: "FAQs", href: "/faq" },
   ],
   community: [
     { label: "Join Community", href: "/join-community" },
-    { label: "Contribute on GitHub", href: "/community-discussions" },
     { label: "Feature Requests", href: "/feature-requests" },
-    { label: "Beta Testing", href: "/community-discussions" },
-    { label: "Community Discussions", href: "/community-discussions" },
-    { label: "Developer Documentation", href: "/developer-documentation" },
+    { label: "Browse Category", href: "/offers" },
   ],
-  pricing: [
-    { label: "Pricing Plan", href: "/pricing" },
-    { label: "Promote your Offer", href: "/promote-your-offer" },
-    { label: "Why Premium", href: "/pricing" },
-    { label: "FAQ", href: "/faq" },
-  ],
-  company: [
-    { label: "About Us", href: "/about" },
-    { label: "Careers", href: "/careers" },
+  legal: [
+    { label: "Privacy policy", href: "/policy" },
     { label: "Terms of Service", href: "/terms" },
-    { label: "Contact Us", href: "/contact" },
+    { label: "Community Guidelines", href: "/community-guidelines" },
   ],
 };
 
@@ -100,11 +91,11 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-black text-white py-10 px-6 md:px-12 lg:px-10 font-baloo">
+    <footer className="bg-black text-white py-10 px-6 lg:px-10 font-baloo">
       <div className="max-w-[1440px] mx-auto mb-[60px] lg:mb-[0]">
 
         {/* ── DESKTOP LAYOUT (lg+): single row — brand | links | newsletter ── */}
-        <div className="hidden lg:grid lg:grid-cols-14 gap-8 mb-16">
+        <div className="hidden lg:grid lg:grid-cols-12 gap-8 mb-16">
           {/* Brand Column */}
           <div className="lg:col-span-3">
             <Image
@@ -121,11 +112,11 @@ export default function Footer() {
             <SocialIcons />
           </div>
 
-          {/* Quick Links */}
+          {/* about */}
           <div className="lg:col-span-2">
-            <h3 className="font-semibold mb-4 font-baloo">Quick Link</h3>
+            <h3 className="font-semibold mb-4 font-baloo">About</h3>
             <ul className="space-y-4 text-sm text-white">
-              {footerLinks.quickLinks.map((link) => (
+              {footerLinks.about.map((link) => (
                 <li key={link.label} className="font-baloo">
                   <Link href={link.href} className="hover:text-gray-300 transition-colors">
                     {link.label}
@@ -149,25 +140,11 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Pricing */}
+          {/* Legal */}
           <div className="lg:col-span-2">
-            <h3 className="font-semibold mb-4 font-baloo">Pricing</h3>
+            <h3 className="font-semibold mb-4 font-baloo">Legal</h3>
             <ul className="space-y-4 text-sm text-white">
-              {footerLinks.pricing.map((link) => (
-                <li key={link.label} className="font-baloo">
-                  <Link href={link.href} className="hover:text-gray-300 transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div className="lg:col-span-2">
-            <h3 className="font-bold mb-4 font-baloo">Company</h3>
-            <ul className="space-y-4 text-sm text-white">
-              {footerLinks.company.map((link) => (
+              {footerLinks.legal.map((link) => (
                 <li key={link.label} className="font-baloo">
                   <Link href={link.href} className="hover:text-gray-300 transition-colors">
                     {link.label}
@@ -186,63 +163,8 @@ export default function Footer() {
         {/* ── TABLET ONLY LAYOUT (md to lg): two-section grid ── */}
         <div className="hidden md:block lg:hidden">
           {/* Section 1: Nav links — 4 cols on tablet */}
-          <div className="grid grid-cols-4 gap-8 mb-12">
-            <div>
-              <h3 className="font-semibold mb-4 font-baloo">Quick Link</h3>
-              <ul className="space-y-4 text-sm text-white">
-                {footerLinks.quickLinks.map((link) => (
-                  <li key={link.label} className="font-baloo">
-                    <Link href={link.href} className="hover:text-gray-300 transition-colors">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-4 font-baloo">Community</h3>
-              <ul className="space-y-4 text-sm text-white">
-                {footerLinks.community.map((link) => (
-                  <li key={link.label} className="font-baloo">
-                    <Link href={link.href} className="hover:text-gray-300 transition-colors">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-4 font-baloo">Pricing</h3>
-              <ul className="space-y-4 text-sm text-white">
-                {footerLinks.pricing.map((link) => (
-                  <li key={link.label} className="font-baloo">
-                    <Link href={link.href} className="hover:text-gray-300 transition-colors">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-bold mb-4 font-baloo">Company</h3>
-              <ul className="space-y-4 text-sm text-white">
-                {footerLinks.company.map((link) => (
-                  <li key={link.label} className="font-baloo">
-                    <Link href={link.href} className="hover:text-gray-300 transition-colors">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Section 2: Brand + Newsletter — side-by-side on tablet */}
-          <div className="grid grid-cols-2 gap-10 mb-12">
-            <div>
+          <div className="grid grid-cols-9 gap-6 mb-12">
+            <div className="col-span-3">
               <Image
                 src="/LogoWhite.png"
                 alt="Logo"
@@ -256,7 +178,48 @@ export default function Footer() {
               </p>
               <SocialIcons />
             </div>
+            <div className="col-span-2">
+              <h3 className="font-semibold mb-4 font-baloo">About</h3>
+              <ul className="space-y-4 text-sm text-white">
+                {footerLinks.about.map((link) => (
+                  <li key={link.label} className="font-baloo">
+                    <Link href={link.href} className="hover:text-gray-300 transition-colors">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
+            <div className="col-span-2">
+              <h3 className="font-semibold mb-4 font-baloo">Community</h3>
+              <ul className="space-y-4 text-sm text-white">
+                {footerLinks.community.map((link) => (
+                  <li key={link.label} className="font-baloo">
+                    <Link href={link.href} className="hover:text-gray-300 transition-colors">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="col-span-2">
+              <h3 className="font-bold mb-4 font-baloo">Legal</h3>
+              <ul className="space-y-4 text-sm text-white">
+                {footerLinks.legal.map((link) => (
+                  <li key={link.label} className="font-baloo">
+                    <Link href={link.href} className="hover:text-gray-300 transition-colors">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Section 2: Brand + Newsletter — side-by-side on tablet */}
+          <div className="max-w-[400px] mx-auto text-center pb-8">
             <Newsletter />
           </div>
         </div>
@@ -281,9 +244,9 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div className="mb-8">
-            <h3 className="font-semibold mb-4 font-baloo">Quick Link</h3>
+            <h3 className="font-semibold mb-4 font-baloo">About</h3>
             <ul className="space-y-4 text-sm text-white">
-              {footerLinks.quickLinks.map((link) => (
+              {footerLinks.about.map((link) => (
                 <li key={link.label} className="font-baloo">
                   <Link href={link.href} className="hover:text-gray-300 transition-colors">
                     {link.label}
@@ -309,23 +272,9 @@ export default function Footer() {
 
           {/* Pricing */}
           <div className="mb-8">
-            <h3 className="font-semibold mb-4 font-baloo">Pricing</h3>
+            <h3 className="font-semibold mb-4 font-baloo">Legal</h3>
             <ul className="space-y-4 text-sm text-white">
-              {footerLinks.pricing.map((link) => (
-                <li key={link.label} className="font-baloo">
-                  <Link href={link.href} className="hover:text-gray-300 transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div className="mb-10">
-            <h3 className="font-bold mb-4 font-baloo">Company</h3>
-            <ul className="space-y-4 text-sm text-white">
-              {footerLinks.company.map((link) => (
+              {footerLinks.legal.map((link) => (
                 <li key={link.label} className="font-baloo">
                   <Link href={link.href} className="hover:text-gray-300 transition-colors">
                     {link.label}

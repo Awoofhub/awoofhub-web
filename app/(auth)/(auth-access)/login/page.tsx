@@ -40,7 +40,7 @@ function Login() {
     );
   }
 
-  if (user) {
+  if (user?.role === "user") {
     return null; 
   }
 

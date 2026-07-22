@@ -16,8 +16,10 @@ function Login() {
   const { data: user, isLoading: isCheckingUser } = useUser();
 
   useEffect(() => {
-    if (!isCheckingUser && user?.role === "user") {
-      router.replace("/");
+    if (!isCheckingUser && user) {
+      if (user.role === "user") {
+        router.replace("/");
+      }
     }
   }, [isCheckingUser, user, router]);
 
@@ -29,21 +31,17 @@ function Login() {
     }, 2500);
   };
 
-  if (isCheckingUser || user) {
+  if (isCheckingUser || showLoading) {
     return (
       <div className="fixed inset-0 z-50 bg-white">
+        {showLoading && <Seo title="Welcome back!" />}
         <Spinner />
       </div>
     );
   }
 
-  if (showLoading) {
-    return (
-      <div className="fixed inset-0 z-50 bg-white ">
-        <Seo title="Welcome back!" />
-        <Spinner />
-      </div>
-    );
+  if (user) {
+    return null; 
   }
 
   return (

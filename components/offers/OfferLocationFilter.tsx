@@ -173,7 +173,7 @@ export function OfferLocationFilter({
                     role="option"
                     aria-selected={isSelected}
                     onClick={() => chooseLocation(value)}
-                    className="flex w-50 items-center gap-2 border-b border-gray-100 px-4 py-[10px] text-left text-sm text-[#0C0C0C] last:border-0 hover:bg-orange-50 transition-colors"
+                    className="flex w-50 items-center gap-2 border-b border-gray-100 px-4 py-2 text-left text-sm text-[#0C0C0C] last:border-0 hover:bg-orange-50 transition-colors"
                   >
                     <span className="w-4 shrink-0 text-[#12B76A]">
                       {isSelected && <IoCheckmark />}
@@ -185,7 +185,7 @@ export function OfferLocationFilter({
             </div>
 
             {isSpecificLocation && (
-              <div className="mt-2 w-max rounded-[14.12px]  bg-white">
+              <div className="mt-2 w-full rounded-md  bg-white">
                 <TomTomAutocomplete
                   value={searchValue}
                   onPlaceSelect={(val: string) => {

@@ -91,9 +91,8 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-black text-white py-10 px-6 lg:px-10 font-baloo">
-      <div className="max-w-[1440px] mx-auto mb-[60px] lg:mb-[0]">
-
+    <footer className="bg-black text-white  font-baloo">
+      <div className="max-w-[1440px] py-10 px-6 lg:px-10 xl:px-12 mx-auto mb-[60px] lg:mb-0">
         {/* ── DESKTOP LAYOUT (lg+): single row — brand | links | newsletter ── */}
         <div className="hidden lg:grid lg:grid-cols-12 gap-8 mb-16">
           {/* Brand Column */}

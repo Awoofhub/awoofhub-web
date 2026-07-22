@@ -126,7 +126,7 @@ export function OfferSelectDropdown({
             top: position.top,
             left: position.left,
           }}
-          className="z-50 max-h-70 overflow-y-auto no-scrollbar whitespace-nowrap overflow-hidden font-medium rounded-xl border border-gray-100 bg-white py-1 shadow-sm"
+          className="z-50 max-h-70 overflow-y-auto whitespace-nowrap overflow-hidden font-medium rounded-xl border border-gray-100 bg-white py-1 shadow-sm"
         >
           {options.map((option) => {
             const isSelected = option.value === value;

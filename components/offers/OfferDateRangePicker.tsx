@@ -119,7 +119,7 @@ function Calendar({
               type="button"
               disabled={Boolean(disabled)}
               onClick={() => onSelect(format(day, "yyyy-MM-dd"))}
-              className={`flex h-9 w-full items-center justify-center transition ${isSelected ? "rounded-md bg-primary font-semibold text-white" : isInRange ? "bg-[#fde5dc] text-gray-700" : disabled ? "cursor-not-allowed text-gray-300" : outsideMonth ? "text-gray-400 hover:bg-orange-50" : "text-gray-700 hover:bg-orange-50 hover:text-primary"}`}
+              className={`flex h-9 w-full items-center justify-center transition ${isSelected ? "bg-primary font-semibold text-white" : isInRange ? "bg-[#fde5dc] text-gray-700" : disabled ? "cursor-not-allowed text-gray-300" : outsideMonth ? "text-gray-400 hover:bg-orange-50" : "text-gray-700 hover:bg-orange-50 hover:text-primary"}`}
             >
               {format(day, "d")}
             </button>
@@ -149,10 +149,7 @@ export function OfferDateRangePicker({
       ? startOfMonth(parseISO(createdFrom))
       : startOfMonth(new Date()),
   );
-  const [position, setPosition] = useState<{
-    top: number;
-    left: number;
-  } | null>(null);
+  const [top, setTop] = useState<number | null>(null);
 
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -169,10 +166,7 @@ export function OfferDateRangePicker({
 
       const rect = triggerRef.current?.getBoundingClientRect();
       if (rect) {
-        setPosition({
-          top: rect.bottom + window.scrollY + 8,
-          left: rect.right + window.scrollX,
-        });
+        setTop(rect.bottom + window.scrollY + 8);
       }
     }
     setIsOpen((open) => !open);
@@ -232,21 +226,21 @@ export function OfferDateRangePicker({
       </button>
 
       {isOpen &&
-        position &&
+        top !== null &&
         createPortal(
           <div
             ref={panelRef}
             style={{
               position: "absolute",
-              top: position.top,
-              left: position.left,
-              transform: "translateX(-100%)",
+              top,
+              left: "50%",
+              transform: "translateX(-50%)",
             }}
-            className="z-50 w-[min(47rem,calc(100vw-2rem))] rounded-xl border border-gray-200 bg-white p-1 shadow-xl"
+            className="z-50 w-[calc(100vw-2rem)] max-w-[380px] xs:max-w-[400px] md:max-w-[min(43rem,calc(100vw-2rem))] lg:max-w-[min(47rem,calc(100vw-2rem))] rounded-xl border border-gray-200 bg-white p-1 shadow-xl"
             role="dialog"
             aria-label="Choose a date range"
           >
-            <div className="grid grid-cols-1 gap-1 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-1 md:grid-cols-2">
               <Calendar
                 month={calendarMonth}
                 selectedDate={draftFrom}
@@ -286,14 +280,14 @@ export function OfferDateRangePicker({
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
-                className="rounded-md border border-primary px-5 py-2 text-xs font-semibold text-primary hover:bg-orange-50"
+                className="rounded-md border border-primary px-6 py-2 text-xs font-semibold text-primary hover:bg-orange-50"
               >
                 Cancel
               </button>
               <button
                 type="button"
                 onClick={apply}
-                className="rounded-md bg-primary px-5 py-2 text-xs font-semibold text-white transition hover:bg-[#e64703]"
+                className="rounded-md bg-primary px-8 py-2 text-xs font-semibold text-white transition hover:bg-[#e64703]"
               >
                 Apply
               </button>

@@ -1,10 +1,10 @@
 "use client";
+import Spinner from "@/components/loading/Loading";
 import { LoginForm } from "@/components/login/LoginForm";
 import { Seo } from "@/components/seo/Seo";
-import Spinner from "@/components/loading/Loading";
+import { useUser } from "@/features/user/useUser";
 import Image from "next/image";
 import Link from "next/link";
-import { useUser } from "@/features/user/useUser";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
@@ -16,7 +16,7 @@ function Login() {
   const { data: user, isLoading: isCheckingUser } = useUser();
 
   useEffect(() => {
-    if (!isCheckingUser && user) {
+    if (!isCheckingUser && user?.role === "user") {
       router.replace("/");
     }
   }, [isCheckingUser, user, router]);

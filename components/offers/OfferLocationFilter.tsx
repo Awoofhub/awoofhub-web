@@ -18,7 +18,10 @@ export function OfferLocationFilter({
 }: OfferLocationFilterProps) {
   const isPresetLocation = location === "Online" || location === "Nationwide";
   const [isOpen, setIsOpen] = useState(false);
-  const [position, setPosition] = useState<{ top: number; left: number } | null>(null);
+  const [position, setPosition] = useState<{
+    top: number;
+    left: number;
+  } | null>(null);
   const [isSpecificLocation, setIsSpecificLocation] = useState(
     Boolean(location && !isPresetLocation),
   );
@@ -39,22 +42,34 @@ export function OfferLocationFilter({
     }
   };
 
-  const hasValue = Boolean(location);
+  const hasValue = Boolean(location || (isSpecificLocation && searchValue));
   const selected: LocationValue | null = hasValue
-    ? (location === "Online" || location === "Nationwide" ? location : "specific")
-    : null;
-  const label = isPresetLocation
-    ? location
-    : location && !isPresetLocation
+    ? location === "Online" || location === "Nationwide"
       ? location
-      : "Location";
+      : "specific"
+    : null;
+  const label = isSpecificLocation
+    ? searchValue || "Location"
+    : isPresetLocation
+      ? location
+      : location || "Location";
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      const target = e.target as Node;
+      const target = e.target as HTMLElement;
+
+      // MUI Autocomplete renders its dropdown in a portal outside our panel,
+      // so we need to check if the click is inside a MUI popper/listbox too.
+      const isInsideMuiPopper = target.closest?.(
+        ".MuiAutocomplete-popper, .MuiAutocomplete-listbox",
+      );
+
       if (
-        triggerRef.current && !triggerRef.current.contains(target) &&
-        panelRef.current && !panelRef.current.contains(target)
+        !isInsideMuiPopper &&
+        triggerRef.current &&
+        !triggerRef.current.contains(target) &&
+        panelRef.current &&
+        !panelRef.current.contains(target)
       ) {
         setIsOpen(false);
       }
@@ -92,6 +107,7 @@ export function OfferLocationFilter({
   const chooseLocation = (value: LocationValue) => {
     if (value === "specific") {
       setIsSpecificLocation(true);
+      setSearchValue(location && !isPresetLocation ? location : "");
       return;
     }
     setIsSpecificLocation(false);
@@ -125,62 +141,72 @@ export function OfferLocationFilter({
         />
       </button>
 
-      {isOpen && position && createPortal(
-        <div
-          ref={panelRef}
-          style={{
-            position: "absolute",
-            top: position.top,
-            left: position.left,
-          }}
-          className="z-50"
-        >
+      {isOpen &&
+        position &&
+        createPortal(
           <div
-            role="listbox"
-            aria-label="Location"
-            className="w-max whitespace-nowrap overflow-hidden rounded-xl border border-gray-100 bg-white py-1 shadow-[0_8px_30px_rgba(0,0,0,0.08)]"
+            ref={panelRef}
+            style={{
+              position: "absolute",
+              top: position.top,
+              left: position.left,
+            }}
+            className="z-50"
           >
-            {(["Online", "Nationwide", "specific"] as const).map((value) => {
-              const optionLabel =
-                value === "specific" ? "Specific Location" : value;
-              const isSelected = value === "specific" ? isSpecificLocation : selected === value;
+            <div
+              role="listbox"
+              aria-label="Location"
+              className="w-max whitespace-nowrap overflow-hidden rounded-xl border border-gray-100 bg-white py-1 shadow-[0_8px_30px_rgba(0,0,0,0.08)]"
+            >
+              {(["Online", "Nationwide", "specific"] as const).map((value) => {
+                const optionLabel =
+                  value === "specific" ? "Specific Location" : value;
+                const isSelected =
+                  value === "specific"
+                    ? isSpecificLocation
+                    : !isSpecificLocation && selected === value;
 
-              return (
-                <button
-                  key={value}
-                  type="button"
-                  role="option"
-                  aria-selected={isSelected}
-                  onClick={() => chooseLocation(value)}
-                  className="flex w-50 items-center gap-2 border-b border-gray-100 px-4 py-[10px] text-left text-sm text-[#0C0C0C] last:border-0 hover:bg-orange-50 transition-colors"
-                >
-                  <span className="w-4 shrink-0 text-[#12B76A]">
-                    {isSelected && <IoCheckmark />}
-                  </span>
-                  {optionLabel}
-                </button>
-              );
-            })}
-          </div>
-
-          {isSpecificLocation && (
-            <div className="mt-2 w-max rounded-[14.12px] px-[16px] border-1 border-[#59585880] bg-white">
-              <TomTomAutocomplete
-                value={searchValue}
-                onPlaceSelect={(val: string) => {
-                  setSearchValue(val);
-                  if (val) {
-                    onChange(val);
-                    setIsOpen(false);
-                  }
-                }}
-                placeholder="Search a city or area e.g. Ikeja, Lagos."
-              />
+                return (
+                  <button
+                    key={value}
+                    type="button"
+                    role="option"
+                    aria-selected={isSelected}
+                    onClick={() => chooseLocation(value)}
+                    className="flex w-50 items-center gap-2 border-b border-gray-100 px-4 py-2 text-left text-sm text-[#0C0C0C] last:border-0 hover:bg-orange-50 transition-colors"
+                  >
+                    <span className="w-4 shrink-0 text-[#12B76A]">
+                      {isSelected && <IoCheckmark />}
+                    </span>
+                    {optionLabel}
+                  </button>
+                );
+              })}
             </div>
-          )}
-        </div>,
-        document.body
-      )}
+
+            {isSpecificLocation && (
+              <div className="mt-2 w-full rounded-md  bg-white">
+                <TomTomAutocomplete
+                  value={searchValue}
+                  onPlaceSelect={(val: string) => {
+                    const nextValue = val?.trim() ?? "";
+                    setSearchValue(nextValue);
+                    if (nextValue) {
+                      onChange(nextValue);
+                      // Small delay to let MUI finish its internal state updates
+                      // before we unmount the autocomplete by closing the panel
+                      setTimeout(() => setIsOpen(false), 100);
+                    } else {
+                      onChange("");
+                    }
+                  }}
+                  placeholder="Search a city or area e.g. Ikeja, Lagos."
+                />
+              </div>
+            )}
+          </div>,
+          document.body,
+        )}
     </div>
   );
 }

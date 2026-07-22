@@ -218,7 +218,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
               />
             </button>
             {categoryOpen && (
-              <ul className="absolute z-50 right-0 w-60 mt-2 py-2 px-4 bg-white border border-gray-200 rounded-md shadow-lg max-h-88 overflow-y-auto no-scrollbar">
+              <ul className="absolute z-50 right-0 w-60 mt-2 py-2 px-4 bg-white border border-gray-200 rounded-md shadow-lg max-h-88 overflow-y-auto ">
                 {categories?.map((cat) => (
                   <li
                     key={cat.id}

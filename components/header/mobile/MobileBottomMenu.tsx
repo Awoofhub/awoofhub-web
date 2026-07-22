@@ -54,7 +54,7 @@ export default function MobileBottomMenu() {
       <div className="flex-1">
         <Link
           href="/wishlist"
-          className={`flex flex-col items-center justify-center pt-3 ${pathname === "/wishlist" ? "text-primary border-t" : "text-gray-700"}`}
+          className={`flex flex-col items-center justify-center pt-5 ${pathname === "/wishlist" ? "text-primary border-t" : "text-gray-700"}`}
         >
           <div className="text-[28px] xxs:text-[20px]">
             <FiHeart />

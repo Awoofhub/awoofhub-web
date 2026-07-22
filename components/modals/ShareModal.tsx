@@ -12,6 +12,7 @@ interface Props {
   onTriggerClick?: () => void;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
+  hideTrigger?: boolean;
 }
 
 export default function ShareModal({
@@ -20,11 +21,12 @@ export default function ShareModal({
   onTriggerClick,
   open: controlledOpen,
   onOpenChange,
+  hideTrigger = false,
 }: Props) {
   const [internalOpen, setInternalOpen] = useState(false);
   const isControlled = controlledOpen !== undefined;
   const open = isControlled ? controlledOpen : internalOpen;
-  const setOpen = isControlled ? (onOpenChange ?? (() => {})) : setInternalOpen;
+  const setOpen = isControlled ? (onOpenChange ?? (() => { })) : setInternalOpen;
 
   const [show, setShow] = useState(false);
 
@@ -89,22 +91,24 @@ export default function ShareModal({
 
   return (
     <>
-      {variant === "menuItem" ? (
-        <button
-          onClick={handleTriggerClick}
-          className="flex items-center gap-2 font-baloo text-sm text-black hover:bg-orange-50"
-        >
-         <Share2 size={15} /> Share offer
-        </button>
-      ) : (
-        <div className="flex gap-4 text-[10px] xs:text-xs md:text-sm lg:text-base text-black">
+      {!hideTrigger && (
+        variant === "menuItem" ? (
           <button
             onClick={handleTriggerClick}
-            className="cursor-pointer flex items-center gap-1 hover:text-blue-500 transition-colors"
+            className="flex items-center gap-2 font-baloo text-sm text-black hover:bg-orange-50"
           >
-            <Share2 size={18} /> Share
+            <Share2 size={15} /> Share offer
           </button>
-        </div>
+        ) : (
+          <div className="flex gap-4 text-[10px] xs:text-xs md:text-sm lg:text-base text-black">
+            <button
+              onClick={handleTriggerClick}
+              className="cursor-pointer flex items-center gap-1 hover:text-blue-500 transition-colors"
+            >
+              <Share2 size={18} /> Share
+            </button>
+          </div>
+        )
       )}
 
       {show && (

@@ -183,6 +183,7 @@ export default function OfferPage({ params }: Props) {
           offerId={offer.id}
           open={isShareOpen}
           onOpenChange={setIsShareOpen}
+          hideTrigger
         />
       </section>
 

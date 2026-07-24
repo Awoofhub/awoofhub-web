@@ -25,18 +25,13 @@ export default function FeatureRequest() {
           Got a <span className="text-primary">Feature</span> Request?
         </h1>
         <p className="text-muted text-base md:text-lg lg:text-xl font-medium  mb-4 md:mb-6">
-          Have an idea that would make AwoofHub work better for you? We want to
-          hear it. Whether you're a deal hunter looking for smarter discovery or
-          a business owner wanting more from your profile your feedback shapes
-          what we build next.
+         Got an idea that would make AwoofHub better? We're building this with Awoofers, not just for them, so if something's missing, annoying, or could just work smarter, we want to hear it.
         </p>
         <p className="font-semibold text-black text-base md:text-lg lg:text-xl mb-4 md:mb-6">
-          Submit your suggestion through the in-app feedback form or reach us
-          directly at <span className="text-black">support@awoofhub.com</span>.
+          Share your idea in the feedback form below.  
         </p>
         <p className="text-muted text-base md:text-lg lg:text-xl font-medium mb-4 md:mb-6">
-          Our team reviews every request, and the most-requested features get
-          prioritised in upcoming updates.
+          Not every idea makes it in, but every idea gets read. The best ones come from people actually using the app every day — that's you.
         </p>
         <p className="text-primary font-semibold text-base md:text-lg lg:text-xl">
           AwoofHub is built by its community. Help us build it right.

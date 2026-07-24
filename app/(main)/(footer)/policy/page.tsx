@@ -7,25 +7,18 @@ export default function PolicyPage() {
       <div className="bg-background my-5">
         <section className="px-4 md:px-6 lg:px-8 xl:px-12 py-6 md:py-8 lg:py-12 mx-auto">
           <div className="flex justify-center md:justify-start">
-          <h2 className="text-primary px-4 py-2 text-sm xs:text-base rounded-xl mb-8 font-semibold inline-flex uppercase bg-gray-50 border  backdrop-blur-3xl border-gray-100 shadow-md">
-            PRIVACY POLICY
-          </h2>
+            <h2 className="text-primary px-4 py-2 text-sm xs:text-base rounded-xl mb-8 font-semibold inline-flex uppercase bg-gray-50 border  backdrop-blur-3xl border-gray-100 shadow-md">
+              PRIVACY POLICY
+            </h2>
           </div>
           <h1 className="text-3xl md:text-4xl font-semibold text-black mb-4">
             Our Privacy Policy
           </h1>
           <p className="text-muted font-medium text-base md:text-lg lg:text-xl mb-4">
-            Last Updated: May 7, 2026
+            Effective Date: July 21, 2026
           </p>
           <p className="text-muted font-medium text-base md:text-lg lg:text-xl mb-4">
-            This Privacy Policy explains how [Your Company Name] (“Company,”
-            “we,” “our,” or “us”) collects, uses, stores, protects, and shares
-            your information when you access or use our website, mobile
-            application, products, and services (collectively, the “Platform”)..
-          </p>
-          <p className="text-muted font-medium text-base md:text-lg lg:text-xl mb-4">
-            By using the Platform, you agree to the practices described in this
-            Privacy Policy.
+            Last Updated: July 21, 2026
           </p>
         </section>
       </div>
@@ -35,422 +28,381 @@ export default function PolicyPage() {
         <section className="px-4 md:px-6 lg:px-8 xl:px-12 pt-8 pb-16 mx-auto">
           <div>
             <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black">
-              1. Information We Collect
+              1. Introduction
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              We may collect different categories of information depending on
-              how you interact with the Platform.
-            </p>
-
-            <p className="text-muted text-sm md:text-base lg:text-lg font-semibold mb-1">
-              A. Personal Information
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              Information you voluntarily provide may include:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>Full name</li>
-              <li>Email address</li>
-              <li>Phone number</li>
-              <li>Username and password</li>
-              <li>Billing and payment information</li>
-              <li>Shipping address</li>
-              <li>Profile photo</li>
-              <li>Business information</li>
-              <li>Customer support inquiries</li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-semibold mb-1">
-              B. Automatically Collected Information
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              When you use the Platform, we may automatically collect:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>IP address</li>
-              <li>Browser type</li>
-              <li>Device information</li>
-              <li>Operating system</li>
-              <li>App version</li>
-              <li>Usage activity</li>
-              <li>Pages visited</li>
-              <li>Time spent on pages</li>
-              <li>Clickstream data</li>
-              <li>Device identifiers</li>
-              <li>Location data (if enabled)</li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-semibold mb-1">
-              C. Cookies and Tracking Technologies
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              We may use:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>Cookies</li>
-              <li>Pixels</li>
-              <li>Analytics tools</li>
-              <li>Web beacons</li>
-              <li>SDKs</li>
-              <li>Local storage technologies</li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              to improve user experience, analyze usage, and support marketing
-              activities. You can manage cookie settings through your browser.
+              AwoofHub ("AwoofHub," "we," "us," or "our") operates the AwoofHub
+              website, mobile application, and related services (collectively,
+              the "Platform"), which allow users to discover, post, and claim
+              deals, discounts, and promotional offers. This Privacy Policy
+              explains what personal data we collect, why we collect it, how we
+              use and protect it, and what rights you have over it. This Policy
+              applies to all users of the Platform, including individuals
+              browsing or claiming deals ("Awoofers"), individuals or businesses
+              posting deals ("Merchants" or "Businesses"), and visitors to our
+              website. We process personal data in accordance with the Nigeria
+              Data Protection Act, 2023 (NDPA) and applicable regulations issued
+              by the Nigeria Data Protection Commission (NDPC). Where we process
+              data of users located outside Nigeria, we comply with applicable
+              local data protection laws as well. By using the Platform, you
+              agree to the collection and use of information in accordance with
+              this Policy. If you do not agree, please do not use the Platform.
             </p>
           </div>
-
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              2. How We Use Your Information
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              We may use collected information to:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>Provide and maintain the Platform</li>
-              <li>Process transactions and payments</li>
-              <li>Create and manage user accounts</li>
-              <li>Improve products and services</li>
-              <li>Personalize user experiences</li>
-              <li>Send updates and notifications</li>
-              <li>Provide customer support</li>
-              <li>Detect fraud or unauthorized activity</li>
-              <li>Analyze trends and performance</li>
-              <li>Conduct research and analytics</li>
-              <li>Comply with legal obligations</li>
-              <li>Market products or promotions (where permitted)</li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              3. Legal Basis for Processing (Where Applicable)
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              Depending on your jurisdiction, we may process information based
-              on:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>Your consent</li>
-              <li>Contractual necessity</li>
-              <li>Legal obligations</li>
-              <li>Legitimate business interests</li>
-              <li>Protection of vital interests</li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              4. Sharing of Information
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              We do not sell your personal information.
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              However, we may share information with:
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              {" "}
-              A. Service Providers
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              Third-party vendors that assist with:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>Payment processing</li>
-              <li>Hosting services</li>
-              <li>Analytics</li>
-              <li>Customer support</li>
-              <li>Marketing</li>
-              <li>Cloud storage</li>
-              <li>Security services</li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              These providers are only permitted to use data as necessary to
-              perform services for us.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              5. Payments and Subscriptions
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              If the Platform offers paid services, subscriptions, or products:
-            </p>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              6. Refund Policy
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              Refund eligibility depends on the specific product or service
-              purchased. Unless otherwise stated:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>
-                Digital products and subscriptions are non-refundable after
-                access or delivery.
-              </li>
-              <li>Refund requests may be reviewed on a case-by-case basis.</li>
-              <li>
-                Abuse of refund requests may result in account suspension.
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              7. Third-Party Services and Links
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              The Platform may contain links or integrations to third-party
-              websites, services, or tools.
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              We do not control or endorse third-party platforms and are not
-              responsible for:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>ATheir content</li>
-              <li>Policies</li>
-              <li>Security</li>
-              <li>Practices</li>
-              <li>Availability</li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              Use third-party services at your own risk.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              8. Privacy
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              Your use of the Platform is also governed by our Privacy Policy, which explains how we collect, use, store, and protect your data.
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              By using the Platform, you consent to our data practices as described in the Privacy Policy.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              9. Data Security
+            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-6">
+              2. Who We Are
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              We implement reasonable security measures to protect user
-              information. However, no digital platform is completely secure.
+              AwoofHub is a Nigerian deal discovery platform, operating as a
+              duly registered business under Nigerian law. Our registered
+              offices are located in Lagos, Nigeria. For the purposes of the
+              NDPA, AwoofHub acts as the Data Controller for personal data
+              collected through the Platform.
+            </p>
+            <p className="text-black text-sm md:text-base lg:text-lg font-medium mb-1">
+              Data Protection contact: Email: privacy@awoofhub.ng
+            </p>
+          </div>
+          <div>
+            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-6">
+              3. Information We Collect
+            </p>
+
+            <p className="text-black text-sm md:text-base lg:text-lg font-semibold mb-1">
+              3.1 Information you provide directly
+            </p>
+
+            <ul className="list-disc list-outside pl-6 text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
+              <li>
+                Account information: Full name, phone number, email address,
+                password, profile photo (optional), and username.
+              </li>
+              <li>
+                Deal-posting information: Deal title, description, category,
+                images, business name (if applicable), location, expiry date,
+                and any documentation submitted to verify a deal.
+              </li>
+              <li>
+                Business/Merchant information: Business name, contact person,
+                business address, and business category.
+              </li>
+              <li>
+                Communications: Messages you send through our Contact Us or
+                support forms, feedback submitted through Feature Request, and
+                any correspondence with our support team.
+              </li>
+              <li>
+                Community participation: Content you post, such as comments,
+                reactions, or reports on deals.
+              </li>
+            </ul>
+            <p
+              className="text-black
+             text-sm md:text-base lg:text-lg font-semibold mb-1"
+            >
+              3.2 Information collected automatically
+            </p>
+
+            <ul className="list-disc list-outside pl-6 text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
+              <li>
+                Device and usage data: IP address, device type, operating
+                system, browser type, app version, pages viewed, features used,
+                and timestamps of activity.
+              </li>
+              <li>
+                Location data: Approximate or precise location (with your
+                permission), used to show deals relevant to your area.
+              </li>
+              <li>Cookies and similar technologies: See Section 9 below.</li>
+            </ul>
+            <p className="text-black text-sm md:text-base lg:text-lg font-semibold mb-1">
+              3.3 Information from third parties
+            </p>
+
+            <ul className="list-disc list-outside pl-6 text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
+              <li>
+                If you join AwoofHub's WhatsApp community, information you share
+                within that community is subject to WhatsApp's own privacy
+                policy, not this one.
+              </li>
+              <li>
+                If you sign up or log in using a third-party service (e.g.
+                Google), we may receive basic profile information from that
+                provider, as permitted by your settings with them.
+              </li>
+            </ul>
+            <p className="text-black text-sm md:text-base lg:text-lg font-semibold mb-1">
+              3.4 Sensitive data
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              You acknowledge that:
+              We do not knowingly collect sensitive personal data such as health
+              information, biometric data, religious beliefs, or political
+              opinions, unless voluntarily provided by you and clearly necessary
+              for a specific feature, in which case we will seek your explicit
+              consent first.
             </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium">
-              <li>Internet transmissions may not always be secure.</li>
-              <li>We cannot guarantee absolute security of your data.</li>
-              <li>You use the Platform at your own risk.</li>
+          </div>
+
+          <div>
+            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+              4. How We Use Your Information
+            </p>
+            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
+              We use personal data to:
+            </p>
+            <ul className="list-decimal list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
+              <li>Create and manage your account.</li>
+              <li>
+                Display relevant deals based on your location and category
+                preferences.
+              </li>
+              <li>Allow you to post, review, and claim deals.</li>
+              <li>
+                Verify the authenticity of deals and businesses before
+                publishing them.
+              </li>
+              <li>
+                Operate community features, including comments and the WhatsApp
+                community.
+              </li>
+              <li>
+                Respond to support requests, feature suggestions, and
+                complaints.
+              </li>
+              <li>
+                Send transactional notifications (e.g. deal approved, deal
+                rejected, deal expiring, wishlist alerts).
+              </li>
+              <li>
+                Send optional marketing or community communications, where
+                you've consented.
+              </li>
+              <li>
+                Detect, investigate, and prevent fraud, fake deals, spam, or
+                abuse of the Platform.
+              </li>
+              <li>
+                Analyse usage trends to improve the Platform's features and
+                performance.
+              </li>
+              <li>
+                Comply with legal obligations and enforce our Terms of Service
+                and Community Guidelines.
+              </li>
             </ul>
           </div>
 
           <div>
             <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              10. Termination
+              5. Legal Basis for Processing
+            </p>
+            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
+              We rely on the following legal bases under the NDPA:
+            </p>
+            <ul className="list-disc list-outside pl-6 text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
+              <li>
+                Consent — for optional features such as marketing communications
+                and precise location access.
+              </li>
+              <li>
+                Performance of a contract — to provide the core Platform
+                services you sign up for.
+              </li>
+              <li>
+                Legitimate interests — to keep the Platform safe, prevent fraud,
+                and improve our services, provided this doesn't override your
+                rights.
+              </li>
+              <li>
+                Legal obligation — where we're required to disclose or retain
+                data by law or a competent authority.
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+              6. How We Share Your Information
+            </p>
+            <p className="text-muted italic text-sm md:text-base lg:text-lg font-medium">
+              We do not sell personal data. We may share information in these
+              circumstances
+            </p>
+            <ul className="list-disc pl-6 list-outside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
+              <li>
+                With businesses/merchants: If you claim a deal, limited
+                information (such as your name or claim status) may be shared
+                with the business offering that deal, solely to fulfil the deal.
+              </li>
+              <li>
+                With service providers: Third parties who help us operate the
+                Platform, such as cloud hosting providers, analytics tools, and
+                email service providers, under confidentiality obligations.
+              </li>
+              <li>
+                With WhatsApp: If you join our WhatsApp community, your phone
+                number becomes visible within that community per WhatsApp's own
+                functionality and policy.
+              </li>
+              <li>
+                For legal reasons: If required by law, court order, or a valid
+                request from a Nigerian regulatory or law enforcement authority.
+              </li>
+              <li>
+                Business transfers: If AwoofHub is involved in a merger,
+                acquisition, or sale of assets, personal data may transfer as
+                part of that transaction, subject to this Policy or a successor
+                policy.
+              </li>
+              <li>
+                With your consent: For any other purpose we disclose to you at
+                the time of collection.
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+              7. Data Retention
+            </p>
+            <ul className="list-disc pl-6 list-outside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
+              <li>
+                Account data: retained while your account is active, and for 12
+                months after deletion, to handle disputes and fraud prevention.
+              </li>
+              <li>
+                Deal and transaction records: retained for 24 months to resolve
+                disputes and maintain platform integrity.
+              </li>
+              <li> Support communications: retained for 12 months.</li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+              8. Your Rights
+            </p>
+            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
+              Under the NDPA, you have the right to:
+            </p>
+            <ul className="list-disc list-outside pl-6 text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
+              <li>Access the personal data we hold about you.</li>
+              <li>Correct inaccurate or incomplete data.</li>
+              <li>
+                Request deletion of your data, subject to legal exceptions.
+              </li>
+              <li>
+                Restrict or object to certain processing, including marketing
+                communications.
+              </li>
+              <li>
+                Data portability — request your data in a structured, commonly
+                used format.
+              </li>
+              <li>
+                Withdraw consent at any time, where processing is based on
+                consent.
+              </li>
+              <li>
+                Lodge a complaint with the Nigeria Data Protection Commission
+                (NDPC) if you believe your data has been mishandled.
+              </li>
+            </ul>
+            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
+              To exercise any of these rights, contact us at
+              privacy@awoofhub.ng. We will respond within the timeframe required
+              under the NDPA.
+            </p>
+          </div>
+
+          <div>
+            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+              9. Cookies and Tracking Technologies
+            </p>
+            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
+              We use cookies and similar technologies to keep you logged in,
+              remember your preferences (location, category filters), and
+              understand how the Platform is used so we can improve it. You can
+              control cookies through your browser or device settings. Disabling
+              certain cookies may affect Platform functionality.
+            </p>
+          </div>
+
+          <div>
+            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+              10. Data Security
+            </p>
+            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
+              We implement reasonable technical and organisational measures to
+              protect personal data, including encrypted data transmission,
+              access controls limiting who on our team can view user data,
+              password hashing, and confidentiality obligations for staff and
+              contractors. No method of transmission or storage is 100% secure,
+              and we cannot guarantee absolute security.
+            </p>
+          </div>
+
+          <div>
+            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+              11. Children's Privacy
+            </p>
+            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
+              The Platform is intended for users aged 18 and above. We do not knowingly collect personal data from individuals under 18. If we become aware that we have done so, we will take steps to delete that data.
+            </p>
+            
+          </div>
+
+          <div>
+            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+             12. International Data Transfers
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium ">
-              We reserve the right to suspend, restrict, or terminate your
-              access to the Platform without prior notice if:
+             We may use cloud hosting and infrastructure providers that store data on servers located outside Nigeria. Where this happens, we take reasonable steps to ensure such transfers meet NDPA requirements for adequate safeguards.
             </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>You violate these Terms.</li>
-              <li>We suspect fraudulent or illegal activity.</li>
-              <li>Your actions may harm the Platform or other users.</li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              You may stop using the Platform at any time.
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              Upon termination:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium">
-              <li>Your rights under these Terms immediately end.</li>
-              <li>
-                Certain provisions may survive termination, including
-                intellectual property, liability limitations, and dispute
-                provisions.
-              </li>
-            </ul>
+           
           </div>
 
           <div>
             <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              11. Disclaimer of Warranties
+             13. Third-Party Links
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              The Platform is provided on an "AS IS" and "AS AVAILABLE" basis.
+              The Platform may contain links to third-party websites or services, including WhatsApp. We are not responsible for the privacy practices of these third parties and encourage you to review their policies separately.
             </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              To the fullest extent permitted by law, we disclaim all warranties
-              including:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>Merchantability</li>
-              <li>Fitness for a particular purpose</li>
-              <li>Non-infringement</li>
-              <li>Accuracy</li>
-              <li>Reliability</li>
-              <li>Availability</li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              We do not guarantee that:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium">
-              <li>The Platform will always be uninterrupted or error-free.</li>
-              <li>Defects will be corrected.</li>
-              <li>
-                The Platform will be free from viruses or harmful components.
-              </li>
-            </ul>
+            
           </div>
 
           <div>
             <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              12. Limitation of Liability
+              14. Data Breach Notification
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              To the maximum extent permitted by law, the Company shall not be
-              liable for:
+              In the event of a data breach that poses a risk to your rights and freedoms, we will notify the NDPC and affected users in line with NDPA timelines and requirements.
             </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>Indirect damages</li>
-              <li>Incidental damages</li>
-              <li>Special damages</li>
-              <li>Consequential damages</li>
-              <li>Loss of profits</li>
-              <li>Data loss</li>
-              <li>Business interruption</li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              arising from your use of the Platform.
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              Our total liability shall not exceed the amount paid by you to us
-              within the preceding 12 months.
-            </p>
+           
           </div>
 
           <div>
             <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              13. Indemnification
+              15. Changes to This Policy
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              You agree to defend, indemnify, and hold harmless the Company, its
-              affiliates, employees, directors, and partners from claims,
-              damages, liabilities, and expenses arising from:
+            We may update this Privacy Policy from time to time. We'll notify users of material changes via the Platform or by email, and update the "Last Updated" date above. Continued use of the Platform after changes take effect means you accept the updated Policy.
             </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium">
-              <li>Your use of the Platform</li>
-              <li>Your violation of these Terms</li>
-              <li>Your infringement of third-party rights</li>
-            </ul>
+            
           </div>
 
           <div>
             <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              14. Governing Law
+              16. Contact Us
             </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              These Terms shall be governed by and interpreted under the laws of
-              [Your Country/State], without regard to conflict of law
-              principles.
+            <p className="text-black text-sm md:text-base lg:text-lg font-medium mb-1">
+              Email: privacy@awoofhub.ng
             </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              Any disputes arising under these Terms shall be resolved in the
-              courts located in [Your Jurisdiction].
-            </p>
+            
           </div>
 
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              15. Dispute Resolution
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              Before filing legal claims, parties agree to attempt informal
-              resolution by contacting the Company first.
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              If disputes cannot be resolved informally, they may be resolved
-              through:
-            </p>
-            <ul className="list-disc list-inside ttext-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>Arbitration</li>
-              <li>Mediation</li>
-              <li>Competent courts</li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              depending on applicable law and jurisdiction.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              16. Changes to the Platform
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              We reserve the right to:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>Modify</li>
-              <li>Suspend</li>
-              <li>Discontinue</li>
-              <li>Update</li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              any part of the Platform at any time without liability.
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              Features may change or become unavailable without prior notice.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              17. Force Majeure
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              We shall not be liable for delays or failure caused by events
-              beyond reasonable control including:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium">
-              <li>Natural disasters</li>
-              <li>Internet outages</li>
-              <li>Government actions</li>
-              <li>Cyberattacks</li>
-              <li>Labor disputes</li>
-              <li>Power failures</li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              18. Severability
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              If any provision of these Terms is found unenforceable, the
-              remaining provisions shall remain in full force and effect.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              19. Entire Agreement
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              These Terms constitute the entire agreement between you and the
-              Company regarding use of the Platform and supersede prior
-              agreements or understandings.
-            </p>
-          </div>     
         </section>
       </div>
       <Footer />

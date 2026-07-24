@@ -11,25 +11,25 @@ const features = [
     icon: "/feature1.png",
     title: "One Place for Every Offer",
     description:
-      "Deals are organised into categories such as; Coupons, Discounts, Freebies, etc. This makes discovering offers fast and effortless.",
+      "Deals are organised by category, so finding what you actually want takes seconds, not scrolling.",
   },
   {
     icon: "/feature2.png",
     title: "Built for Everyone",
     description:
-      "Customers, businesses, students, deals finder, entrepreneurs, affiliation marketer etc.",
+      "Shoppers, students, small businesses, and deal-hunters alike. If you love a good bargain, you're an Awoofer.",
   },
   {
     icon: "/feature3.png",
     title: "Get More for Less",
     description:
-      "AwoofHub makes saving money simple, transparent, and accessible.",
+      "Saving money shouldn't be complicated. AwoofHub keeps it simple, honest, and easy to act on.",
   },
   {
     icon: "/feature4.png",
     title: "Promote your Offer",
     description:
-      "Put your service, product, or skill in front of the right audience. AwoofHub gives you the tools to get noticed and drive real interest.",
+      "Got a product, service, or promo worth sharing? Put it in front of people who are actively looking for deals like yours.",
   },
 ];
 
@@ -80,17 +80,15 @@ export default function AboutUs() {
           </h2>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-black">
             The marketplace where <span className="text-primary">deals</span>{" "}
-            find customers.
+            find you.
           </h1>
           <p className="text-muted max-w-6xl mt-4 lg:mt-8 mx-auto text-base md:text-lg lg:text-xl font-medium mb-8">
-            AwoofHub is a modern digital marketplace built to connect people
-            with the best offers happening around them. Instead of searching
-            endlessly for discounts, coupons, and promo codes across multiple
-            platforms, AwoofHub brings them all together in one place. Our
-            platform helps everyday shoppers discover exclusive deals on food,
-            fashion, electronics, services, travel, entertainment, and more.
-            From limited time flash discounts to cashback offers and free
-            trials.
+            Finding a good deal shouldn't feel like a full-time job. AwoofHub
+            brings every discount, freebie, and promo worth knowing about into
+            one place — food, fashion, electronics, data and airtime, travel,
+            entertainment, and more — so you stop hunting across ten different
+            tabs for one good price. If it's real, it's verified, and it's on
+            AwoofHub.
           </p>
           <button className="inline-flex items-center mb-6 gap-2 px-6 py-3 border border-primary text-primary rounded-sm text-sm font-medium hover:bg-gray-200 transition-colors">
             Watch Video
@@ -129,7 +127,7 @@ export default function AboutUs() {
                 <p className="font-bold text-black text-lg md:text-xl mb-2 text-center">
                   {feature.title}
                 </p>
-                <h5 className="text-primary font-normal text-base md:text-lg text-center">
+                <h5 className="text-muted font-normal text-base md:text-lg text-center">
                   {feature.description}
                 </h5>
               </div>
@@ -160,11 +158,13 @@ export default function AboutUs() {
                 Our mission is simple.
               </p>
               <p className="text-muted text-base md:text-lg lg:text-xl font-medium">
-                Help people discover real deals while helping businesses reach
-                the right customers. We believe great offers should not be
-                hidden. Businesses deserve visibility for their promotions, and
-                customers deserve an easy way to find value in the things they
-                already buy.
+                No one should miss a good deal because it was too scattered to
+                find. Right now, real offers get buried in random WhatsApp
+                broadcasts, forgotten Instagram stories, and codes nobody
+                bothered to check before sharing. AwoofHub pulls every verified
+                discount, freebie, and promo into one place, reviewed, current,
+                and actually worth your time. Finding value should never feel
+                like a hunt.
               </p>
             </div>
           </div>
@@ -190,9 +190,12 @@ export default function AboutUs() {
                 <Image src="/line.png" alt="line" width={200} height={200} />
               </div>
               <p className="text-muted text-base md:text-lg lg:text-xl mt-4 lg:text-start text-end font-medium">
-                We are building a future where everyday shopping feels like
-                Black Friday. A world where finding value is effortless and
-                every great deal reaches the right audience.
+                A Nigeria where checking AwoofHub is just what you do before you
+                spend a naira — as instant and automatic as checking your bank
+                balance. Where "Awoofer" means something: the ones who always
+                know first. We're not chasing a bigger catalog of discounts.
+                We're building the habit that makes missing a good deal feel
+                like the exception, not the norm. 
               </p>
             </div>
           </div>
@@ -227,8 +230,7 @@ export default function AboutUs() {
                 <Image src="/line.png" alt="line" width={200} height={200} />
               </div>
               <p className="text-muted lg:max-w-xl  font-medium text-base md:text-lg lg:text-xl my-6">
-                Thousands of people use AwoofHub to discover deals every day.
-                Browse active offers, publish deal and start saving today.
+                Thousands of people are discovering deals on AwoofHub every day. Browse what's live right now and see what you've been missing.
               </p>
               <Link
                 href="/offers"

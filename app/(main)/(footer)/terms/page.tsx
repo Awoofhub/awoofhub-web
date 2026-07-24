@@ -7,19 +7,18 @@ export default function TermsOfService() {
       <div className="bg-background my-5">
         <section className="px-4 md:px-6 lg:px-8 xl:px-12 py-6 md:py-8 lg:py-12 mx-auto">
           <div className="flex justify-center md:justify-start">
-          <h2 className="text-primary text-sm xs:text-base px-4 py-2 rounded-xl mb-8 font-semibold inline-flex uppercase backdrop-blur-3xl bg-gray-50 border border-gray-100 shadow-md">
-            Terms of Service
-          </h2>
+            <h2 className="text-primary text-sm xs:text-base px-4 py-2 rounded-xl mb-8 font-semibold inline-flex uppercase backdrop-blur-3xl bg-gray-50 border border-gray-100 shadow-md">
+              Terms of Service
+            </h2>
           </div>
           <h1 className="text-3xl md:text-4xl font-semibold text-black mb-4">
             AwoofHub Terms of Service
           </h1>
-          <p className="text-muted font-medium text-base md:text-lg lg:text-xl mb-4">Last Updated: May 7, 2026</p>
           <p className="text-muted font-medium text-base md:text-lg lg:text-xl mb-4">
-            Welcome to [Your Company Name] ("Company," "we," "our," or "us").
-            These Terms of Service ("Terms") govern your access to and use of
-            our website, mobile application, products, services, features, and
-            content (collectively, the "Platform").
+            Last Updated: May 7, 2026
+          </p>
+          <p className="text-muted font-medium text-base md:text-lg lg:text-xl mb-4">
+            Welcome to AWOOFHUB.
           </p>
           <p className="text-muted font-medium text-base md:text-lg lg:text-xl mb-4">
             By accessing or using our Platform, you agree to be legally bound by
@@ -34,616 +33,399 @@ export default function TermsOfService() {
         <section className="px-4 md:px-6 lg:px-8 xl:px-12 pt-8 pb-16 mx-auto">
           <div>
             <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black">
-              1. Eligibility
+              1. Acceptance of Terms
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium  mb-1">
-              By using our Platform, you confirm that:
+              These Terms of Service ("Terms") govern your access to and use of
+              the AwoofHub website, mobile application, and related services
+              (collectively, the "Platform"), operated by AwoofHub ("AwoofHub,"
+              "we," "us," or "our").
             </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium  mb-1">
-              <li>
-                You are at least 18 years old or the age of majority in your
-                jurisdiction.
-              </li>
-              <li>You have the legal authority to enter into these Terms.</li>
-              <li>
-                You will comply with all applicable laws and regulations while
-                using the Platform.
-              </li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              If you are using the Platform on behalf of a company or
-              organization, you represent that you are authorized to bind that
-              entity to these Terms.
+            <p className="text-muted text-sm md:text-base lg:text-lg font-medium  mb-1">
+              By creating an account, browsing, posting, or claiming a deal on
+              the Platform, you agree to be bound by these Terms and our Privacy
+              Policy. If you do not agree, you must not use the Platform.
             </p>
           </div>
 
           <div>
             <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              2. Acceptance of Terms
+              2. Eligibility
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              By creating an account, accessing, browsing, downloading, or using
-              our Platform, you acknowledge that you have read, understood, and
-              agreed to these Terms and our Privacy Policy.
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              We reserve the right to modify or update these Terms at any time.
-              Continued use of the Platform after updates constitutes acceptance
-              of the revised Terms.
+              You must be at least 18 years old to create an account or use the
+              Platform. By using AwoofHub, you confirm that you meet this
+              requirement and that all information you provide is accurate and
+              current. If you are registering on behalf of a business, you
+              confirm you have the authority to bind that business to these
+              Terms.
             </p>
           </div>
 
           <div>
             <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              3. Account Registration
+              3. What AwoofHub Is
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              To access certain features, you may be required to create an
-              account.
+              AwoofHub is a deal discovery platform that allows users
+              ("Awoofers") to post, browse, and claim deals, discounts,
+              freebies, and promotional offers. Deals may be posted by
+              individual Awoofers or by businesses and are reviewed by our team
+              before appearing publicly on the Platform. AwoofHub is a discovery
+              and listing platform. We are not a party to any transaction
+              between an Awoofer and a business. We do not sell, fulfil,
+              deliver, or guarantee any product or service featured in a deal.
+            </p>
+          </div>
+
+          <div>
+            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+              4. Account Registration and Security
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              You agree to:
+              To access certain features, you must create an account with
+              accurate information, including a valid phone number and/or email
+              address. You are responsible for:
             </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium  mb-1">
-              <li>Provide accurate and complete information.</li>
-              <li>Keep your login credentials secure.</li>
+
+            <ul className="list-disc list-outside pl-6 text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
+              <li>Keeping your login credentials confidential.</li>
+              <li>All activity that occurs under your account.</li>
               <li>
-                Notify us immediately of unauthorized access or security
-                breaches.
+                Notifying us immediately at legal@awoofhub.ng if you suspect
+                unauthorised access to your account.
               </li>
-              <li>Be responsible for all activities under your account.</li>
             </ul>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
               We reserve the right to suspend or terminate accounts that provide
-              false information or violate these Terms.
+              false information, impersonate another person or business, or are
+              used in violation of these Terms.
             </p>
           </div>
 
           <div>
             <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              4. Use of the Platform
+              5. Posting Deals
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              You agree to use the Platform only for lawful purposes and in
-              accordance with these Terms.
+              Anyone posting a deal on AwoofHub — whether an individual Awoofer
+              or a business — agrees that:
+            </p>
+            <ul className="list-disc list-outside pl-6 text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
+              <li>
+                The deal is real, current, and accurately described at the time
+                of posting.
+              </li>
+              <li>
+                You have the right to offer the deal, product, or service
+                described.
+              </li>
+              <li>
+                The deal is not fraudulent, misleading, or designed to collect
+                personal data under false pretences.
+              </li>
+              <li>
+                You will honour the deal as described for any Awoofer who claims
+                it in good faith, within the stated validity period
+              </li>
+            </ul>
+            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
+              All submitted deals go through a review process before
+              publication. AwoofHub reserves the right to approve, reject, edit,
+              suspend, or remove any deal at our sole discretion, including
+              after it has already been published, if we determine it violates
+              these Terms, our Community Guidelines, or applicable law. We are
+              not obligated to explain every moderation decision in detail,
+              though we will generally provide a reason for rejection where
+              practical.
+            </p>
+          </div>
+
+          <div>
+            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+              6. Claiming Deals
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              You shall not:
+              When you claim or "grab" a deal, you are entering into a direct
+              interaction with the business or individual offering that deal —
+              not with AwoofHub. We facilitate the discovery and connection,
+              but:
             </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>Violate any laws or regulations.</li>
+            <ul className="list-disc list-outside pl-6 text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
               <li>
-                Use the Platform for fraudulent, harmful, or deceptive
-                activities.
-              </li>
-              <li>Upload malicious software, viruses, or harmful code.</li>
-              <li>
-                Attempt to gain unauthorized access to systems or accounts.
-              </li>
-              <li>Interfere with the security or operation of the Platform.</li>
-              <li>
-                Copy, scrape, reverse engineer, or exploit any part of the
-                Platform without permission.
+                We do not guarantee that a deal will still be available,
+                honoured, or in stock at the time of claim.
               </li>
               <li>
-                Use the Platform to harass, abuse, threaten, or harm others.
+                We do not process payments, handle deliveries, or manage
+                fulfilment for any deal.
+              </li>
+              <li>
+                Any dispute regarding a deal's fulfilment is between you and the
+                business or individual who posted it, though we encourage you to
+                report issues to us so we can take appropriate action against
+                bad actors.
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+              7. Acceptable Use
+            </p>
+            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
+              You agree not to:
+            </p>
+            <ul className="list-disc list-outside pl-6 text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
+              <li>Post fake, expired, duplicate, or misleading deals.</li>
+              <li>
+                Use the Platform to collect personal data from other users for
+                unauthorised purposes.
+              </li>
+              <li>Harass, abuse, or impersonate other users.</li>
+              <li>
+                Post spam, malware, or unauthorised advertising outside the
+                deal-posting features.
+              </li>
+              <li>
+                Attempt to bypass, disable, or interfere with the Platform's
+                review, security, or moderation systems.
+              </li>
+              <li>
+                Use bots, scrapers, or automated tools to extract data from the
+                Platform without our written permission.
+              </li>
+              <li>
+                Use AwoofHub for any unlawful purpose or in violation of any
+                applicable Nigerian law.
               </li>
             </ul>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              We reserve the right to investigate and take legal action against
-              violations.
+              Violation of this section may result in content removal, account
+              suspension, or permanent termination, at our discretion, in
+              addition to any other legal remedies available to us. Full
+              behavioural rules for the community are set out in our Community
+              Guidelines, which form part of these Terms by reference.
             </p>
           </div>
 
           <div>
             <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              5. User Content
+              8. Business and Merchant Terms
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              You may submit, upload, post, or share content including text,
-              images, videos, reviews, comments, or other materials ("User
-              Content").
+              Businesses posting deals on AwoofHub additionally agree that:
+            </p>
+
+            <ul className="list-disc list-outside pl-6 text-muted text-sm md:text-base lg:text-lg font-medium">
+              <li>
+                They are responsible for fulfilling every deal they post as
+                described, for the full stated duration.
+              </li>
+              <li>
+                AwoofHub may request reasonable verification of a business's
+                identity or legitimacy before or after a deal is published.
+              </li>
+              <li>
+                Repeated posting of inaccurate, expired, or misleading deals may
+                result in suspension of posting privileges.
+              </li>
+              <li>
+                Any advertising or promotional features offered by AwoofHub
+                (including future paid features) are subject to additional terms
+                provided at the time such features are introduced.
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+              9. User Content and Intellectual Property
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              You retain ownership of your User Content. However, by submitting
-              content to the Platform, you grant us a worldwide, non-exclusive,
-              royalty-free license to:
+              <span className="text-black font-semibold">Your content:</span>{" "}
+              You retain ownership of any content you submit to AwoofHub (deal
+              descriptions, images, comments). By posting content, you grant
+              AwoofHub a non-exclusive, worldwide, royalty-free licence to use,
+              display, reproduce, and distribute that content on the Platform
+              and in related marketing, for as long as the content remains on
+              the Platform or as reasonably needed for archival and legal
+              purposes.
             </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>Use</li>
-              <li>Reproduce</li>
-              <li>Modify</li>
-              <li>Display</li>
-              <li>Distribute</li>
-              <li>Promote</li>
+            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1 mt-6">
+              <span className="text-black font-semibold">Our content:</span> The
+              AwoofHub name, logo, design, and underlying software are the
+              property of AwoofHub and may not be copied, reproduced, or used
+              without our written permission. You confirm that any content you
+              post does not infringe the intellectual property or other rights
+              of any third party.
+            </p>
+          </div>
+
+          <div>
+            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+              10. WhatsApp Community
+            </p>
+            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
+              AwoofHub maintains a WhatsApp community for Awoofers.
+              Participation is optional and subject to WhatsApp's own terms and
+              privacy policy in addition to these Terms. AwoofHub reserves the
+              right to remove members who violate our Community Guidelines
+              within that space.
+            </p>
+          </div>
+
+          <div>
+            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+              11. Disclaimers
+            </p>
+            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
+              The Platform and all deals listed on it are provided "as is" and
+              "as available." To the fullest extent permitted by law, AwoofHub
+              disclaims all warranties, express or implied, including but not
+              limited to:
+            </p>
+
+            <ul className="list-disc list-outside pl-6 text-muted text-sm md:text-base lg:text-lg font-medium">
+              <li>
+                That deals listed are error-free, always available, or fit for a
+                particular purpose.
+              </li>
+              <li>
+                That the Platform will be uninterrupted, timely, secure, or free
+                of errors.
+              </li>
+              <li>
+                That any business or individual posting a deal will honour it.
+              </li>
             </ul>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              your content in connection with operating and improving the
+              AwoofHub reviews deals before publication, but this review does
+              not constitute a guarantee, endorsement, or warranty of any deal,
+              product, service, or business.
+            </p>
+          </div>
+
+          <div>
+            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+              12. Limitation of Liability
+            </p>
+            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
+              To the fullest extent permitted under Nigerian law, AwoofHub, its
+              founders, employees, and affiliates shall not be liable for any
+              indirect, incidental, special, or consequential damages arising
+              from:
+            </p>
+            <ul className="list-disc list-outside pl-6 text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
+              <li>Your use of, or inability to use, the Platform.</li>
+              <li>
+                Any deal, product, or service obtained through a business or
+                individual found on the Platform.
+              </li>
+              <li>Unauthorised access to or alteration of your data.</li>
+              <li>Any conduct of a third party on the Platform</li>
+            </ul>
+            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
+              Where liability cannot be fully excluded under applicable law,
+              AwoofHub's total liability to you for any claim arising from these
+              Terms or your use of the Platform shall not exceed the equivalent
+              of ₦50,000 (fifty thousand naira) or the amount you have paid us
+              in the past twelve months, whichever is lower.
+            </p>
+          </div>
+
+          <div>
+            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+              13. Indemnification
+            </p>
+            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
+              You agree to indemnify and hold AwoofHub harmless from any claims,
+              damages, losses, or expenses (including reasonable legal fees)
+              arising from your violation of these Terms, your posted content,
+              or your interactions with other users or businesses on the
               Platform.
             </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              You represent that:
+          </div>
+
+          <div>
+            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+              14. Termination
             </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>You own or have rights to the content you submit.</li>
-              <li>Your content does not infringe on third-party rights.</li>
-              <li>Your content is not unlawful, offensive, or misleading.</li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              We reserve the right to remove content at our discretion.
+            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
+              You may stop using the Platform and delete your account at any
+              time. We may suspend or terminate your access to the Platform,
+              with or without notice, if we reasonably believe you have violated
+              these Terms, our Community Guidelines, or applicable law, or if we
+              are required to do so by law. Sections of these Terms that by
+              their nature should survive termination (including Sections 9, 11,
+              12, and 13) will continue to apply after your account is closed.
             </p>
           </div>
 
           <div>
             <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              6. Intellectual Property Rights
+              15. Changes to the Platform and These Terms
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              All Platform content including:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>Logos</li>
-              <li>Branding</li>
-              <li>Designs</li>
-              <li>Graphics</li>
-              <li>Software</li>
-              <li>User interface elements</li>
-              <li>Text</li>
-              <li>Features</li>
-              <li>Trademarks</li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              are owned by or licensed to the Company and are protected under
-              intellectual property laws.
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              You may not copy, modify, distribute, sell, or create derivative
-              works without prior written permission.
+              We may modify, suspend, or discontinue any part of the Platform at
+              any time. We may also update these Terms from time to time;
+              material changes will be communicated via the Platform or by
+              email, with an updated "Last Updated" date above. Continued use of
+              the Platform after changes take effect constitutes acceptance of
+              the revised Terms.
             </p>
           </div>
 
           <div>
             <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              7. Payments and Subscriptions
+              16. Governing Law and Dispute Resolution
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              If the Platform offers paid services, subscriptions, or products:
+              These Terms are governed by the laws of the Federal Republic of
+              Nigeria. Any dispute arising from these Terms or your use of the
+              Platform shall first be attempted to be resolved informally by
+              contacting legal@awoofhub.ng. If unresolved, disputes shall be
+              subject to the exclusive jurisdiction of the courts of Lagos
+              State, Nigeria.
             </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>All prices are listed in the applicable currency.</li>
+          </div>
+
+          <div>
+            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+              17. General
+            </p>
+
+            <ul className="list-disc list-outside pl-6 text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
               <li>
-                Payments must be completed using approved payment methods.
+                Severability: If any part of these Terms is found unenforceable,
+                the remaining provisions remain in full effect.
               </li>
               <li>
-                Subscription services may renew automatically unless canceled
-                before renewal.
+                No waiver: Our failure to enforce any part of these Terms does
+                not waive our right to do so later.
               </li>
               <li>
-                Fees are generally non-refundable unless otherwise stated.
+                Entire agreement: These Terms, together with our Privacy Policy
+                and Community Guidelines, constitute the entire agreement
+                between you and AwoofHub regarding the Platform.
               </li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              We reserve the right to change pricing at any time with reasonable
-              notice.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              8. Refund Policy
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              Refund eligibility depends on the specific product or service
-              purchased.
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              Unless otherwise stated:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium">
-              <li>
-                Digital products and subscriptions are non-refundable after
-                access or delivery.
-              </li>
-              <li>Refund requests may be reviewed on a case-by-case basis.</li>
-              <li>
-                Abuse of refund requests may result in account suspension.
-              </li>
+              
             </ul>
           </div>
 
           <div>
             <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              9. Third-Party Services and Links
+              18. Contact Us
             </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              The Platform may contain links or integrations to third-party
-              websites, services, or tools.
+            <p className="text-black text-sm md:text-base lg:text-lg font-medium mb-1">
+              Email: legal@awoofhub.ng
             </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              We do not control or endorse third-party platforms and are not
-              responsible for:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>Their content</li>
-              <li>Policies</li>
-              <li>Security</li>
-              <li>Practices</li>
-              <li>Availability</li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              Use third-party services at your own risk.
-            </p>
+            
           </div>
 
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">10. Privacy</p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              Your use of the Platform is also governed by our Privacy Policy,
-              which explains how we collect, use, store, and protect your data.
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              By using the Platform, you consent to our data practices as
-              described in the Privacy Policy.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              11. Data Security
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              We implement reasonable security measures to protect user
-              information. However, no digital platform is completely secure.
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              You acknowledge that:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium">
-              <li>Internet transmissions may not always be secure.</li>
-              <li>We cannot guarantee absolute security of your data.</li>
-              <li>You use the Platform at your own risk.</li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              12. Termination
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              We reserve the right to suspend, restrict, or terminate your
-              access to the Platform without prior notice if:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>You violate these Terms.</li>
-              <li>We suspect fraudulent or illegal activity.</li>
-              <li>Your actions may harm the Platform or other users.</li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              You may stop using the Platform at any time.
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              Upon termination:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium">
-              <li>Your rights under these Terms immediately end.</li>
-              <li>
-                Certain provisions may survive termination, including
-                intellectual property, liability limitations, and dispute
-                provisions.
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              13. Disclaimer of Warranties
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              The Platform is provided on an "AS IS" and "AS AVAILABLE" basis.
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              To the fullest extent permitted by law, we disclaim all warranties
-              including:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>Merchantability</li>
-              <li>Fitness for a particular purpose</li>
-              <li>Non-infringement</li>
-              <li>Accuracy</li>
-              <li>Reliability</li>
-              <li>Availability</li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              We do not guarantee that:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium">
-              <li>The Platform will always be uninterrupted or error-free.</li>
-              <li>Defects will be corrected.</li>
-              <li>
-                The Platform will be free from viruses or harmful components.
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              14. Limitation of Liability
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              To the maximum extent permitted by law, the Company shall not be
-              liable for:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>Indirect damages</li>
-              <li>Incidental damages</li>
-              <li>Special damages</li>
-              <li>Consequential damages</li>
-              <li>Loss of profits</li>
-              <li>Data loss</li>
-              <li>Business interruption</li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              arising from your use of the Platform.
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              Our total liability shall not exceed the amount paid by you to us
-              within the preceding 12 months.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              15. Indemnification
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              You agree to defend, indemnify, and hold harmless the Company, its
-              affiliates, employees, directors, and partners from claims,
-              damages, liabilities, and expenses arising from:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium">
-              <li>Your use of the Platform</li>
-              <li>Your violation of these Terms</li>
-              <li>Your infringement of third-party rights</li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              16. Governing Law
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              These Terms shall be governed by and interpreted under the laws of
-              [Your Country/State], without regard to conflict of law
-              principles.
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              Any disputes arising under these Terms shall be resolved in the
-              courts located in [Your Jurisdiction].
-            </p>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              17. Dispute Resolution
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              Before filing legal claims, parties agree to attempt informal
-              resolution by contacting the Company first.
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              If disputes cannot be resolved informally, they may be resolved
-              through:
-            </p>
-            <ul className="list-disc list-inside ttext-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>Arbitration</li>
-              <li>Mediation</li>
-              <li>Competent courts</li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              depending on applicable law and jurisdiction.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              18. Changes to the Platform
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              We reserve the right to:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>Modify</li>
-              <li>Suspend</li>
-              <li>Discontinue</li>
-              <li>Update</li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              any part of the Platform at any time without liability.
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              Features may change or become unavailable without prior notice.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              19. Force Majeure
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              We shall not be liable for delays or failure caused by events
-              beyond reasonable control including:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium">
-              <li>Natural disasters</li>
-              <li>Internet outages</li>
-              <li>Government actions</li>
-              <li>Cyberattacks</li>
-              <li>Labor disputes</li>
-              <li>Power failures</li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              20. Severability
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              If any provision of these Terms is found unenforceable, the
-              remaining provisions shall remain in full force and effect.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              21. Entire Agreement
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              These Terms constitute the entire agreement between you and the
-              Company regarding use of the Platform and supersede prior
-              agreements or understandings.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              22. Contact Information
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              For questions, support, or legal concerns, contact:
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">AwoofHub</p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">Email: support@awoofhub.com</p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">Website: www.awoofhub.com</p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">Address: Lagos, Nigeria</p>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              23. Mobile App Specific Terms
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              For users accessing our mobile application:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium">
-              <li>
-                App stores (Apple App Store, Google Play Store, etc.) may have
-                additional terms that apply.
-              </li>
-              <li>
-                You are responsible for maintaining device compatibility and
-                internet access.
-              </li>
-              <li>
-                Unauthorized modification, reverse engineering, or
-                redistribution of the app is prohibited.
-              </li>
-              <li>
-                Push notifications may be sent for updates, promotions, or
-                account activity. You may disable notifications in device
-                settings.
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              24. Community Guidelines
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              Users are expected to maintain respectful and professional
-              conduct.
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              Prohibited behavior includes:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>Hate speech</li>
-              <li>Harassment</li>
-              <li>Impersonation</li>
-              <li>Spam</li>
-              <li>Fraudulent promotions</li>
-              <li>Misleading claims</li>
-              <li>Posting inappropriate or illegal content</li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              Violations may result in content removal or permanent account
-              suspension.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              25. Digital Communications Consent
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              By creating an account or using the Platform, you consent to
-              receive electronic communications including:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>Service notifications</li>
-              <li>Transaction receipts</li>
-              <li>Security alerts</li>
-              <li>Product updates</li>
-              <li>Marketing communications (where permitted)</li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              You may opt out of promotional emails at any time.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              26. Beta Features
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              We may occasionally offer beta or experimental features.
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              Beta features:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              <li>May contain bugs or limitations.</li>
-              <li>Are provided without warranties.</li>
-              <li>May be modified or discontinued at any time.</li>
-            </ul>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              Use of beta features is at your own risk.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
-              27. Feedback and Suggestions
-            </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium">
-              Any feedback, ideas, or suggestions you submit may be used by the
-              Company without compensation or obligation to you.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">28. Survival</p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              The following sections survive termination:
-            </p>
-            <ul className="list-disc list-inside text-muted text-sm md:text-base lg:text-lg font-medium">
-              <li>Intellectual Property</li>
-              <li>Liability Limitations</li>
-              <li>Disclaimers</li>
-              <li>Indemnification</li>
-              <li>Governing Law</li>
-              <li>Dispute Resolution</li>
-            </ul>
-          </div>
-
-          {/* Final Note */}
-          <p className="text-muted text-sm md:text-base lg:text-lg font-medium pt-6">
-            By using the Platform, you acknowledge that you have read and agreed
-            to these Terms of Service.
-          </p>
         </section>
       </div>
-      <Footer/>
+      <Footer />
     </main>
   );
 }

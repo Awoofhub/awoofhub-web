@@ -93,13 +93,11 @@ export default function FAQs() {
             FAQs
           </h2>
           <h1 className="text-3xl text-center lg:text-start md:text-4xl lg:text-5xl font-semibold text-black mb-4 md:mb-6 ">
-            Most of your frequently asked{" "}
-            <span className="text-primary">questions</span> answered
+            Quick{" "}
+            <span className="text-primary">answers</span> before you go digging.
           </h1>
           <p className="text-muted text-center lg:text-start text-base md:text-lg lg:text-xl font-medium max-w-6xl">
-            On this page, the AwoofHub team has answered all your questions
-            related to the product and services. If you can't find an answer
-            that you're looking for, feel free to drop us a line.
+           We've covered the questions Awoofers ask most — how deals work, how review and approval happen, how to post, how to claim. Can't find what you're looking for? Send us a message, and we'll sort it out.
           </p>
         </section>
       </div>

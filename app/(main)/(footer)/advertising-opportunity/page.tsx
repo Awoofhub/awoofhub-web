@@ -23,10 +23,10 @@ export default function AdvertisingPage() {
     <main className="bg-white">
       <div className="bg-background py-8 md:py-10 lg:py-16 px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] ">
         <section className="  mx-auto max-w-[1440px]">
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-black mb-4">
+          <h1 className="text-2xl xs:text-3xl lg:text-4xl font-semibold text-black mb-4">
             Advertise with <span className="text-primary">Awoof</span>Hub!
           </h1>
-          <h4 className="flex flex-col gap-4 leading-6 text-sm md:text-lg lg:text-xl text-muted font-semibold font-montserrat">
+          <h4 className="flex flex-col gap-4 text-sm xs:text-lg lg:text-xl text-muted font-semibold font-montserrat">
             <span className="italic text-black">Coming soon!</span>
             <span className="font-medium">
               Every day, more Awoofers open the app looking for one thing — a
@@ -41,7 +41,7 @@ export default function AdvertisingPage() {
             <span className="text-primary">Notify me when this launched</span>
           </h4>
 
-          <div className="my-6 py-2 px-3 md:py-1 md:px-2 lg:py-1 lg:px-4 bg-[#FFF6F2] lg:max-w-[674px] md:max-w-[509px] max-auto">
+          <div className="my-6 rounded-xl py-2 px-3 md:py-4 lg:px-4 bg-[#FFF6F2] lg:max-w-[650px] md:max-w-[500px] shadow-sm">
             <section className="flex justify-center items-center gap-3 md:gap-4 lg:gap-5">
               {/* Bell icon */}
               <Bell

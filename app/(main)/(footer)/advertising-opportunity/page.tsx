@@ -22,19 +22,19 @@ export default function AdvertisingPage() {
   return (
     <main className="bg-white">
       <div className="bg-background py-8 md:py-10 lg:py-16 px-4 md:px-6 lg:px-8 xl:px-12 max-w[1440px] ">
-        <section className=" max-w-[1222px] mx-auto">
+        <section className="  mx-auto">
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-black mb-4">
             Advertise with <span className="text-primary">Awoof</span>Hub!
           </h1>
-          <h4 className="flex flex-col gap-4 loading-6 text-sm md:text-lg lg:text-xl text-muted font-[600] font-montserrat">
+          <h4 className="flex flex-col gap-4 loading-6 text-sm md:text-lg lg:text-xl text-muted font-semibold font-montserrat">
             <span className="italic text-black">Coming soon!</span>
-            <span className="font-[500]">
+            <span className="font-medium">
               Every day, more Awoofers open the app looking for one thing — a
               deal worth their money. Soon, businesses will be able to put their
               offers directly in front of that audience: not random reach, but
               people already in a buying mood.
             </span>
-            <span className="font-[500]">
+            <span className="font-medium">
               We&apos;re still shaping what this looks like. If you want early
               access or a heads-up the moment it&apos;s live, let us know below.
             </span>

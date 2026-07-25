@@ -17,7 +17,7 @@ const page = () => {
             Community <span className="text-primary">Guidelines</span>
           </h1>
           <p className="text-muted font-medium text-base md:text-lg lg:text-xl mb-4">
-            Last Updated: May 7, 2026
+            Last Updated: July 7, 2026
           </p>
         </section>
       </div>

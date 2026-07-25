@@ -72,7 +72,7 @@ function EmptyChats() {
             <div className="flex md:hidden flex-col items-center justify-center size-full bg-gray-50">
                 <TbMessage size={48} className="text-primary" />
                 <h2 className="mt-2 text-black text-lg xs:text-xl lg:text-2xl font-bold">No conversations yet</h2>
-                <p className="mb-6 text-muted text-xs xs:ext-sm lg:text-base max-w-[400px] mx-auto text-center">Have a question about an order or product? Start a chat with any awoofer’s post.</p>
+                <p className="mb-4 text-muted text-xs xs:ext-sm lg:text-base max-w-[310px] mx-auto text-center">Have a question about an order or product? Start a chat with any awoofer’s post.</p>
                 <Link
                     href="/offers"
                     className="bg-primary text-white px-6 py-2 rounded-sm text-xs xs:text-sm lg:text-base font-baloo font-semibold hover:bg-orange-700 transition-colors flex items-center justify-center"

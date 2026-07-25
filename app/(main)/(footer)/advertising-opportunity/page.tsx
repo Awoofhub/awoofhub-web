@@ -21,12 +21,12 @@ export default function AdvertisingPage() {
    const [enabled, setEnabled] = useState(false);
   return (
     <main className="bg-white">
-      <div className="bg-background py-8 md:py-10 lg:py-16 px-4 md:px-6 lg:px-8 xl:px-12 max-w[1440px] ">
-        <section className="  mx-auto">
+      <div className="bg-background py-8 md:py-10 lg:py-16 px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] ">
+        <section className="  mx-auto max-w-[1440px]">
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-black mb-4">
             Advertise with <span className="text-primary">Awoof</span>Hub!
           </h1>
-          <h4 className="flex flex-col gap-4 loading-6 text-sm md:text-lg lg:text-xl text-muted font-semibold font-montserrat">
+          <h4 className="flex flex-col gap-4 leading-6 text-sm md:text-lg lg:text-xl text-muted font-semibold font-montserrat">
             <span className="italic text-black">Coming soon!</span>
             <span className="font-medium">
               Every day, more Awoofers open the app looking for one thing — a

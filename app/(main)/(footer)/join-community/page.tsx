@@ -1,12 +1,12 @@
 "use client";
-import Footer from "@/components/footer/Footer";
 import { JoinCommunityForm } from "@/components/community/JoinCommunityForm";
+import Footer from "@/components/footer/Footer";
 import Image from "next/image";
 import {
+  FaFacebookF,
   FaInstagram,
   FaLinkedinIn,
   FaXTwitter,
-  FaFacebookF,
 } from "react-icons/fa6";
 
 const socials = [
@@ -31,7 +31,7 @@ const features = [
   },
 ];
 
-export default function GetInvolved() {
+export default function JoinCommunity() {
   return (
     <main className="bg-white">
       {/* Hero */}

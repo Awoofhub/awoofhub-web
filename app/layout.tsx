@@ -1,3 +1,5 @@
+import GoogleAnalytics from '@/components/googleAnalytics/GoogleAnalytics';
+import { WebVitals } from "@/components/googleAnalytics/WebVitals";
 import AppProvider from "@/providers/app-provider";
 import type { Metadata } from "next";
 import { Baloo_2, Geist, Geist_Mono, Montserrat } from "next/font/google";
@@ -43,6 +45,9 @@ export default function RootLayout({
         <AppProvider>
             {children}
         </AppProvider>
+
+        <GoogleAnalytics />
+        <WebVitals />
       </body>
     </html>
   );

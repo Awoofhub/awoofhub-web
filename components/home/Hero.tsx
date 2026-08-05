@@ -1,7 +1,6 @@
 "use client";
 
 import heroImg from "@/public/heroImage.svg";
-import mobileHero from "@/public/mobileHero.svg";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -91,12 +90,12 @@ export default function Hero() {
         {/* mobile hero image */}
         <div className="w-full flex md:hidden justify-center">
           <Image
-            src={mobileHero}
+            src="/mobHero.jpeg"
             alt="Hero illustration"
             width={360}
             height={240}
             priority
-            className="w-full max-w-[500px] h-auto"
+            className="w-full rounded-xl max-w-[500px] h-auto"
           />
         </div>
       </div>

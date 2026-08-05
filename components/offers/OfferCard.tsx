@@ -4,6 +4,7 @@ import { useOfferCountdown } from "@/features/offers/useOfferCountdown";
 import { Offer } from "@/types/offer";
 import { formatCountdown } from "@/utils/formatCountdown";
 import { getOfferVariant } from "@/utils/offerVariant";
+import { parsePriceDropValue } from "@/utils/parsePriceDropValue";
 import Rating from "@mui/material/Rating";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,12 +16,15 @@ import { LocationIconFor, ValueIconFor } from "./Offercardicons";
 
 interface Props {
   offer: Offer;
-  index?: number; 
+  index?: number;
 }
 
 export default function OfferCard({ offer }: Props) {
   const variant = getOfferVariant(offer);
   const { secondsLeft, hasCountdown } = useOfferCountdown(offer, variant);
+
+  const priceDrop =
+    offer.dealType === "price_drop" ? parsePriceDropValue(offer.value) : null;
 
   return (
     <Link
@@ -88,9 +92,20 @@ export default function OfferCard({ offer }: Props) {
 
           <div className="flex items-center mb-0.5 gap-1">
             <ValueIconFor dealType={offer.dealType} />
-            <p className="text-primary font-medium font-baloo text-[12.5px] xs:text-sm lg:text-base line-clamp-1">
-              {offer.value}
-            </p>
+            {priceDrop ? (
+              <div className="flex items-center gap-1.5 min-w-0">
+                <p className="text-primary font-bold font-baloo text-[12.5px] xs:text-sm lg:text-base whitespace-nowrap">
+                  {priceDrop.awoofPrice}
+                </p>
+                <p className="text-muted/60 font-baloo text-[10.5px] xs:text-xs lg:text-sm line-through truncate">
+                  {priceDrop.normalPrice}
+                </p>
+              </div>
+            ) : (
+              <p className="text-primary font-medium font-baloo text-[12.5px] xs:text-sm lg:text-base line-clamp-1">
+                {offer.value}
+              </p>
+            )}
           </div>
 
           <div className="flex items-center justify-between mb-1 lg:mb-2">

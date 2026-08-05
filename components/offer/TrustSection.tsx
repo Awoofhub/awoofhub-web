@@ -12,7 +12,6 @@ const safetyTips = [
   "Check deal expiry dates.",
   "Don't share personal info.",
   "Report suspicious listings.",
-  "Avoid off platform deals.",
 ];
 
 export default function TrustSection({ offer }: Props) {

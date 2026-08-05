@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Cropper, { type Area } from "react-easy-crop";
 import "react-easy-crop/react-easy-crop.css";
 import { MdClose } from "react-icons/md";
@@ -16,6 +16,9 @@ const CROP_WIDTH = 1000;
 const CROP_HEIGHT = 800;
 const CROP_ASPECT = CROP_WIDTH / CROP_HEIGHT; // 5:4
 
+const MAX_ZOOM = 3;
+const DEFAULT_MIN_ZOOM = 0.2; // fallback until natural size is known
+
 const createImage = (url: string) =>
   new Promise<HTMLImageElement>((resolve, reject) => {
     const image = new Image();
@@ -24,6 +27,14 @@ const createImage = (url: string) =>
     image.setAttribute("crossOrigin", "anonymous");
     image.src = url;
   });
+
+// react-easy-crop's zoom=1 makes the image "cover" the crop box.
+// To let the whole image fit ("contain") we scale down by the ratio
+// between the crop box's aspect ratio and the image's aspect ratio.
+const getFitZoom = (imageWidth: number, imageHeight: number) => {
+  const imageAspect = imageWidth / imageHeight;
+  return Math.min(CROP_ASPECT / imageAspect, imageAspect / CROP_ASPECT);
+};
 
 const getCroppedImg = async (imageSrc: string, pixelCrop: Area) => {
   const image = await createImage(imageSrc);
@@ -36,6 +47,10 @@ const getCroppedImg = async (imageSrc: string, pixelCrop: Area) => {
 
   canvas.width = CROP_WIDTH;
   canvas.height = CROP_HEIGHT;
+
+  // Fill background so any empty space left by a zoomed-out image
+  ctx.fillStyle = "#FFD5C3";
+  ctx.fillRect(0, 0, CROP_WIDTH, CROP_HEIGHT);
 
   ctx.drawImage(
     image,
@@ -60,7 +75,34 @@ export const ImageCropperModal = ({
 }: ImageCropperModalProps) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
+  const [minZoom, setMinZoom] = useState(DEFAULT_MIN_ZOOM);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
+
+  // Whenever a new image is loaded, figure out the zoom level that makes
+  // the whole image visible inside the crop box, and start there.
+  useEffect(() => {
+    if (!imageSrc) return;
+
+    let isCancelled = false;
+
+    createImage(imageSrc)
+      .then((image) => {
+        if (isCancelled) return;
+        const fitZoom = getFitZoom(image.naturalWidth, image.naturalHeight);
+        setMinZoom(fitZoom);
+        setZoom(fitZoom);
+        setCrop({ x: 0, y: 0 });
+      })
+      .catch(() => {
+        if (isCancelled) return;
+        setMinZoom(DEFAULT_MIN_ZOOM);
+        setZoom(DEFAULT_MIN_ZOOM);
+      });
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [imageSrc]);
 
   const handleCropComplete = (_croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels);
@@ -96,6 +138,9 @@ export const ImageCropperModal = ({
             image={imageSrc}
             crop={crop}
             zoom={zoom}
+            minZoom={minZoom}
+            maxZoom={MAX_ZOOM}
+            restrictPosition={false}
             aspect={CROP_ASPECT}
             onCropChange={setCrop}
             onZoomChange={setZoom}
@@ -105,12 +150,12 @@ export const ImageCropperModal = ({
         <div className="mt-3 flex items-center justify-between gap-3">
           <input
             type="range"
-            min={1}
-            max={3}
-            step={0.1}
+            min={minZoom}
+            max={MAX_ZOOM}
+            step={0.01}
             value={zoom}
             onChange={(e) => setZoom(Number(e.target.value))}
-            className="w-full accent-orange-500"
+            className="w-full accent-orange-600"
           />
           <button
             type="button"

@@ -21,7 +21,7 @@ export default function Home() {
           className="w-full hidden md:block"
         />
         <Image
-          src="/BannerSm1.svg"
+          src="/mobileBannerA.jpeg"
           alt="the marketplace where deals find you"
           width={800}
           height={500}

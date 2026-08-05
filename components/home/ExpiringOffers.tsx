@@ -42,6 +42,10 @@ export default function ExpiringOffers() {
   const minutes = Math.floor((secondsLeft % 3600) / 60);
   const seconds = secondsLeft % 60;
 
+  if (isFetched && !isFetching && allOffers.length === 0) {
+    return null;
+  }
+
   return (
     <section className="bg-gray-50">
       <div className="py-8 lg:py-12 px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto">
@@ -117,9 +121,6 @@ export default function ExpiringOffers() {
 
         <ErrorBoundary fallback={<OfferError />}>
           {isLoading && <OfferListSkeleton number={4} />}
-          {!isLoading && !isFetching && allOffers.length === 0 && (
-            <p className="text-gray-500 mt-2">No offers available.</p>
-          )}
           {isFetched && allOffers.length > 0 && (
             <OfferList offers={allOffers} />
           )}

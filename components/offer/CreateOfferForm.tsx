@@ -6,6 +6,7 @@ import { useCreateOffer } from "@/features/offers/useCreateOffer";
 import { useUploadSinglePhoto } from "@/features/upload/useUpdateProfilePhoto";
 import { CreateOfferFormProps } from "@/types/form-props";
 import { CreateOfferData } from "@/types/offer";
+import { formatNairaDisplay, formatNairaInput, parseNairaInput } from "@/utils/formatNaira";
 import dayjs from "dayjs";
 import { ChevronDown, Flag, Globe, Pencil } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -17,6 +18,7 @@ import { TomTomAutocomplete } from "../form/AutoComplete";
 import { InputField } from "../form/InputField";
 import { PostOfferSuccessModal } from "../modals/PostOfferSuccessModal";
 import { ImageCropperModal } from "./ImageCropperModal";
+import Image from "next/image";
 
 const DEAL_TYPES: { label: string; value: CreateOfferData["dealType"] }[] = [
   { label: "Cash Back", value: "cashback" },
@@ -43,6 +45,13 @@ const DEAL_VALUE_PLACEHOLDERS: Record<CreateOfferData["dealType"], string> = {
 const LABEL_CLS =
   "block font-baloo text-base lg:text-lg font-semibold text-black";
 
+function normalizeUrl(url: string): string {
+  if (/^https?:\/\//i.test(url)) {
+    return url;
+  }
+  return `https://${url}`;
+}
+
 export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
   const { data: categories } = useCategory();
   const { uploadPhoto, isPending: isUploading } = useUploadSinglePhoto();
@@ -67,8 +76,13 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
   const categoryRef = useRef<HTMLDivElement>(null);
   const dealTypeRef = useRef<HTMLDivElement>(null);
 
+  // Naira price inputs shown only for price_drop deal type
+  const [normalPriceDisplay, setNormalPriceDisplay] = useState("");
+  const [awoofPriceDisplay, setAwoofPriceDisplay] = useState("");
+
   const { register, handleSubmit, formState, control, watch, setValue } =
     useForm<CreateOfferData>({
+      mode: "onChange",
       defaultValues: {
         category: "",
         dealType: undefined,
@@ -83,6 +97,8 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
 
   const dealType = watch("dealType");
   const category = watch("category");
+
+  const isPriceDrop = dealType === "price_drop";
 
   const valuePlaceholder = dealType
     ? DEAL_VALUE_PLACEHOLDERS[dealType]
@@ -107,6 +123,28 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const handleNormalPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatNairaInput(e.target.value);
+    setNormalPriceDisplay(formatted);
+    syncPriceDropValue(formatted, awoofPriceDisplay);
+  };
+
+  const handleAwoofPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatNairaInput(e.target.value);
+    setAwoofPriceDisplay(formatted);
+    syncPriceDropValue(normalPriceDisplay, formatted);
+  };
+
+  const syncPriceDropValue = (normal: string, awoof: string) => {
+    const normalNum = parseNairaInput(normal);
+    const awoofNum = parseNairaInput(awoof);
+    const computed =
+      normalNum && awoofNum
+        ? `${formatNairaDisplay(normalNum)} - ${formatNairaDisplay(awoofNum)}`
+        : "";
+    setValue("value", computed, { shouldValidate: true, shouldDirty: true });
+  };
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -179,9 +217,12 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
     }
     createOffer.submit({
       ...data,
+      externalLink: normalizeUrl(data.externalLink),
       endDate: data.endDate ? dayjs(data.endDate).toISOString() : null,
     });
   };
+
+  const isSubmitDisabled = createOffer.isPending || isUploading || !formState.isValid;
 
   return (
     <div className="mt-3 xs:mt-5 mb-30 lg:mb-10 mx-auto w-full">
@@ -218,7 +259,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
               />
             </button>
             {categoryOpen && (
-              <ul className="absolute z-50 right-0 w-60 mt-2 py-2 px-4 bg-white border border-gray-200 rounded-md shadow-lg max-h-88 overflow-y-auto ">
+              <ul className="absolute z-50 w-full mt-2 py-2 px-4 bg-white border border-gray-200 rounded-md shadow-lg max-h-70 overflow-y-auto ">
                 {categories?.map((cat) => (
                   <li
                     key={cat.id}
@@ -274,13 +315,18 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
               />
             </button>
             {dealTypeOpen && (
-              <ul className="absolute z-50 right-0 w-55 mt-2 py-2 px-4 bg-white border border-gray-200 rounded-md shadow-lg max-h-80 overflow-y-auto">
+              <ul className="absolute z-50 w-full mt-2 py-2 px-4 bg-white border border-gray-200 rounded-md shadow-lg max-h-70 overflow-y-auto">
                 {DEAL_TYPES.map((dt) => (
                   <li
                     key={dt.value}
                     onClick={() => {
                       setValue("dealType", dt.value, { shouldValidate: true });
                       setDealTypeOpen(false);
+                      // Reset value + price display state when deal type changes,
+                      // so a leftover value from a different deal type isn't submitted
+                      setNormalPriceDisplay("");
+                      setAwoofPriceDisplay("");
+                      setValue("value", "", { shouldValidate: true });
                     }}
                     className="px-3 py-1 cursor-pointer hover:bg-orange-50 font-baloo text-base border-b border-muted/20 last:border-none flex items-center justify-between text-gray-900"
                   >
@@ -335,8 +381,8 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
           {...register("description", {
             required: "Description is required",
             minLength: {
-              value: 100,
-              message: "Must be more than 100 characters",
+              value: 50,
+              message: "Must not be less than 50 characters",
             },
           })}
           error={formState.errors.description}
@@ -373,26 +419,66 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
           />
         </div>
 
-        {/* Deal Value */}
-        <div>
-          <label className={LABEL_CLS}>
-            Deal Value <span className="text-red-500">*</span>
-          </label>
-          <InputField
-            type="text"
-            placeholder={valuePlaceholder}
-            compulsory
-            labelClassName={LABEL_CLS}
-            {...register("value", {
-              required: "Value is required",
-              maxLength: {
-                value: 50,
-                message: "Must not be more than 50 characters",
-              },
-            })}
-            error={formState.errors.value}
-          />
-        </div>
+        {/* Deal Value — Normal/Awoof price for price_drop, single field otherwise */}
+        {isPriceDrop ? (
+          <div className="grid grid-cols-1 xxs:grid-cols-2 gap-4">
+            <div>
+              <label className={LABEL_CLS}>
+                Normal Price (₦)
+              </label>
+              <input
+                type="text"
+                inputMode="numeric"
+                placeholder="4,000"
+                value={normalPriceDisplay}
+                onChange={handleNormalPriceChange}
+                className="w-full h-12 px-3 mt-2 border border-gray-300 rounded-md bg-white text-sm lg:text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              />
+            </div>
+            <div>
+              <label className={LABEL_CLS}>
+                Awoof Price (₦)
+              </label>
+              <input
+                type="text"
+                inputMode="numeric"
+                placeholder="2,000"
+                value={awoofPriceDisplay}
+                onChange={handleAwoofPriceChange}
+                className="w-full h-12 px-3 mt-2 border border-gray-300 rounded-md bg-white text-sm lg:text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              />
+            </div>
+            <input
+              type="hidden"
+              {...register("value", { required: "Both prices are required" })}
+            />
+            {formState.errors.value && (
+              <p className="text-red-500 text-xs col-span-full">
+                {formState.errors.value.message}
+              </p>
+            )}
+          </div>
+        ) : (
+          <div>
+            <label className={LABEL_CLS}>
+              Deal Value <span className="text-red-500">*</span>
+            </label>
+            <InputField
+              type="text"
+              placeholder={valuePlaceholder}
+              compulsory
+              labelClassName={LABEL_CLS}
+              {...register("value", {
+                required: "Value is required",
+                maxLength: {
+                  value: 50,
+                  message: "Must not be more than 50 characters",
+                },
+              })}
+              error={formState.errors.value}
+            />
+          </div>
+        )}
 
         {/* Location */}
         <div className="space-y-2">
@@ -476,16 +562,16 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
 
         {/* External Link */}
         <InputField
-          label="Website or Contact Link"
+          label="Website or Contact Link (https://)"
           type="text"
           labelClassName={LABEL_CLS}
-          placeholder="e.g  https://www.jollyawoof.com"
+          placeholder="e.g  www.jollyawoof.com"
           compulsory
           {...register("externalLink", {
             required: "URL is required",
             pattern: {
-              value: /^https?:\/\/.+$/,
-              message: "Enter a valid URL (must start with http/https)",
+              value: /^(https?:\/\/)?(www\.)?[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+([/?#].*)?$/,
+              message: "Enter a valid website or link",
             },
           })}
           error={formState.errors.externalLink}
@@ -520,11 +606,15 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
           />
           {imagePreview ? (
             <div className="relative w-full rounded-xl overflow-hidden border border-gray-200 shadow-sm bg-gray-50">
-              <img
-                src={imagePreview}
-                alt="Offer preview"
-                className={`aspect-[4/3] w-full object-cover transition-opacity ${isUploading ? "opacity-50" : "opacity-100"}`}
-              />
+              <div className={`relative aspect-[4/3] w-full transition-opacity ${isUploading ? "opacity-50" : "opacity-100"}`}>
+                <Image
+                  src={imagePreview}
+                  alt="Offer preview"
+                  fill
+                  unoptimized
+                  className="object-cover"
+                />
+              </div>
               {isUploading && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-white/60">
                   <svg
@@ -576,11 +666,10 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              className={`w-full h-32 flex flex-col items-center justify-center gap-2 rounded-xl transition-colors cursor-pointer bg-[#F6F7F8] ${
-                imageError || formState.errors.imageUrl
+              className={`w-full h-32 flex flex-col items-center justify-center gap-2 rounded-xl transition-colors cursor-pointer bg-[#F6F7F8] ${imageError || formState.errors.imageUrl
                   ? "border-red-400 bg-red-50"
                   : "border-gray-300 hover:border-orange-400 hover:bg-orange-50"
-              }`}
+                }`}
             >
               <FaRegImage
                 size={30}
@@ -615,7 +704,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
         <div className="xs:w-75 mx-auto mt-6">
           <Button
             isLoading={createOffer.isPending}
-            isDisabled={isUploading}
+            isDisabled={isSubmitDisabled}
             type="submit"
           >
             Post an Awoof

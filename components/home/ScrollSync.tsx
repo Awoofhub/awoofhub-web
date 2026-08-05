@@ -94,7 +94,7 @@ export default function ScrollSync({
               className="w-full hidden md:block"
             />
             <Image
-              src="/BannerSm2.svg"
+              src="/mobileBannerB.jpeg"
               alt="the marketplace where deals find you"
               width={800}
               height={500}

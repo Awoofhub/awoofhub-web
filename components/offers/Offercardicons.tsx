@@ -17,8 +17,8 @@ export function LocationIconFor({ location }: { location: string }) {
   return <MapPin size={LOCATION_ICON_SIZE} className={LOCATION_ICON_CLASS} />;
 }
 
-const VALUE_ICON_SIZE = 20;
-const VALUE_ICON_CLASS = "text-primary w-3 xs:w-4 lg:w-5 shrink-0";
+const VALUE_ICON_SIZE = 18;
+const VALUE_ICON_CLASS = "text-primary w-3 xs:w-4 lg:w-4.5 shrink-0";
 
 // Icon shown next to the deal value, based on the offer's deal type
 export function ValueIconFor({ dealType }: { dealType: Offer["dealType"] }) {

@@ -9,6 +9,7 @@ import { CreateOfferData } from "@/types/offer";
 import { formatNairaDisplay, formatNairaInput, parseNairaInput } from "@/utils/formatNaira";
 import dayjs from "dayjs";
 import { ChevronDown, Flag, Globe, Pencil } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FaRegImage } from "react-icons/fa6";
@@ -18,7 +19,6 @@ import { TomTomAutocomplete } from "../form/AutoComplete";
 import { InputField } from "../form/InputField";
 import { PostOfferSuccessModal } from "../modals/PostOfferSuccessModal";
 import { ImageCropperModal } from "./ImageCropperModal";
-import Image from "next/image";
 
 const DEAL_TYPES: { label: string; value: CreateOfferData["dealType"] }[] = [
   { label: "Cash Back", value: "cashback" },

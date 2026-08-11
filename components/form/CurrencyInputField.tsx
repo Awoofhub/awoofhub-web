@@ -23,7 +23,7 @@ type CurrencyInputFieldProps = {
 };
 
 export const CurrencyInputField = forwardRef((props: CurrencyInputFieldProps, ref) => {
-    const {
+    const { 
         label,
         error,
         placeholder,
@@ -39,9 +39,7 @@ export const CurrencyInputField = forwardRef((props: CurrencyInputFieldProps, re
     return (
         <FormControl>
             {label && (
-                <FormLabel
-                    className={labelClassName ?? "font-baloo text-sm lg:text-lg"}
-                >
+                <FormLabel className={labelClassName ?? "font-baloo text-sm lg:text-lg"}>
                     {label}
                     {compulsory && <span className="text-red-500"> *</span>}
                 </FormLabel>

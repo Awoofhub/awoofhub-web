@@ -1,4 +1,5 @@
 import { Offer } from "@/types/offer";
+import { parsePriceDropValue } from "@/utils/parsePriceDropValue";
 import Rating from "@mui/material/Rating";
 import { MapPin } from "lucide-react";
 
@@ -7,6 +8,9 @@ interface Props {
 }
 
 export default function OfferInfo({ offer }: Props) {
+  const priceDrop =
+    offer.dealType === "price_drop" ? parsePriceDropValue(offer.value) : null;
+
   return (
     <>
       <h1 className="text-lg xs:text-xl lg:text-2xl font-bold text-gray-900 leading-tight mb-1">
@@ -68,8 +72,15 @@ export default function OfferInfo({ offer }: Props) {
               ({offer.reviewCount}+ reviews)
             </span>
           </div>
-          <div className=" xs:hidden inline-block bg-[#EA4B481A] text-primary text-sm font-medium font-baloo px-3 py-1 rounded-md">
-            {offer.value}
+          <div className="xs:hidden inline-flex items-center gap-1.5 bg-[#EA4B481A] text-sm font-medium font-baloo px-3 py-1 rounded-md">
+            {priceDrop ? (
+              <>
+                <span className="text-primary font-bold">{priceDrop.awoofPrice}</span>
+                <span className="text-muted/60 line-through">{priceDrop.normalPrice}</span>
+              </>
+            ) : (
+              <span className="text-primary">{offer.value}</span>
+            )}
           </div>
         </div>
       </section>
@@ -81,8 +92,15 @@ export default function OfferInfo({ offer }: Props) {
           {offer.description}
         </p>
 
-        <div className=" hidden xs:inline-block bg-[#EA4B481A] text-primary text-xs lg:text-base font-semibold px-6 py-2 rounded-full mb-1 lg:mb-2 mt-1">
-          {offer.value}
+        <div className="hidden xs:inline-flex items-center gap-2 bg-[#EA4B481A] text-xs lg:text-base font-semibold px-6 py-2 rounded-full mb-1 lg:mb-2 mt-1">
+          {priceDrop ? (
+            <>
+              <span className="text-primary">{priceDrop.awoofPrice}</span>
+              <span className="text-muted/60 line-through font-normal">{priceDrop.normalPrice}</span>
+            </>
+          ) : (
+            <span className="text-primary">{offer.value}</span>
+          )}
         </div>
       </section>
     </>

@@ -12,7 +12,7 @@ import { FaRegUser } from "react-icons/fa6";
 import { FiUsers } from "react-icons/fi";
 import { IoAlarmOutline } from "react-icons/io5";
 import WishlistButton from "../wishlist/WishlistButton";
-import { LocationIconFor, ValueIconFor } from "./Offercardicons";
+import { LocationIconFor, ValueIconFor } from "./OfferCardIcons";
 
 interface Props {
   offer: Offer;

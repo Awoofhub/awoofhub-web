@@ -22,7 +22,7 @@ export const getOffersByUsername = ({ username, search, category, minRating, cre
 
 export const useOffersByUsername = ({ username, search, category, minRating, createdFrom, createdTo, limit = 8 }: GetOffersByUsername) => {
 
-    const { data, isFetching, isFetchingNextPage, fetchNextPage, hasNextPage, isError, error } = useInfiniteQuery({
+    const { data, isLoading, isFetching, isFetchingNextPage, fetchNextPage, hasNextPage, isError, error } = useInfiniteQuery({
         queryKey: ['offers', "username", username, search, category, minRating, createdFrom, createdTo, limit],
         queryFn: ({ pageParam = 1 }) => getOffersByUsername({ username, search, category, minRating, createdFrom, createdTo, page: pageParam, limit }),
 
@@ -41,6 +41,7 @@ export const useOffersByUsername = ({ username, search, category, minRating, cre
 
     return {
         data,
+        isLoading,
         isFetching,
         fetchNextPage,
         hasNextPage,

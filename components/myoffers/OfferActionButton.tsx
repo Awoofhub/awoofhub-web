@@ -12,23 +12,29 @@ export default function OfferActionButton({ offer, status }: Props) {
     return (
       <Link
         href={`/offers/${offer.id}`}
-        className="w-full block text-center text-xs md:textsm lg:text-base font-baloo bg-primary text-white py-2 rounded-md font-semibold hover:bg-orange-700 transition-colors"
+        className="w-full block text-center text-xs md:text-sm lg:text-base font-baloo bg-primary text-white py-2 rounded-md font-semibold hover:bg-orange-700 transition-colors"
       >
         View Live Post
       </Link>
     );
   }
 
-  if (
-    status === "pending" ||
-    status === "suspended" ||
-    status === "rejected" ||
-    status === "expired"
-  ) {
+  if (status === "rejected") {
+    return (
+      <Link
+        href={`/offers/create?editId=${offer.id}`}
+        className="w-full block text-center text-xs md:text-sm lg:text-base font-baloo bg-primary text-white py-2 rounded-md font-semibold hover:bg-orange-700 transition-colors"
+      >
+        Re-edit
+      </Link>
+    );
+  }
+
+  if (status === "pending" || status === "suspended" || status === "expired") {
     return (
       <button
         disabled
-        className="w-full bg-[#FFD5C3] text-xs md:textsm lg:text-base font-baloo text-white py-2 rounded-md font-semibold cursor-not-allowed"
+        className="w-full bg-[#FFD5C3] text-xs md:text-sm lg:text-base font-baloo text-white py-2 rounded-md font-semibold cursor-not-allowed"
       >
         View Live Post
       </button>

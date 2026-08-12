@@ -3,22 +3,30 @@
 import { Button } from "@/components/button/Button";
 import { useCategory } from "@/features/category/useCategory";
 import { useCreateOffer } from "@/features/offers/useCreateOffer";
+import { useUpdateOffer } from "@/features/offers/useUpdateOffer";
+import { useOffer } from "@/features/offers/useOffer";
 import { useUploadSinglePhoto } from "@/features/upload/useUpdateProfilePhoto";
 import { CreateOfferFormProps } from "@/types/form-props";
-import { CreateOfferData } from "@/types/offer";
-import { formatNairaDisplay, formatNairaInput, parseNairaInput } from "@/utils/formatNaira";
+import { CreateOfferData, Offer } from "@/types/offer";
+import { formatNairaDisplay } from "@/utils/formatNaira";
+import { parsePriceDropValue } from "@/utils/parsePriceDropValue";
 import dayjs from "dayjs";
 import { ChevronDown, Flag, Globe, Pencil } from "lucide-react";
+import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FaRegImage } from "react-icons/fa6";
 import { MdClose } from "react-icons/md";
 import { DatePickerField } from "../date/DatePickerField";
 import { TomTomAutocomplete } from "../form/AutoComplete";
+import { CurrencyInputField } from "../form/CurrencyInputField";
 import { InputField } from "../form/InputField";
 import { PostOfferSuccessModal } from "../modals/PostOfferSuccessModal";
 import { ImageCropperModal } from "./ImageCropperModal";
-import Image from "next/image";
+import OfferNoticeBox from "../myoffers/OfferNoticeBox";
+import { useLatestModeration } from "@/features/moderation/useLatestModeration";
+import Loading from "../loading/Loading";
 
 const DEAL_TYPES: { label: string; value: CreateOfferData["dealType"] }[] = [
   { label: "Cash Back", value: "cashback" },
@@ -52,13 +60,64 @@ function normalizeUrl(url: string): string {
   return `https://${url}`;
 }
 
+function toNumericPrice(display: string): number | undefined {
+  const digitsOnly = display.replace(/[^0-9.]/g, "");
+  if (!digitsOnly) return undefined;
+  const parsed = Number(digitsOnly);
+  return Number.isNaN(parsed) ? undefined : parsed;
+}
+
+type FormValues = CreateOfferData & {
+  normalPrice?: number;
+  awoofPrice?: number;
+};
+
+
+function EditOfferLoader({
+  id,
+  onLoad,
+}: {
+  id: string;
+  onLoad: (offer: Offer) => void;
+}) {
+  const { data, isLoading } = useOffer({ id });
+
+  useEffect(() => {
+    if (data) onLoad(data);
+  }, [data, onLoad]);
+
+  return isLoading ? (
+    <div >
+      <Loading />
+    </div>
+  ) : null;
+}
+
 export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
+  const searchParams = useSearchParams();
+  const editOfferId = searchParams.get("editId");
+  const isEditMode = Boolean(editOfferId);
+
   const { data: categories } = useCategory();
   const { uploadPhoto, isPending: isUploading } = useUploadSinglePhoto();
   const [showSuccess, setShowSuccess] = useState(false);
+
   const createOffer = useCreateOffer({
     onSuccess: () => setShowSuccess(true),
   });
+
+  const updateOffer = useUpdateOffer({
+    onSuccess: () => setShowSuccess(true),
+  });
+
+  const [existingOffer, setExistingOffer] = useState<Offer | null>(null);
+  const [isLoadingOffer, setIsLoadingOffer] = useState(isEditMode);
+
+  const { data: moderation, isLoading: isLoadingModeration } = useLatestModeration(
+    { id: editOfferId ?? "" },
+    isEditMode,
+  );
+
   const [locationType, setLocationType] = useState<
     "Online" | "Nationwide" | "at_a_location" | ""
   >("");
@@ -76,12 +135,8 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
   const categoryRef = useRef<HTMLDivElement>(null);
   const dealTypeRef = useRef<HTMLDivElement>(null);
 
-  // Naira price inputs shown only for price_drop deal type
-  const [normalPriceDisplay, setNormalPriceDisplay] = useState("");
-  const [awoofPriceDisplay, setAwoofPriceDisplay] = useState("");
-
-  const { register, handleSubmit, formState, control, watch, setValue } =
-    useForm<CreateOfferData>({
+  const { register, handleSubmit, formState, control, watch, setValue, reset } =
+    useForm<FormValues>({
       mode: "onChange",
       defaultValues: {
         category: "",
@@ -97,6 +152,8 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
 
   const dealType = watch("dealType");
   const category = watch("category");
+  const normalPrice = watch("normalPrice");
+  const awoofPrice = watch("awoofPrice");
 
   const isPriceDrop = dealType === "price_drop";
 
@@ -124,27 +181,91 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleNormalPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const formatted = formatNairaInput(e.target.value);
-    setNormalPriceDisplay(formatted);
-    syncPriceDropValue(formatted, awoofPriceDisplay);
-  };
+  useEffect(() => {
+    if (!isPriceDrop) return;
+    if (normalPrice && awoofPrice) {
+      const combined = `${formatNairaDisplay(normalPrice)} - ${formatNairaDisplay(awoofPrice)}`;
+      setValue("value", combined, { shouldValidate: true, shouldDirty: true });
+    } else {
+      setValue("value", "", { shouldValidate: true });
+    }
+  }, [normalPrice, awoofPrice, isPriceDrop, setValue]);
 
-  const handleAwoofPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const formatted = formatNairaInput(e.target.value);
-    setAwoofPriceDisplay(formatted);
-    syncPriceDropValue(normalPriceDisplay, formatted);
-  };
+  // Prefill the form once the offer-to-edit has loaded via EditOfferLoader.
+  useEffect(() => {
+    if (!existingOffer) return;
 
-  const syncPriceDropValue = (normal: string, awoof: string) => {
-    const normalNum = parseNairaInput(normal);
-    const awoofNum = parseNairaInput(awoof);
-    const computed =
-      normalNum && awoofNum
-        ? `${formatNairaDisplay(normalNum)} - ${formatNairaDisplay(awoofNum)}`
-        : "";
-    setValue("value", computed, { shouldValidate: true, shouldDirty: true });
-  };
+    const isOnlineOrNationwide =
+      existingOffer.location === "Online" ||
+      existingOffer.location === "Nationwide";
+    setLocationType(
+      isOnlineOrNationwide
+        ? (existingOffer.location as "Online" | "Nationwide")
+        : "at_a_location",
+    );
+
+    const priceDrop =
+      existingOffer.dealType === "price_drop"
+        ? parsePriceDropValue(existingOffer.value)
+        : null;
+
+    reset({
+      category: existingOffer.category.name,
+      dealType: existingOffer.dealType,
+      title: existingOffer.title,
+      description: existingOffer.description,
+      brandName: existingOffer.brandName,
+      endDate: dayjs(existingOffer.endDate),
+      value: existingOffer.value,
+      location: existingOffer.location,
+      externalLink: existingOffer.externalLink,
+      couponCode: existingOffer.couponCode ?? "",
+      imageUrl: existingOffer.imageUrl,
+      normalPrice: priceDrop ? toNumericPrice(priceDrop.normalPrice) : undefined,
+      awoofPrice: priceDrop ? toNumericPrice(priceDrop.awoofPrice) : undefined,
+    } as unknown as FormValues);
+    setImagePreview(existingOffer.imageUrl);
+  }, [existingOffer, reset]);
+
+  // Reset back to a blank form when navigating away from edit mode
+  const prevEditOfferId = useRef(editOfferId);
+
+  useEffect(() => {
+    const wasEditing = Boolean(prevEditOfferId.current);
+    const isEditingNow = Boolean(editOfferId);
+
+    if (wasEditing && !isEditingNow) {
+      reset({
+        category: "",
+        dealType: undefined,
+        imageUrl: "",
+        endDate: null,
+        brandName: "",
+        value: "",
+        location: "",
+        externalLink: "",
+        title: "",
+        description: "",
+        couponCode: "",
+        normalPrice: undefined,
+        awoofPrice: undefined,
+      });
+      setLocationType("");
+      setImagePreview(null);
+      setImageError("");
+      setCropSrc(null);
+      setOriginalImageSrc(null);
+      setSelectedImageFile(null);
+      setExistingOffer(null);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+
+    if (isEditingNow && !wasEditing) {
+      setIsLoadingOffer(true);
+    }
+
+    prevEditOfferId.current = editOfferId;
+  }, [editOfferId, reset]);
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -210,19 +331,58 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
     setCropModalOpen(true);
   };
 
-  const onSubmit = (data: CreateOfferData) => {
+  const onSubmit = (data: FormValues) => {
     if (!data.imageUrl) {
       setImageError("Please upload an offer image.");
       return;
     }
-    createOffer.submit({
-      ...data,
+
+    const finalPayload: CreateOfferData = {
+      category: data.category,
+      dealType: data.dealType,
+      title: data.title,
+      description: data.description,
+      brandName: data.brandName,
+      endDate: dayjs(data.endDate).toISOString(),
+      value: data.value,
+      location: data.location,
       externalLink: normalizeUrl(data.externalLink),
-      endDate: data.endDate ? dayjs(data.endDate).toISOString() : null,
-    });
+      couponCode: data.couponCode,
+      imageUrl: data.imageUrl,
+    };
+
+    if (isEditMode && editOfferId) {
+      updateOffer.submit(editOfferId, finalPayload);
+    } else {
+      createOffer.submit(finalPayload);
+    }
   };
 
-  const isSubmitDisabled = createOffer.isPending || isUploading || !formState.isValid;
+  const isSubmitDisabled =
+    createOffer.isPending ||
+    updateOffer.isPending ||
+    isUploading ||
+    !formState.isValid ||
+    (isEditMode && !formState.isDirty);
+
+  if (isEditMode && isLoadingOffer) {
+    return (
+      <>
+        {editOfferId && (
+          <EditOfferLoader
+            id={editOfferId}
+            onLoad={(offer) => {
+              setExistingOffer(offer);
+              setIsLoadingOffer(false);
+            }}
+          />
+        )}
+        <div className="mt-10 flex justify-center">
+          <Loading />
+        </div>
+      </>
+    );
+  }
 
   return (
     <div className="mt-3 xs:mt-5 mb-30 lg:mb-10 mx-auto w-full">
@@ -236,6 +396,16 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
       )}
 
       <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
+        {isEditMode && (
+          <div className="rounded-md border border-red-200 bg-red-50 p-3">
+            <OfferNoticeBox
+              status="rejected"
+              moderation={moderation}
+              isLoading={isLoadingModeration}
+            />
+          </div>
+        )}
+
         {/* Category */}
         <div className="space-y-2">
           <label className={LABEL_CLS}>
@@ -264,7 +434,10 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                   <li
                     key={cat.id}
                     onClick={() => {
-                      setValue("category", cat.name, { shouldValidate: true });
+                      setValue("category", cat.name, {
+                        shouldValidate: true,
+                        shouldDirty: true,
+                      });
                       setCategoryOpen(false);
                     }}
                     className="px-3 py-1 cursor-pointer hover:bg-orange-50 font-baloo text-base border-b border-muted/20 last:border-none flex items-center justify-between text-gray-900"
@@ -320,12 +493,13 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                   <li
                     key={dt.value}
                     onClick={() => {
-                      setValue("dealType", dt.value, { shouldValidate: true });
+                      setValue("dealType", dt.value, {
+                        shouldValidate: true,
+                        shouldDirty: true,
+                      });
                       setDealTypeOpen(false);
-                      // Reset value + price display state when deal type changes,
-                      // so a leftover value from a different deal type isn't submitted
-                      setNormalPriceDisplay("");
-                      setAwoofPriceDisplay("");
+                      setValue("normalPrice", undefined, { shouldDirty: true });
+                      setValue("awoofPrice", undefined, { shouldDirty: true });
                       setValue("value", "", { shouldValidate: true });
                     }}
                     className="px-3 py-1 cursor-pointer hover:bg-orange-50 font-baloo text-base border-b border-muted/20 last:border-none flex items-center justify-between text-gray-900"
@@ -422,41 +596,46 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
         {/* Deal Value — Normal/Awoof price for price_drop, single field otherwise */}
         {isPriceDrop ? (
           <div className="grid grid-cols-1 xxs:grid-cols-2 gap-4">
-            <div>
-              <label className={LABEL_CLS}>
-                Normal Price (₦)
-              </label>
-              <input
-                type="text"
-                inputMode="numeric"
-                placeholder="4,000"
-                value={normalPriceDisplay}
-                onChange={handleNormalPriceChange}
-                className="w-full h-12 px-3 mt-2 border border-gray-300 rounded-md bg-white text-sm lg:text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
-              />
-            </div>
-            <div>
-              <label className={LABEL_CLS}>
-                Awoof Price (₦)
-              </label>
-              <input
-                type="text"
-                inputMode="numeric"
-                placeholder="2,000"
-                value={awoofPriceDisplay}
-                onChange={handleAwoofPriceChange}
-                className="w-full h-12 px-3 mt-2 border border-gray-300 rounded-md bg-white text-sm lg:text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
-              />
-            </div>
+            <Controller
+              name="normalPrice"
+              control={control}
+              rules={{ required: "Normal price is required" }}
+              render={({ field }) => (
+                <CurrencyInputField
+                  label="Normal Price (₦)"
+                  compulsory
+                  labelClassName={LABEL_CLS}
+                  placeholder="4,000"
+                  name={field.name}
+                  value={field.value}
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
+                  error={formState.errors.normalPrice}
+                />
+              )}
+            />
+            <Controller
+              name="awoofPrice"
+              control={control}
+              rules={{ required: "Awoof price is required" }}
+              render={({ field }) => (
+                <CurrencyInputField
+                  label="Awoof Price (₦)"
+                  compulsory
+                  labelClassName={LABEL_CLS}
+                  placeholder="2,000"
+                  name={field.name}
+                  value={field.value}
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
+                  error={formState.errors.awoofPrice}
+                />
+              )}
+            />
             <input
               type="hidden"
               {...register("value", { required: "Both prices are required" })}
             />
-            {formState.errors.value && (
-              <p className="text-red-500 text-xs col-span-full">
-                {formState.errors.value.message}
-              </p>
-            )}
           </div>
         ) : (
           <div>
@@ -498,7 +677,10 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                   checked={locationType === option}
                   onChange={() => {
                     setLocationType(option);
-                    setValue("location", option, { shouldValidate: true });
+                    setValue("location", option, {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                    });
                   }}
                   className="accent-primary w-4 h-4"
                 />
@@ -512,7 +694,10 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
                 checked={locationType === "at_a_location"}
                 onChange={() => {
                   setLocationType("at_a_location");
-                  setValue("location", "", { shouldValidate: true });
+                  setValue("location", "", {
+                    shouldValidate: true,
+                    shouldDirty: true,
+                  });
                 }}
                 className="accent-primary w-4 h-4"
               />
@@ -562,7 +747,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
 
         {/* External Link */}
         <InputField
-          label="Website or Contact Link (https://)"
+          label="Website or Contact Link"
           type="text"
           labelClassName={LABEL_CLS}
           placeholder="e.g  www.jollyawoof.com"
@@ -667,8 +852,8 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
               type="button"
               onClick={() => fileInputRef.current?.click()}
               className={`w-full h-32 flex flex-col items-center justify-center gap-2 rounded-xl transition-colors cursor-pointer bg-[#F6F7F8] ${imageError || formState.errors.imageUrl
-                  ? "border-red-400 bg-red-50"
-                  : "border-gray-300 hover:border-orange-400 hover:bg-orange-50"
+                ? "border-red-400 bg-red-50"
+                : "border-gray-300 hover:border-orange-400 hover:bg-orange-50"
                 }`}
             >
               <FaRegImage
@@ -703,11 +888,11 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
         </div>
         <div className="xs:w-75 mx-auto mt-6">
           <Button
-            isLoading={createOffer.isPending}
+            isLoading={createOffer.isPending || updateOffer.isPending}
             isDisabled={isSubmitDisabled}
             type="submit"
           >
-            Post an Awoof
+            {isEditMode ? "Resubmit for Review" : "Post an Awoof"}
           </Button>
         </div>
       </form>

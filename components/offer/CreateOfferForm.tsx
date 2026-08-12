@@ -4,10 +4,10 @@ import { Button } from "@/components/button/Button";
 import { useCategory } from "@/features/category/useCategory";
 import { useCreateOffer } from "@/features/offers/useCreateOffer";
 import { useUpdateOffer } from "@/features/offers/useUpdateOffer";
-import { useOfferById } from "@/features/offers/useOfferById";
+import { useOffer } from "@/features/offers/useOffer";
 import { useUploadSinglePhoto } from "@/features/upload/useUpdateProfilePhoto";
 import { CreateOfferFormProps } from "@/types/form-props";
-import { CreateOfferData } from "@/types/offer";
+import { CreateOfferData, Offer } from "@/types/offer";
 import { formatNairaDisplay } from "@/utils/formatNaira";
 import { parsePriceDropValue } from "@/utils/parsePriceDropValue";
 import dayjs from "dayjs";
@@ -72,6 +72,27 @@ type FormValues = CreateOfferData & {
   awoofPrice?: number;
 };
 
+
+function EditOfferLoader({
+  id,
+  onLoad,
+}: {
+  id: string;
+  onLoad: (offer: Offer) => void;
+}) {
+  const { data, isLoading } = useOffer({ id });
+
+  useEffect(() => {
+    if (data) onLoad(data);
+  }, [data, onLoad]);
+
+  return isLoading ? (
+    <div >
+      <Loading />
+    </div>
+  ) : null;
+}
+
 export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
   const searchParams = useSearchParams();
   const editOfferId = searchParams.get("editId");
@@ -89,9 +110,8 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
     onSuccess: () => setShowSuccess(true),
   });
 
-  const { data: existingOffer, isLoading: isLoadingOffer } = useOfferById({
-    id: editOfferId ?? undefined,
-  });
+  const [existingOffer, setExistingOffer] = useState<Offer | null>(null);
+  const [isLoadingOffer, setIsLoadingOffer] = useState(isEditMode);
 
   const { data: moderation, isLoading: isLoadingModeration } = useLatestModeration(
     { id: editOfferId ?? "" },
@@ -171,7 +191,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
     }
   }, [normalPrice, awoofPrice, isPriceDrop, setValue]);
 
-  // Prefill the form once the offer-to-edit has loaded.
+  // Prefill the form once the offer-to-edit has loaded via EditOfferLoader.
   useEffect(() => {
     if (!existingOffer) return;
 
@@ -195,7 +215,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
       title: existingOffer.title,
       description: existingOffer.description,
       brandName: existingOffer.brandName,
-      endDate: existingOffer.endDate ? dayjs(existingOffer.endDate) : null,
+      endDate: dayjs(existingOffer.endDate),
       value: existingOffer.value,
       location: existingOffer.location,
       externalLink: existingOffer.externalLink,
@@ -206,7 +226,6 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
     } as unknown as FormValues);
     setImagePreview(existingOffer.imageUrl);
   }, [existingOffer, reset]);
-
 
   // Reset back to a blank form when navigating away from edit mode
   const prevEditOfferId = useRef(editOfferId);
@@ -237,7 +256,12 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
       setCropSrc(null);
       setOriginalImageSrc(null);
       setSelectedImageFile(null);
+      setExistingOffer(null);
       if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+
+    if (isEditingNow && !wasEditing) {
+      setIsLoadingOffer(true);
     }
 
     prevEditOfferId.current = editOfferId;
@@ -312,12 +336,19 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
       setImageError("Please upload an offer image.");
       return;
     }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { normalPrice: _np, awoofPrice: _ap, ...payload } = data;
-    const finalPayload = {
-      ...payload,
+
+    const finalPayload: CreateOfferData = {
+      category: data.category,
+      dealType: data.dealType,
+      title: data.title,
+      description: data.description,
+      brandName: data.brandName,
+      endDate: dayjs(data.endDate).toISOString(),
+      value: data.value,
+      location: data.location,
       externalLink: normalizeUrl(data.externalLink),
-      endDate: data.endDate ? dayjs(data.endDate).toISOString() : null,
+      couponCode: data.couponCode,
+      imageUrl: data.imageUrl,
     };
 
     if (isEditMode && editOfferId) {
@@ -336,9 +367,20 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
 
   if (isEditMode && isLoadingOffer) {
     return (
-      <div className="mt-10 flex justify-center">
-       <Loading/>
-      </div>
+      <>
+        {editOfferId && (
+          <EditOfferLoader
+            id={editOfferId}
+            onLoad={(offer) => {
+              setExistingOffer(offer);
+              setIsLoadingOffer(false);
+            }}
+          />
+        )}
+        <div className="mt-10 flex justify-center">
+          <Loading />
+        </div>
+      </>
     );
   }
 
@@ -705,7 +747,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
 
         {/* External Link */}
         <InputField
-          label="Website or Contact Link (https://)"
+          label="Website or Contact Link"
           type="text"
           labelClassName={LABEL_CLS}
           placeholder="e.g  www.jollyawoof.com"

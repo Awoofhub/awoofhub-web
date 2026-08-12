@@ -15,7 +15,7 @@ export default function ProfileDeals({
   isOwnProfile,
   profile,
 }: Props) {
-    const { data, isFetching, hasNextPage, isFetchingNextPage, fetchNextPage } =
+    const { data, isLoading, isFetching, hasNextPage, isFetchingNextPage, fetchNextPage } =
       useOffersByUsername({
         username: profile?.username ?? "",
         search: "",
@@ -23,7 +23,7 @@ export default function ProfileDeals({
         minRating: 0,
         createdFrom: "",
         createdTo: "",
-        limit: 20,
+        limit: 12,
       });
   
     const offers = useMemo(
@@ -35,7 +35,7 @@ export default function ProfileDeals({
     <div className="flex-1 w-full xs:min-w-0 flex flex-col">
       <h2 className=" text-xl lg:text-2xl font-semibold text-black mb-4">Active Deals</h2>
 
-      {isFetching && <ProfileDealsSkeleton />}
+      {isLoading && <ProfileDealsSkeleton />}
 
       {!isFetching && offers.length === 0 && (
         <div className="flex-1 flex flex-col items-center justify-center text-center min-h-[60vh]">
@@ -63,7 +63,7 @@ export default function ProfileDeals({
         </div>
       )}
 
-      {!isFetching && offers.length > 0 && (
+      {offers.length > 0 && (
         <OfferInfiniteList
           offers={offers}
           hasNextPage={hasNextPage}

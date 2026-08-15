@@ -1,15 +1,15 @@
 "use client";
+import { useLatestModeration } from "@/features/moderation/useLatestModeration";
 import { Offer } from "@/types/offer";
 import { getDisplayStatus } from "@/utils/offerStatus";
-import { useLatestModeration } from "@/features/moderation/useLatestModeration";
 import { format } from "date-fns";
 import Image from "next/image";
 import { FiMapPin, FiUsers, FiX } from "react-icons/fi";
-import StatusBadge from "./StatusBadge";
-import OfferDateLabel from "./OfferDateLabel";
-import OfferNoticeBox from "./OfferNoticeBox";
 import OfferActionButton from "./OfferActionButton";
+import OfferDateLabel from "./OfferDateLabel";
 import OfferDescription from "./OfferDescription";
+import OfferNoticeBox from "./OfferNoticeBox";
+import StatusBadge from "./StatusBadge";
 
 interface Props {
   offer: Offer;
@@ -46,6 +46,7 @@ export default function OfferStatusModal({ offer, onClose }: Props) {
             <Image
               src={offer.imageUrl}
               alt={offer.title}
+              unoptimized
               fill
               className={`object-fill p-3 ${
                 status === "pending" ||

@@ -1,7 +1,6 @@
 "use client";
 
 import { Offer } from "@/types/offer";
-import type { ImageLoaderProps } from "next/image";
 import Image from "next/image";
 import Comment from "../comment/Comment";
 import ReviewChart from "../review/ReviewChart";
@@ -15,18 +14,17 @@ interface Props {
 }
 
 export default function SingleOffer({ offer }: Props) {
-  const customLoader = ({ src }: ImageLoaderProps) => src;
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-8 lg:grid-cols-9 gap-4 lg:gap-10 pb-10">
         <div className="lg:col-span-4 md:col-span-4 flex flex-col items-center justify-start">
           <Image
-                loader={customLoader} 
             src={offer.imageUrl}
             alt={offer.title}
             width={500}
             height={500}
             priority
+            unoptimized
             className="w-full max-w-[600px] mx-auto aspect-[12/9] md:aspect-[10/12] lg:aspect-[10/9] object-fill rounded-2xl md:rounded-3xl"
           />
         </div>

@@ -57,7 +57,7 @@ export default function OfferStatusModal({ offer, onClose }: Props) {
               }`}
             />
           </div>
-
+ 
           <div className="p-5">
             <div className="flex items-center justify-between mb-2">
               <StatusBadge status={status} />

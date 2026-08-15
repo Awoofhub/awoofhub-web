@@ -1,8 +1,8 @@
 import { Offer } from "@/types/offer";
 import { capitalizeFirstLetter } from "@/utils/truncate";
-import Link from "next/link";
-import Image from "next/image";
 import { format } from "date-fns";
+import Image from "next/image";
+import Link from "next/link";
 import { FaRegUser } from "react-icons/fa6";
 
 interface Props {
@@ -22,6 +22,7 @@ export default function CreatorLink({ offer, variant = "top" }: Props) {
             <Image
               width={600}
               height={600}
+              unoptimized
               src={offer.contributor.profileImageUrl}
               alt={offer.contributor.name}
               className="w-full h-full object-cover "
@@ -68,6 +69,7 @@ export default function CreatorLink({ offer, variant = "top" }: Props) {
             height={50}
             src={offer.contributor.profileImageUrl}
             alt={offer.contributor.name}
+            unoptimized
             className="w-full h-full object-cover"
           />
         ) : (

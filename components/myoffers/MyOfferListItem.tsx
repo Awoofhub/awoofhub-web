@@ -1,10 +1,10 @@
 import { Offer } from "@/types/offer";
-import { getDisplayStatus, DisplayStatus } from "@/utils/offerStatus";
+import { DisplayStatus, getDisplayStatus } from "@/utils/offerStatus";
+import { truncateId } from "@/utils/truncate";
 import { format } from "date-fns";
 import Image from "next/image";
-import { FiUsers, FiMapPin, FiArrowUpRight } from "react-icons/fi";
+import { FiArrowUpRight, FiMapPin, FiUsers } from "react-icons/fi";
 import StatusBadge from "./StatusBadge";
-import { truncateId } from "@/utils/truncate";
 
 interface Props {
   offer: Offer;
@@ -37,6 +37,7 @@ export default function MyOfferListItem({ offer, onClick }: Props) {
         <Image
           src={offer.imageUrl}
           alt={offer.title}
+          unoptimized
           width={200}
           height={200}
           className="w-full h-full object-fill"

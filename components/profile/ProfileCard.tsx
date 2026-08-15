@@ -1,18 +1,18 @@
 "use client";
-import AlertButton from "../alert/Alert";
-import ChatButton from "../chat/ChatButton";
 import ReportModal from "@/components/modals/ReportModal";
 import { User } from "@/types/user";
 import { capitalizeFirstLetter } from "@/utils/truncate";
 import { format } from "date-fns";
+import { Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
-import { GoDotFill } from "react-icons/go";
 import { FaRegUser } from "react-icons/fa6";
-import { Plus } from "lucide-react";
+import { GoDotFill } from "react-icons/go";
 import { MdOutlineChat } from "react-icons/md";
+import AlertButton from "../alert/Alert";
+import ChatButton from "../chat/ChatButton";
 import EditProfileModal from "../modals/EditProfileModal";
 
 interface Props {
@@ -57,7 +57,7 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
                   }}
                   className="text-sm w-full flex items-center justify-center gap-2 px-4 py-3 hover:bg-gray-100 font-medium"
                 >
-                 Report User
+                  Report User
                 </button>
               </div>
             )}
@@ -70,6 +70,7 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
               <Image
                 width={200}
                 height={200}
+                unoptimized
                 src={profile.profileImageUrl}
                 alt={profile.name}
                 className="w-full h-full object-cover"

@@ -55,6 +55,7 @@ export default function ActivityCard({ type, title, isRead, createdAt, payload, 
                                 src={payload.imageUrl}
                                 alt={title}
                                 priority
+                                unoptimized
                                 width={100}
                                 height={100}
                                 className="h-full w-full object-fill"

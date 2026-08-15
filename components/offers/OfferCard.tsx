@@ -6,6 +6,7 @@ import { formatCountdown } from "@/utils/formatCountdown";
 import { getOfferVariant } from "@/utils/offerVariant";
 import { parsePriceDropValue } from "@/utils/parsePriceDropValue";
 import Rating from "@mui/material/Rating";
+import type { ImageLoaderProps } from "next/image";
 import Image from "next/image";
 import Link from "next/link";
 import { FaRegUser } from "react-icons/fa6";
@@ -25,6 +26,8 @@ export default function OfferCard({ offer }: Props) {
 
   const priceDrop =
     offer.dealType === "price_drop" ? parsePriceDropValue(offer.value) : null;
+
+  const customLoader = ({ src }: ImageLoaderProps) => src;
 
   return (
     <Link
@@ -64,6 +67,7 @@ export default function OfferCard({ offer }: Props) {
         </div>
 
         <Image
+          loader={customLoader}
           src={offer.imageUrl}
           alt={offer.title}
           width={500}

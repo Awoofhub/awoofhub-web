@@ -1,87 +1,48 @@
+"use client";
 import { Comment } from "@/types/comment";
-import { formatDate } from "@/utils/formatDate";
-import { capitalizeFirstLetter } from "@/utils/truncate";
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from "react";
+import { Spinner } from "@chakra-ui/react";
+import CommentCard from "./CommentCard";
 
 interface Props {
     comments: Comment[];
+    isFetchingNextPage: boolean;
+    hasNextPage: boolean;
+    fetchNextPage: () => void;
 }
 
-export default function CommentContainer({ comments }: Props) {
-    const INITIAL_COUNT = 3;
-    const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
+export default function CommentContainer({ comments, hasNextPage, fetchNextPage, isFetchingNextPage, }: Props) {
 
-    const visibleComments = comments.slice(0, visibleCount);
 
-    const handleShowMore = () => {
-        if (visibleCount >= comments.length) {
-            setVisibleCount(INITIAL_COUNT);
-            return;
-        }
-        setVisibleCount((prev) => Math.min(prev + INITIAL_COUNT, comments.length));
-    };
-
-    // Fetch usernames for commenters where username is not provided
-  
     return (
         <>
-            <div className="bg-gray-100 rounded-lg overflow-y-auto" style={{ maxHeight: 350 }}>
+            <div className="bg-gray-100 rounded-lg overflow-y-auto">
                 <div className="space-y-0.5">
-                    {visibleComments.map(comment => (
-
-                        <Link href={`/profile/${comment.user.username}`} key={comment.id} className="rounded-lg flex flex-col gap-1 p-4 bg-white max-w-2xl">
-                            {/* Header Section */}
-                            <div className="flex items-center gap-4">
-                                    <div className="w-10 h-10 rounded-full overflow-hidden">
-                                        {comment.user.profileImageUrl ? (
-                                            <Image
-                                                width={40}
-                                                height={40}
-                                                src={comment.user.profileImageUrl}
-                                                alt={comment.user.name}
-                                                className="w-full h-full object-cover"
-                                            />
-                                        ) : (
-                                            <div className="bg-green-500 text-white flex items-center justify-center w-full h-full">
-                                                <span className="font-semibold">{capitalizeFirstLetter(comment.user.name)}</span>
-                                            </div>
-                                        )}
-                                    </div>
-                                    <span className="font-medium text-gray-900 text-lg hover:underline">
-                                        {comment.user.name}
-                                    </span>
-    
-                            </div>
-
-                            {/* Meta Section */}
-                            <div className="text-gray-400 text-sm">
-                                {formatDate(comment.createdAt)}
-                            </div>
-
-                            {/* Body Section */}
-                            <div className="text-gray-800 leading-relaxed text-base">
-                                {comment.comment}
-                            </div>
-                        </Link>
-
+                    {comments.map(comment => (
+                        <CommentCard comment={comment} key={comment.id} />
                     ))}
                 </div>
             </div>
 
-            {comments.length > INITIAL_COUNT && (
+            {isFetchingNextPage ? (
+                <div className="flex justify-center mt-5 w-full" >
+                    <Spinner
+                        className="w-10 h-10 text-primary"
+                        data-testid="loading"
+                    />
+                </div>
+            ) : hasNextPage ? (
                 <div className="flex justify-center mt-3 flex-col gap-2">
                     <div className="border-b border-gray-300 w-full" />
+
                     <button
                         type="button"
-                        onClick={handleShowMore}
+                        onClick={fetchNextPage}
                         className="text-sm font-semibold text-primary hover:underline cursor-pointer"
                     >
-                        {visibleCount >= comments.length ? 'Show less' : `See more Comments`}
+                        See more Comments
                     </button>
                 </div>
-            )}
+            ) : null}
         </>
     );
 };

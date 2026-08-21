@@ -174,9 +174,6 @@ export default function OfferPage({ params }: Props) {
           onClose={() => setIsReportOpen(false)}
           targetType="offer"
           targetId={offer.id}
-          targetName={offer.title}
-          targetImage={offer.imageUrl}
-          targetBadge={offer.contributor.name}
         />
 
         <ShareModal

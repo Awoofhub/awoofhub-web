@@ -4,20 +4,22 @@ import { Comment, commentData } from "@/types/comment";
 
 
 async function writeComment(id: string, payload: commentData): Promise<ApiResponse<Comment>> {
-  const res: ApiResponse<Comment> = await apiClient.post(`/comments/offer/${id}`, payload)
+    const res: ApiResponse<Comment> = await apiClient.post(`/comments/offer/${id}`, payload)
 
-  return res;
+    return res;
 }
 
-async function getAllComments(id: string): Promise<ApiResponse<Comment[]>> {
-    const res: ApiResponse<Comment[]> = await apiClient.get(`/comments/offer/${id}`)
+async function getCommentsForOffer(id: string, page: number, limit: number): Promise<ApiResponse<Comment[]>> {
+    const res: ApiResponse<Comment[]> = await apiClient.get(`/comments/offer/${id}`, {
+        params: { page, limit },
+    })
 
     return res;
 }
 
 const CommentService = {
     writeComment,
-    getAllComments,
+    getCommentsForOffer,
 };
 
 export default CommentService;

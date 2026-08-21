@@ -1,5 +1,5 @@
 "use client";
-import ReportModal from "@/components/modals/ReportModal";
+import ReportModal from "@/components/modals/ReportModall";
 import { User } from "@/types/user";
 import { capitalizeFirstLetter } from "@/utils/truncate";
 import { format } from "date-fns";

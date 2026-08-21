@@ -16,7 +16,6 @@ import { LocationIconFor, ValueIconFor } from "./OfferCardIcons";
 
 interface Props {
   offer: Offer;
-  index?: number;
 }
 
 export default function OfferCard({ offer }: Props) {

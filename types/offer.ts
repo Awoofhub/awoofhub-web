@@ -1,3 +1,5 @@
+import { Dayjs } from "dayjs";
+
 export interface CreateOfferData {
   title: string;
   description: string;
@@ -9,7 +11,7 @@ export interface CreateOfferData {
   couponCode?: string;
   brandName: string;
   location: string;
-  endDate: string | null;
+  endDate: Dayjs;
 }
 
 export interface UpdateOfferData {
@@ -23,6 +25,7 @@ export interface UpdateOfferData {
   couponCode?: string;
   brandName?: string;
   location?: string;
+  endDate?: Dayjs;
 }
 
 export interface Offer {

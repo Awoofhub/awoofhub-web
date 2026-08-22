@@ -82,13 +82,15 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
       category: undefined,
       dealType: undefined,
       imageUrl: "",
-      endDate: null,
+      endDate: dayjs().add(1, 'day'),
       brandName: "",
       value: "",
       location: "",
       externalLink: "",
     },
   });
+
+  const { isDirty } = formState;
 
   useEffect(() => {
     if (!editOfferId || !Offer) return;
@@ -111,7 +113,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
       title: Offer.title,
       description: Offer.description,
       brandName: Offer.brandName,
-      endDate: Offer.endDate,
+      endDate: Offer.endDate ? dayjs(Offer.endDate) : dayjs(),
       value: Offer.value,
       normalPrice,
       awoofPrice,
@@ -145,7 +147,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
       title: data.title,
       description: data.description,
       brandName: data.brandName,
-      endDate: dayjs(data.endDate).toISOString(),
+      endDate: data.endDate,
       value,
       location: data.location,
       externalLink: normalizeUrl(data.externalLink),
@@ -153,10 +155,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
       imageUrl: data.imageUrl,
     };
 
-    console.log(editOfferId)
-
     if (editOfferId) {
-      console.log("is it here?")
       updateOffer.submit(payload);
     } else {
       createOffer.submit(payload);
@@ -164,7 +163,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
 
   }
 
-  const isSubmitDisabled = createOffer.isPending || updateOffer.isPending || isUploading
+  const isSubmitDisabled = createOffer.isPending || updateOffer.isPending || isUploading || (Boolean(editOfferId) && !formState.isDirty);
 
   if (editOfferId && (isLoading || isLoadingModeration)) {
     return <Loading />

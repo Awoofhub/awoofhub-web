@@ -2,7 +2,7 @@
 
 import { Pencil } from "lucide-react";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaRegImage } from "react-icons/fa6";
 import { MdClose } from "react-icons/md";
 import { ImageCropperModal } from "./ImageCropperModal";
@@ -20,6 +20,13 @@ export const ImageUploader = ({ value, uploadPhoto,  isUploading, onChange, erro
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [imagePreview, setImagePreview] = useState<string | null>(value || null);
+
+  useEffect(() => {
+    if (value) {
+      setImagePreview(value);
+    }
+  }, [value]);
+  
   const [imageError, setImageError] = useState<string>("");
   const [cropModalOpen, setCropModalOpen] = useState(false);
   const [cropSrc, setCropSrc] = useState<string | null>(null);

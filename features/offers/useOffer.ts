@@ -15,6 +15,7 @@ export const useOffer = ({ id }: GetOfferOptions) => {
     const { data, isLoading } = useQuery({
         queryKey: ['offers', id],
         queryFn: () => getOffer({ id }),
+        enabled: Boolean(id),
     });
 
     return { data, isLoading };

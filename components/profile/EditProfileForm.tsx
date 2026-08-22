@@ -63,7 +63,7 @@ export const EditProfileForm = ({ onSuccess }: EditProfileFormProps) => {
     if (file) {
       try {
         const res = await uploadPhoto(file);
-        setValue("profileImageUrl", res.data, {
+        setValue("profileImageUrl", res, {
           shouldDirty: true,
         });
       } catch (err) {

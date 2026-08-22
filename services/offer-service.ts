@@ -57,7 +57,7 @@ async function randomOffers(): Promise<ApiResponse<Offer[]>> {
 }
 
 async function updateOffer(id: string, payload: UpdateOfferData): Promise<ApiResponse<Offer>> {
-  const res: ApiResponse<Offer> = await apiClient.post(`/offers/${id}`, payload)
+  const res: ApiResponse<Offer> = await apiClient.patch(`/offers/${id}`, payload)
 
   return res;
 }

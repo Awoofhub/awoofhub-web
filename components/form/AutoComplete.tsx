@@ -112,7 +112,7 @@ export const TomTomAutocomplete = ({ label, error, compulsory, onPlaceSelect, va
                             input: {
                                 ...params.InputProps,
                                 disableUnderline: true,
-                                className: `!mt-2 !w-full !px-3 !py-3 !bg-white !border ${error ? '!border-red-500' : '!border-gray-300'} !rounded-md !shadow-sm !text-base !lg:text-lg focus-within:!border-orange-500
+                                className: `!mt-2 !w-full !px-3 !py-2 !bg-white !border ${error ? '!border-red-500' : '!border-gray-300'} !rounded-md !shadow-sm !text-base !lg:text-lg focus-within:!border-orange-500
                                 [&_.MuiAutocomplete-endAdornment]:!px-3`,
                             },
                             htmlInput: {

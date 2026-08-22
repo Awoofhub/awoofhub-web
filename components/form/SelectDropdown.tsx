@@ -42,7 +42,7 @@ export function SelectDropdown({ data, value, onChange }: Props) {
   const isSelected = value !== undefined;
 
   return (
-    <div ref={dropdownRef} className="relative w-full font-baloo text-[16px] font-medium">
+    <div ref={dropdownRef} className="relative w-full text-[16px] font-medium">
       <button
         type="button"
         onClick={toggleDropdown}
@@ -54,7 +54,7 @@ export function SelectDropdown({ data, value, onChange }: Props) {
           h-[40px]
           ${isSelected
             ? "border-primary bg-primary text-white"
-            : "border-[#595858B2] bg-white text-[#0C0C0C] hover:border-[#737373]"
+            : "border-[#595858B2] bg-white text-gray-400 font-normal hover:border-[#737373]"
           }
         `}
       >
@@ -73,7 +73,7 @@ export function SelectDropdown({ data, value, onChange }: Props) {
           className="
             absolute left-0 top-full z-50 mt-1 max-h-50 w-full
             overflow-y-auto overflow-hidden whitespace-nowrap
-            rounded-xl border border-gray-100 bg-white py-1
+            rounded-xl border border-gray-100 bg-white py-1 font-baloo
             font-medium shadow-sm
           "
         >

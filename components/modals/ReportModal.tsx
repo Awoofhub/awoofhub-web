@@ -5,7 +5,7 @@ import { CreateReportData } from "@/types/report";
 import Image from "next/image";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { SelectDropdown } from "../form/SelectDropdown";
+import { FormSelectDropdown } from "../form/FormSelectDropdown";
 import ReportConfirmationModal from "./ReportConfirmationModal";
 
 const ReportReasons = [
@@ -86,36 +86,26 @@ export default function ReportModal({ isOpen, onClose, targetType, targetId }: P
               <Controller
                 name="type"
                 control={control}
-                rules={{
-                  required: "Please select a report reason.",
-                }}
+                rules={{ required: "Please select a report reason." }}
                 render={({ field, fieldState }) => (
-                  <div className="my-4">
-                    <label className="block text-sm md:text-lg font-baloo font-medium text-muted mb-1">
-                      Reason for this report
-                    </label>
-                    <SelectDropdown
-                      data={ReportReasons}
-                      value={field.value}
-                      onChange={field.onChange}
-                    />
-
-                    {fieldState.error && (
-                      <p className="text-sm text-red-500 mt-1">
-                        {fieldState.error.message}
-                      </p>
-                    )}
-                  </div>
+                  <FormSelectDropdown
+                    label="Reason for this report"
+                    data={ReportReasons}
+                    value={field.value}
+                    onChange={field.onChange}
+                    error={fieldState.error?.message}
+                  />
                 )}
               />
 
-              {targetType !== "comment" && (<textarea
-                {...register("description", { required: "Please provide a description." })}
-                placeholder="Write a short note"
-                rows={3}
-                disabled={isPending}
-                className="w-full border mb-4 border-gray-200 rounded-lg p-3 text-sm resize-none disabled:bg-gray-50 disabled:text-gray-400"
-              />
+              {targetType !== "comment" && (
+                <textarea
+                  {...register("description", { required: "Please provide a description." })}
+                  placeholder="Write a short note"
+                  rows={3}
+                  disabled={isPending}
+                  className="w-full border mb-4 border-gray-200 rounded-lg p-3 text-sm resize-none disabled:bg-gray-50 disabled:text-gray-400"
+                />
               )}
 
               <div className="flex flex-col-reverse xs:flex-row justify-end gap-2">

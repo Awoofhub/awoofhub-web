@@ -2,7 +2,7 @@ import { Bell } from "lucide-react";
 import Link from "next/link";
 import { GiCheckMark } from "react-icons/gi";
 
-export default function ActivityEmptyState() {
+export default function NotificationEmptyState() {
   return (
     <section className="max-w-[1440px] mx-auto pt-6 pb-20 lg:py-8 px-4 md:px-6 lg:px-8 xl:px-12">
       <div className="flex items-center justify-between mb-6 border-b-2 border-gray-200 pb-4">

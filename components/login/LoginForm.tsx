@@ -9,7 +9,6 @@ import { Lock, Mail } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { LoginErrorModal } from "./LoginErrorModal";
 
 export const LoginForm = ({ onSuccess }: LoginFormProps) => {
   const login = useLogin({ onSuccess });
@@ -126,17 +125,6 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
           </p>
         </div>
       </form>
-
-      {login.isError && isIncorrectPassword && (
-        <LoginErrorModal
-          message={errorMessage}
-          onClose={() => login.reset()}
-          onReset={() => {
-            reset();
-            login.reset();
-          }}
-        />
-      )}
     </div>
   );
 };

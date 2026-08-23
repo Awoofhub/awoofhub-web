@@ -1,18 +1,18 @@
-import ActivityService from "@/services/activity-service";
-import { ActivityData } from "@/types/activity";
+import NotificationService from "@/services/notification-service";
 import { ApiResponse } from "@/types/api-response";
+import { NotificationData } from "@/types/notification";
 import { InfiniteData, useMutation, useQueryClient } from "@tanstack/react-query";
 
-type ActivityOptions = {
+type NotificationOptions = {
     id: string;
 };
 
-export const markAsRead = async ({ id }: ActivityOptions): Promise<{}> => {
-    const result = await ActivityService.markAsRead(id);
+export const markAsRead = async ({ id }: NotificationOptions): Promise<{}> => {
+    const result = await NotificationService.markAsRead(id);
     return result.data
 };
 
-export function useActivityMarkAsRead({ id }: ActivityOptions) {
+export function useNotificationMarkAsRead({ id }: NotificationOptions) {
     const queryClient = useQueryClient();
     const queryKey = ['notifications']
 
@@ -22,7 +22,7 @@ export function useActivityMarkAsRead({ id }: ActivityOptions) {
             await queryClient.cancelQueries({ queryKey });
             const previousNotifications = queryClient.getQueryData(queryKey);
 
-            queryClient.setQueryData<InfiniteData<ApiResponse<ActivityData[]>>>(queryKey, (oldData) => {
+            queryClient.setQueryData<InfiniteData<ApiResponse<NotificationData[]>>>(queryKey, (oldData) => {
                 if (!oldData) return oldData
 
                 return {

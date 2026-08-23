@@ -1,6 +1,6 @@
-import ActivityService from '@/services/activity-service';
-import { ActivityData } from '@/types/activity';
+import NotificationService from '@/services/notification-service';
 import { ApiResponse } from '@/types/api-response';
+import { NotificationData } from '@/types/notification';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 
@@ -9,14 +9,14 @@ type GetActivityOptions = {
     limit: number,
 };
 
-export const getActivity = ({ page = 1, limit }: GetActivityOptions): Promise<ApiResponse<ActivityData[]>> => {
-    return ActivityService.getAllActivities(page, limit);
+export const getNotification = ({ page = 1, limit }: GetActivityOptions): Promise<ApiResponse<NotificationData[]>> => {
+    return NotificationService.getAllNotifications(page, limit);
 };
 
-export const useActivity = ({ limit = 6 }: GetActivityOptions) => {
+export const useNotification = ({ limit = 6 }: GetActivityOptions) => {
     const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isError, error } = useInfiniteQuery({
         queryKey: ['notifications'],
-        queryFn: ({ pageParam = 1 }) => getActivity({ page: pageParam, limit }),
+        queryFn: ({ pageParam = 1 }) => getNotification({ page: pageParam, limit }),
 
         getNextPageParam: (lastPage) => {
             if (!lastPage.meta) return undefined;

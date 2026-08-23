@@ -1,6 +1,6 @@
 "use client";
-import MyOfferListItem from "@/components/myoffers/MyOfferListItem";
-import MyOffersTabs from "@/components/myoffers/MyOffersTabs";
+import MyOfferListItem from "@/components/my-offers/MyOfferListItem";
+import MyOffersTabs from "@/components/my-offers/MyOffersTabs";
 import { useFilter } from "@/features/offers/useFilter";
 import { MyOffersTabsCount } from "@/types/offer";
 import { use } from "react";

@@ -1,19 +1,19 @@
-import ActivityService from "@/services/activity-service";
+import ActivityService from "@/services/notification-service";
 import { useQuery } from "@tanstack/react-query";
 import { useUser } from "../user/useUser";
 
-export const getActivityCount = async (): Promise<number> => {
+export const getNotificationCount = async (): Promise<number> => {
     const result = await ActivityService.getActivityCount();
     return result.data.unread;
 };
 
 
-export const useActivityCount = () => {
+export const useNotificationCount = () => {
     const { data: user } = useUser();
 
     const { data, isFetching, isFetched } = useQuery({
         queryKey: ['notifications', 'count'],
-        queryFn: () => getActivityCount(),
+        queryFn: () => getNotificationCount(),
         refetchInterval: 5000,
         enabled: !!user,
     });

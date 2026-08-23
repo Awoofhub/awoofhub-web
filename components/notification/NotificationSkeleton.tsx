@@ -2,7 +2,7 @@ interface Props {
   number: number;
 }
 
-export default function ActivityListSkeleton({ number }: Props) {
+export default function NotificationListSkeleton({ number }: Props) {
   return (
     <div className="flex flex-col gap-2 w-full">
       {[...Array(number)].map((_, i) => (

@@ -4,7 +4,6 @@ import { InputField } from "@/components/form/InputField";
 import { useUploadSinglePhoto } from "@/features/upload/useUpdateProfilePhoto";
 import { useUpdateUser } from "@/features/user/useUpdateUser";
 import { useUser } from "@/features/user/useUser";
-import { notificationsStore } from "@/store/notifications/notifications";
 import { EditProfileFormProps } from "@/types/form-props";
 import { UpdateUserData, UsernameCheckResult } from "@/types/user";
 import { capitalizeFirstLetter } from "@/utils/truncate";
@@ -16,6 +15,7 @@ import { FiCamera } from "react-icons/fi";
 import { ImSpinner2 } from "react-icons/im";
 import { TomTomAutocomplete } from "../form/AutoComplete";
 import UsernameChecker from "../form/UsernameChecker";
+import { showToast } from "../toast/Toast";
 
 export const EditProfileForm = ({ onSuccess }: EditProfileFormProps) => {
   const { data: currentUser } = useUser();
@@ -32,9 +32,9 @@ export const EditProfileForm = ({ onSuccess }: EditProfileFormProps) => {
 
   const isUsernameLocked = currentUser?.usernameChangeLockedUntil
     ? differenceInDays(
-        parseISO(currentUser.usernameChangeLockedUntil),
-        new Date(),
-      ) > 0
+      parseISO(currentUser.usernameChangeLockedUntil),
+      new Date(),
+    ) > 0
     : false;
 
   const currentUsername = currentUser?.username ?? "";
@@ -67,14 +67,10 @@ export const EditProfileForm = ({ onSuccess }: EditProfileFormProps) => {
           shouldDirty: true,
         });
       } catch (err) {
-        const message =
-          err instanceof Error ? err.message : "Something went wrong";
-        notificationsStore.getState().showNotification({
-          type: "error",
-          title: "Error",
-          duration: 5000,
-          message,
-        });
+        const message = err instanceof Error ? err.message : "Something went wrong";
+      
+        showToast('error', message);
+
       }
     }
   };
@@ -190,11 +186,10 @@ export const EditProfileForm = ({ onSuccess }: EditProfileFormProps) => {
             type="submit"
             isLoading={updateUser.isPending}
             isDisabled={updateUser.isPending || !isDirty}
-            className={`!font-baloo !rounded-md !py-3 !w-full !max-w-[400px] ${
-              !isDirty
+            className={`!font-baloo !rounded-md !py-3 !w-full !max-w-[400px] ${!isDirty
                 ? "!bg-[#FFD5C3] !text-white cursor-not-allowed"
                 : "!bg-primary !text-white"
-            }`}
+              }`}
           >
             Save Changes
           </Button>

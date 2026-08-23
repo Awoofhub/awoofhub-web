@@ -1,16 +1,16 @@
 "use client"
-import { useActivityMarkAsRead } from "@/features/activity/useActivityMarkAsRead";
-import { ActivityData } from '@/types/activity';
+import { useNotificationMarkAsRead } from "@/features/notification/useNotificationMarkAsRead";
+import { NotificationData } from '@/types/notification';
 import { useRouter } from "next/navigation";
-import ActivityCard from "./ActivityCard";
-import { ActivityType } from "./ActivityIcon";
+import NotificationCard from './NotificationCard';
+import { NotificationType } from "./NotificationIcon";
 
 
 interface Props {
-    prop: ActivityData;
+    prop: NotificationData;
 }
 
-const getNavigationHref = (type: ActivityType, entityId: string): string | null => {
+const getNavigationHref = (type: NotificationType, entityId: string): string | null => {
     switch (type) {
         case 'user_suspended':
             return "/";
@@ -24,7 +24,7 @@ const getNavigationHref = (type: ActivityType, entityId: string): string | null 
         case 'offer_rejected':
         case 'offer_suspended':
         case 'offer_expired': {
-            const tabByType: Partial<Record<ActivityType, string>> = {
+            const tabByType: Partial<Record<NotificationType, string>> = {
                 offer_pending: 'pending',
                 offer_approved: 'approved',
                 offer_expiring: 'approved',
@@ -41,9 +41,9 @@ const getNavigationHref = (type: ActivityType, entityId: string): string | null 
     }
 };
 
-export default function Activity({ prop }: Props) {
+export default function Notification({ prop }: Props) {
     const router = useRouter();
-    const { markAsRead } = useActivityMarkAsRead({ id: prop.id });
+    const { markAsRead } = useNotificationMarkAsRead({ id: prop.id });
 
     const href = getNavigationHref(prop.type, prop.entityId);
 
@@ -58,7 +58,7 @@ export default function Activity({ prop }: Props) {
     };
 
     return (
-        <ActivityCard
+        <NotificationCard
             title={prop.title}
             createdAt={prop.createdAt}
             isRead={prop.isRead}

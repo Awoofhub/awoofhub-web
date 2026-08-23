@@ -2,18 +2,18 @@ import { cn } from "@/lib/utils";
 import { formatTimeAgo } from "@/utils/formatTimeAgo";
 import Image from "next/image";
 import { ComponentProps } from "react";
-import { ActivityIcon, ActivityType } from "./ActivityIcon";
+import { NotificationIcon, NotificationType } from "./NotificationIcon";
 
-interface ActivityCardProps extends ComponentProps<'div'> {
+interface NotificationCardProps extends ComponentProps<'div'> {
     title: string;
-    type: ActivityType;
+    type: NotificationType;
     message: string;
     isRead: boolean;
     createdAt: string;
     payload: any;
 }
 
-export default function ActivityCard({ type, title, isRead, createdAt, payload, message, ...rest }: ActivityCardProps) {
+export default function NotificationCard({ type, title, isRead, createdAt, payload, message, ...rest }: NotificationCardProps) {
 
     return (
 
@@ -29,7 +29,7 @@ export default function ActivityCard({ type, title, isRead, createdAt, payload, 
                 <div className="flex flex-wrap items-start justify-between gap-2">
                     <div className="flex flex-1 flex-row items-center gap-2">
 
-                        <ActivityIcon type={type} />
+                        <NotificationIcon type={type} />
 
                         <h3 className="text-sm md:text-base font-bold  text-black">
                             {title}

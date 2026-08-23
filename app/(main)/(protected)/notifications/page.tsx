@@ -1,17 +1,17 @@
 "use client";
-import ActivityEmptyState from "@/components/activity/ActivityEmptyState";
-import { ActivityError } from "@/components/activity/ActivityError";
-import ActivityList from "@/components/activity/ActivityList";
-import ActivityListSkeleton from "@/components/activity/ActivitySkeleton";
-import { useActivity } from "@/features/activity/useActivity";
-import { useActivityCount } from "@/features/activity/useActivityCount";
-import { useActivityMarkAllAsRead } from "@/features/activity/useActivityMarkAllAsRead";
+import NotificationEmptyState from "@/components/notification/NotificationEmptyState";
+import { NotificationError } from "@/components/notification/NotificationError";
+import NotificationList from "@/components/notification/NotificationList";
+import NotificationListSkeleton from "@/components/notification/NotificationSkeleton";
+import { useNotification } from "@/features/notification/useNotification";
+import { useNotificationCount } from "@/features/notification/useNotificationCount";
+import { useNotificationMarkAllAsRead } from "@/features/notification/useNotificationMarkAllAsRead";
 import { Spinner } from "@chakra-ui/react";
 import { useEffect, useMemo } from "react";
 import { GiCheckMark } from "react-icons/gi";
 import { useInView } from "react-intersection-observer";
 
-export default function ActivityPage() {
+export default function NotificationPage() {
   const [ref, inView] = useInView();
 
   const {
@@ -21,15 +21,15 @@ export default function ActivityPage() {
     fetchNextPage,
     hasNextPage,
     isError,
-  } = useActivity({
+  } = useNotification({
     limit: 8,
   });
 
-  const { data: count } = useActivityCount();
+  const { data: count } = useNotificationCount();
 
-  const { markAllAsRead, isPending } = useActivityMarkAllAsRead();
+  const { markAllAsRead, isPending } = useNotificationMarkAllAsRead();
 
-  const allActivities = useMemo(() => {
+  const allNotifications = useMemo(() => {
     return data?.pages.flatMap((page) => page.data) ?? [];
   }, [data]);
 
@@ -41,15 +41,15 @@ export default function ActivityPage() {
 
   // Early returns make JSX cleaner
   if (isError) {
-    return <ActivityError />;
+    return <NotificationError />;
   }
 
   const hasUnread = (count ?? 0) > 0;
-  const isLoading = isFetching && allActivities.length === 0;
-  const isEmpty = !isLoading && allActivities.length === 0;
+  const isLoading = isFetching && allNotifications.length === 0;
+  const isEmpty = !isLoading && allNotifications.length === 0;
 
   if (isEmpty) {
-    return <ActivityEmptyState />;
+    return <NotificationEmptyState />;
   }
 
   return (
@@ -70,10 +70,10 @@ export default function ActivityPage() {
       </div>
 
       {isLoading ? (
-        <ActivityListSkeleton number={5} />
+        <NotificationListSkeleton number={5} />
       ) : (
         <>
-          <ActivityList activities={allActivities} />
+          <NotificationList notifications={allNotifications} />
           <div
             ref={ref}
             className="h-10 flex items-center justify-center mt-4 lg:mt-6"
@@ -84,7 +84,7 @@ export default function ActivityPage() {
                 data-testid="loading"
               />
             )}
-            {!hasNextPage && allActivities.length > 0 && (
+            {!hasNextPage && allNotifications.length > 0 && (
               <p className="text-center text-[14px] sm:text-[16px]">
                 No more Notifications
               </p>

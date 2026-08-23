@@ -1,10 +1,10 @@
 "use client";
 
-import OfferActionButton from "@/components/myoffers/OfferActionButton";
-import OfferDateLabel from "@/components/myoffers/OfferDateLabel";
-import OfferDescription from "@/components/myoffers/OfferDescription";
-import OfferNoticeBox from "@/components/myoffers/OfferNoticeBox";
-import StatusBadge from "@/components/myoffers/StatusBadge";
+import OfferActionButton from "@/components/my-offers/OfferActionButton";
+import OfferDateLabel from "@/components/my-offers/OfferDateLabel";
+import OfferDescription from "@/components/my-offers/OfferDescription";
+import OfferNoticeBox from "@/components/my-offers/OfferNoticeBox";
+import StatusBadge from "@/components/my-offers/StatusBadge";
 import { useLatestModeration } from "@/features/moderation/useLatestModeration";
 import { Offer } from "@/types/offer";
 import { getDisplayStatus } from "@/utils/offerStatus";

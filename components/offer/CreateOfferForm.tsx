@@ -20,7 +20,7 @@ import { CurrencyInputField } from "../form/CurrencyInputField";
 import { FormSelectDropdown } from "../form/FormSelectDropdown";
 import { InputField } from "../form/InputField";
 import Loading from "../loading/Loading";
-import OfferNoticeBox from "../myoffers/OfferNoticeBox";
+import OfferNoticeBox from "../my-offers/OfferNoticeBox";
 import { ImageUploader } from "./ImageUploader";
 import { LocationPicker } from "./LocationPicker";
 

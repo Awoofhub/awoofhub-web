@@ -1,10 +1,10 @@
 import { apiClient } from "@/lib/api-client";
-import { ActivityData } from "@/types/activity";
 import { ApiResponse } from "@/types/api-response";
+import { NotificationData } from "@/types/notification";
 
 
-async function getAllActivities(page: number, limit: number): Promise<ApiResponse<ActivityData[]>> {
-    const res: ApiResponse<ActivityData[]> = await apiClient.get('/notifications/', {
+async function getAllNotifications(page: number, limit: number): Promise<ApiResponse<NotificationData[]>> {
+    const res: ApiResponse<NotificationData[]> = await apiClient.get('/notifications/', {
         params: { page, limit },
     })
 
@@ -28,11 +28,11 @@ async function markAllAsRead(): Promise<ApiResponse<{}>> {
 }
 
 
-const ActivityService = {
-    getAllActivities,
+const NotificationService = {
+    getAllNotifications,
     getActivityCount,
     markAsRead,
     markAllAsRead
 };
 
-export default ActivityService;
+export default NotificationService;

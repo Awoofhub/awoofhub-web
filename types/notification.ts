@@ -1,10 +1,10 @@
-import { ActivityType } from "@/components/activity/ActivityIcon";
+import { NotificationType } from "@/components/notification/NotificationIcon";
 import { User } from "@/types/user";
 
-export interface ActivityData {
+export interface NotificationData {
     id: string;
     user: User;
-    type: ActivityType;
+    type: NotificationType;
     title: string;
     message: string;
     entityType: 'offer' | 'user';

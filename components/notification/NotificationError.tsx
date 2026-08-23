@@ -1,5 +1,5 @@
 
-export function ActivityError() {
+export function NotificationError() {
     return (
         <div className="flex flex-col items-center justify-center min-h-[50vh]">
             <h2 className="text-xl font-bold">Oops! Something went wrong</h2>

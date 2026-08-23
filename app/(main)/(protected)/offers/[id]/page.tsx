@@ -1,7 +1,7 @@
 "use client";
 
-import ReportModal from "@/components/modals/ReportModal";
-import ShareModal from "@/components/modals/ShareModal";
+import ShareModal from "@/components/modals/offer/ShareModal";
+import ReportModal from "@/components/modals/report/ReportModal";
 import SingleOffer from "@/components/offer/SingleOffer";
 import SingleOfferSkeleton from "@/components/offer/SingleOfferSkeleton";
 import OfferList from "@/components/offers/OfferList";

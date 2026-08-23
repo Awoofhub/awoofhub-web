@@ -1,4 +1,4 @@
-import LogoutModal from "@/components/modals/LogoutModal";
+import LogoutModal from "@/components/modals/user/LogoutModal";
 import { useLogout } from "@/features/auth/useLogout";
 import { User } from "@/types/user";
 import { capitalizeFirstLetter } from "@/utils/truncate";
@@ -8,9 +8,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaRegEnvelope } from "react-icons/fa6";
 import {
-  FiHelpCircle,
-  FiLogOut,
-  FiUser,
+    FiHelpCircle,
+    FiLogOut,
+    FiUser,
 } from "react-icons/fi";
 
 interface Props {

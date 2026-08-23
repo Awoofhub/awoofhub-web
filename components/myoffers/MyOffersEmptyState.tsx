@@ -1,13 +1,13 @@
-import Link from "next/link";
 import { Plus } from "lucide-react";
-import { MY_OFFERS_EMPTY_STATES } from "./myOffersEmptyStates";
+import Link from "next/link";
 import EmptyStateIcon from "./EmptyStateIcon";
+import { MY_OFFERS_EMPTY_STATES } from "./myOffersEmptyStates";
 
 interface Props {
-  tab: string;
+  tab?: string;
 }
 
-export default function MyOffersEmptyState({ tab }: Props) {
+export default function MyOffersEmptyState({ tab = "all" }: Props) {
   const config = MY_OFFERS_EMPTY_STATES[tab] ?? MY_OFFERS_EMPTY_STATES.all;
 
   return (

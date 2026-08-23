@@ -1,6 +1,6 @@
 "use client";
 import { Button } from '@/components/button/Button';
-import LogoutModal from "@/components/modals/LogoutModal";
+import LogoutModal from "@/components/modals/user/LogoutModal";
 import { useActivityCount } from '@/features/activity/useActivityCount';
 import { useMessageCount } from "@/features/chat/useMessageCount";
 import { useUser } from "@/features/user/useUser";

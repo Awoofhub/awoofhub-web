@@ -1,5 +1,5 @@
 import ReportService from "@/services/report-service";
-import { CreateReportData } from "@/types/report";
+import { CreateReportData, Report } from "@/types/report";
 import { useMutation } from "@tanstack/react-query";
 
 

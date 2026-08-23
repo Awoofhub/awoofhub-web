@@ -1,29 +1,34 @@
 "use client";
+
+import OfferActionButton from "@/components/myoffers/OfferActionButton";
+import OfferDateLabel from "@/components/myoffers/OfferDateLabel";
+import OfferDescription from "@/components/myoffers/OfferDescription";
+import OfferNoticeBox from "@/components/myoffers/OfferNoticeBox";
+import StatusBadge from "@/components/myoffers/StatusBadge";
 import { useLatestModeration } from "@/features/moderation/useLatestModeration";
 import { Offer } from "@/types/offer";
 import { getDisplayStatus } from "@/utils/offerStatus";
 import { format } from "date-fns";
 import Image from "next/image";
 import { FiMapPin, FiUsers, FiX } from "react-icons/fi";
-import OfferActionButton from "./OfferActionButton";
-import OfferDateLabel from "./OfferDateLabel";
-import OfferDescription from "./OfferDescription";
-import OfferNoticeBox from "./OfferNoticeBox";
-import StatusBadge from "./StatusBadge";
+
 
 interface Props {
   offer: Offer;
+  isOpen: boolean
   onClose: () => void;
 }
 
-export default function OfferStatusModal({ offer, onClose }: Props) {
+export default function MyOfferModal({ offer, isOpen, onClose }: Props) {
+  
   const status = getDisplayStatus(offer);
   const needsModeration = status === "rejected" || status === "suspended";
 
   const { data: moderation, isLoading } = useLatestModeration(
-    { id: offer.id },
-    needsModeration,
+    { id:  needsModeration ? offer.id : "" },
   );
+
+  if (!isOpen) return null;
 
   return (
     <div

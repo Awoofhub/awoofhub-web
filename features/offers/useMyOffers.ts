@@ -7,15 +7,15 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 type GetMyOffersOptions = {
     page?: number,
     limit: number,
-    tab?: string,
+    tab: string,
 };
 
-export const getMyOffers = ({ page = 1, limit, tab = "all" }: GetMyOffersOptions): Promise<ApiResponse<Offer[]>> => {
+export const getMyOffers = ({ page = 1, limit, tab }: GetMyOffersOptions): Promise<ApiResponse<Offer[]>> => {
     return OfferService.myOffers(page, limit, tab);
 };
 
 export const useMyOffers = ({ limit = 8, tab = "all" }: GetMyOffersOptions) => {
-    const { data, isFetched, isFetching, isFetchingNextPage, fetchNextPage, hasNextPage, isError, error } = useInfiniteQuery({
+    const { data, isFetched, isFetching,isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError, error } = useInfiniteQuery({
         queryKey: ['offers', 'mine', limit, tab],
         queryFn: ({ pageParam = 1 }) => getMyOffers({ page: pageParam, limit, tab }),
 
@@ -28,5 +28,5 @@ export const useMyOffers = ({ limit = 8, tab = "all" }: GetMyOffersOptions) => {
         initialPageParam: 1,
     });
 
-    return { data, isFetched, isFetching, fetchNextPage, hasNextPage, isFetchingNextPage, isError, error };
+    return { data, isFetched, isFetching, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage, isError, error };
 };

@@ -1,79 +1,52 @@
-import { Offer } from "@/types/offer";
-import { DisplayStatus, getDisplayStatus } from "@/utils/offerStatus";
-import { truncateId } from "@/utils/truncate";
-import { format } from "date-fns";
-import Image from "next/image";
-import { FiArrowUpRight, FiMapPin, FiUsers } from "react-icons/fi";
-import StatusBadge from "./StatusBadge";
+import { useMyOffers } from "@/features/offers/useMyOffers";
+import { Spinner } from "@chakra-ui/react";
+import { useEffect, useMemo } from "react";
+import { useInView } from "react-intersection-observer";
+import MyOfferListCard from "./MyOfferListCard";
+import MyOfferListItemSkeleton from "./MyOfferListItemSkeleton";
+import MyOffersEmptyState from "./MyOffersEmptyState";
 
 interface Props {
-  offer: Offer;
-  onClick: () => void;
+  tab?: string;
 }
 
-function getDateLabel(offer: Offer, status: DisplayStatus) {
-  if (status === "active") {
-    return `Live since: ${format(new Date(offer.createdAt), "do MMM yyyy")}`;
-  }
-  if (status === "expired") {
-    return `Was live: ${format(new Date(offer.createdAt), "do MMM yyyy")} - ${format(new Date(offer.endDate), "do MMM yyyy")}`;
-  }
-  return `Submitted: ${format(new Date(offer.createdAt), "do MMM yyyy")}`;
-}
 
-export default function MyOfferListItem({ offer, onClick }: Props) {
-  const status = getDisplayStatus(offer);
-  const dateLabel = getDateLabel(offer, status);
-  const isActive = status === "active";
+export default function MyOfferListItem({ tab }: Props) {
+  const [ref, inView] = useInView();
+
+
+  const { data, isFetching, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useMyOffers({
+    limit: 8,
+    tab: tab ?? "all",
+  });
+
+  const offers = useMemo(
+    () => data?.pages.flatMap((page) => page.data) ?? [],
+    [data]
+  )
+
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
+
 
   return (
-    <button
-      onClick={onClick}
-      className={`w-full flex flex-col xs:flex-row gap-3 md:gap-4 p-2 md:px-6 md:py-3 items-start md:items-center rounded-lg cursor-pointer border ${
-        isActive ? "border border-[#00A95D]" : "border-gray-100 border-2"
-      } hover:shadow-md transition-shadow text-left bg-white`}
-    >
-      <div className="w-full h-[130px] xxs:h-[150px] xs:w-[110px] xs:h-[110px] md:w-[130px] md:h-[130px] lg:w-[150px] lg:h-[150px] shrink-0 overflow-hidden rounded-md">
-        <Image
-          src={offer.imageUrl}
-          alt={offer.title}
-          unoptimized
-          width={200}
-          height={200}
-          className="w-full h-full object-fill"
-        />
+    <div className="grid grid-cols-2 xs:flex xs:flex-col gap-2">
+      {isLoading && <MyOfferListItemSkeleton />}
+      {!isLoading && !isFetching && offers.length === 0 && (
+        <MyOffersEmptyState tab={tab} />
+      )}
+      {!isLoading && offers.length > 0 && (
+        offers.map((offer) => (
+          <MyOfferListCard offer={offer} key={offer.id} />
+        )))
+      }
+      <div ref={ref} className="h-10 flex items-center justify-center mt-4">
+        {isFetchingNextPage && <Spinner className="text-primary w-10 h-10" size="md" />}
       </div>
-
-      <div className="flex-1 min-w-0 w-full">
-        <div className="flex items-center gap-2 mb-1">
-          <StatusBadge status={status} />
-        </div>
-        <h4 className="font-semibold text-black text-xs md:text-lg lg:text-xl mt-1 md:mt-2 line-clamp-1">
-          {offer.title}
-        </h4>
-        <p className="mt-1 text-primary md:text-black  font-medium text-[10px] md:text-sm md:mt-2 lg:mt-4 truncate">
-          {offer.category.name} | {offer.brandName}
-        </p>
-        <div className="flex items-center gap-1 text-muted text-[10px] md:text-xs mt-1">
-          <FiMapPin size={11} />
-          <span className="xxs:hidden">{truncateId(offer.location, 15)}</span>
-          <span className="hidden xxs:inline xs:hidden">{truncateId(offer.location, 30)}</span>
-          <span className="hidden xs:inline md:hidden">{truncateId(offer.location, 40)}</span>
-          <span className="hidden md:inline">{offer.location}</span>
-        </div>
-        <div className="md:mt-2 flex flex-wrap justify-between items-center gap-1">
-          <p className="text-muted text-[10px] md:text-xs">{dateLabel}</p>
-          <div className="flex items-center w-full md:w-22 justify-between gap-2">
-            <div className="flex items-center gap-1">
-              <FiUsers size={12} />
-              <span className="text-[8px] md:text-xs">
-                {offer.clickCount} grabs
-              </span>
-            </div>
-            <FiArrowUpRight color="#FE4F04" size={16} />
-          </div>
-        </div>
-      </div>
-    </button>
-  );
+    </div>
+  )
 }
+

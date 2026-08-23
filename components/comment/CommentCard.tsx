@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import ReportModal from "../modals/ReportModal";
+import ReportModal from "../modals/report/ReportModal";
 
 interface Props {
     comment: Comment;

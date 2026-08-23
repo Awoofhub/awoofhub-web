@@ -2,7 +2,7 @@
 import { Button } from "@/components/button/Button";
 import { TomTomAutocomplete } from "@/components/form/AutoComplete";
 import { InputField } from "@/components/form/InputField";
-import { JoinCommunitySuccessModal } from "@/components/modals/JoinCommunitySuccessModal";
+import { JoinCommunitySuccessModal } from "@/components/modals/community/JoinCommunitySuccessModal";
 import { useJoinCommunity } from "@/features/community/useJoinCommunity";
 import { JoinCommunityData } from "@/types/community";
 import { ChevronDown } from "lucide-react";

@@ -24,6 +24,7 @@ export const Toast = () => {
       hideProgressBar={false}
       closeOnClick
       pauseOnHover
+      newestOnTop
       draggable
     />
   );

@@ -3,7 +3,8 @@ import MyOfferListItem from "@/components/my-offers/MyOfferListItem";
 import MyOffersTabs from "@/components/my-offers/MyOffersTabs";
 import { useFilter } from "@/features/offers/useFilter";
 import { MyOffersTabsCount } from "@/types/offer";
-import { use } from "react";
+import { Spinner } from "@chakra-ui/react";
+import { Suspense, use } from "react";
 
 type FilterParams = {
   tab?: string,
@@ -13,7 +14,7 @@ interface FilterProps {
   searchParams: Promise<FilterParams>;
 }
 
-export default function MyOffersPage({ searchParams }: FilterProps) {
+function MyOffersPage({ searchParams }: FilterProps) {
   const params = use(searchParams);
   const { tab } = params;
 
@@ -27,8 +28,6 @@ export default function MyOffersPage({ searchParams }: FilterProps) {
     { value: "suspended", label: "Suspended" },
     { value: "expired", label: "Expired" },
   ];
-
-  console.log("Tab:", tab)
 
   return (
     <div className="bg-white">
@@ -52,5 +51,20 @@ export default function MyOffersPage({ searchParams }: FilterProps) {
         
       </div>
     </div>
+  );
+}
+
+
+export default function Filter(props: FilterProps) {
+  return (
+    <Suspense
+      fallback={
+        <section className="flex justify-center pt-14">
+          <Spinner size="xl" />
+        </section>
+      }
+    >
+        <MyOffersPage searchParams={props.searchParams} />
+    </Suspense>
   );
 }

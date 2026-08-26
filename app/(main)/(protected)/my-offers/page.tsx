@@ -28,6 +28,8 @@ export default function MyOffersPage({ searchParams }: FilterProps) {
     { value: "expired", label: "Expired" },
   ];
 
+      {console.log('Tab:', tab)}
+
   return (
     <div className="bg-white">
       <div className="px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto py-6">

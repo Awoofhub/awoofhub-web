@@ -10,10 +10,6 @@ interface Props {
 export default function MyOffersTabs({ tabs, activeTab, onChange }: Props) {
   const { data: counts } = useMyOffersTabsCount();
 
-    console.log("tabs:", tabs);
-  console.log("activeTab:", activeTab);
-  console.log("counts:", counts);
-
   return (
     <div className="flex gap-1 xs:gap-2 bg-gray-100 shadow-md md:p-2 rounded-lg overflow-x-auto no-scrollbar">
       {tabs.map((tab) => (

@@ -28,7 +28,7 @@ export default function MyOffersPage({ searchParams }: FilterProps) {
     { value: "expired", label: "Expired" },
   ];
 
-      {console.log('Tab:', tab)}
+  console.log("Tab:", tab)
 
   return (
     <div className="bg-white">

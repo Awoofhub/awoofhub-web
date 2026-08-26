@@ -7,7 +7,7 @@ import { Spinner } from "@chakra-ui/react";
 import { Suspense, use } from "react";
 
 type FilterParams = {
-  tab?: string,
+  tab?: string;
 };
 
 interface FilterProps {
@@ -28,6 +28,8 @@ function MyOffersPage({ searchParams }: FilterProps) {
     { value: "suspended", label: "Suspended" },
     { value: "expired", label: "Expired" },
   ];
+
+  console.log("Tab", tab)
 
   return (
     <div className="bg-white">
@@ -53,6 +55,7 @@ function MyOffersPage({ searchParams }: FilterProps) {
     </div>
   );
 }
+
 
 
 export default function Filter(props: FilterProps) {

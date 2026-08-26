@@ -1,8 +1,8 @@
 "use client";
 import { Button } from '@/components/button/Button';
-import LogoutModal from "@/components/modals/LogoutModal";
-import { useActivityCount } from '@/features/activity/useActivityCount';
+import LogoutModal from "@/components/modals/user/LogoutModal";
 import { useMessageCount } from "@/features/chat/useMessageCount";
+import { useNotificationCount } from '@/features/notification/useNotificationCount';
 import { useUser } from "@/features/user/useUser";
 import { capitalizeFirstLetter } from "@/utils/truncate";
 import Image from "next/image";
@@ -22,7 +22,7 @@ export default function DesktopMenu() {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   const { data: currentUser } = useUser();
-  const { data: notificationCount } = useActivityCount()
+  const { data: notificationCount } = useNotificationCount()
   const { data: messageCount } = useMessageCount(); // It needs to be below useUser() unless it keeps refreshing.
 
   const pathname = usePathname();

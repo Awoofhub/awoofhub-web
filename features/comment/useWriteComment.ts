@@ -17,8 +17,8 @@ export const useWriteComment = ({ id }: WriteCommentOptions) => {
 
   const { mutate, isPending } = useMutation({
     mutationFn: (data: commentData) => WriteComment(id, data),
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ['comment', id] });
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['comment'] });
     },
   });
 

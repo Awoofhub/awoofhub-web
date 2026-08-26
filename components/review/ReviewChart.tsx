@@ -25,7 +25,7 @@ export default function ReviewChart({ offer }: Props) {
     });
 
     return (
-        <div className="max-w-[320px] xxs:max-w-[380px]  mx-auto md:mx-0">
+        <div className="max-w-[320px] xxs:max-w-[380px] x-auto md:mx-0">
             {/* Header Section */}
             <div>
                 <h2 className="text-lg lg:text-xl  font-bold mb-1 text-muted">All Rating</h2>

@@ -55,25 +55,7 @@ export const InputField = forwardRef((props: InputFieldProps, ref) => {
         </FormLabel>
       )}
 
-      {type === "text" ? (
-        <InputGroup>
-          {icon && (
-            <InputLeftElement
-              pointerEvents="none"
-              className="flex items-center justify-center h-full pl-3 text-gray-500"
-            >
-              {icon}
-            </InputLeftElement>
-          )}
-          <Input
-            bg="white"
-            placeholder={placeholder}
-            className={`mt-2 w-full px-3 py-3 ${icon ? "pl-10" : ""} border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 text-sm lg:text-base ${className ?? ""}`}
-            {...inputProps}
-            ref={ref}
-          />
-        </InputGroup>
-      ) : type === "textarea" ? (
+      {type === "textarea" ? (
         <Textarea
           bg=" white"
           placeholder={placeholder}

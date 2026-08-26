@@ -16,7 +16,6 @@ type CurrencyInputFieldProps = {
     compulsory?: boolean;
     labelClassName?: string;
     className?: string;
-    name?: string;
     value?: number | null;
     onChange?: (value: number | undefined) => void;
     onBlur?: () => void;
@@ -30,7 +29,6 @@ export const CurrencyInputField = forwardRef((props: CurrencyInputFieldProps, re
         compulsory,
         labelClassName,
         className,
-        name,
         value,
         onChange,
         onBlur,
@@ -51,9 +49,8 @@ export const CurrencyInputField = forwardRef((props: CurrencyInputFieldProps, re
                 thousandSeparator=","
                 bg="white"
                 placeholder={placeholder}
-                className={`mt-2 w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 text-sm lg:text-base ${className ?? ""}`}
+                className={`mt-2 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 text-sm lg:text-base ${className ?? ""}`}
                 getInputRef={ref}
-                name={name}
                 value={value ?? ""}
                 onBlur={onBlur}
                 onValueChange={(values) => {

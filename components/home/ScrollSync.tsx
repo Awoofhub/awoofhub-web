@@ -1,5 +1,6 @@
 "use client";
 import { useOffers } from "@/features/offers/useOffers";
+import Image from "next/image";
 import Link from "next/link";
 import { useMemo } from "react";
 import { ErrorBoundary } from "react-error-boundary";
@@ -8,7 +9,6 @@ import { useInView } from "react-intersection-observer";
 import { OfferError } from "../offers/OfferError";
 import OfferList from "../offers/OfferList";
 import OfferListSkeleton from "../offers/OfferListSkeleton";
-import Image from "next/image";
 
 interface Props {
   category: {

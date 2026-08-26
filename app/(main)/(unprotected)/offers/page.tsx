@@ -1,10 +1,10 @@
 "use client";
 
-import { OfferError } from "@/components/offers/OfferError";
 import { OfferDateRangePicker } from "@/components/offers/OfferDateRangePicker";
-import { OfferLocationFilter } from "@/components/offers/OfferLocationFilter";
+import { OfferError } from "@/components/offers/OfferError";
 import OfferInfiniteList from "@/components/offers/OfferInfiniteList";
 import OfferListSkeleton from "@/components/offers/OfferListSkeleton";
+import { OfferLocationFilter } from "@/components/offers/OfferLocationFilter";
 import { OfferSelectDropdown } from "@/components/offers/OfferSelectDropdown";
 import { useCategory } from "@/features/category/useCategory";
 import { useFilter } from "@/features/offers/useFilter";
@@ -49,28 +49,11 @@ const RATING_OPTIONS = [1, 2, 3, 4, 5].map((r) => ({
 
 function FilterResults({ searchParams }: FilterProps) {
   const params = use(searchParams);
-  const {
-    search,
-    dealType,
-    location,
-    category,
-    minRating,
-    createdFrom,
-    createdTo,
-  } = params;
+  const { search, dealType, location, category, minRating, createdFrom, createdTo } = params;
   const { data: categories } = useCategory();
   const updateFilter = useFilter("/offers");
 
-  const {
-    data,
-    isFetching,
-    isLoading,
-    isFetchingNextPage,
-    fetchNextPage,
-    hasNextPage,
-    isError,
-    error,
-  } = useOffers({
+  const { data, isFetching, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError, error, } = useOffers({
     search: search ?? "",
     dealType: dealType ?? "",
     location: location ?? "",

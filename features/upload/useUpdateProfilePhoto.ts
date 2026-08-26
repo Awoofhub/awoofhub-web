@@ -1,9 +1,9 @@
 import FileService from "@/services/file-service";
-import { ApiResponse } from "@/types/api-response";
 import { useMutation } from "@tanstack/react-query";
 
-export const singlePhoto = (file: File): Promise<ApiResponse<string>> => {
-  return FileService.uploadSinglePhoto(file);
+export const singlePhoto = async (file: File): Promise<string> => {
+  const result = await FileService.uploadSinglePhoto(file);
+  return result.data; 
 };
 
 export const useUploadSinglePhoto = () => {

@@ -1,5 +1,5 @@
 "use client";
-import ReportModal from "@/components/modals/ReportModal";
+import ReportModal from "@/components/modals/report/ReportModal";
 import { User } from "@/types/user";
 import { capitalizeFirstLetter } from "@/utils/truncate";
 import { format } from "date-fns";
@@ -13,7 +13,7 @@ import { GoDotFill } from "react-icons/go";
 import { MdOutlineChat } from "react-icons/md";
 import AlertButton from "../alert/Alert";
 import ChatButton from "../chat/ChatButton";
-import EditProfileModal from "../modals/EditProfileModal";
+import EditProfileModal from "../modals/user/EditProfileModal";
 
 interface Props {
   isOwnProfile: boolean;
@@ -184,14 +184,6 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
         onClose={() => setIsReportOpen(false)}
         targetType="user"
         targetId={profile.id}
-        targetName={profile.name}
-        targetEmail={profile.email}
-        targetImage={profile.profileImageUrl}
-        targetBadge={
-          profile.role === "business"
-            ? "Business Account"
-            : "Individual Account"
-        }
       />
       <EditProfileModal
         isOpen={isEditOpen}

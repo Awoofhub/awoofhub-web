@@ -1,119 +1,36 @@
 "use client";
-import { useMyOffers } from "@/features/offers/useMyOffers";
-import { useMyOffersTabsCount } from "@/features/offers/useMyOffersTabsCount";
-import { useMemo, useState, useEffect } from "react";
-import { useInView } from "react-intersection-observer";
-import { useRouter, useSearchParams } from "next/navigation";
-import MyOffersTabs from "@/components/myoffers/MyOffersTabs";
-import MyOfferListItem from "@/components/myoffers/MyOfferListItem";
-import MyOfferModal from "@/components/myoffers/MyOfferModal";
-import { Offer } from "@/types/offer";
-import { Spinner } from "@chakra-ui/react";
-import { getDisplayStatus } from "@/utils/offerStatus";
-import MyOfferListItemSkeleton from "@/components/myoffers/MyOfferListItemSkeleton";
-import MyOffersEmptyState from "@/components/myoffers/MyOffersEmptyState";
-import OfferService from "@/services/offer-service";
+import MyOfferListItem from "@/components/my-offers/MyOfferListItem";
+import MyOffersTabs from "@/components/my-offers/MyOffersTabs";
+import { useFilter } from "@/features/offers/useFilter";
+import { MyOffersTabsCount } from "@/types/offer";
+import { use } from "react";
 
-const STATUS_ORDER: Record<string, number> = {
-  active: 0,
-  pending: 1,
-  rejected: 2,
-  expired: 3,
-  suspended: 4,
+type FilterParams = {
+  tab?: string,
 };
 
-export default function MyOffersPage() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const activeTab = searchParams.get("tab") ?? "all";
-  const targetOfferId = searchParams.get("offerId");
-  const [manualSelectedOffer, setManualSelectedOffer] = useState<Offer | null>(
-    null,
-  );
-  const [fallbackOffer, setFallbackOffer] = useState<Offer | null>(null);
-  const [fallbackAttemptedId, setFallbackAttemptedId] = useState<string | null>(
-    null,
-  );
-  const [ref, inView] = useInView();
+interface FilterProps {
+  searchParams: Promise<FilterParams>;
+}
 
-  const { data, isFetching, isFetchingNextPage, fetchNextPage, hasNextPage } =
-    useMyOffers({
-      limit: 20,
-      tab: activeTab,
-    });
+export default function MyOffersPage({ searchParams }: FilterProps) {
+  const params = use(searchParams);
+  const { tab } = params;
 
-  const { data: counts } = useMyOffersTabsCount();
+  const updateTab = useFilter("/my-offers");
 
-  const offers = useMemo(() => {
-    const flat = data?.pages.flatMap((page) => page.data) ?? [];
-
-    if (activeTab !== "all") return flat;
-
-    return [...flat].sort((a, b) => {
-      const statusA = getDisplayStatus(a);
-      const statusB = getDisplayStatus(b);
-      return STATUS_ORDER[statusA] - STATUS_ORDER[statusB];
-    });
-  }, [data, activeTab]);
-
-  useEffect(() => {
-    if (inView && hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
-
-  const matchedInList = targetOfferId
-    ? (offers.find((o) => o.id === targetOfferId) ?? null)
-    : null;
-
-  useEffect(() => {
-    if (!targetOfferId) return;
-    if (matchedInList) return;
-    if (isFetching) return;
-    if (fallbackAttemptedId === targetOfferId) return;
-
-    let cancelled = false;
-    OfferService.offerById(targetOfferId)
-      .then((res) => {
-        if (cancelled) return;
-        setFallbackOffer(res.data ?? null);
-      })
-      .catch((err) => {
-        console.error("Failed to load offer from notification link:", err);
-      })
-      .finally(() => {
-        if (!cancelled) setFallbackAttemptedId(targetOfferId);
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [targetOfferId, matchedInList, isFetching, fallbackAttemptedId]);
-
-  const linkedOffer =
-    matchedInList ??
-    (fallbackAttemptedId === targetOfferId ? fallbackOffer : null);
-
-  const selectedOffer = manualSelectedOffer ?? linkedOffer;
-
-  const handleTabChange = (tab: string) => {
-    router.push(`/my-offers?tab=${tab}`);
-  };
-
-  const handleCloseModal = () => {
-    setManualSelectedOffer(null);
-    if (targetOfferId) {
-      router.replace(`/my-offers?tab=${activeTab}`);
-    }
-  };
-
-  const isResolvingTarget =
-    !!targetOfferId && !matchedInList && fallbackAttemptedId !== targetOfferId;
-  const showSkeleton = (isFetching && offers.length === 0) || isResolvingTarget;
+  const Tabs: { value: keyof MyOffersTabsCount | undefined; label: string }[] = [
+    { value: undefined, label: "All" },
+    { value: "approved", label: "Active" },
+    { value: "pending", label: "Pending" },
+    { value: "rejected", label: "Rejected" },
+    { value: "suspended", label: "Suspended" },
+    { value: "expired", label: "Expired" },
+  ];
 
   return (
     <div className="bg-white">
-      <div className="px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto py-6 mb-10 lg:mb-6">
+      <div className="px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto py-6">
         <h1 className="text-xl lg:text-2xl font-semibold text-black mb-2">
           My Posts
         </h1>
@@ -123,39 +40,14 @@ export default function MyOffersPage() {
 
         <div className="mb-6">
           <MyOffersTabs
-            activeTab={activeTab}
-            onChange={handleTabChange}
-            counts={counts}
+            activeTab={tab}
+            onChange={(value) => updateTab("tab", value)}
+            tabs={Tabs}
           />
         </div>
 
-        {showSkeleton && (
-          <div className="grid grid-cols-2 xs:flex xs:flex-col gap-2">
-            {[...Array(5)].map((_, i) => (
-              <MyOfferListItemSkeleton key={i} />
-            ))}
-          </div>
-        )}
-
-        {!showSkeleton && offers.length === 0 && (
-          <MyOffersEmptyState tab={activeTab} />
-        )}
-        {!showSkeleton && offers.length > 0 && (
-          <div className="grid grid-cols-2 xs:flex xs:flex-col gap-2">
-            {offers.map((offer) => (
-              <MyOfferListItem
-                key={offer.id}
-                offer={offer}
-                onClick={() => setManualSelectedOffer(offer)}
-              />
-            ))}
-          </div>
-        )}
-        <div ref={ref} className="h-10 flex items-center justify-center mt-4">
-          {isFetchingNextPage && <Spinner className="text-primary" size="md" />}
-        </div>
-
-        <MyOfferModal offer={selectedOffer} onClose={handleCloseModal} />
+        <MyOfferListItem tab={tab} />
+        
       </div>
     </div>
   );

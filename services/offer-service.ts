@@ -1,29 +1,16 @@
 import { apiClient } from "@/lib/api-client";
 import { ApiResponse } from "@/types/api-response";
-import { CreateOfferData, Offer, UpdateOfferData, MyOffersTabsCount } from "@/types/offer";
+import { CreateOfferData, MyOffersTabsCount, Offer, UpdateOfferData } from "@/types/offer";
 
-/**
- * Creates an offer.
- *
- * Sends a plain JSON body.  The image must have been uploaded separately
- * before calling this — `payload.imageUrl` should be the returned URL string.
- */
 async function createOffer(payload: CreateOfferData): Promise<ApiResponse<Offer>> {
   const res: ApiResponse<Offer> = await apiClient.post('/offers/', payload);
   return res;
 }
 
-async function offers(search: string, category: string, minRating: number, createdFrom: string, createdTo: string, page: number, limit: number , dealType:string, location:string): Promise<ApiResponse<Offer[]>> {
-  const params: Record<string, any> = { page, limit };
-  if (search) params.search = search;
-  if (category) params.category = category;
-  if (minRating) params.minRating = minRating;
-  if (createdFrom) params.createdFrom = createdFrom;
-  if (createdTo) params.createdTo = createdTo;
-  if (dealType) params.dealType = dealType;
-  if (location) params.location = location;
-
-  const res: ApiResponse<Offer[]> = await apiClient.get('/offers/', { params })
+async function offers(search: string, category: string, minRating: number, createdFrom: string, createdTo: string, page: number, limit: number, dealType: string, location: string): Promise<ApiResponse<Offer[]>> {
+  const res: ApiResponse<Offer[]> = await apiClient.get('/offers/', {
+    params: { search, dealType, category, minRating, createdFrom, createdTo, location, page, limit },
+  })
 
   return res;
 }
@@ -35,7 +22,7 @@ async function grab(id: string): Promise<ApiResponse<any>> {
   return res;
 }
 
-async function myOffers(page: number, limit: number, tab: string = "all"): Promise<ApiResponse<Offer[]>> {
+async function myOffers(page: number, limit: number, tab: string): Promise<ApiResponse<Offer[]>> {
   const res: ApiResponse<Offer[]> = await apiClient.get(`/offers/mine`, {
     params: { page, limit, tab },
   })
@@ -45,18 +32,14 @@ async function myOffers(page: number, limit: number, tab: string = "all"): Promi
 
 async function myOffersTabsCount(): Promise<ApiResponse<MyOffersTabsCount>> {
   const res: ApiResponse<MyOffersTabsCount> = await apiClient.get(`/offers/mine/tabs-count`)
+
   return res;
 }
 
 async function offersByUsername(username: string, search: string, category: string, minRating: number, createdFrom: string, createdTo: string, page: number, limit: number): Promise<ApiResponse<Offer[]>> {
-  const params: Record<string, any> = { page, limit };
-  if (search) params.search = search;
-  if (category) params.category = category;
-  if (minRating) params.minRating = minRating;
-  if (createdFrom) params.createdFrom = createdFrom;
-  if (createdTo) params.createdTo = createdTo;
-
-  const res: ApiResponse<Offer[]> = await apiClient.get(`/offers/username/${username}`, { params })
+  const res: ApiResponse<Offer[]> = await apiClient.get(`/offers/username/${username}`, {
+    params: { search, category, minRating, createdFrom, createdTo, page, limit },
+  })
 
   return res;
 }
@@ -74,7 +57,7 @@ async function randomOffers(): Promise<ApiResponse<Offer[]>> {
 }
 
 async function updateOffer(id: string, payload: UpdateOfferData): Promise<ApiResponse<Offer>> {
-  const res: ApiResponse<Offer> = await apiClient.post(`/offers/${id}`, payload)
+  const res: ApiResponse<Offer> = await apiClient.patch(`/offers/${id}`, payload)
 
   return res;
 }

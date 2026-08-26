@@ -9,7 +9,7 @@ interface Props {
   isFetchingNextPage: boolean;
   hasNextPage: boolean;
   fetchNextPage: () => void;
-   gridClassName?: string;
+  gridClassName?: string;
 }
 
 export default function OfferInfiniteList({ offers, hasNextPage, fetchNextPage, isFetchingNextPage, gridClassName }: Props) {
@@ -24,8 +24,8 @@ export default function OfferInfiniteList({ offers, hasNextPage, fetchNextPage, 
   return (
     <>
       <div className={gridClassName ?? "grid grid-cols-2 xs:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-3 xl:gap-4 justify-items-center"}>
-        {offers.map((offer, index) => (
-          <OfferCard offer={offer} key={offer.id} index={index} />
+        {offers.map((offer) => (
+          <OfferCard offer={offer} key={offer.id} />
         ))}
       </div>
       <div ref={ref} className="h-10 flex items-center justify-center mt-6">

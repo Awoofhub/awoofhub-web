@@ -1,4 +1,4 @@
-import { useComment } from "@/features/comment/useComment";
+import { useComments } from "@/features/comment/useComments";
 import { useWriteComment } from "@/features/comment/useWriteComment";
 import { useUser } from "@/features/user/useUser";
 import { commentData } from "@/types/comment";
@@ -6,6 +6,7 @@ import { Offer } from "@/types/offer";
 import { Button, FormControl, FormHelperText, Input, InputGroup, InputRightElement, Spinner } from '@chakra-ui/react';
 import { Send } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import CommentContainer from "./CommentContainer";
 
@@ -15,7 +16,10 @@ interface Props {
 
 export default function Comment({ offer }: Props) {
     const { writeComment, isPending } = useWriteComment({ id: offer.id })
-    const { data: comments, isLoading } = useComment({ id: offer.id })
+    const { data, isLoading, isFetching, hasNextPage, isFetchingNextPage, fetchNextPage } = useComments({
+        id: offer.id,
+        limit: 3
+    })
     const { register, reset, handleSubmit, formState: { errors } } = useForm<commentData>();
     const { data: currentUser } = useUser();
     const router = useRouter();
@@ -27,6 +31,11 @@ export default function Comment({ offer }: Props) {
         writeComment(data)
         reset()
     };
+
+    const comments = useMemo(
+        () => data?.pages.flatMap((page) => page.data) ?? [],
+        [data],
+    );
 
     return (
         <>
@@ -50,7 +59,6 @@ export default function Comment({ offer }: Props) {
                                 className="w-full text-xs md:text-base  p-2 pr-12 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
                                 type='text'
                                 placeholder="Comments"
-
                             />
 
                             <InputRightElement className=" text-gray-500">
@@ -69,16 +77,26 @@ export default function Comment({ offer }: Props) {
                 </form>
 
             </div>
-                <div className="border-b border-gray-300 w-full"/>
 
             <div>
-                
-                {isLoading && !comments?.length ? (
-                    <Spinner className="mt-5 w-17 h-17 text-primary" />
-                ) : !comments?.length ? (
+                <div className="border-b border-gray-300 w-full" />
+                {isLoading && (
+                    <div className="flex justify-center mt-5 w-full">
+                        <Spinner
+                            className="w-17 h-17 text-primary"
+                            data-testid="loading"
+                        />
+                    </div>
+                )}
+                {!isLoading && !isFetching && comments.length === 0 && (
                     <p className="text-center text-sm md:text-base text-gray-500">No Comment found.</p>
-                ) : (
-                    <CommentContainer comments={comments} />
+                )}
+                {!isLoading && comments.length > 0 && (
+                    <CommentContainer
+                        comments={comments}
+                        hasNextPage={hasNextPage}
+                        isFetchingNextPage={isFetchingNextPage}
+                        fetchNextPage={fetchNextPage} />
                 )}
             </div>
         </>

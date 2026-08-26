@@ -6,24 +6,19 @@ type GetLatestModerationOptions = {
   id: string;
 };
 
-export const getLatestModeration = async ({
-  id,
-}: GetLatestModerationOptions): Promise<Moderation> => {
+export const getLatestModeration = async ({id}: GetLatestModerationOptions): Promise<Moderation> => {
   const result = await ModerationService.latestHistory(id);
   return result.data;
 };
 
-export const useLatestModeration = (
-  { id }: GetLatestModerationOptions,
-  enabled: boolean = true,
-) => {
+export const useLatestModeration = ({ id }: GetLatestModerationOptions) => {
   const { data, isLoading } = useQuery({
     queryKey: ["moderation", "latest", id],
     queryFn: () => getLatestModeration({ id }),
-    enabled,
+    enabled: Boolean(id),
   });
 
-  
+
   return {
     data,
     isLoading,

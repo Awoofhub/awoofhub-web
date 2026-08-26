@@ -1,5 +1,5 @@
-import GoogleAnalytics from '@/components/googleAnalytics/GoogleAnalytics';
-import { WebVitals } from "@/components/googleAnalytics/WebVitals";
+import GoogleAnalytics from '@/components/google-analytics/GoogleAnalytics';
+import { WebVitals } from "@/components/google-analytics/WebVitals";
 import AppProvider from "@/providers/app-provider";
 import type { Metadata } from "next";
 import { Baloo_2, Geist, Geist_Mono, Montserrat } from "next/font/google";

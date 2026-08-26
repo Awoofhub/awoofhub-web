@@ -10,9 +10,11 @@ export const DatePickerField = ({ label, error, compulsory, value, onChange, lab
   // Get 'now' so we can block the past
   const today = dayjs().add(1, 'day');
 
+  const formattedValue = value ? dayjs(value) : null;
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <FormControl isInvalid={!!error} className="w-full mb-4">
+      <FormControl isInvalid={!!error} className="w-full">
         {label && (
           <FormLabel className={labelClassName ?? "font-baloo text-sm lg:text-lg"}>
             {label} {compulsory && <span className="text-red-500">*</span>}
@@ -20,9 +22,8 @@ export const DatePickerField = ({ label, error, compulsory, value, onChange, lab
         )}
 
         <DatePicker
-          value={value || null}
+          value={formattedValue}
           onChange={(newValue) => onChange(newValue)}
-          // THIS BLOCKS THE PAST:
           minDate={today}
           slotProps={{
             textField: {
@@ -31,7 +32,7 @@ export const DatePickerField = ({ label, error, compulsory, value, onChange, lab
               slotProps: {
                 input: {
                   disableUnderline: true,
-                  className: `!mt-2 !w-full !px-3 !py-1.5 lg:py-2! !bg-white !border ${error ? '!border-red-500' : '!border-gray-300'
+                  className: `!mt-2 !w-full !px-3 !py-1 xxs:!py-0.5 lg:!py-1 !bg-white !border ${error ? '!border-red-500' : '!border-gray-300'
                     } !rounded-md !shadow-sm text-sm lg:text-base focus-within:!border-orange-500`,
                 },
                 htmlInput: {
@@ -46,7 +47,6 @@ export const DatePickerField = ({ label, error, compulsory, value, onChange, lab
           }}
         />
 
-        {/* This shows the error message if validation fails */}
         {error && (
           <FormHelperText className="text-red-500 text-left text-xs mt-1">
             {error.message || "Invalid date selected"}

@@ -1,12 +1,12 @@
 "use client";
-import { useActivityCount } from "@/features/activity/useActivityCount";
+import { useNotificationCount } from "@/features/notification/useNotificationCount";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FiBell, FiHeart, FiHome, FiPlus } from "react-icons/fi";
 import { TbListCheck } from "react-icons/tb";
 
 export default function MobileBottomMenu() {
-  const { data: notificationCount } = useActivityCount()
+  const { data: notificationCount } = useNotificationCount()
   const pathname = usePathname();
 
   const isInsideChannel =

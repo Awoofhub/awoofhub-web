@@ -1,6 +1,6 @@
 export interface CreateReportData {
   type: string;
-  targetType: "offer" | "user";
+  targetType: "offer" | "user" | "comment";
   targetId: string;
   description?: string;
 }
@@ -8,7 +8,7 @@ export interface CreateReportData {
 export interface Report {
   id: string;
   type: string;
-  targetType: "offer" | "user";
+  targetType: "offer" | "user" | "comment";
   targetId: string;
   description?: string;
   createdAt: string;

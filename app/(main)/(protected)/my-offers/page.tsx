@@ -6,7 +6,7 @@ import { MyOffersTabsCount } from "@/types/offer";
 import { use } from "react";
 
 type FilterParams = {
-  tab?: string;
+  tab?: string,
 };
 
 interface FilterProps {
@@ -28,12 +28,6 @@ export default function MyOffersPage({ searchParams }: FilterProps) {
     { value: "expired", label: "Expired" },
   ];
 
-    console.log("window URL:", window.location.href);
-  console.log("window search:", window.location.search);
-
-  console.log("SEARCH PARAMS:", params);
-  console.log("TAB:", params.tab);
-
   return (
     <div className="bg-white">
       <div className="px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto py-6">
@@ -53,7 +47,7 @@ export default function MyOffersPage({ searchParams }: FilterProps) {
         </div>
 
         <MyOfferListItem tab={tab} />
-
+        
       </div>
     </div>
   );

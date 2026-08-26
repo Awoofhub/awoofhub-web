@@ -1,10 +1,9 @@
 "use client";
-import Loading from "@/components/loading/Loading";
 import MyOfferListItem from "@/components/my-offers/MyOfferListItem";
 import MyOffersTabs from "@/components/my-offers/MyOffersTabs";
 import { useFilter } from "@/features/offers/useFilter";
 import { MyOffersTabsCount } from "@/types/offer";
-import { Suspense, use } from "react";
+import { use } from "react";
 
 type FilterParams = {
   tab?: string,
@@ -14,7 +13,7 @@ interface FilterProps {
   searchParams: Promise<FilterParams>;
 }
 
-function MyOffersContent({ searchParams }: FilterProps) {
+export default function MyOffersPage({ searchParams }: FilterProps) {
   const params = use(searchParams);
   const { tab } = params;
 
@@ -51,14 +50,5 @@ function MyOffersContent({ searchParams }: FilterProps) {
         
       </div>
     </div>
-  );
-}
-
-
-export default function MyOffersPage(props: FilterProps) {
-  return (
-    <Suspense fallback={<Loading />}>
-      <MyOffersContent {...props} />
-    </Suspense>
   );
 }

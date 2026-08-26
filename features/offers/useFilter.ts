@@ -28,7 +28,7 @@ export function useFilter(basePath: string) {
       }
 
       params.delete('page');
-      router.replace(`${basePath}?${params.toString()}`);
+      router.push(`${basePath}?${params.toString()}`);
     },
     [searchParams, router, basePath]
   );

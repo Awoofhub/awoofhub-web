@@ -82,7 +82,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
       category: undefined,
       dealType: undefined,
       imageUrl: "",
-      endDate: dayjs().add(1, 'day'),
+      endDate: undefined,
       brandName: "",
       value: "",
       location: "",

@@ -1,22 +1,17 @@
 "use client";
+import Loading from "@/components/loading/Loading";
 import MyOfferListItem from "@/components/my-offers/MyOfferListItem";
 import MyOffersTabs from "@/components/my-offers/MyOffersTabs";
 import { useFilter } from "@/features/offers/useFilter";
 import { MyOffersTabsCount } from "@/types/offer";
-import { use } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-type FilterParams = {
-  tab?: string,
-};
 
-interface FilterProps {
-  searchParams: Promise<FilterParams>;
-}
-
-export default function MyOffersPage({ searchParams }: FilterProps) {
-  const params = use(searchParams);
-  const { tab } = params;
-
+function MyOffersPage() {
+  const searchParams = useSearchParams();
+  const tab = searchParams.get("tab") ?? undefined;
+  
   const updateTab = useFilter("/my-offers");
 
   const Tabs: { value: keyof MyOffersTabsCount | undefined; label: string }[] = [
@@ -47,8 +42,18 @@ export default function MyOffersPage({ searchParams }: FilterProps) {
         </div>
 
         <MyOfferListItem tab={tab} />
-        
+
       </div>
     </div>
+  );
+}
+
+
+
+export default function Filter() {
+  return (
+    <Suspense fallback={<Loading />}>
+        <MyOffersPage />
+    </Suspense>
   );
 }

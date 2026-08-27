@@ -90,7 +90,6 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
     },
   });
 
-  const { isDirty } = formState;
 
   useEffect(() => {
     if (!editOfferId || !Offer) return;

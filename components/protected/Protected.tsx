@@ -19,7 +19,7 @@ export default function Protected({ children }: ProtectedProps) {
         if (!user.isLoading && user.data?.role !== REQUIRED_ROLE) {
             router.replace(`/login?redirect=${pathname}`);
         }
-    }, [user.data, user.isLoading]);
+    }, [user.data, user.isLoading, pathname, router]);
 
 
     if (user.isLoading) {

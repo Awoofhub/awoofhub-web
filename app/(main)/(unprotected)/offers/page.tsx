@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/components/loading/Loading";
 import { OfferDateRangePicker } from "@/components/offers/OfferDateRangePicker";
 import { OfferError } from "@/components/offers/OfferError";
 import OfferInfiniteList from "@/components/offers/OfferInfiniteList";
@@ -9,26 +10,12 @@ import { OfferSelectDropdown } from "@/components/offers/OfferSelectDropdown";
 import { useCategory } from "@/features/category/useCategory";
 import { useFilter } from "@/features/offers/useFilter";
 import { useOffers } from "@/features/offers/useOffers";
-import { Spinner } from "@chakra-ui/react";
-import { Suspense, use, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useMemo } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { IoFilterSharp } from "react-icons/io5";
 import { RiResetLeftLine } from "react-icons/ri";
 
-
-type FilterParams = {
-  search?: string;
-  category?: string;
-  minRating?: number;
-  createdFrom?: string;
-  createdTo?: string;
-  dealType?: string;
-  location?: string;
-};
-
-interface FilterProps {
-  searchParams: Promise<FilterParams>;
-}
 
 const DEAL_TYPES = [
   ["cashback", "Cash Back"],
@@ -47,9 +34,19 @@ const RATING_OPTIONS = [1, 2, 3, 4, 5].map((r) => ({
 }));
 
 
-function FilterResults({ searchParams }: FilterProps) {
-  const params = use(searchParams);
-  const { search, dealType, location, category, minRating, createdFrom, createdTo } = params;
+function FilterResults() {
+
+  const searchParams = useSearchParams();
+
+  const search = searchParams.get("search") ?? undefined;
+  const category = searchParams.get("category") ?? undefined;
+  const minRating = searchParams.get("minRating") ? Number(searchParams.get("minRating")) : undefined;
+  const createdFrom = searchParams.get("createdFrom") ?? undefined;
+  const createdTo = searchParams.get("createdTo") ?? undefined;
+  const dealType = searchParams.get("dealType") ?? undefined;
+  const location = searchParams.get("location") ?? undefined;
+
+
   const { data: categories } = useCategory();
   const updateFilter = useFilter("/offers");
 
@@ -164,17 +161,11 @@ function FilterResults({ searchParams }: FilterProps) {
   );
 }
 
-export default function Filter(props: FilterProps) {
+export default function Filter() {
   return (
-    <Suspense
-      fallback={
-        <section className="flex justify-center pt-14">
-          <Spinner size="xl" />
-        </section>
-      }
-    >
+    <Suspense fallback={<Loading />}>
       <ErrorBoundary fallback={<OfferError />}>
-        <FilterResults searchParams={props.searchParams} />
+        <FilterResults />
       </ErrorBoundary>
     </Suspense>
   );

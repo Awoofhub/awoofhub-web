@@ -1,30 +1,33 @@
-"use client";
+'use client';
 
-import { openPayment } from "@/lib/paystack";
+import { useRouter } from 'next/navigation';
+import { ChevronLeft } from 'lucide-react';
+import { SubscriptionPlanList } from '@/components/subscription/subscriptionPlanList';
 
-export default function PremiumUserPage() {
+ export default function SubscriptionPage() {
+  const router = useRouter();
 
-    const accessCode = 'x8qbkzwt2euyzl8';
+  return (
+    <div className="max-w-[1440px] mx-auto px-2 py-10 md:px-6">
+      <button
+        type="button"
+        onClick={() => router.back()}
+        className="flex items-center gap-1 text-sm font-bold hover:text-gray-700"
+      >
+        <ChevronLeft className="h-4 w-4" />
+        Back
+      </button>
 
-    const handlePayment = () => {
-        openPayment(accessCode, {
-            onSuccess: () => {
-                alert('Payment successful');
-            },
-        });
-    };
+      <div className="text-center mt-8 mb-10">
+        <h1 className="text-[20px] md:text-[40px] font-bold text-[#281812]">
+          Choose a premium subscription
+        </h1>
+        <p className="text-sm md:text-[18px] text-gray-400 mt-2">
+          Packages are designed to help you reach more people
+        </p>
+      </div>
 
-    return (
-        <section className="max-w-[1440px] mx-auto pt-6 pb-20 lg:py-8 px-4 md:px-6 lg:px-8 xl:px-12">
-
-            <button
-                type="button"
-                onClick={handlePayment}
-                className="rounded-lg bg-black px-6 py-3 text-white"
-            >
-                Pay Now
-            </button>
-
-        </section>
-    );
+      <SubscriptionPlanList />
+    </div>
+  );
 }

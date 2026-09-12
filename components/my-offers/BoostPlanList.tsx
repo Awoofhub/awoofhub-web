@@ -1,3 +1,4 @@
+import { Button } from "@/components/button/Button";
 import { useBoostOffer } from "@/features/boost/useBoostOffer";
 import { openPayment } from "@/lib/paystack";
 import { useState } from "react";
@@ -92,9 +93,9 @@ export default function BoostPlanList({ offerId }: Props) {
                     </span>
                 </div>
 
-                <button onClick={onSubmit} disabled={boostOffer.isPending} className="bg-[#FF5722] hover:bg-[#f4511e] w-70 text-white font-semibold py-3 rounded-md text-sm">
+                <Button isLoading={boostOffer.isPending} onClick={onSubmit} isDisabled={boostOffer.isPending} className="!w-[280px] !mx-0 text-sm">
                     Continue
-                </button>
+                </Button>
             </div>
         </>
 

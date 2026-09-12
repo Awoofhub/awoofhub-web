@@ -25,8 +25,8 @@ export default function BoostOfferCard({ offer }: Props) {
   const dateLabel = getDateLabel(offer, status);
  
   return (
-    <div className="w-full flex flex-col xs:flex-row gap-3 md:gap-4 p-2 md:px-6 md:py-3 items-start md:items-center rounded-lg cursor-pointer border border border-[#00A95D] hover:shadow-md transition-shadow text-left bg-white">
-        <div className="w-full h-[130px] xxs:h-[150px] xs:w-[110px] xs:h-[110px] md:w-[130px] md:h-[130px] lg:w-[150px] lg:h-[150px] shrink-0 overflow-hidden rounded-md">
+    <div className="w-full flex gap-3 md:gap-4 p-2 md:px-6 md:py-3 items-start md:items-center rounded-lg border border border-[#00A95D] hover:shadow-md transition-shadow text-left bg-white">
+        <div className="w-[110px] h-[110px] md:w-[130px] md:h-[130px] lg:w-[150px] lg:h-[150px] shrink-0 overflow-hidden rounded-md">
           <Image
             src={offer.imageUrl}
             alt={offer.title}

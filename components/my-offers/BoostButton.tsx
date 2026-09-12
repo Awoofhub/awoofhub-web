@@ -16,7 +16,7 @@ export default function BoostButton({ offer }: Props) {
     };
 
     return status === "active" ? (
-        <button onClick={handleClick} className="border border-primary text-sm p-2 text-primary rounded-xl">
+        <button onClick={handleClick} className="border border-primary text-xs sm:text-sm p-1 text-primary rounded-lg cursor-pointer">
             Boost Post
         </button>
     ) : null;

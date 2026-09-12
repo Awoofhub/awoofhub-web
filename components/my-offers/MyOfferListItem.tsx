@@ -33,7 +33,7 @@ export default function MyOfferListItem({ tab }: Props) {
 
 
   return (
-    <div className="grid grid-cols-2 xs:flex xs:flex-col gap-2">
+    <div className="flex flex-col gap-2">
       {isLoading && <MyOfferListItemSkeleton />}
       {!isLoading && !isFetching && offers.length === 0 && (
         <MyOffersEmptyState tab={tab} />

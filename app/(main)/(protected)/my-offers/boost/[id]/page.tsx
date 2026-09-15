@@ -1,8 +1,9 @@
 "use client";
 
-import Loading from "@/components/loading/Loading";
+
 import BoostOfferCard from "@/components/my-offers/BoostOfferCard";
 import BoostPlanList from "@/components/my-offers/BoostPlanList";
+import BoostPlanListSkeleton from "@/components/my-offers/BoostPlanListSkeleton";
 import { useOffer } from "@/features/offers/useOffer";
 import { getDisplayStatus } from "@/utils/offerStatus";
 import { use } from "react";
@@ -17,7 +18,7 @@ export default function BoostPage({ params }: Props) {
     const { data: offer, isLoading } = useOffer({ id });
 
     if (isLoading) {
-        return <Loading />
+        return <BoostPlanListSkeleton/>
     }
 
     if (!offer) {

@@ -22,6 +22,13 @@ async function grab(id: string): Promise<ApiResponse<any>> {
   return res;
 }
 
+
+async function share(id: string): Promise<ApiResponse<any>> {
+  const res: ApiResponse<any> = await apiClient.post(`/shares/offer/${id}`)
+
+  return res;
+}
+
 async function myOffers(page: number, limit: number, tab: string): Promise<ApiResponse<Offer[]>> {
   const res: ApiResponse<Offer[]> = await apiClient.get(`/offers/mine`, {
     params: { page, limit, tab },
@@ -89,6 +96,7 @@ const OfferService = {
   createOffer,
   offers,
   grab,
+  share,
   offersByUsername,
   myOffers,
   myOffersTabsCount,

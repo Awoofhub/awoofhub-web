@@ -4,7 +4,8 @@ import { truncateId } from "@/utils/truncate";
 import { format } from "date-fns";
 import Image from "next/image";
 import { FiArrowUpRight, FiMapPin, FiUsers } from "react-icons/fi";
-import StatusBadge from "./StatusBadge";
+import StatusBadge from "../StatusBadge";
+ 
 
 interface Props {
   offer: Offer;

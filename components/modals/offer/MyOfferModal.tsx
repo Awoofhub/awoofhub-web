@@ -1,5 +1,6 @@
 "use client";
 
+import AnalyticsButton from "@/components/my-offers/boost/AnalyticsButton";
 import OfferActionButton from "@/components/my-offers/OfferActionButton";
 import OfferDateLabel from "@/components/my-offers/OfferDateLabel";
 import OfferDescription from "@/components/my-offers/OfferDescription";
@@ -20,12 +21,12 @@ interface Props {
 }
 
 export default function MyOfferModal({ offer, isOpen, onClose }: Props) {
-  
+
   const status = getDisplayStatus(offer);
   const needsModeration = status === "rejected" || status === "suspended";
 
   const { data: moderation, isLoading } = useLatestModeration(
-    { id:  needsModeration ? offer.id : "" },
+    { id: needsModeration ? offer.id : "" },
   );
 
   if (!isOpen) return null;
@@ -44,7 +45,7 @@ export default function MyOfferModal({ offer, isOpen, onClose }: Props) {
         </button>
 
         <div
-          className="bg-white rounded-xl w-[90vw] xs:w-[500px] lg:w-[600px] max-h-[90vh] overflow-y-auto no-scrollbar"
+          className="bg-white rounded-xl w-[90vw] xs:w-[500px] lg:w-[600px] max-h-[90vh] overflow-y-auto scrollbar-tiny"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="relative w-full h-[240px] xxs:h-[260px] xs:h-[270px] md:h-[300px] lg:h-[320px]">
@@ -53,16 +54,15 @@ export default function MyOfferModal({ offer, isOpen, onClose }: Props) {
               alt={offer.title}
               unoptimized
               fill
-              className={`object-fill p-3 ${
-                status === "pending" ||
-                status === "suspended" ||
-                status === "expired"
+              className={`object-fill p-3 ${status === "pending" ||
+                  status === "suspended" ||
+                  status === "expired"
                   ? "opacity-60"
                   : ""
-              }`}
+                }`}
             />
           </div>
- 
+
           <div className="p-5">
             <div className="flex items-center justify-between mb-2">
               <StatusBadge status={status} />
@@ -114,8 +114,9 @@ export default function MyOfferModal({ offer, isOpen, onClose }: Props) {
               isLoading={isLoading}
             />
 
-            <div className="mt-4">
+            <div className="mt-4 flex items-center gap-3">
               <OfferActionButton offer={offer} status={status} />
+              <AnalyticsButton offer={offer} />
             </div>
           </div>
         </div>

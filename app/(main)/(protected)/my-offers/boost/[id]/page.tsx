@@ -1,9 +1,8 @@
 "use client";
 
-
-import BoostOfferCard from "@/components/my-offers/BoostOfferCard";
-import BoostPlanList from "@/components/my-offers/BoostPlanList";
-import BoostPlanListSkeleton from "@/components/my-offers/BoostPlanListSkeleton";
+import Loading from "@/components/loading/Loading";
+import BoostOfferCard from "@/components/my-offers/boost/BoostOfferCard";
+import BoostPlanList from "@/components/my-offers/boost/BoostPlanList";
 import { useOffer } from "@/features/offers/useOffer";
 import { getDisplayStatus } from "@/utils/offerStatus";
 import { use } from "react";

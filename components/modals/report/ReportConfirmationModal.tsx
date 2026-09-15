@@ -16,6 +16,7 @@ export default function ReportConfirmationModal({ isOpen, onDone }: Props) {
         <Image
           src="/EditSuccess.svg"
           alt="success-img"
+          unoptimized
           width={150}
           height={150}
           className="mb-2"

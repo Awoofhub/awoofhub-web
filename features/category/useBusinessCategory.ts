@@ -9,7 +9,7 @@ export const getBusinessCategory = async (): Promise<Category[]> => {
 };
 
 export const useBusinessCategory = () => {
-    const { data, isLoading } = useQuery({
+    const { data, isLoading,isError } = useQuery({
         queryKey: ["business", 'category'],
         queryFn: () => getBusinessCategory(),
         initialData: []
@@ -17,7 +17,8 @@ export const useBusinessCategory = () => {
 
     return {
         data,
-        isLoading
+        isLoading,
+        isError
     };
 };
 

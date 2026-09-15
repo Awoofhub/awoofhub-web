@@ -58,12 +58,14 @@ export interface Offer {
   reviewCount: number;
   clickCount: number;
   isTrending: boolean;
+  isBoosted: boolean;
   ratingDistribution: any;
 }
 
 export interface MyOffersTabsCount {
   all: number;
   pending: number;
+  boosted: number;
   approved: number;
   rejected: number;
   suspended: number;

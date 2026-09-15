@@ -1,4 +1,5 @@
 import { Button } from "@/components/button/Button";
+import BoostPaymentSuccessModal from "@/components/modals/boost/BoostPaymentSuccessModal";
 import { useBoostOffer } from "@/features/boost/useBoostOffer";
 import { openPayment } from "@/lib/paystack";
 import { useState } from "react";
@@ -48,6 +49,7 @@ interface Props {
 export default function BoostPlanList({ offerId }: Props) {
 
     const [selectedId, setSelectedId] = useState('standard');
+    const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
     const boostOffer = useBoostOffer({
         id: offerId,
         onSuccess: (data) => {
@@ -55,7 +57,7 @@ export default function BoostPlanList({ offerId }: Props) {
 
             openPayment(accessCode, {
                 onSuccess: () => {
-                    alert('Payment successful');
+                   setIsPaymentModalOpen(true)
                 },
             });
         }
@@ -97,6 +99,8 @@ export default function BoostPlanList({ offerId }: Props) {
                     Continue
                 </Button>
             </div>
+
+             <BoostPaymentSuccessModal offerId={offerId} isOpen={isPaymentModalOpen} price={formattedPrice} />
         </>
 
     )

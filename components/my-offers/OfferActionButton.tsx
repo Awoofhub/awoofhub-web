@@ -12,7 +12,7 @@ export default function OfferActionButton({ offer, status }: Props) {
     return (
       <Link
         href={`/offers/${offer.id}`}
-        className="w-full block text-center text-xs md:text-sm lg:text-base font-baloo bg-primary text-white py-2 rounded-md font-semibold hover:bg-orange-700 transition-colors"
+        className="w-full block text-center text-xs md:text-sm lg:text-base font-baloo bg-primary text-white py-2 rounded-md font-semibold hover:bg-orange-700 transition-colors border border-primary"
       >
         View Live Post
       </Link>

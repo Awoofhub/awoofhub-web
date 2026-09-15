@@ -5,9 +5,10 @@ import { format } from "date-fns";
 import Image from "next/image";
 import { useState } from "react";
 import { FiArrowUpRight, FiMapPin, FiUsers } from "react-icons/fi";
+import { PiRocketLaunchBold } from "react-icons/pi";
 import MyOfferModal from "../modals/offer/MyOfferModal";
-import BoostButton from "./BoostButton";
 import StatusBadge from "./StatusBadge";
+import BoostButton from "./boost/BoostButton";
 
 interface Props {
   offer: Offer;
@@ -53,7 +54,12 @@ export default function MyOfferListCard({ offer }: Props) {
           <div className="relative flex items-start mb-1">
             <StatusBadge status={status} />
             <div className="absolute -top-1 -right-1">
-              <BoostButton offer={offer} />
+              {
+                offer.isBoosted ?
+                  <button className="bg-purple-500/20 border border-purple-500 text-xs sm:text-sm p-1 text-purple-500 rounded-lg flex items-center gap-1">
+                   <PiRocketLaunchBold size={16} /> Boosted
+                  </button> : <BoostButton offer={offer} />
+              }
             </div>
           </div>
           <h4 className="font-semibold text-black text-sm md:text-lg lg:text-xl mt-1 md:mt-2 line-clamp-1">

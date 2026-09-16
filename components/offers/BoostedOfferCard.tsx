@@ -46,7 +46,7 @@ export default function BoostedOfferCard({ offer }: Props) {
     <Link
       ref={ref}
       href={`/offers/${offer.id}`}
-      className="w-full bg-white h-[280px] xxs:h-[290px] xs:h-[280px] md:h-[350px] lg:h-[380px] xl:h-[420px] rounded-lg shadow-sm border border-primary p-1.5 md:p-2 lg:p-3 flex flex-col group hover:shadow-md transition-shadow"
+      className="w-full bg-[#FFD5C3] h-[280px] xxs:h-[290px] xs:h-[280px] md:h-[350px] lg:h-[380px] xl:h-[420px] rounded-lg shadow-sm border border-gray-100 p-1.5 md:p-2 lg:p-3 flex flex-col group hover:shadow-md transition-shadow"
     >
       {/* Card Image & Badges */}
       <div className="relative h-[60%] md:h-[70%] rounded-md overflow-hidden bg-white">
@@ -93,10 +93,10 @@ export default function BoostedOfferCard({ offer }: Props) {
       <div className="h-[40%] md:px-1 flex flex-col mt-3 md:mt-4">
         {/* Username and Awoofer badge */}
         <div className="flex flex-wrap items-center justify-between mb-1">
-          <span className="max-w-[55%] truncate text-primary text-[10px] lg:text-xs font-medium">
+          <span className="max-w-[55%] truncate text-primary text-[10px] lg:text-xs font-semibold">
             @{offer.contributor.username}
           </span>
-          <span className="flex items-center gap-1 text-green-500 text-[10px] lg:text-xs">
+          <span className="flex items-center gap-1 text-[#006400] text-[10px] lg:text-xs">
             <BsLightningChargeFill className="w-2 h-2 md:w-2.5 md:h-2.5" />
             Boosted
           </span>
@@ -134,13 +134,13 @@ export default function BoostedOfferCard({ offer }: Props) {
                 }`}
             >
               <LocationIconFor location={offer.location} />
-              <p className="truncate text-muted text-[11px] lg:text-xs">
+              <p className="truncate text-black text-[11px] lg:text-xs">
                 {offer.location}
               </p>
             </div>
             {offer.clickCount > 0 && (
-              <div className="flex items-center gap-1 text-muted text-[10px] lg:text-xs">
-                <FiUsers size={12} className="text-muted" />
+              <div className="flex items-center gap-1 text-black text-[10px] lg:text-xs">
+                <FiUsers size={12} className="text-black" />
                 <span>
                   {offer.clickCount} {offer.clickCount === 1 ? "grab" : "grabs"}
                 </span>
@@ -162,10 +162,10 @@ export default function BoostedOfferCard({ offer }: Props) {
                   fontSize: { xs: "18px" },
                   "& .MuiRating-icon": { marginRight: "-7px" },
                   "& .MuiRating-iconFilled": { color: "#FFC000" },
-                  "& .MuiRating-iconEmpty": { color: "#ccc" },
+                  "& .MuiRating-iconEmpty": { color: "#8b8b8b" },
                 }}
               />
-              <span className="font-medium font-baloo text-[12px]  md:text-xs lg:text-[16px] text-gray-400 ml-1">
+              <span className="font-medium font-baloo text-[12px]  md:text-xs lg:text-[16px] text-black ml-1">
                 ({offer.reviewCount})
               </span>
             </div>

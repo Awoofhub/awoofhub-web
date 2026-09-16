@@ -39,12 +39,8 @@ export function mixOffers(
     boostedBatch.forEach((offer, index) => {
       const position = positions[index];
 
-      if (position !== undefined) {
-        mixedBatch.splice(
-          Math.min(position, mixedBatch.length),
-          0,
-          offer,
-        );
+      if (position !== undefined && position <= organicBatch.length) {
+        mixedBatch.splice(position, 0, offer);
       }
     });
 

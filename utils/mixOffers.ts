@@ -15,7 +15,8 @@ export function mixOffers(
   const result: Offer[] = [];
 
   const organicBatchSize = 8;
-  const boostedBatchSize = 2;
+  const boostedBatchSize = 1;
+  const position = 7;
 
   for (
     let organicIndex = 0, boostedIndex = 0;
@@ -34,12 +35,8 @@ export function mixOffers(
 
     const mixedBatch = [...organicBatch];
 
-    const positions = [2, 7];
-
-    boostedBatch.forEach((offer, index) => {
-      const position = positions[index];
-
-      if (position !== undefined && position <= organicBatch.length) {
+    boostedBatch.forEach((offer) => {
+      if (position <= organicBatch.length) {
         mixedBatch.splice(position, 0, offer);
       }
     });

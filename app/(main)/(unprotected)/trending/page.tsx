@@ -9,7 +9,7 @@ import { Offer } from "@/types/offer";
 import { appendUniqueBoostedOffers } from "@/utils/appendUniqueBoostedOffers";
 import { mixOffers } from "@/utils/mixOffers";
 import { Spinner } from "@chakra-ui/react";
-import { Suspense, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 
@@ -36,12 +36,20 @@ function TrendingResults() {
     limit: 8,
   });
 
+  useEffect(() => {
+    if (boostedData?.length) {
+      setBoostedOffers((previous) =>
+        appendUniqueBoostedOffers(previous, boostedData),
+      );
+    }
+  }, [boostedData]);
+
   const organicOffers = useMemo(
     () => trendingData?.pages.flatMap((page) => page.data) ?? [],
     [trendingData],
   );
 
-  const currentBoostedOffers = boostedOffers.length > 0 ? boostedOffers : boostedData ?? []
+
 
   const fetchNextPage = async () => {
     if (!hasNextTrendingPage) {
@@ -66,8 +74,8 @@ function TrendingResults() {
   const isLoading = isTrendingLoading || isBoostedLoading;
 
   const allOffers = useMemo(() => {
-    return mixOffers(organicOffers, currentBoostedOffers);
-  }, [organicOffers, currentBoostedOffers]);
+    return mixOffers(organicOffers, boostedOffers);
+  }, [organicOffers, boostedOffers]);
 
 
   return (

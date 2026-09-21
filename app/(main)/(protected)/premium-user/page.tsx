@@ -1,14 +1,21 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import Loading from '@/components/loading/Loading';
+import SubscriptionDashboard from '@/components/subscription/SubscriptionDashboard';
+import SubscriptionPaymentFailed from '@/components/subscription/SubscriptionPaymentFailed';
+import { SubscriptionPlanList } from '@/components/subscription/SubscriptionPlanList';
+import { useSubscription } from '@/features/subscription/useSubscription';
 import { ChevronLeft } from 'lucide-react';
-import { SubscriptionPlanList } from '@/components/subscription/subscriptionPlanList';
+import { useRouter } from 'next/navigation';
 
- export default function SubscriptionPage() {
+export default function SubscriptionPage() {
   const router = useRouter();
+  const { data: subscription, isLoading } = useSubscription();
+
+  if (isLoading) return <Loading />;
 
   return (
-    <div className="max-w-[1440px] mx-auto px-2 py-10 md:px-6">
+    <div className="max-w-[1440px] mx-auto p-2 md:p-6 mb-10">
       <button
         type="button"
         onClick={() => router.back()}
@@ -18,16 +25,20 @@ import { SubscriptionPlanList } from '@/components/subscription/subscriptionPlan
         Back
       </button>
 
-      <div className="text-center mt-8 mb-10">
-        <h1 className="text-[20px] md:text-[40px] font-bold text-[#281812]">
-          Choose a premium subscription
-        </h1>
-        <p className="text-sm md:text-[18px] text-gray-400 mt-2">
-          Packages are designed to help you reach more people
-        </p>
-      </div>
+      {(!subscription || subscription.subscriptionStatus !== 'active') && (
+        <SubscriptionPlanList />
+      )}
 
-      <SubscriptionPlanList />
+      {subscription?.status === 'paid' &&
+        subscription?.subscriptionStatus === 'active' && (
+          <SubscriptionDashboard subscription={subscription} />
+        )}
+
+      {subscription?.status === 'not paid' &&
+        subscription?.subscriptionStatus === 'active' && (
+          <SubscriptionPaymentFailed />
+        )}
+
     </div>
   );
 }

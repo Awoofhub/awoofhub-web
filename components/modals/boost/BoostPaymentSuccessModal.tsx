@@ -44,7 +44,6 @@ export default function BoostPaymentSuccessModal({ price, isOpen, offerId }: Pro
                     </Link>
                 </div>
 
-
             </div>
         </div>
     );

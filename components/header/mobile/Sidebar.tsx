@@ -11,7 +11,6 @@ import {
   FiLogOut,
   FiUser,
 } from "react-icons/fi";
-import { PiCrown } from "react-icons/pi";
 
 interface Props {
   user: User;
@@ -29,7 +28,6 @@ export default function Sidebar({ user, isOpen, onClose }: Props) {
   const navItems = [
     { label: "Profile", icon: <FiUser />, href: `/profile/${user.username}`, },
     { label: "Messages", icon: <FaRegEnvelope />, href: "/message", showBadge: true, },
-    { label: "Premium User", icon: <PiCrown />, href: "/premium-user" },
     { label: "Help & Support", icon: <FiHelpCircle />, href: "/help" },
   ];
 

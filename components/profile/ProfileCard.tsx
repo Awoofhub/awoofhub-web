@@ -8,9 +8,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
-import { FaRegUser } from "react-icons/fa6";
 import { GoDotFill } from "react-icons/go";
 import { MdOutlineChat } from "react-icons/md";
+import { RiVerifiedBadgeFill } from "react-icons/ri";
 import AlertButton from "../alert/Alert";
 import ChatButton from "../chat/ChatButton";
 import EditProfileModal from "../modals/user/EditProfileModal";
@@ -36,6 +36,10 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
     window.addEventListener("click", handleClickOutside);
     return () => window.removeEventListener("click", handleClickOutside);
   }, []);
+
+
+  const isPremiumActive = profile.isSubscribed && profile.subscriptionState === "active" && (profile.subscriptionPlan === "growth" || profile.subscriptionPlan === "pro");
+
 
   return (
     <>
@@ -86,9 +90,25 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
             <h1 className="text-xl  md:text-lg xl:text-2xl font-semibold text-black">
               {profile.name}
             </h1>
-            <span className="flex items-center gap-1 bg-[#FFF0EC] text-primary text-xs font-semibold px-2 py-1 rounded-full">
-              <FaRegUser size={10} /> Awoofer
-            </span>
+            {isPremiumActive && (
+              <Link
+                href="/premium-user"
+                className="flex items-center gap-1 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full hover:underline"
+              >
+                <RiVerifiedBadgeFill size={15} />
+                Premium
+              </Link>
+            )}
+
+            {!isPremiumActive && isOwnProfile && (
+              <Link
+                href="/premium-user"
+                className="flex items-center gap-1 bg-blue-500/10 text-blue-500 text-xs font-bold px-2 py-1 rounded-full hover:underline"
+              >
+                <RiVerifiedBadgeFill size={15} />
+                Get Premium
+              </Link>
+            )}
           </div>
 
           <div className="flex items-start gap-2 text-black text-base xs:text-sm lg:text-base font-medium mt-1 flex-wrap">

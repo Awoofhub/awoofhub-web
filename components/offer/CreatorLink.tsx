@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 import { FaRegUser } from "react-icons/fa6";
+import { RiVerifiedBadgeFill } from "react-icons/ri";
 
 interface Props {
   offer: Offer;
@@ -11,6 +12,9 @@ interface Props {
 }
 
 export default function CreatorLink({ offer, variant = "top" }: Props) {
+
+  const isPremiumActive = offer.contributor.isSubscribed && offer.contributor.subscriptionState === "active" && (offer.contributor.subscriptionPlan === "growth" || offer.contributor.subscriptionPlan === "pro");
+
   if (variant === "card") {
     return (
       <Link
@@ -34,13 +38,21 @@ export default function CreatorLink({ offer, variant = "top" }: Props) {
           )}
         </div>
         <div className="flex flex-col justify-between gap-1">
-          <div className="flex gap-10 xs:gap-2 lg:gap-6 justify-between items-center">
+          <div className="flex justify-between items-center">
             <span className="font-semibold font-baloo text-black text-sm lg:text-lg hover:underline">
               {offer.contributor.name}
             </span>
-            <span className="flex items-center gap-1 bg-[#FFF0EC] text-primary text-[10px] lg:text-xs font-semibold px-2.5 py-1 lg:py-2 rounded-full">
-              <FaRegUser size={11} /> Awoofer
-            </span>
+    
+            {isPremiumActive ? (
+              <span className="flex items-center gap-1 bg-blue-600 text-white text-[10px] lg:text-xs font-bold px-2.5 py-1 lg:py-2 rounded-full shrink-0">
+                <RiVerifiedBadgeFill size={15} />
+                Premium
+              </span>
+            ) : (
+              <span className="flex items-center gap-1 bg-[#FFF0EC] text-primary text-[10px] lg:text-xs font-semibold px-2.5 py-1 lg:py-2 rounded-full shrink-0">
+                <FaRegUser size={11} /> Awoofer
+              </span>
+            )}
           </div>
           <span className="text-muted font-medium text-xs xs:text-[10px] lg:text-sm">
             @{offer.contributor.username}

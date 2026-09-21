@@ -11,6 +11,7 @@ import Link from "next/link";
 import { FaRegUser } from "react-icons/fa6";
 import { FiUsers } from "react-icons/fi";
 import { IoAlarmOutline } from "react-icons/io5";
+import { RiVerifiedBadgeFill } from "react-icons/ri";
 import WishlistButton from "../wishlist/WishlistButton";
 import { LocationIconFor, ValueIconFor } from "./OfferCardIcons";
 
@@ -22,8 +23,9 @@ export default function OfferCard({ offer }: Props) {
   const variant = getOfferVariant(offer);
   const { secondsLeft, hasCountdown } = useOfferCountdown(offer, variant);
 
-  const priceDrop =
-    offer.dealType === "price_drop" ? parsePriceDropValue(offer.value) : null;
+  const priceDrop = offer.dealType === "price_drop" ? parsePriceDropValue(offer.value) : null;
+
+  const isPremiumActive = offer.contributor.isSubscribed && offer.contributor.subscriptionState === "active" && (offer.contributor.subscriptionPlan === "growth" || offer.contributor.subscriptionPlan === "pro");
 
   return (
     <Link
@@ -78,10 +80,18 @@ export default function OfferCard({ offer }: Props) {
           <span className="max-w-[55%] truncate text-primary text-[10px] lg:text-xs font-medium">
             @{offer.contributor.username}
           </span>
-          <span className="flex items-center gap-1 text-muted/70 text-[10px] lg:text-xs">
-            <FaRegUser className="w-2 h-2 md:w-2.5 md:h-2.5" />
-            Awoofer
-          </span>
+
+          {isPremiumActive ? (
+            <span className="flex items-center gap-1 text-blue-500 text-xs font-bold px-2 py-1">
+              <RiVerifiedBadgeFill size={15} />
+              Premium
+            </span>
+          ) : (
+            <span className="flex items-center gap-1 text-muted/70 text-[10px] lg:text-xs">
+              <FaRegUser className="w-2 h-2 md:w-2.5 md:h-2.5" />
+              Awoofer
+            </span>
+          )}
         </div>
 
         {/* Card Content Wrapper */}

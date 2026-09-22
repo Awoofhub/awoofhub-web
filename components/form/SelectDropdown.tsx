@@ -72,7 +72,7 @@ export function SelectDropdown({ data, value, onChange }: Props) {
         <div
           className="
             absolute left-0 top-full z-50 mt-1 max-h-50 w-full
-            overflow-y-auto overflow-hidden whitespace-nowrap
+            overflow-y-auto scrollbar-tiny whitespace-nowrap
             rounded-xl border border-gray-100 bg-white py-1 font-baloo
             font-medium shadow-sm
           "

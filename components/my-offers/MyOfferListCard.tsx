@@ -5,8 +5,10 @@ import { format } from "date-fns";
 import Image from "next/image";
 import { useState } from "react";
 import { FiArrowUpRight, FiMapPin, FiUsers } from "react-icons/fi";
+import { PiRocketLaunchBold } from "react-icons/pi";
 import MyOfferModal from "../modals/offer/MyOfferModal";
 import StatusBadge from "./StatusBadge";
+import BoostButton from "./boost/BoostButton";
 
 interface Props {
   offer: Offer;
@@ -32,12 +34,12 @@ export default function MyOfferListCard({ offer }: Props) {
 
   return (
     <>
-      <button
+      <div
         onClick={() => setOpenModal(true)}
-        className={`w-full flex flex-col xs:flex-row gap-3 md:gap-4 p-2 md:px-6 md:py-3 items-start md:items-center rounded-lg cursor-pointer border ${isActive ? "border border-[#00A95D]" : "border-gray-100 border-2"
+        className={`w-full flex gap-3 md:gap-4 p-2 md:px-6 md:py-3 items-start md:items-center rounded-lg cursor-pointer border ${isActive ? "border border-[#00A95D]" : "border-gray-200"
           } hover:shadow-md transition-shadow text-left bg-white`}
       >
-        <div className="w-full h-[130px] xxs:h-[150px] xs:w-[110px] xs:h-[110px] md:w-[130px] md:h-[130px] lg:w-[150px] lg:h-[150px] shrink-0 overflow-hidden rounded-md">
+        <div className="w-[110px] h-[110px] md:w-[130px] md:h-[130px] lg:w-[150px] lg:h-[150px] shrink-0 overflow-hidden rounded-md">
           <Image
             src={offer.imageUrl}
             alt={offer.title}
@@ -49,11 +51,19 @@ export default function MyOfferListCard({ offer }: Props) {
         </div>
 
         <div className="flex-1 min-w-0 w-full">
-          <div className="flex items-center gap-2 mb-1">
+          <div className="relative flex items-start mb-1">
             <StatusBadge status={status} />
+            <div className="absolute -top-1 -right-1">
+              {
+                offer.isBoosted ?
+                  <button className="bg-purple-500/20 border border-purple-500 text-xs sm:text-sm p-1 text-purple-500 rounded-lg flex items-center gap-1">
+                   <PiRocketLaunchBold size={16} /> Boosted
+                  </button> : <BoostButton offer={offer} />
+              }
+            </div>
           </div>
-          <h4 className="font-semibold text-black text-xs md:text-lg lg:text-xl mt-1 md:mt-2 line-clamp-1">
-            {offer.title}
+          <h4 className="font-semibold text-black text-sm md:text-lg lg:text-xl mt-1 md:mt-2 line-clamp-1">
+            {offer.title} 20% off infinix Phone + Free Cases
           </h4>
           <p className="mt-1 text-primary md:text-black  font-medium text-[10px] md:text-sm md:mt-2 lg:mt-4 truncate">
             {offer.category.name} | {offer.brandName}
@@ -78,7 +88,7 @@ export default function MyOfferListCard({ offer }: Props) {
             </div>
           </div>
         </div>
-      </button>
+      </div>
 
       <MyOfferModal offer={offer} isOpen={openModal} onClose={() => setOpenModal(false)} />
     </>

@@ -1,16 +1,15 @@
 import LogoutModal from "@/components/modals/user/LogoutModal";
-import { useLogout } from "@/features/auth/useLogout";
+import { useMessageCount } from "@/features/chat/useMessageCount";
 import { User } from "@/types/user";
 import { capitalizeFirstLetter } from "@/utils/truncate";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaRegEnvelope } from "react-icons/fa6";
 import {
-    FiHelpCircle,
-    FiLogOut,
-    FiUser,
+  FiHelpCircle,
+  FiLogOut,
+  FiUser,
 } from "react-icons/fi";
 
 interface Props {
@@ -20,14 +19,17 @@ interface Props {
 }
 
 export default function Sidebar({ user, isOpen, onClose }: Props) {
-  const router = useRouter();
+
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
-  const { submit: logout } = useLogout({
-    onSuccess: () => {
-      const redirect = "/login";
-      router.push(redirect);
-    },
-  });
+  const { data: messageCount } = useMessageCount();
+
+  const count = messageCount ?? 0;
+
+  const navItems = [
+    { label: "Profile", icon: <FiUser />, href: `/profile/${user.username}`, },
+    { label: "Messages", icon: <FaRegEnvelope />, href: "/message", showBadge: true, },
+    { label: "Help & Support", icon: <FiHelpCircle />, href: "/help" },
+  ];
 
   return (
     <>
@@ -52,15 +54,7 @@ export default function Sidebar({ user, isOpen, onClose }: Props) {
 
         <ul className="flex flex-col">
           {/* Standard Items */}
-          {[
-            {
-              label: "Profile",
-              icon: <FiUser />,
-              href: `/profile/${user.username}`,
-            },
-            { label: "Messages", icon: <FaRegEnvelope />, href: "/message" },
-            { label: "Help & Support", icon: <FiHelpCircle />, href: "/help" },
-          ].map((item, idx) => (
+          {navItems.map((item, idx) => (
             <li key={idx} className="border-b border-muted/10 last:border-none">
               <Link
                 href={item.href}
@@ -71,6 +65,13 @@ export default function Sidebar({ user, isOpen, onClose }: Props) {
                 <span className="text-foreground text-lg sm:text-[20px] font-light">
                   {item.label}
                 </span>
+
+                {item.showBadge && count > 0 && (
+                  <div className="min-w-6 h-6 px-[2px] bg-red-500 text-white text-[12px] font-bold ml-auto flex items-center justify-center rounded-full border-2 border-white">
+                    {count > 99 ? "99+" : count}
+                  </div>
+                )}
+
               </Link>
             </li>
           ))}
@@ -78,7 +79,10 @@ export default function Sidebar({ user, isOpen, onClose }: Props) {
           {/* Logout - Special Styling */}
           <li>
             <button
-              onClick={() => setIsLogoutModalOpen(true)}
+              onClick={() => {
+                onClose()
+                setIsLogoutModalOpen(true)
+              }}
               className="cursor-pointer w-full flex items-center gap-4 px-4 xxs:px-6 py-4 hover:bg-primary/5 transition-colors text-primary"
             >
               <FiLogOut className="text-xl" />

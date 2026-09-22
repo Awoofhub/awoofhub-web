@@ -41,6 +41,9 @@ export interface Offer {
     id: string;
     name: string;
     username: string;
+    isSubscribed: boolean,
+    subscriptionPlan: 'starter' | 'growth' | 'pro' | null,
+    subscriptionState: "inactive" | "active" | "payment_failed",
     profileImageUrl?: string;
     createdAt: string;
   };
@@ -58,12 +61,14 @@ export interface Offer {
   reviewCount: number;
   clickCount: number;
   isTrending: boolean;
+  isBoosted: boolean;
   ratingDistribution: any;
 }
 
 export interface MyOffersTabsCount {
   all: number;
   pending: number;
+  boosted: number;
   approved: number;
   rejected: number;
   suspended: number;

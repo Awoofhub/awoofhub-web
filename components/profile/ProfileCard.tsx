@@ -8,9 +8,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
-import { FaRegUser } from "react-icons/fa6";
+import { FaRegUser } from "react-icons/fa";
 import { GoDotFill } from "react-icons/go";
 import { MdOutlineChat } from "react-icons/md";
+import { RiVerifiedBadgeFill } from "react-icons/ri";
 import AlertButton from "../alert/Alert";
 import ChatButton from "../chat/ChatButton";
 import EditProfileModal from "../modals/user/EditProfileModal";
@@ -18,9 +19,10 @@ import EditProfileModal from "../modals/user/EditProfileModal";
 interface Props {
   isOwnProfile: boolean;
   profile: User;
+  currentUser?: User;
 }
 
-export default function ProfileCard({ isOwnProfile, profile }: Props) {
+export default function ProfileCard({ isOwnProfile, profile, currentUser }: Props) {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const [isReportOpen, setIsReportOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -36,6 +38,16 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
     window.addEventListener("click", handleClickOutside);
     return () => window.removeEventListener("click", handleClickOutside);
   }, []);
+
+  const isViewerActivePro =
+    currentUser?.isSubscribed &&
+    currentUser?.subscriptionState === "active" && currentUser?.subscriptionPlan === "pro";
+
+  const isProfileActive =
+    profile.isSubscribed &&
+    profile.subscriptionState === "active" &&
+    (profile.subscriptionPlan === "growth" || profile.subscriptionPlan === "pro");
+
 
   return (
     <>
@@ -86,9 +98,28 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
             <h1 className="text-xl  md:text-lg xl:text-2xl font-semibold text-black">
               {profile.name}
             </h1>
-            <span className="flex items-center gap-1 bg-[#FFF0EC] text-primary text-xs font-semibold px-2 py-1 rounded-full">
-              <FaRegUser size={10} /> Awoofer
-            </span>
+
+            {isProfileActive ? (
+              <Link
+                href="/premium-user"
+                className="flex items-center gap-1 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full hover:underline"
+              >
+                <RiVerifiedBadgeFill size={15} />
+                Premium
+              </Link>
+            ) : isOwnProfile ? (
+              <Link
+                href="/premium-user"
+                className="flex items-center gap-1 bg-blue-500/10 text-blue-500 text-xs font-bold px-2 py-1 rounded-full hover:underline"
+              >
+                <RiVerifiedBadgeFill size={15} />
+                Get Premium
+              </Link>
+            ) : (
+              <span className="flex items-center gap-1 bg-[#FFF0EC] text-primary text-xs font-semibold px-2 py-1 rounded-full">
+                <FaRegUser size={10} /> Awoofer
+              </span>
+            )}
           </div>
 
           <div className="flex items-start gap-2 text-black text-base xs:text-sm lg:text-base font-medium mt-1 flex-wrap">
@@ -117,15 +148,23 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
         </div>
 
         {!isOwnProfile && (
-          <ChatButton targetUserId={profile.id}>
-            <span className="w-full mt-6 mb-4 text-center border border-primary text-primary py-2 rounded-md text-sm lg:text-base font-medium font-baloo hover:bg-gray-50 transition-colors flex items-center justify-center gap-1">
+          isViewerActivePro ? (
+
+            <ChatButton targetUserId={profile.id}>
+              <span className="w-full mt-6 mb-4 text-center border border-primary text-primary py-2 rounded-md text-sm lg:text-base font-medium font-baloo hover:bg-gray-50 transition-colors flex items-center justify-center gap-1">
+                <MdOutlineChat className="w-5 h-5" />
+                Message
+              </span>
+            </ChatButton>
+          ) : (
+            <div className="w-full mt-6 mb-4 text-center border border-gray-300 bg-gray-100 text-gray-500 py-2 rounded-md text-sm lg:text-base font-medium font-baloo flex items-center justify-center gap-1 cursor-not-allowed">
               <MdOutlineChat className="w-5 h-5" />
-              Message
-            </span>
-          </ChatButton>
+              Upgrade to Message
+            </div>
+          )
         )}
 
-        <div className=" xs:py-4 space-y-2 xs:space-y-3">
+        < div className=" xs:py-4 space-y-2 xs:space-y-3">
           <div className="flex justify-between px-4 py-6 border border-muted/10 shadow-lg rounded-md items-center">
             <span className=" text-muted text-sm xs:text-xs lg:text-sm font-semibold">
               DEALS POSTED
@@ -177,7 +216,7 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
             </div>
           </div>
         )}
-      </div>
+      </div >
 
       <ReportModal
         isOpen={isReportOpen}

@@ -2,6 +2,7 @@ import { Offer } from "@/types/offer";
 import { Spinner } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+import BoostedOfferCard from "./BoostedOfferCard";
 import OfferCard from "./OfferCard";
 
 interface Props {
@@ -25,7 +26,11 @@ export default function OfferInfiniteList({ offers, hasNextPage, fetchNextPage, 
     <>
       <div className={gridClassName ?? "grid grid-cols-2 xs:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-3 xl:gap-4 justify-items-center"}>
         {offers.map((offer) => (
-          <OfferCard offer={offer} key={offer.id} />
+              offer.isBoosted ? (
+                <BoostedOfferCard key={offer.id} offer={offer} />
+              ) : (
+                <OfferCard key={offer.id} offer={offer} />
+              )        
         ))}
       </div>
       <div ref={ref} className="h-10 flex items-center justify-center mt-6">

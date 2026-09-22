@@ -7,11 +7,15 @@ import OfferInfiniteList from "@/components/offers/OfferInfiniteList";
 import OfferListSkeleton from "@/components/offers/OfferListSkeleton";
 import { OfferLocationFilter } from "@/components/offers/OfferLocationFilter";
 import { OfferSelectDropdown } from "@/components/offers/OfferSelectDropdown";
+import { useBoostedOffers } from "@/features/boost/useBoostedOffers";
 import { useCategory } from "@/features/category/useCategory";
 import { useFilter } from "@/features/offers/useFilter";
 import { useOffers } from "@/features/offers/useOffers";
+import { Offer } from "@/types/offer";
+import { appendUniqueBoostedOffers } from "@/utils/appendUniqueBoostedOffers";
+import { mixOffers } from "@/utils/mixOffers";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useMemo } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { IoFilterSharp } from "react-icons/io5";
 import { RiResetLeftLine } from "react-icons/ri";
@@ -50,7 +54,24 @@ function FilterResults() {
   const { data: categories } = useCategory();
   const updateFilter = useFilter("/offers");
 
-  const { data, isFetching, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError, error, } = useOffers({
+  const [boostedOffers, setBoostedOffers] = useState<Offer[]>([]);
+
+  const {
+    data: boostedData,
+    isLoading: isBoostedLoading,
+    isFetching: isFetchingBoosted,
+    refetch: fetchBoosted
+  } = useBoostedOffers()
+
+  const {
+    data: offerData,
+    isLoading: isOfferLoading,
+    isFetchingNextPage: isOfferFetchingNextPage,
+    fetchNextPage: fetchNextOfferPage,
+    hasNextPage: hasNextOfferPage,
+    isError: isOfferError,
+    error: offerError,
+  } = useOffers({
     search: search ?? "",
     dealType: dealType ?? "",
     location: location ?? "",
@@ -61,14 +82,50 @@ function FilterResults() {
     limit: 8,
   });
 
-  const allOffers = useMemo(
-    () => data?.pages.flatMap((page) => page.data) ?? [],
-    [data],
+  useEffect(() => {
+    if (boostedData?.length) {
+      setBoostedOffers((previous) =>
+        appendUniqueBoostedOffers(previous, boostedData),
+      );
+    }
+  }, [boostedData]);
+
+  const organicOffers = useMemo(
+    () => offerData?.pages.flatMap((page) => page.data) ?? [],
+    [offerData],
   );
+
+  const fetchNextPage = async () => {
+    if (!hasNextOfferPage) {
+      return;
+    }
+
+    // First get the next offer page.
+    const offerResult = await fetchNextOfferPage();
+
+    // Only fetch boosted offers if a new offer page was loaded.
+    if (offerResult.data) {
+      const result = await fetchBoosted();
+      const newBoostedOffers = result.data ?? [];
+
+      setBoostedOffers((previous) =>
+        appendUniqueBoostedOffers(previous, newBoostedOffers),
+      );
+    }
+  };
+
+  const isFetchingNextPage = isOfferFetchingNextPage || isFetchingBoosted;
+  const isLoading = isOfferLoading || isBoostedLoading;
+
+  const allOffers = useMemo(() => {
+    return mixOffers(organicOffers, boostedOffers);
+  }, [organicOffers, boostedOffers]);
+
 
   const hasActiveFilters = Boolean(
     dealType || location || category || minRating || createdFrom || createdTo,
   );
+
 
   return (
     <div className="bg-white">
@@ -144,14 +201,14 @@ function FilterResults() {
         </div>
 
         {isLoading && <OfferListSkeleton number={4} />}
-        {!isLoading && !isFetching && allOffers.length === 0 && (
+        {!isLoading && !isFetchingNextPage && allOffers.length === 0 && (
           <p className="text-center text-gray-500">No offers available.</p>
         )}
-        {isError && <div>{error?.message}</div>}
+        {isOfferError && <div>{offerError?.message}</div>}
         {!isLoading && allOffers.length > 0 && (
           <OfferInfiniteList
             offers={allOffers}
-            hasNextPage={hasNextPage}
+            hasNextPage={hasNextOfferPage}
             isFetchingNextPage={isFetchingNextPage}
             fetchNextPage={fetchNextPage}
           />
@@ -170,3 +227,5 @@ export default function Filter() {
     </Suspense>
   );
 }
+
+

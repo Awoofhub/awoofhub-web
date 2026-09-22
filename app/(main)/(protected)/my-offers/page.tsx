@@ -2,6 +2,7 @@
 import Loading from "@/components/loading/Loading";
 import MyOfferListItem from "@/components/my-offers/MyOfferListItem";
 import MyOffersTabs from "@/components/my-offers/MyOffersTabs";
+import { useHasActiveBoost } from "@/features/boost/useHasActiveBoost";
 import { useFilter } from "@/features/offers/useFilter";
 import { MyOffersTabsCount } from "@/types/offer";
 import { useSearchParams } from "next/navigation";
@@ -11,12 +12,15 @@ import { Suspense } from "react";
 function MyOffersPage() {
   const searchParams = useSearchParams();
   const tab = searchParams.get("tab") ?? undefined;
-  
+
   const updateTab = useFilter("/my-offers");
+  const { data } = useHasActiveBoost()
+
 
   const Tabs: { value: keyof MyOffersTabsCount | undefined; label: string }[] = [
     { value: undefined, label: "All" },
     { value: "approved", label: "Active" },
+    ...(data ? [{ value: "boosted" as keyof MyOffersTabsCount, label: "Boosted" }] : []),
     { value: "pending", label: "Pending" },
     { value: "rejected", label: "Rejected" },
     { value: "suspended", label: "Suspended" },
@@ -53,7 +57,7 @@ function MyOffersPage() {
 export default function Filter() {
   return (
     <Suspense fallback={<Loading />}>
-        <MyOffersPage />
+      <MyOffersPage />
     </Suspense>
   );
 }

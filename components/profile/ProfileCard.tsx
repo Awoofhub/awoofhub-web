@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
+import { FaRegUser } from "react-icons/fa";
 import { GoDotFill } from "react-icons/go";
 import { MdOutlineChat } from "react-icons/md";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
@@ -90,7 +91,8 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
             <h1 className="text-xl  md:text-lg xl:text-2xl font-semibold text-black">
               {profile.name}
             </h1>
-            {isPremiumActive && (
+
+            {isPremiumActive ? (
               <Link
                 href="/premium-user"
                 className="flex items-center gap-1 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full hover:underline"
@@ -98,9 +100,7 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
                 <RiVerifiedBadgeFill size={15} />
                 Premium
               </Link>
-            )}
-
-            {!isPremiumActive && isOwnProfile && (
+            ) : isOwnProfile ? (
               <Link
                 href="/premium-user"
                 className="flex items-center gap-1 bg-blue-500/10 text-blue-500 text-xs font-bold px-2 py-1 rounded-full hover:underline"
@@ -108,6 +108,10 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
                 <RiVerifiedBadgeFill size={15} />
                 Get Premium
               </Link>
+            ) : (
+              <span className="flex items-center gap-1 bg-[#FFF0EC] text-primary text-xs font-semibold px-2 py-1 rounded-full">
+                <FaRegUser size={10} /> Awoofer
+              </span>
             )}
           </div>
 

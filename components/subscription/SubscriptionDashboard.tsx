@@ -128,7 +128,7 @@ export default function SubscriptionDashboard({ subscription }: Props) {
                                     <p className="text-xs text-gray-400 mb-1">Subscription ends</p>
                                     <div className="flex items-center text-gray-900 font-bold text-lg">
                                         <Calendar className="w-5 h-5 text-orange-500 mr-2" />
-                                        Sep 8, 2026
+                                        {subscription.subscriptionExpiresAt}
                                     </div>
                                     <p className="text-xs text-gray-400 mt-0.5">(in 14 days)</p>
                                 </div>

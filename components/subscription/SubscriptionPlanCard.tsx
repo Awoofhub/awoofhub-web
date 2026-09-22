@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/button/Button";
 import { useSubscribe } from "@/features/subscription/useSubscribe";
+import { openPayment } from "@/lib/paystack";
 import { useState } from "react";
 import { FaRegCheckCircle } from "react-icons/fa";
 import SubscriptionSuccessModal from "../modals/subscription/SubscriptionSuccessModal";
@@ -37,9 +38,18 @@ export default function SubscriptionPlanCard({
 }: Props) {
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const subscribe = useSubscribe({
-    onSuccess: () => {
-      onLoadingChange(false);
-      setIsSuccessModalOpen(true);
+    onSuccess: (data) => {
+      const accessCode = data.accessCode;
+
+      openPayment(accessCode, {
+        onSuccess: () => {
+          onLoadingChange(false);
+          setIsSuccessModalOpen(true);
+        },
+        onCancel: () => {
+          onLoadingChange(false);
+        }
+      });
     },
   });
 
@@ -112,7 +122,7 @@ export default function SubscriptionPlanCard({
           variant={selected ? "solid" : "outline"}
           isLoading={isThisCardLoading}
           onClick={onSubmit}
-          isDisabled={isGlobalPending}
+          isDisabled={isGlobalPending || !selected}
           className={`${selected ? "" : "!text-primary"} mt-6`}
         >
           {selectLabel}

@@ -1,4 +1,3 @@
-import { openPayment } from "@/lib/paystack";
 import SubscriptionService from "@/services/subscription.service";
 import { SubscriptionData, subscriptionPayload } from "@/types/subscription";
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -18,13 +17,7 @@ export const useSubscribe = ({ onSuccess }: UseSubscribeOptions = {}) => {
     const { mutate, isPending } = useMutation({
         mutationFn: subscribe,
         onSuccess: (data) => {
-            const accessCode = data.accessCode;
-
-            openPayment(accessCode, {
-                onSuccess: () => {
-                    onSuccess?.(data);
-                },
-            });
+            onSuccess?.(data);
         },
     });
 

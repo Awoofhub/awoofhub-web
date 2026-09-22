@@ -19,9 +19,10 @@ import EditProfileModal from "../modals/user/EditProfileModal";
 interface Props {
   isOwnProfile: boolean;
   profile: User;
+  currentUser?: User;
 }
 
-export default function ProfileCard({ isOwnProfile, profile }: Props) {
+export default function ProfileCard({ isOwnProfile, profile, currentUser }: Props) {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const [isReportOpen, setIsReportOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -38,8 +39,14 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
     return () => window.removeEventListener("click", handleClickOutside);
   }, []);
 
+  const isViewerActivePro =
+    currentUser?.isSubscribed &&
+    currentUser?.subscriptionState === "active" && currentUser?.subscriptionPlan === "pro";
 
-  const isPremiumActive = profile.isSubscribed && profile.subscriptionState === "active" && (profile.subscriptionPlan === "growth" || profile.subscriptionPlan === "pro");
+  const isProfileActive =
+    profile.isSubscribed &&
+    profile.subscriptionState === "active" &&
+    (profile.subscriptionPlan === "growth" || profile.subscriptionPlan === "pro");
 
 
   return (
@@ -92,7 +99,7 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
               {profile.name}
             </h1>
 
-            {isPremiumActive ? (
+            {isProfileActive ? (
               <Link
                 href="/premium-user"
                 className="flex items-center gap-1 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full hover:underline"
@@ -141,15 +148,23 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
         </div>
 
         {!isOwnProfile && (
-          <ChatButton targetUserId={profile.id}>
-            <span className="w-full mt-6 mb-4 text-center border border-primary text-primary py-2 rounded-md text-sm lg:text-base font-medium font-baloo hover:bg-gray-50 transition-colors flex items-center justify-center gap-1">
+          isViewerActivePro ? (
+
+            <ChatButton targetUserId={profile.id}>
+              <span className="w-full mt-6 mb-4 text-center border border-primary text-primary py-2 rounded-md text-sm lg:text-base font-medium font-baloo hover:bg-gray-50 transition-colors flex items-center justify-center gap-1">
+                <MdOutlineChat className="w-5 h-5" />
+                Message
+              </span>
+            </ChatButton>
+          ) : (
+            <div className="w-full mt-6 mb-4 text-center border border-gray-300 bg-gray-100 text-gray-500 py-2 rounded-md text-sm lg:text-base font-medium font-baloo flex items-center justify-center gap-1 cursor-not-allowed">
               <MdOutlineChat className="w-5 h-5" />
-              Message
-            </span>
-          </ChatButton>
+              Upgrade to Message
+            </div>
+          )
         )}
 
-        <div className=" xs:py-4 space-y-2 xs:space-y-3">
+        < div className=" xs:py-4 space-y-2 xs:space-y-3">
           <div className="flex justify-between px-4 py-6 border border-muted/10 shadow-lg rounded-md items-center">
             <span className=" text-muted text-sm xs:text-xs lg:text-sm font-semibold">
               DEALS POSTED
@@ -201,7 +216,7 @@ export default function ProfileCard({ isOwnProfile, profile }: Props) {
             </div>
           </div>
         )}
-      </div>
+      </div >
 
       <ReportModal
         isOpen={isReportOpen}

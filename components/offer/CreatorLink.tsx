@@ -13,7 +13,7 @@ interface Props {
 
 export default function CreatorLink({ offer, variant = "top" }: Props) {
 
-  const isPremiumActive = offer.contributor.isSubscribed && offer.contributor.subscriptionState === "active" && (offer.contributor.subscriptionPlan === "growth" || offer.contributor.subscriptionPlan === "pro");
+  const isPremiumActive = offer.contributor.subscriptionState === "active" && (offer.contributor.subscriptionPlan === "growth" || offer.contributor.subscriptionPlan === "pro");
 
   if (variant === "card") {
     return (

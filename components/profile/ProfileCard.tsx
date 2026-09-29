@@ -39,14 +39,9 @@ export default function ProfileCard({ isOwnProfile, profile, currentUser }: Prop
     return () => window.removeEventListener("click", handleClickOutside);
   }, []);
 
-  const isViewerActivePro =
-    currentUser?.isSubscribed &&
-    currentUser?.subscriptionState === "active" && currentUser?.subscriptionPlan === "pro";
+  const isViewerActivePro = currentUser?.subscriptionState === "active" && currentUser?.subscriptionPlan === "pro";
 
-  const isProfileActive =
-    profile.isSubscribed &&
-    profile.subscriptionState === "active" &&
-    (profile.subscriptionPlan === "growth" || profile.subscriptionPlan === "pro");
+  const isProfileActive = profile.subscriptionState === "active" && (profile.subscriptionPlan === "growth" || profile.subscriptionPlan === "pro");
 
 
   return (

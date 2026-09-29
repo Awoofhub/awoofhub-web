@@ -13,7 +13,6 @@ export interface User {
   numOfDealPosted?: number;
   offerClicks?: number;
   usernameChangeLockedUntil: string;
-  isSubscribed: boolean,
   subscriptionPlan: 'starter' | 'growth' | 'pro' | null,
   subscriptionState: "inactive" | "active" | "payment_failed",
 }

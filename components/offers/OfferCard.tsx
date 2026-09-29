@@ -25,7 +25,7 @@ export default function OfferCard({ offer }: Props) {
 
   const priceDrop = offer.dealType === "price_drop" ? parsePriceDropValue(offer.value) : null;
 
-  const isPremiumActive = offer.contributor.isSubscribed && offer.contributor.subscriptionState === "active" && (offer.contributor.subscriptionPlan === "growth" || offer.contributor.subscriptionPlan === "pro");
+  const isPremiumActive = offer.contributor.subscriptionState === "active" && (offer.contributor.subscriptionPlan === "growth" || offer.contributor.subscriptionPlan === "pro");
 
   return (
     <Link

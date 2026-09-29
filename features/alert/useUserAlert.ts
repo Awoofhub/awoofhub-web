@@ -6,15 +6,15 @@ type setAlertOptions = {
     id: string;
 };
 
-export const GetBusinessAlert = async ({ id }: setAlertOptions): Promise<Alert | null> => {
-    const result = await AlertService.getBusinessAlert(id);
+export const GetUserAlert = async ({ id }: setAlertOptions): Promise<Alert | null> => {
+    const result = await AlertService.getUserAlert(id);
     return result.data
 };
 
-export const useBusinessAlert = (id: string) => {
+export const useUserAlert = (id: string) => {
     const { data, isLoading } = useQuery({
         queryKey: ['alert', id],
-        queryFn: () => GetBusinessAlert({ id }),
+        queryFn: () => GetUserAlert({ id }),
     });
 
 

@@ -1,11 +1,11 @@
 "use client";
-import { useUsernameChecker } from "@/features/user/useUsernameChecker";
 import { useUser } from "@/features/user/useUser";
-import { ImSpinner2 } from "react-icons/im";
-import { CgDanger } from "react-icons/cg";
+import { useUsernameChecker } from "@/features/user/useUsernameChecker";
 import { UsernameCheckResult } from "@/types/user";
-import { useEffect, useMemo } from "react";
 import { debounce } from "lodash";
+import { useEffect, useMemo } from "react";
+import { CgDanger } from "react-icons/cg";
+import { ImSpinner2 } from "react-icons/im";
 
 interface Props {
   value: string;

@@ -86,6 +86,7 @@ export const LocationPicker = ({ value, onChange, error }: Props) => {
                         value={value === "Online" || value === "Nationwide" ? "" : value}
                         onPlaceSelect={onChange}
                         placeholder="Enter deal address e.g, Ikeja city mall, Lagos"
+                        error={true}
                     />
                 </div>
             )}

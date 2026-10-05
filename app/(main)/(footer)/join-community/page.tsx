@@ -1,5 +1,6 @@
 "use client";
-import { JoinCommunityForm } from "@/components/community/JoinCommunityForm";
+
+import JoinCommunityForm from "@/components/community/JoinCommunityForm";
 import Footer from "@/components/footer/Footer";
 import Image from "next/image";
 import {

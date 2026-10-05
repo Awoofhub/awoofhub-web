@@ -16,7 +16,7 @@ export function FormSelectDropdown({ data, value, onChange, compulsory, label, e
   return (
     <div className="my-4">
       {label && (
-        <label className={`block text-black mb-1 ${labelClassName ?? "text-sm md:text-lg font-baloo"}`}>
+        <label className={`block text-left text-black mb-1 ${labelClassName ?? "text-sm md:text-lg font-baloo"}`}>
           {label}
           {compulsory && <span className="text-red-500"> *</span>}
         </label>

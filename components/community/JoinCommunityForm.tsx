@@ -59,7 +59,7 @@ interface JoinCommunityFormValues {
     understandsExpectations: boolean;
 }
 
-export const JoinCommunityForm = () => {
+export default function JoinCommunityForm() {
     const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const { register, handleSubmit, formState, reset, control, watch } = useForm<JoinCommunityFormValues>();

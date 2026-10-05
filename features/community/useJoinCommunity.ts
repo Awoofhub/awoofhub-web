@@ -12,12 +12,12 @@ type UseJoinCommunityOptions = {
 };
 
 export const useJoinCommunity = ({ onSuccess }: UseJoinCommunityOptions = {}) => {
-  const { mutate: submit, isPending, isError, error, reset } = useMutation({
+  const { mutate: submit, isPending, isError, error } = useMutation({
     mutationFn: joinCommunity,
     onSuccess: (data) => {
       onSuccess?.(data);
     },
   });
 
-  return { submit, isPending, isError, error, reset };
+  return { submit, isPending, isError, error };
 };

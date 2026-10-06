@@ -63,8 +63,7 @@ export interface Bank {
     code: string;
 }
 
-
-export interface VerifyAccountData {
+export interface AccountData {
     accountNumber: string;
     bankCode: string;
 }
@@ -74,4 +73,11 @@ export interface VerifiedAccount {
     account_name: string;
     bank_id: number;
 }
+
+export interface SavedAccount {
+    account_number: string;
+    account_name: string;
+    bank_id: number;
+}
+
 

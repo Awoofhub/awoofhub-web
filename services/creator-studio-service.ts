@@ -1,6 +1,6 @@
 import { apiClient } from "@/lib/api-client";
 import { ApiResponse } from "@/types/api-response";
-import { CreatorMonthlyClicks, CreatorStats, CreatorTopOffers, Payout, VerifiedAccount, VerifyAccountData } from "@/types/creator-studio";
+import { AccountData, Bank, BankAccount, CreatorMonthlyClicks, CreatorStats, CreatorTopOffers, Payout, VerifiedAccount } from "@/types/creator-studio";
 
 async function stats(): Promise<ApiResponse<CreatorStats>> {
   const res: ApiResponse<CreatorStats> = await apiClient.get('/creator-studio/stats')
@@ -26,21 +26,35 @@ async function payouts(): Promise<ApiResponse<Payout>> {
   return res;
 }
 
-async function getBanks(): Promise<ApiResponse<Payout>> {
-  const res: ApiResponse<Payout> = await apiClient.get('/creator-studio/banks')
+async function getBanks(): Promise<ApiResponse<Bank>> {
+  const res: ApiResponse<Bank> = await apiClient.get('/creator-studio/banks')
 
   return res;
 }
 
-
-async function verifyAccount(payload: VerifyAccountData): Promise<ApiResponse<VerifiedAccount>> {
+async function verifyAccount(payload: AccountData): Promise<ApiResponse<VerifiedAccount>> {
   const res: ApiResponse<VerifiedAccount> = await apiClient.post('/creator-studio/payout-accounts/verify', payload);
+
   return res;
 }
 
+async function saveAccount(payload: AccountData): Promise<ApiResponse<BankAccount>> {
+  const res: ApiResponse<BankAccount> = await apiClient.post('/creator-studio/payout-accounts', payload);
 
+  return res;
+}
 
+async function getAccount(): Promise<ApiResponse<Payout>> {
+  const res: ApiResponse<Payout> = await apiClient.get('/creator-studio/payouts')
 
+  return res;
+}
+
+async function deleteAccount(id: string): Promise<ApiResponse<any>> {
+  const res: ApiResponse<any> = await apiClient.delete(`/creator-studio/payout-accounts/${id}`);
+
+  return res;
+};
 
 const CreatorStudioService = {
   stats,
@@ -49,6 +63,9 @@ const CreatorStudioService = {
   payouts,
   getBanks,
   verifyAccount,
+  saveAccount,
+  getAccount,
+  deleteAccount,
 };
 
 export default CreatorStudioService;

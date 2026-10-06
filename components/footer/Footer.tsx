@@ -8,7 +8,7 @@ import { RiInstagramFill } from "react-icons/ri";
 const footerLinks = {
   about: [
     { label: "About Us", href: "/about" },
-    { label: "Advertising Opportunity", href: "/advertising-opportunity" },
+    { label: "Creator Studio", href: "/creator-studio-learnmore" },
     { label: "Help & Support", href: "/help" },
     { label: "FAQs", href: "/faq" },
   ],

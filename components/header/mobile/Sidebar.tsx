@@ -11,6 +11,7 @@ import {
   FiLogOut,
   FiUser,
 } from "react-icons/fi";
+import { GiAlliedStar } from "react-icons/gi";
 
 interface Props {
   user: User;
@@ -28,6 +29,7 @@ export default function Sidebar({ user, isOpen, onClose }: Props) {
   const navItems = [
     { label: "Profile", icon: <FiUser />, href: `/profile/${user.username}`, },
     { label: "Messages", icon: <FaRegEnvelope />, href: "/message", showBadge: true, },
+    { label: "Creator Studio", icon: <GiAlliedStar />, href: `/creator-studio`, },
     { label: "Help & Support", icon: <FiHelpCircle />, href: "/help" },
   ];
 

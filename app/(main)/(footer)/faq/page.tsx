@@ -138,74 +138,7 @@ export default function FAQs() {
         </section>
       </div>
 
-      {/* Send a Message */}
-      <div className="bg-background my-5">
-        <section className="py-10 md:py-12 lg:py-16 px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto">
-          <h2 className="text-2xl md:text-3xl font-semibold text-black mb-4 md:mb-8">
-            Not resolved? Send us a Message
-          </h2>
-
-          {/* Custom Dropdown */}
-          <div className="mb-6">
-            <label className="block font-baloo text-base md:text-lg text-black font-medium mb-2">
-              Select Category
-            </label>
-            <div className="relative w-full">
-              <button
-                type="button"
-                onClick={() => setOpen(!open)}
-                className={`w-full border border-[#D9D9D9] rounded-lg px-4 py-4 outline-none flex items-center justify-between ${
-                  selected ? "text-muted text-xs md:text-sm" : "text-muted/50 text-xs md:text-sm"
-                }`}
-              >
-                {selected || "Select category"}
-                <FiChevronDown
-                  className={`transition-transform duration-200 ${
-                    open ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-              {open && (
-                <ul className="absolute z-10 w-full bg-white border border-[#D9D9D9] rounded-lg mt-1 overflow-hidden shadow-md">
-                  {categories.map((cat) => (
-                    <li
-                      key={cat}
-                      onClick={() => {
-                        setSelected(cat);
-                        setOpen(false);
-                      }}
-                      className="px-4 py-3 text-black cursor-pointer hover:bg-primary hover:text-white transition-colors"
-                    >
-                      {cat}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          </div>
-
-          <div className="mb-6">
-            <label className="block font-baloo text-base md:text-lg text-black font-medium mb-2">
-              Message
-            </label>
-            <textarea
-              placeholder="Enter your message"
-              rows={6}
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              className="w-full border border-[#D9D9D9] text-xs md:text-sm rounded-lg px-4 py-4 text-muted outline-none resize-none"
-            />
-          </div>
-          <div className="flex justify-center md:justify-end">
-            <button
-              onClick={handleSend}
-              className="bg-primary w-[250px] cursor-pointer text-white font-semibold text-lg px-8 py-3 font-baloo rounded-lg hover:bg-orange-600 transition-colors"
-            >
-              Send Message
-            </button>
-          </div>
-        </section>
-      </div>
+      
       <Footer />
     </main>
   );

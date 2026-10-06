@@ -20,14 +20,14 @@ async function topOffers(): Promise<ApiResponse<CreatorTopOffers>> {
   return res;
 }
 
-async function payouts(): Promise<ApiResponse<Payout>> {
-  const res: ApiResponse<Payout> = await apiClient.get('/creator-studio/payouts')
+async function payouts(): Promise<ApiResponse<Payout[]>> {
+  const res: ApiResponse<Payout[]> = await apiClient.get('/creator-studio/payouts')
 
   return res;
 }
 
-async function getBanks(): Promise<ApiResponse<Bank>> {
-  const res: ApiResponse<Bank> = await apiClient.get('/creator-studio/banks')
+async function getBanks(): Promise<ApiResponse<Bank[]>> {
+  const res: ApiResponse<Bank[]> = await apiClient.get('/creator-studio/banks')
 
   return res;
 }
@@ -44,8 +44,8 @@ async function saveAccount(payload: AccountData): Promise<ApiResponse<BankAccoun
   return res;
 }
 
-async function getAccount(): Promise<ApiResponse<Payout>> {
-  const res: ApiResponse<Payout> = await apiClient.get('/creator-studio/payouts')
+async function getAccount(): Promise<ApiResponse<BankAccount>> {
+  const res: ApiResponse<BankAccount> = await apiClient.get('/creator-studio/payouts')
 
   return res;
 }

@@ -74,10 +74,4 @@ export interface VerifiedAccount {
     bank_id: number;
 }
 
-export interface SavedAccount {
-    account_number: string;
-    account_name: string;
-    bank_id: number;
-}
-
 

@@ -15,7 +15,7 @@ type UseCreateOfferOptions = {
 export const useCreateOffer = ({ onSuccess }: UseCreateOfferOptions = {}) => {
     const queryClient = useQueryClient();
 
-    const { mutate: submit, isPending } = useMutation<Offer, Error, CreateOfferData>({
+    const { mutate: submit, isPending } = useMutation({
         mutationFn: createOffer,
         onSuccess: (data) => {
             queryClient.setQueryData(['offers', data.id], data);

@@ -8,7 +8,7 @@ export const getPayouts = async (): Promise<Payout[]> => {
 };
 
 export const usePayouts = () => {
-    const { data, isFetching, isFetched } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ['payouts'],
         queryFn: () => getPayouts(),
         initialData: []
@@ -16,8 +16,7 @@ export const usePayouts = () => {
 
     return {
         data,
-        isFetching,
-        isFetched
+        isLoading,
     };
 };
 

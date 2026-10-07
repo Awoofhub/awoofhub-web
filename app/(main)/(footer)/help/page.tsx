@@ -20,7 +20,7 @@ export default function HelpPage() {
           </p>
         </div>
 
-        <div className="px-4 md:px-6 lg:px-8 xl:px-12">
+        <div className="px-4   max-w-4xl w-full mx-auto">
           <HelpAndSupportForm />
         </div>
 

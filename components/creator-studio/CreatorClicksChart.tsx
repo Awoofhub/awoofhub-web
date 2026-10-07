@@ -27,7 +27,7 @@ export default function CreatorClicksChart() {
 
 
     return (
-        <div className="bg-white p-5 rounded-2xl flex flex-col border border-gray-100 shadow-sm flex-1 min-w-[300px] flex justify-center">
+        <div className="bg-[#FAFAFA] p-5 rounded-2xl flex flex-col border border-gray-100 shadow-sm flex-1 min-w-[300px] flex justify-center">
             <h3 className="text-lg font-semibold text-start text-gray-700">
                 Clicks
             </h3>

@@ -1,6 +1,6 @@
 
 interface Props {
-    activeTab: string | undefined;
+    activeTab: string;
     onChange: (tab: string) => void;
     tabs: { label: string; value: string; }[];
 }

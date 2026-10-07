@@ -8,7 +8,7 @@ export default function CreatorSubscribed() {
   return (
     <div >
     
-
+This page is for user subscribed
       
        
     </div>

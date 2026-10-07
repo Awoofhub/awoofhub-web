@@ -1,6 +1,7 @@
 "use client";
 
-import { default as CreatorNotSubscribed, default as CreatorSubscribed } from "@/components/creator-studio/CreatorNotSubscribed";
+import CreatorNotSubscribed from "@/components/creator-studio/CreatorNotSubscribed";
+import CreatorSubscribed from "@/components/creator-studio/CreatorSubscribed";
 import Loading from "@/components/loading/Loading";
 import { useSubscription } from "@/features/subscription/useSubscription";
 

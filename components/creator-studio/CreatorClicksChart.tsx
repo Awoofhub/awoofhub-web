@@ -4,7 +4,7 @@ import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
 export default function CreatorClicksChart() {
 
-    const { data, isLoading } = useCreatorMonthlyClicks();
+    const { data } = useCreatorMonthlyClicks();
 
     const monthlyData = data || { jan: 0, feb: 0, march: 0, april: 0, may: 0, june: 0, july: 0, aug: 0, sep: 0, oct: 0, nov: 0, dec: 0, };
 

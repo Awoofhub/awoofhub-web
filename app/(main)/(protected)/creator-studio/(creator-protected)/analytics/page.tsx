@@ -6,7 +6,7 @@ import { ChevronLeft } from "lucide-react";
 export default function AnalyticsPage() {
 
     return (
-        <div className="max-w-[1440px] mx-auto p-2 md:p-6 mb-10">
+        <div className="max-w-[1440px] mx-auto p-2 md:p-6 mb-10 bg-white">
             <button className="flex items-center text-sm text-gray-500 hover:text-gray-800 mb-2 transition-colors">
                 <ChevronLeft className="w-4 h-4 mr-1" />
             </button>

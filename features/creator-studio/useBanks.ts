@@ -8,7 +8,7 @@ export const getBanks = async (): Promise<Bank[]> => {
 };
 
 export const useBanks = () => {
-    const { data, isFetching, isFetched } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ['banks'],
         queryFn: () => getBanks(),
         initialData: []
@@ -16,8 +16,7 @@ export const useBanks = () => {
 
     return {
         data,
-        isFetching,
-        isFetched
+        isLoading,
     };
 };
 

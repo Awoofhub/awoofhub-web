@@ -2,27 +2,41 @@
 
 import PayoutItem from "@/components/creator-studio/PayoutItem";
 import Loading from "@/components/loading/Loading";
+import { useBanks } from "@/features/creator-studio/useBanks";
 import { usePayouts } from "@/features/creator-studio/usePayouts";
 import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useMemo } from "react";
 
 export default function PayoutPage() {
   const router = useRouter();
-  const { data: payouts, isLoading } = usePayouts();
 
-  if (isLoading) return <Loading />;
+  const { data: payouts, isLoading: isPayoutsLoading } = usePayouts();
+  const { data: banks = [], isLoading: isBanksLoading, } = useBanks();
 
-  if (!payouts) {
+
+  const getBankName = useMemo(() => {
+    const bankNameMap = banks.reduce<Record<string, string>>((acc, bank) => {
+      acc[bank.code] = bank.name;
+      return acc;
+    }, {});
+    return (code: string) => bankNameMap[code] || "Unknown Bank";
+  }, [banks]);
+
+  
+  if (isPayoutsLoading) return <Loading />;
+
+  if (!payouts || payouts.length === 0) {
     return (
       <section className="pt-14 px-6">
-        <p className="text-center text-gray-500"> No payouts</p>
+        <p className="text-center text-gray-500">No payouts</p>
       </section>
-    )
+    );
   }
 
   return (
     <section className="bg-white">
-      <div className="max-w-[1440px] mx-auto p-2 md:p-6 mb-10">
+      <div className="max-w-[1440px] mx-auto p-2 md:p-6 pb-10">
         <div className="relative flex items-center justify-between mb-12">
           <button
             onClick={() => router.back()}
@@ -39,7 +53,12 @@ export default function PayoutPage() {
 
         <div className="divide-y divide-gray-100 border-t border-b border-gray-100">
           {payouts.map((payout) => (
-            <PayoutItem key={payout.id} payout={payout} />
+            <PayoutItem 
+              key={payout.id} 
+              payout={payout} 
+              getBankName={getBankName}
+              isLoading={isBanksLoading}
+            />
           ))}
         </div>
 

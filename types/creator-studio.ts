@@ -23,14 +23,18 @@ export interface CreatorMonthlyClicks {
 }
 
 export interface ClickedOffer {
-    offerId: string;
+    id: string;
     title: string;
+    imageUrl: string;
+    createdAt: string;
     clicks: number;
 }
 
 export interface SharedOffer {
-    offerId: string;
+    id: string;
     title: string;
+    imageUrl: string;
+    createdAt: string;
     shares: number;
 }
 

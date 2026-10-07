@@ -6,23 +6,21 @@ export default function CreatorClicksChart() {
 
     const { data, isLoading } = useCreatorMonthlyClicks();
 
-    if (isLoading || !data) {
-        return <div className="text-gray-400 text-sm">Skeleton</div>;
-    }
+    const monthlyData = data || { jan: 0, feb: 0, march: 0, april: 0, may: 0, june: 0, july: 0, aug: 0, sep: 0, oct: 0, nov: 0, dec: 0, };
 
     const chartData = [
-        { name: 'Jan', value: data.jan },
-        { name: 'Feb', value: data.feb },
-        { name: 'Mar', value: data.march },
-        { name: 'Apr', value: data.april },
-        { name: 'May', value: data.may },
-        { name: 'Jun', value: data.june },
-        { name: 'Jul', value: data.july },
-        { name: 'Aug', value: data.aug },
-        { name: 'Sep', value: data.sep },
-        { name: 'Oct', value: data.oct },
-        { name: 'Nov', value: data.nov },
-        { name: 'Dec', value: data.dec },
+        { name: 'Jan', value: monthlyData.jan },
+        { name: 'Feb', value: monthlyData.feb },
+        { name: 'Mar', value: monthlyData.march },
+        { name: 'Apr', value: monthlyData.april },
+        { name: 'May', value: monthlyData.may },
+        { name: 'Jun', value: monthlyData.june },
+        { name: 'Jul', value: monthlyData.july },
+        { name: 'Aug', value: monthlyData.aug },
+        { name: 'Sep', value: monthlyData.sep },
+        { name: 'Oct', value: monthlyData.oct },
+        { name: 'Nov', value: monthlyData.nov },
+        { name: 'Dec', value: monthlyData.dec },
     ];
 
 
@@ -39,8 +37,8 @@ export default function CreatorClicksChart() {
                         fontSize={12}
                         stroke="#9ca3af"
                         tickMargin={12}
-                        tick={{ fill: '#000000'}}
-                        
+                        tick={{ fill: '#000000' }}
+
                     />
                     <YAxis
                         type="number"
@@ -49,11 +47,11 @@ export default function CreatorClicksChart() {
                         allowDecimals={false}
                         tickLine={false}
                         width={10}
-                        tick={{ fill: '#000000'}}
+                        tick={{ fill: '#000000' }}
                     />
                     <Bar dataKey="value" fill="#FE4F04" radius={[6, 6, 0, 0]} />
-                        
-                    
+
+
                 </BarChart>
             </ResponsiveContainer>
         </div>

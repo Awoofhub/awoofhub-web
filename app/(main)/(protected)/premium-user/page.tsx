@@ -25,20 +25,14 @@ export default function SubscriptionPage() {
         Back
       </button>
 
-      {(!subscription || subscription.subscriptionStatus !== 'active') && (
+      {subscription?.status === 'active' ? (
+        <SubscriptionDashboard subscription={subscription} />
+      ) : subscription?.status === 'failed' ? (
+        <SubscriptionPaymentFailed />
+      ) : (
         <SubscriptionPlanList />
       )}
-
-      {subscription?.status === 'paid' &&
-        subscription?.subscriptionStatus === 'active' && (
-          <SubscriptionDashboard subscription={subscription} />
-        )}
-
-      {subscription?.status === 'not paid' &&
-        subscription?.subscriptionStatus === 'active' && (
-          <SubscriptionPaymentFailed />
-        )}
-
+      
     </div>
   );
 }

@@ -2,8 +2,10 @@ import { apiClient } from "@/lib/api-client";
 import { ApiResponse } from "@/types/api-response";
 import { AccountData, Bank, BankAccount, CreatorMonthlyClicks, CreatorStats, CreatorTopOffers, Payout, VerifiedAccount } from "@/types/creator-studio";
 
-async function stats(): Promise<ApiResponse<CreatorStats>> {
-  const res: ApiResponse<CreatorStats> = await apiClient.get('/creator-studio/stats')
+async function stats(dateFilter?: string): Promise<ApiResponse<CreatorStats>> {
+  const res: ApiResponse<CreatorStats> = await apiClient.get('/creator-studio/stats', {
+    params: { dateFilter },
+  })
 
   return res;
 }

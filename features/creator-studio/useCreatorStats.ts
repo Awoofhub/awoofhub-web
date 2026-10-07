@@ -2,15 +2,21 @@ import CreatorStudioService from '@/services/creator-studio-service';
 import { CreatorStats } from '@/types/creator-studio';
 import { useQuery } from '@tanstack/react-query';
 
-export const GetCreatorStats = async (): Promise<CreatorStats> => {
-    const result = await CreatorStudioService.stats()
+
+type GetCreatorStatsOption = {
+    dateFilter?: string
+};
+
+
+export const GetCreatorStats = async ({ dateFilter }: GetCreatorStatsOption): Promise<CreatorStats> => {
+    const result = await CreatorStudioService.stats(dateFilter)
     return result.data;
 };
 
-export const useCreatorMonthlyClicks = () => {
+export const useCreatorStats = ({ dateFilter }: GetCreatorStatsOption = {}) => {
     const { data, isLoading } = useQuery({
-        queryKey: ['creator', 'stats'],
-        queryFn: () => GetCreatorStats(),
+        queryKey: ['creator', 'stats', dateFilter],
+        queryFn: () => GetCreatorStats({ dateFilter }),
         refetchInterval: 180000,
     });
 

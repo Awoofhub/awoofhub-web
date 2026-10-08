@@ -11,7 +11,6 @@ export const useBanks = () => {
     const { data, isLoading } = useQuery({
         queryKey: ['banks'],
         queryFn: () => getBanks(),
-        initialData: []
     });
 
     return {

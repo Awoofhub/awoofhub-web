@@ -56,4 +56,3 @@ export default function PayoutItem({ payout, getBankName, isLoading }: Props) {
 
     );
 }
-

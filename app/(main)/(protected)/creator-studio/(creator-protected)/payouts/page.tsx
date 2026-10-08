@@ -23,16 +23,8 @@ export default function PayoutPage() {
     return (code: string) => bankNameMap[code] || "Unknown Bank";
   }, [banks]);
 
-  
-  if (isPayoutsLoading) return <Loading />;
 
-  if (!payouts || payouts.length === 0) {
-    return (
-      <section className="pt-14 px-6">
-        <p className="text-center text-gray-500">No payouts</p>
-      </section>
-    );
-  }
+  if (isPayoutsLoading || isBanksLoading) return <Loading />;
 
   return (
     <section className="bg-white">
@@ -52,14 +44,20 @@ export default function PayoutPage() {
         </div>
 
         <div className="divide-y divide-gray-100 border-t border-b border-gray-100">
-          {payouts.map((payout) => (
-            <PayoutItem 
-              key={payout.id} 
-              payout={payout} 
-              getBankName={getBankName}
-              isLoading={isBanksLoading}
-            />
-          ))}
+          {!payouts || payouts.length === 0 ? (
+            <section className="py-14 px-6">
+              <p className="text-center text-gray-500">No payouts</p>
+            </section>
+          ) : (
+            payouts.map((payout) => (
+              <PayoutItem
+                key={payout.id}
+                payout={payout}
+                getBankName={getBankName}
+                isLoading={isBanksLoading}
+              />
+            ))
+          )}
         </div>
 
       </div>

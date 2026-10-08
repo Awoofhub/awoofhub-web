@@ -11,7 +11,6 @@ export const usePayouts = () => {
     const { data, isLoading } = useQuery({
         queryKey: ['payouts'],
         queryFn: () => getPayouts(),
-        initialData: []
     });
 
     return {

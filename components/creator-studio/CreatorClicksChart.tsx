@@ -1,12 +1,17 @@
 import { useCreatorMonthlyClicks } from "@/features/creator-studio/useCreatorMonthlyClicks";
+import { useMediaQuery } from "@chakra-ui/react";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
 
 export default function CreatorClicksChart() {
-
+    const [isMobile] = useMediaQuery("(max-width: 500px)");
     const { data } = useCreatorMonthlyClicks();
 
     const monthlyData = data || { jan: 0, feb: 0, march: 0, april: 0, may: 0, june: 0, july: 0, aug: 0, sep: 0, oct: 0, nov: 0, dec: 0, };
+
+    const allMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",];
+
+    const mobileMonths = ["Jan", "Mar", "May", "Aug", "Oct", "Dec"];
 
     const chartData = [
         { name: 'Jan', value: monthlyData.jan },
@@ -30,7 +35,7 @@ export default function CreatorClicksChart() {
                 Clicks
             </h3>
             <ResponsiveContainer height={250} className="w-full">
-                <BarChart data={chartData} margin={{ top: 20, right: 10, left: -20, bottom: 0 }}>
+                <BarChart data={chartData} margin={{ top: 20, right: 10, left: 0, bottom: 0 }}>
                     <XAxis
                         dataKey="name"
                         tickLine={false}
@@ -38,6 +43,7 @@ export default function CreatorClicksChart() {
                         stroke="#9ca3af"
                         tickMargin={12}
                         tick={{ fill: '#000000' }}
+                        ticks={isMobile ? mobileMonths : allMonths}
 
                     />
                     <YAxis

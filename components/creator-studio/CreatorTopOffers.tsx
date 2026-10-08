@@ -6,9 +6,28 @@ import Image from "next/image";
 export default function CreatorTopOffers() {
     const { data, isLoading } = useCreatorTopOffers();
 
-    if (isLoading) {
-        return <div className="text-gray-400 text-sm">Skeleton</div>;
-    }
+   if (isLoading) {
+    return (
+        <div className="animate-pulse">
+            {[0, 1].map((i) => (
+                <div key={i} className="bg-white rounded-2xl border border-gray-200/80 mb-6 overflow-hidden">
+                    <div className="px-6 py-4 border-b border-gray-100">
+                        <div className="h-4 w-40 rounded bg-gray-200" />
+                    </div>
+                    {[0, 1, 2].map((j) => (
+                        <div key={j} className="flex items-center gap-4 py-4 px-6">
+                            <div className="w-12 h-12 rounded-xl bg-gray-200" />
+                            <div className="space-y-2">
+                                <div className="h-3 w-40 rounded bg-gray-200" />
+                                <div className="h-3 w-24 rounded bg-gray-100" />
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            ))}
+        </div>
+    );
+}
 
     const topClickedOffers = data?.topClickedOffers || [];
     const topSharedOffers = data?.topSharedOffers || [];

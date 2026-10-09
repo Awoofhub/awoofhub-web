@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 type deleteAccountOptions = {
     id: string;
+    onSuccess?: () => void;
 };
 
 export const DeleteAccount = async ({ id }: deleteAccountOptions): Promise<any> => {
@@ -11,13 +12,14 @@ export const DeleteAccount = async ({ id }: deleteAccountOptions): Promise<any> 
     return result.data
 };
 
-export const useDeleteAccount = ({ id }: deleteAccountOptions) => {
+export const useDeleteAccount = ({ id, onSuccess }: deleteAccountOptions) => {
     const queryClient = useQueryClient();
 
     const { mutate, isPending } = useMutation({
         mutationFn: () => DeleteAccount({ id }),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['payout', 'account'] });
+            onSuccess?.();
         },
     });
 

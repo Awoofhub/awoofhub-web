@@ -2,6 +2,7 @@
 import CreatorAccount from "@/components/creator-studio/CreatorAccount";
 import CreatorAccountEmptyState from "@/components/creator-studio/CreatorAccountEmptyState";
 import Loading from "@/components/loading/Loading";
+import { useBankName } from "@/features/creator-studio/useBankName";
 import { usePayoutAccount } from "@/features/creator-studio/usePayoutAccount";
 
 import { ChevronLeft } from "lucide-react";
@@ -9,8 +10,10 @@ import { useRouter } from 'next/navigation';
 
 export default function PaymentSettingsPage() {
   const router = useRouter();
+  const { getBankName, isLoading: isBanksLoading } = useBankName();
   const { data: account, isLoading } = usePayoutAccount();
-  if (isLoading) return <Loading />;
+  
+  if (isLoading || isBanksLoading) return <Loading />;
   return (
     <div className="max-w-[1440px] mx-auto p-2 md:p-6 mb-10">
       <button
@@ -23,9 +26,9 @@ export default function PaymentSettingsPage() {
       </button>
 
       {account ? (
-        <CreatorAccount />
+        <CreatorAccount account={account} getBankName={getBankName} />
       ) : (
-        <CreatorAccountEmptyState />
+        <CreatorAccountEmptyState getBankName={getBankName} />
       )}
 
     </div>

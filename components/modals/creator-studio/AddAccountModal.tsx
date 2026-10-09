@@ -3,33 +3,23 @@
 import { Button } from "@/components/button/Button";
 import { BankSearch } from '@/components/form/BankSearch';
 import { InputField } from '@/components/form/InputField';
-import { useBanks } from "@/features/creator-studio/useBanks";
 import { useVerifyPayoutAccount } from '@/features/creator-studio/useVerifyPayoutAccount';
 import { AccountData } from '@/types/creator-studio';
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Controller, useForm } from 'react-hook-form';
 import AccountConfirmModal from "./AccountConfirmModal";
 
 interface Props {
     isOpen: boolean;
     onClose: () => void;
+    getBankName: (code: string) => string;
 }
 
 
-export default function AddAccountModal({ isOpen, onClose }: Props) {
+export default function AddAccountModal({ isOpen, onClose, getBankName }: Props) {
 
     const [verifiedAccount, setVerifiedAccount] = useState<any>(null);
     const [isDone, setIsDone] = useState(false);
-
-    const { data: banks = [], isLoading: isBanksLoading } = useBanks();
-
-    const getBankName = useMemo(() => {
-        const bankNameMap = banks.reduce<Record<string, string>>((acc, bank) => {
-            acc[bank.code] = bank.name;
-            return acc;
-        }, {});
-        return (code: string) => bankNameMap[code] || "Unknown Bank";
-    }, [banks]);
 
     const { submit, isPending, } = useVerifyPayoutAccount({
         onSuccess: (data) => {
@@ -102,8 +92,8 @@ export default function AddAccountModal({ isOpen, onClose }: Props) {
 
                             <div className="mt-6">
                                 <Button
-                                    isLoading={isPending || isBanksLoading}
-                                    isDisabled={isPending || isBanksLoading}
+                                    isLoading={isPending}
+                                    isDisabled={isPending}
                                     type="submit"
                                 >
                                     Verify

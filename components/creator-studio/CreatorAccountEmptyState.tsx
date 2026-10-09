@@ -2,7 +2,11 @@ import { List } from "lucide-react";
 import { useState } from "react";
 import AddAccountModal from "../modals/creator-studio/AddAccountModal";
 
-export default function CreatorAccountEmptyState() {
+interface Props {
+    getBankName: (code: string) => string;
+}
+
+export default function CreatorAccountEmptyState({ getBankName }: Props) {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <section className="flex min-h-[60vh] w-full items-center justify-center px-4 py-16">
@@ -26,7 +30,11 @@ export default function CreatorAccountEmptyState() {
                 </button>
             </div>
 
-            <AddAccountModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+            <AddAccountModal
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                getBankName={getBankName}
+            />
         </section>
     );
 }

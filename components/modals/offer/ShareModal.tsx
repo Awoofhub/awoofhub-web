@@ -1,10 +1,11 @@
 "use client";
 
-import { Share2, X as CloseIcon } from "lucide-react";
-import { useState } from "react";
+import { useShareOffer } from "@/features/offers/useShareOffer";
+import { X as CloseIcon, Share2 } from "lucide-react";
 import Image from "next/image";
-import { IoCheckmarkSharp } from "react-icons/io5";
+import { useState } from "react";
 import { FiCopy } from "react-icons/fi";
+import { IoCheckmarkSharp } from "react-icons/io5";
 
 interface Props {
   offerId: string;
@@ -24,6 +25,7 @@ export default function ShareModal({
   hideTrigger = false,
 }: Props) {
   const [internalOpen, setInternalOpen] = useState(false);
+  const share = useShareOffer({ id: offerId });
   const isControlled = controlledOpen !== undefined;
   const open = isControlled ? controlledOpen : internalOpen;
   const setOpen = isControlled ? (onOpenChange ?? (() => { })) : setInternalOpen;
@@ -45,40 +47,48 @@ export default function ShareModal({
     {
       label: "Whatsapp",
       icon: "/WhatsApp.png",
-      onClick: () =>
-        window.open(`https://wa.me/?text=${encodeURIComponent(url)}`, "_blank"),
+      onClick: () => {
+        share.shareOffer();
+        window.open(`https://wa.me/?text=${encodeURIComponent(url)}`, "_blank");
+      }
     },
     {
       label: "Instagram",
       icon: "/Instagram.png",
       onClick: async () => {
         await copyLink();
+        share.shareOffer();
         window.open("https://www.instagram.com/", "_blank");
       },
     },
     {
       label: "X (Twitter)",
       icon: "/X.png",
-      onClick: () =>
+      onClick: () => {
+        share.shareOffer();
         window.open(
           `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`,
           "_blank",
-        ),
+        );
+      }
     },
     {
       label: "Facebook",
       icon: "/Facebook.png",
-      onClick: () =>
+      onClick: () => {
+        share.shareOffer();
         window.open(
           `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
           "_blank",
-        ),
+        );
+      }
     },
     {
       label: "TikTok",
       icon: "/Tiktok.png",
       onClick: async () => {
         await copyLink();
+        share.shareOffer();
         window.open("https://www.tiktok.com/", "_blank");
       },
     },

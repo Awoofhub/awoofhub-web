@@ -1,12 +1,16 @@
 "use client";
 
-export default function MyOfferListItemSkeleton() {
+interface Props {
+  number?: number;
+}
+
+export default function MyOfferListItemSkeleton({ number = 5 }: Props) {
   return (
     <>
-      {[...Array(5)].map((_, i) => (
-        <div key={i} className="w-full flex flex-col xs:flex-row gap-3 md:gap-4 p-2 md:px-6 md:py-3 items-start md:items-center rounded-lg border border-gray-100 bg-white animate-pulse">
+      {[...Array(number)].map((_, i) => (
+        <div key={i} className="w-full flex gap-3 md:gap-4 p-2 md:px-6 md:py-3 items-start md:items-center rounded-lg border border-gray-100 bg-white animate-pulse">
           {/* Image */}
-          <div className="w-full h-[150px] xs:w-[110px] xs:h-[110px] md:w-[130px] md:h-[130px] lg:w-[150px] lg:h-[150px] shrink-0 rounded-md bg-gray-200" />
+          <div className="w-[110px] h-[110px] md:w-[130px] md:h-[130px] lg:w-[150px] lg:h-[150px] shrink-0 rounded-md bg-gray-200" />
 
           {/* Content */}
           <div className="flex-1 min-w-0 w-full">

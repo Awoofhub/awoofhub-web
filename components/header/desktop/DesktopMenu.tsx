@@ -12,6 +12,7 @@ import { useEffect, useRef, useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
 import { FaList } from "react-icons/fa6";
 import { FiHelpCircle, FiHome, FiLogOut, FiUser } from "react-icons/fi";
+import { GiAlliedStar } from 'react-icons/gi';
 import { HiOutlineEnvelope } from "react-icons/hi2";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { PiHeart } from "react-icons/pi";
@@ -146,6 +147,11 @@ export default function DesktopMenu() {
                       icon: <HiOutlineEnvelope />,
                       href: "/message",
                       badge: messageCount,
+                    },
+                    {
+                      label: "Creator Studio",
+                      icon: <GiAlliedStar />,
+                      href: `/creator-studio`,
                     },
                     {
                       label: "Help & Support",

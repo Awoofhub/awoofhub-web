@@ -1,7 +1,7 @@
 "use client";
 
 import { NEXT_PUBLIC_TOMTOM_API_KEY } from "@/config/constants";
-import { FormControl, FormLabel } from "@chakra-ui/react";
+import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
@@ -10,7 +10,7 @@ import { useEffect, useMemo, useState } from "react";
 
 
 
-export const TomTomAutocomplete = ({ label, error, compulsory, onPlaceSelect, value, placeholder }: any) => {
+export const LocationAutocomplete = ({ label, error, compulsory, onPlaceSelect, value, placeholder, labelClassName }: any) => {
     const [options, setOptionsList] = useState<any[]>([]);
     const [inputValue, setInputValue] = useState("");
 
@@ -59,7 +59,7 @@ export const TomTomAutocomplete = ({ label, error, compulsory, onPlaceSelect, va
     return (
         <FormControl isInvalid={!!error} className="w-full mb-4">
             {label && (
-                <FormLabel className="font-baloo  text-sm lg:text-lg">
+                <FormLabel className={labelClassName ?? "font-baloo text-sm lg:text-lg"}>
                     {label} {compulsory && <span className="text-red-500">*</span>}
                 </FormLabel>
             )}
@@ -117,13 +117,18 @@ export const TomTomAutocomplete = ({ label, error, compulsory, onPlaceSelect, va
                             },
                             htmlInput: {
                                 ...params.inputProps,
-                                className: "!font-montserrat !text-base !lg:text-lg !placeholder-gray-400 !pr-8 !py-0",
+                                className: "!font-montserrat !text-base !lg:text-lg !placeholder-gray-800 !pr-8 !py-0",
                             },
                         }}
                         className="[&_svg]:!fill-gray-500"
                     />
                 )}
             />
+            {error && (
+                <FormHelperText className="text-red-500 text-left text-xs mt-1">
+                    {error.message}
+                </FormHelperText>
+            )}
         </FormControl>
     );
 };

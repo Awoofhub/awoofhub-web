@@ -41,7 +41,6 @@ export interface Offer {
     id: string;
     name: string;
     username: string;
-    isSubscribed: boolean,
     subscriptionPlan: 'starter' | 'growth' | 'pro' | null,
     subscriptionState: "inactive" | "active" | "payment_failed",
     profileImageUrl?: string;

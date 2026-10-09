@@ -59,7 +59,7 @@ export const InputField = forwardRef((props: InputFieldProps, ref) => {
         <Textarea
           bg=" white"
           placeholder={placeholder}
-          className={`mt-2 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 text-sm lg:text-base ${className ?? ""}`}
+          className={`mt-2 w-full px-3 py-2 border ${error ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 text-sm lg:text-base ${className ?? ""}`}
           rows={textAreaRows}
           {...inputProps}
           ref={ref}
@@ -77,7 +77,7 @@ export const InputField = forwardRef((props: InputFieldProps, ref) => {
           <Input
             bg="white"
             pr="4.5rem"
-            className={`mt-2 w-full px-3 py-2 ${icon ? "pl-10" : ""} border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 text-sm lg:text-base  ${className ?? ""}`}
+            className={`mt-2 w-full px-3 py-2 ${icon ? "pl-10" : ""} border ${error ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 text-sm lg:text-base  ${className ?? ""}`}
             type={show ? "text" : "password"}
             placeholder={placeholder}
             {...inputProps}
@@ -103,7 +103,7 @@ export const InputField = forwardRef((props: InputFieldProps, ref) => {
             bg="white"
             type={type}
             placeholder={placeholder}
-            className={`mt-2 w-full px-3 py-2 ${icon ? "pl-10" : ""} border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 text-sm lg:text-base ${className ?? ""}`}
+            className={`mt-2 w-full px-3 py-2 ${icon ? "pl-10" : ""} border ${error ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 text-sm lg:text-base ${className ?? ""}`}
             {...inputProps}
             ref={ref}
           />

@@ -1,5 +1,6 @@
 "use client";
-import { JoinCommunityForm } from "@/components/community/JoinCommunityForm";
+
+import JoinCommunityForm from "@/components/community/JoinCommunityForm";
 import Footer from "@/components/footer/Footer";
 import Image from "next/image";
 import {
@@ -72,31 +73,12 @@ export default function JoinCommunity() {
       </div>
 
       {/* Join form */}
-      <div className="bg-white">
+      <div className="bg-white mb-5">
         <section className="px-4 xxs:px-6 xs:px-10 md:px-16 py-6 md:py-8 lg:py-10 max-w-[900px] xl:max-w-[1000px] mx-auto">
           <h2 className="text-[20px] xs:text-[30px] font-semibold text-black mb-6 text-center">
             Complete the form to join
           </h2>
           <JoinCommunityForm />
-        </section>
-      </div>
-
-      {/* Social Media */}
-      <div className="bg-background my-5">
-        <section className="py-8 md:py-10 lg:py-16 px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto">
-          <h2 className="text-2xl xs:text-3xl lg:text-4xl font-semibold text-black mb-10">
-            Reach out through Social Media
-          </h2>
-          <div className="grid grid-cols-2 xs:grid-cols-4 gap-8">
-            {socials.map((s) => (
-              <div key={s.id} className="flex flex-col gap-2">
-                <span className="text-primary text-3xl xs:text-4xl lg:text-5xl">{s.icon}</span>
-                <h4 className="text-primary font-normal text-base md:text-lg lg:text-xl">
-                  {s.handle}
-                </h4>
-              </div>
-            ))}
-          </div>
         </section>
       </div>
       <Footer />

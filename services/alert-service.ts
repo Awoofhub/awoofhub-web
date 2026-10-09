@@ -19,7 +19,7 @@ const removeAlert = throttle(async (id: string): Promise<ApiResponse<any>>  => {
     return res;
 });
 
-async function getBusinessAlert(id: string): Promise<ApiResponse<Alert | null>> {
+async function getUserAlert(id: string): Promise<ApiResponse<Alert | null>> {
     const res: ApiResponse<Alert | null> = await apiClient.get(`/alert/${id}`)
     return res;
 }
@@ -28,7 +28,7 @@ async function getBusinessAlert(id: string): Promise<ApiResponse<Alert | null>> 
 const AlertService = {
     setAlert,
     removeAlert,
-    getBusinessAlert,
+    getUserAlert,
 };
 
 export default AlertService;

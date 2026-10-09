@@ -10,7 +10,7 @@ import { useEffect, useMemo, useState } from "react";
 
 
 
-export const TomTomAutocomplete = ({ label, error, compulsory, onPlaceSelect, value, placeholder, labelClassName }: any) => {
+export const LocationAutocomplete = ({ label, error, compulsory, onPlaceSelect, value, placeholder, labelClassName }: any) => {
     const [options, setOptionsList] = useState<any[]>([]);
     const [inputValue, setInputValue] = useState("");
 

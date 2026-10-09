@@ -18,10 +18,14 @@ export const useSavePayoutAccount = ({ onSuccess }: UseSaveAccountOptions = {}) 
     const { mutate: submit, isPending } = useMutation({
         mutationFn: saveAccount,
         onSuccess: (data) => {
-            queryClient.setQueryData(['payout', 'account'], data);
+            queryClient.invalidateQueries({ queryKey: ['payout', 'account'] });
             onSuccess?.(data);
         },
     });
+
+     
+     
+
 
     return { submit, isPending };
 };

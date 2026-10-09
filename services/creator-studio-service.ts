@@ -47,7 +47,7 @@ async function saveAccount(payload: AccountData): Promise<ApiResponse<BankAccoun
 }
 
 async function getAccount(): Promise<ApiResponse<BankAccount>> {
-  const res: ApiResponse<BankAccount> = await apiClient.get('/creator-studio/payouts')
+  const res: ApiResponse<BankAccount> = await apiClient.get('/creator-studio/payout-accounts')
 
   return res;
 }

@@ -2,7 +2,7 @@
 
 import { Flag, Globe } from "lucide-react";
 import { useState } from "react";
-import { TomTomAutocomplete } from "../form/AutoComplete";
+import { LocationAutocomplete } from "../form/LocationAutocomplete";
 
 interface Props {
     value: string;
@@ -82,11 +82,11 @@ export const LocationPicker = ({ value, onChange, error }: Props) => {
 
             {locationType === "at_a_location" && (
                 <div className="pt-2">
-                    <TomTomAutocomplete
+                    <LocationAutocomplete
                         value={value === "Online" || value === "Nationwide" ? "" : value}
                         onPlaceSelect={onChange}
                         placeholder="Enter deal address e.g, Ikeja city mall, Lagos"
-                        error={true}
+                        error={error}
                     />
                 </div>
             )}

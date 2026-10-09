@@ -75,6 +75,7 @@ export interface AccountData {
 export interface VerifiedAccount {
     account_number: string;
     account_name: string;
+    bank_code: string;
     bank_id: number;
 }
 

@@ -13,7 +13,7 @@ import { useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FiCamera } from "react-icons/fi";
 import { ImSpinner2 } from "react-icons/im";
-import { TomTomAutocomplete } from "../form/AutoComplete";
+import { LocationAutocomplete } from "../form/LocationAutocomplete";
 import UsernameChecker from "../form/UsernameChecker";
 import { showToast } from "../toast/Toast";
 
@@ -172,7 +172,7 @@ export const EditProfileForm = ({ onSuccess }: EditProfileFormProps) => {
           name="address"
           control={control}
           render={({ field, fieldState }) => (
-            <TomTomAutocomplete
+            <LocationAutocomplete
               label="Location"
               error={fieldState.error}
               value={field.value}

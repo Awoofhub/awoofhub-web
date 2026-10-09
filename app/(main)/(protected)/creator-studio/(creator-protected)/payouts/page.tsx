@@ -2,27 +2,17 @@
 
 import PayoutItem from "@/components/creator-studio/PayoutItem";
 import Loading from "@/components/loading/Loading";
-import { useBanks } from "@/features/creator-studio/useBanks";
+import { useBankName } from "@/features/creator-studio/useBankName";
 import { usePayouts } from "@/features/creator-studio/usePayouts";
 import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useMemo } from "react";
 
 export default function PayoutPage() {
   const router = useRouter();
 
   const { data: payouts, isLoading: isPayoutsLoading } = usePayouts();
-  const { data: banks = [], isLoading: isBanksLoading, } = useBanks();
 
-
-  const getBankName = useMemo(() => {
-    const bankNameMap = banks.reduce<Record<string, string>>((acc, bank) => {
-      acc[bank.code] = bank.name;
-      return acc;
-    }, {});
-    return (code: string) => bankNameMap[code] || "Unknown Bank";
-  }, [banks]);
-
+  const { getBankName, isLoading: isBanksLoading } = useBankName();
 
   if (isPayoutsLoading || isBanksLoading) return <Loading />;
 

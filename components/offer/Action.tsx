@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
-import Image from "next/image";
 import { useGrabOffer } from "@/features/offers/useGrabOffer";
 import { Offer } from "@/types/offer";
+import { formatCountdown } from "@/utils/formatCountdown";
 import { formatDate } from "@/utils/formatDate";
+import { differenceInSeconds, parseISO } from "date-fns";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import { FiCopy } from "react-icons/fi";
 import { IoCheckmarkSharp } from "react-icons/io5";
-import { differenceInSeconds, parseISO } from "date-fns";
-import { formatCountdown } from "@/utils/formatCountdown";
 
 
 interface Props {
@@ -16,19 +16,17 @@ interface Props {
 export default function Action({ offer }: Props) {
   const [copied, setCopied] = useState(false);
   const grab = useGrabOffer({ id: offer.id });
-  // Determine trending from click count (same source used elsewhere)
-  const isTrending = (offer.clickCount ?? 0) >= 1;
+  const isTrending = offer.isTrending
 
   const totalSeconds = Math.max(
     0,
     differenceInSeconds(parseISO(offer.endDate), new Date()),
   );
-  const isExpiring = totalSeconds >= 0 && totalSeconds <= 259200; // 3 days in seconds
+  const isExpiring = totalSeconds >= 0 && totalSeconds <= 259200; 
 
   const [secondsLeft, setSecondsLeft] = useState(totalSeconds);
   const [prevTotalSeconds, setPrevTotalSeconds] = useState(totalSeconds);
 
-  // Sync prop changes during render
   if (totalSeconds !== prevTotalSeconds) {
     setPrevTotalSeconds(totalSeconds);
     setSecondsLeft(totalSeconds);

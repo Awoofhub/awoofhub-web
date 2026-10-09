@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { IoCheckmark, IoChevronDown } from "react-icons/io5";
-import { TomTomAutocomplete } from "../form/AutoComplete";
+import { LocationAutocomplete } from "../form/LocationAutocomplete";
 
 type LocationValue = "Online" | "Nationwide" | "specific";
 
@@ -186,7 +186,7 @@ export function OfferLocationFilter({
 
             {isSpecificLocation && (
               <div className="mt-2 w-full rounded-md  bg-white">
-                <TomTomAutocomplete
+                <LocationAutocomplete
                   value={searchValue}
                   onPlaceSelect={(val: string) => {
                     const nextValue = val?.trim() ?? "";

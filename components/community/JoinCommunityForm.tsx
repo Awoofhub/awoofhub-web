@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/button/Button";
-import { TomTomAutocomplete } from "@/components/form/AutoComplete";
 import { InputField } from "@/components/form/InputField";
+import { LocationAutocomplete } from "@/components/form/LocationAutocomplete";
 import { useJoinCommunity } from "@/features/community/useJoinCommunity";
 import { JoinCommunityData } from "@/types/community";
 import { useState } from "react";
@@ -136,7 +136,7 @@ export default function JoinCommunityForm() {
                     control={control}
                     rules={{ required: "City is required" }}
                     render={({ field, fieldState }) => (
-                        <TomTomAutocomplete
+                        <LocationAutocomplete
                             label="City/State"
                             labelClassName={LABEL_CLS}
                             error={fieldState.error}

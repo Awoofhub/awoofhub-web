@@ -1,3 +1,4 @@
+"use client";
 import CreatorAccount from "@/components/creator-studio/CreatorAccount";
 import CreatorAccountEmptyState from "@/components/creator-studio/CreatorAccountEmptyState";
 import Loading from "@/components/loading/Loading";

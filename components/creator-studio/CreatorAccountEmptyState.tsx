@@ -1,4 +1,4 @@
-import Link from "next/link";
+
 import { List } from "lucide-react";
 
 export default function CreatorAccountEmptyState() {

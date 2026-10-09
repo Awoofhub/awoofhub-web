@@ -61,7 +61,7 @@ export default function CreatorAccount({ account, getBankName }: Props) {
           </div>
 
 
-          <div className="absolute top-2 right-2 xs:top-6 xs:right-6">
+          <div className="absolute -top-10 right-2 md:top-6 md:right-6">
             <div
               ref={dropdownRef}
               onClick={() => toggleDropdown()}

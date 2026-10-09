@@ -39,6 +39,7 @@ export default function ShareModal({
 
   const copyLink = async () => {
     await navigator.clipboard.writeText(url);
+    share.shareOffer();
     setShow(true);
     setTimeout(() => setShow(false), 2000);
   };
@@ -57,7 +58,6 @@ export default function ShareModal({
       icon: "/Instagram.png",
       onClick: async () => {
         await copyLink();
-        share.shareOffer();
         window.open("https://www.instagram.com/", "_blank");
       },
     },
@@ -88,7 +88,6 @@ export default function ShareModal({
       icon: "/Tiktok.png",
       onClick: async () => {
         await copyLink();
-        share.shareOffer();
         window.open("https://www.tiktok.com/", "_blank");
       },
     },

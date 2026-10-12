@@ -18,9 +18,9 @@ const footerLinks = {
     { label: "Browse Category", href: "/offers" },
   ],
   legal: [
-    { label: "Privacy policy", href: "/policy" },
+    { label: "Privacy policy", href: "/privacy" },
     { label: "Terms of Service", href: "/terms" },
-    { label: "Community Guidelines", href: "/community-guidelines" },
+    { label: "Billing Policy", href: "/billing-policy" },
   ],
 };
 

@@ -57,11 +57,15 @@ export default function CreatorTopOffers() {
                                 className="flex items-center justify-between py-4 px-6 hover:bg-gray-50/50 transition-colors"
                             >
                                 <div className="flex items-center gap-4">
-                                    <img
-                                        src={item.imageUrl}
-                                        alt={item.title}
-                                        className="w-12 h-12 rounded-xl object-cover border border-gray-200/80 shadow-xs"
-                                    />
+                                     <div className="relative w-12 h-12 rounded-xl overflow-hidden border border-gray-200/80 shadow-xs flex-shrink-0">
+                                        <Image
+                                            src={item.imageUrl}
+                                            alt={item.title}
+                                            fill
+                                            unoptimized
+                                            className="object-cover"
+                                        />
+                                    </div>
                                     <div>
                                         <h4 className="text-sm font-semibold text-gray-900">{item.title}</h4>
                                         <p className="text-xs text-gray-500 mt-0.5">{`Publihed ${item.createdAt}`}</p>

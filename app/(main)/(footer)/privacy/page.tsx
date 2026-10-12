@@ -15,10 +15,10 @@ export default function PolicyPage() {
             Our Privacy Policy
           </h1>
           <p className="text-muted font-medium text-base md:text-lg lg:text-xl mb-4">
-            Effective Date: July 21, 2026
+            Effective Date: October 21, 2026
           </p>
           <p className="text-muted font-medium text-base md:text-lg lg:text-xl mb-4">
-            Last Updated: July 21, 2026
+            Last Updated: october 21, 2026
           </p>
         </section>
       </div>

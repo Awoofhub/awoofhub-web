@@ -11,23 +11,14 @@ export default function TermsOfService() {
               Terms of Service
             </h2>
           </div>
-          <h1 className="text-3xl md:text-4xl font-semibold text-black mb-4">
-            AwoofHub Terms of Service
-          </h1>
+        
            <p className="text-muted font-medium text-base md:text-lg lg:text-xl mb-4">
             Effective Date: May 2026
           </p>
           <p className="text-muted font-medium text-base md:text-lg lg:text-xl mb-4">
             Last Updated: October 2026
           </p>
-          <p className="text-muted font-medium text-base md:text-lg lg:text-xl mb-4">
-            Welcome to AWOOFHUB.
-          </p>
-          <p className="text-muted font-medium text-base md:text-lg lg:text-xl mb-4">
-            By accessing or using our Platform, you agree to be legally bound by
-            these Terms. If you do not agree to these Terms, please do not use
-            the Platform.
-          </p>
+        
         </section>
       </div>
 
@@ -51,7 +42,7 @@ export default function TermsOfService() {
             </p>
           </div>
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black">
               1.1 Agreement to the Terms
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium  mb-1">
@@ -63,7 +54,7 @@ export default function TermsOfService() {
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               1.2 Eligibility
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -77,12 +68,12 @@ export default function TermsOfService() {
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               1.3 Related Policies
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              These Terms should be read together with our Privacy Policy,
-              Community Guidelines, Acceptable Use Policy, applicable
+              These Terms should be read together with our <a href="/privacy-policy" className="text-blue-500 underline font-bold ">Privacy Policy</a>,
+              <a href="/community-guidelines" className="text-blue-500 underline font-bold ">Community Guidelines</a>, Acceptable Use Policy, applicable
               subscription terms and any other policies published on the
               Platform. Those documents form part of these Terms to the extent
               stated in them.
@@ -90,7 +81,7 @@ export default function TermsOfService() {
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               1.4 Changes to These Terms
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -115,7 +106,7 @@ export default function TermsOfService() {
             <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
               2. IMPORTANT DISCLAIMERS
             </p>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               2.1 AwoofHub Is a Deal-Sharing and Aggregation Platform
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -133,7 +124,7 @@ export default function TermsOfService() {
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               2.2 No Guarantee of Offers
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -153,7 +144,7 @@ export default function TermsOfService() {
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               2.3 Independent Verification
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -176,7 +167,7 @@ export default function TermsOfService() {
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               2.4 No Agency or Partnership
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -193,7 +184,7 @@ export default function TermsOfService() {
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               2.5 Services Provided on an “As Available” Basis
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -210,7 +201,7 @@ export default function TermsOfService() {
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               2.6 Third-Party Websites and Services
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -231,7 +222,7 @@ export default function TermsOfService() {
             3. ACCOUNT REGISTRATION AND SECURITY
           </p>
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               3.1 Account Creation
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -246,7 +237,7 @@ export default function TermsOfService() {
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               3.2 One Account per User
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -258,7 +249,7 @@ export default function TermsOfService() {
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               3.3 Accurate Information
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -269,7 +260,7 @@ export default function TermsOfService() {
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               3.4 Account Security
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -286,7 +277,7 @@ export default function TermsOfService() {
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               3.5 Suspension and Termination
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -320,7 +311,7 @@ export default function TermsOfService() {
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               3.6 Account Closure
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -340,7 +331,7 @@ export default function TermsOfService() {
           </p>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               4.1 Platform Features
             </p>{" "}
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -361,7 +352,7 @@ export default function TermsOfService() {
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               4.2 Third-Party Sales and Transactions
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -382,7 +373,7 @@ export default function TermsOfService() {
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               4.3 Taxes and Legal Compliance
             </p>
 
@@ -397,7 +388,7 @@ export default function TermsOfService() {
             </p>
           </div>
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               4.4 Changes to the Platform
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -416,7 +407,7 @@ export default function TermsOfService() {
             5. OFFERS, DEALS AND PROMOTIONAL CONTENT
           </p>
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               5.1 Publishing and Discovering Offers
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -430,7 +421,7 @@ export default function TermsOfService() {
             </p>
           </div>
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               5.2 Responsibilities of Users Who Submit Offers
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -484,7 +475,7 @@ export default function TermsOfService() {
             </p>
           </div>
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               5.3 Responsibilities of Businesses and Offer Providers
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -506,7 +497,7 @@ export default function TermsOfService() {
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               5.4 Accuracy and Availability
             </p>
 
@@ -526,7 +517,7 @@ export default function TermsOfService() {
             </p>
           </div>
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               5.5 Moderation and Removal of Content
             </p>
 
@@ -568,7 +559,7 @@ export default function TermsOfService() {
             6. CASHBACK, REWARDS AND PROMOTIONAL INCENTIVES
           </p>
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               6.1 Nature of Cashback Promotions
             </p>
             <p>
@@ -587,7 +578,7 @@ export default function TermsOfService() {
             </p>
           </div>
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               6.2 Offer Conditions
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -603,7 +594,7 @@ export default function TermsOfService() {
             </p>
           </div>
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               6.3 Referral and Contributor Rewards
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -626,7 +617,7 @@ export default function TermsOfService() {
             7. AFFILIATE RELATIONSHIPS AND THIRD-PARTY TRANSACTIONS
           </p>
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               7.1 Affiliate and Advertising Relationships
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -646,7 +637,7 @@ export default function TermsOfService() {
             </p>
           </div>
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               7.2 Third-Party Purchases
             </p>
 
@@ -667,7 +658,7 @@ export default function TermsOfService() {
             </p>
           </div>
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               7.3 Third-Party Services
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -682,7 +673,7 @@ export default function TermsOfService() {
             8. FEES, ADVERTISING AND PAID FEATURES
           </p>
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               8.1 Free and Paid Services
             </p>
 
@@ -702,7 +693,7 @@ export default function TermsOfService() {
             </p>
           </div>
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               8.2 Fees and Payment Methods
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -719,7 +710,7 @@ export default function TermsOfService() {
             </p>
           </div>
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               8.3 Refunds
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -736,7 +727,7 @@ export default function TermsOfService() {
             9. USER SUBSCRIPTIONS AND PREMIUM PACKAGES
           </p>
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
              9.1 Subscription Plans
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -744,7 +735,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
           </div>
 
           <div>
-<p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+<p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
              9.2 Subscription Payments and Renewal
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -756,7 +747,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
             9.3 Cancellation and Subscription Access
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -766,12 +757,12 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
               Unless otherwise stated or required by applicable law, cancellation prevents future renewals but does not automatically terminate an already-paid subscription period or entitle you to a refund for that period.
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              Further information about cancellation deadlines, continued access, refunds and billing support is available in our <span className="text-black font-bold ">Billing, Subscriptions and Refund Policy.</span>
+              Further information about cancellation deadlines, continued access, refunds and billing support is available in our <a href="/billing-policy" className="text-blue-500 underline font-bold ">Billing, Subscriptions and Refund Policy.</a>
             </p>
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
            9.4 Subscription Changes and Misuse
             </p>
            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -785,7 +776,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
 
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               9.5 Applicable Billing Policy
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -795,13 +786,13 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
               You can read the policy here:{" "}
-              <span className="text-black font-bold ">
-                Billing, Subscriptions and Refund Policy.
-              </span>
+              <a href="/billing-policy" className="text-blue-500 underline font-bold ">
+                Billing, Subscriptions and Refund Policy
+              </a>
             </p>
           </div>
 
-          <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+          <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
             10. USER REPRESENTATIONS AND PROHIBITED CONDUCT
           </p>
           <div>
@@ -953,7 +944,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
             12. INTELLECTUAL PROPERTY RIGHTS
           </p>
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               12.1 Ownership of the Platform
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -971,7 +962,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               12.2 Ownership of User Content
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -986,7 +977,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               12.3 Licence to Operate the Platform
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -1004,7 +995,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               12.4 Promotional Use of Public Listings
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -1033,7 +1024,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               12.5 Duration of the Licence
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -1057,7 +1048,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               12.6 Intellectual Property Complaints
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -1132,7 +1123,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
             14. LIMITATION OF LIABILITY
           </p>
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               14.1 Excluded Losses
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -1148,7 +1139,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               14.2 Third-Party Offers and Transactions
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -1163,7 +1154,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               14.3 Liability Cap
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -1188,7 +1179,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               14.4 User Responsibility
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -1229,7 +1220,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
             16. TERMINATION AND SUSPENSION
           </p>
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               16.1 Termination by You
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -1244,7 +1235,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               16.2 Termination by AwoofHub
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -1261,7 +1252,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               16.3 Effect of Termination
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -1282,7 +1273,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
             17. GOVERNING LAW AND DISPUTE RESOLUTION
           </p>
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               17.1 Governing Law
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -1292,7 +1283,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               17.2 Resolution of Disputes
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -1321,7 +1312,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
             18. GENERAL PROVISIONS
           </p>
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               18.1 Severability
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -1333,7 +1324,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               18.2 No Waiver
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -1343,7 +1334,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               18.3 Assignment
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -1359,7 +1350,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               18.4 Events Beyond Our Control
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -1370,7 +1361,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               18.5 Entire Agreement
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
@@ -1382,7 +1373,7 @@ AwoofHub may offer free and paid subscription plans that provide access to addit
           </div>
 
           <div>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
+            <p className="text-sm md:text-base lg:text-lg font-semibold text-black mt-4">
               18.6 No Waiver of Mandatory Rights
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">

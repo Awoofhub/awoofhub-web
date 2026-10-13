@@ -6,11 +6,9 @@ export default function PolicyPage() {
       {/* Header */}
       <div className="bg-background my-5">
         <section className="px-4 md:px-6 lg:px-8 xl:px-12 py-6 md:py-8 lg:py-12 mx-auto">
-          <div className="flex justify-center md:justify-start">
-            <h2 className="text-primary px-4 py-2 text-sm xs:text-base rounded-xl mb-8 font-semibold inline-flex uppercase bg-gray-50 border  backdrop-blur-3xl border-gray-100 shadow-md">
-              PRIVACY POLICY
-            </h2>
-          </div>
+         <h1 className="text-3xl md:text-4xl font-semibold text-black mb-4">
+           PRIVACY POLICY
+          </h1>
          
           <p className="text-muted font-medium text-base md:text-lg lg:text-xl mb-4">
             Effective Date: May 2026
@@ -427,10 +425,10 @@ export default function PolicyPage() {
             <p className="text-black text-sm md:text-base lg:text-lg font-medium mb-1">
               Awoofhub Technology Limited
             </p>
-            <p className="text-black text-sm md:text-base lg:text-lg font-medium mb-1">
+            <p className="text-black font-medium text-sm md:text-base lg:text-lg mb-1">
               Email: info@awoofhub.ng
             </p>
-            <p className="text-black text-sm md:text-base lg:text-lg font-medium mb-1">
+            <p className="text-black font-medium text-sm md:text-base lg:text-lg mb-1">
               Website: AwoofHub.ng
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">

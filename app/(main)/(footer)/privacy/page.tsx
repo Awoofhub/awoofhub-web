@@ -11,9 +11,7 @@ export default function PolicyPage() {
               PRIVACY POLICY
             </h2>
           </div>
-          <h1 className="text-3xl md:text-4xl font-semibold text-black mb-4">
-            Our Privacy Policy
-          </h1>
+         
           <p className="text-muted font-medium text-base md:text-lg lg:text-xl mb-4">
             Effective Date: May 2026
           </p>
@@ -30,11 +28,7 @@ export default function PolicyPage() {
             <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black">
               1. Introduction
             </p>
-            <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
-              Awoofhub Technology Limited (“AwoofHub”, “we”, “us” or “our”)
-              operates AwoofHub.ng, an online deal-sharing and aggregation
-              platform.
-            </p>
+            
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
               This Privacy Policy explains how we collect, use, disclose, store
               and protect personal information when you visit our website, use

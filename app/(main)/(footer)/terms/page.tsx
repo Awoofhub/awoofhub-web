@@ -6,11 +6,9 @@ export default function TermsOfService() {
       {/* Header */}
       <div className="bg-background my-5">
         <section className="px-4 md:px-6 lg:px-8 xl:px-12 py-6 md:py-8 lg:py-12 mx-auto">
-          <div className="flex justify-center md:justify-start">
-            <h2 className="text-primary text-sm xs:text-base px-4 py-2 rounded-xl mb-8 font-semibold inline-flex uppercase backdrop-blur-3xl bg-gray-50 border border-gray-100 shadow-md">
-              Terms of Service
-            </h2>
-          </div>
+           <h1 className="text-3xl md:text-4xl font-semibold text-black mb-4">
+           TERMS OF SERVICE
+          </h1>
         
            <p className="text-muted font-medium text-base md:text-lg lg:text-xl mb-4">
             Effective Date: May 2026

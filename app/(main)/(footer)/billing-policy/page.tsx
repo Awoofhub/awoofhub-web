@@ -8,15 +8,14 @@ const page = () => {
       {/* Header */}
       <div className="bg-background my-5">
         <section className="px-4 md:px-6 lg:px-8 xl:px-12 py-6 md:py-8 lg:py-12 mx-auto">
-          <div className="flex justify-center md:justify-start">
-            <h2 className="text-primary px-4 py-2 text-sm xs:text-base rounded-xl mb-8 font-semibold inline-flex uppercase bg-gray-50 border  backdrop-blur-3xl border-gray-100 shadow-md">
-              BILLING POLICY
-            </h2>
-          </div>
+         
           <h1 className="text-3xl md:text-4xl font-semibold text-black mb-4">
             Billing, Subscriptions and{" "}
             <span className="text-primary">Refund Policy</span>
           </h1>
+          <p className="text-muted font-medium text-base md:text-lg lg:text-xl mb-4">
+            Effective Date: May 2026
+          </p>
           <p className="text-muted font-medium text-base md:text-lg lg:text-xl mb-4">
             Last Updated: October 2026
           </p>
@@ -410,13 +409,13 @@ const page = () => {
             <p className="text-lg md:text-xl lg:text-2xl font-semibold text-black mt-4">
               14. Contact Information
             </p>
-            <p className="text-black text-sm md:text-base lg:text-lg font-medium mb-1">
+            <p className="text-black text-sm md:text-base lg:text-lg mb-1">
               AwoofHub Technology Limited
             </p>
-            <p className="text-black text-sm md:text-base lg:text-lg font-medium mb-1">
+            <p className="text-black font-medium text-sm md:text-base lg:text-lg mb-1">
               Website: AwoofHub.ng
             </p>
-            <p className="text-black text-sm md:text-base lg:text-lg font-medium mb-1">
+            <p className="text-black font-medium text-sm md:text-base lg:text-lg mb-1">
               Email: info@awoofhub.ng
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">

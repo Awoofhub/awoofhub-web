@@ -71,7 +71,7 @@ export default function TermsOfService() {
             </p>
             <p className="text-muted text-sm md:text-base lg:text-lg font-medium mb-1">
               These Terms should be read together with our <a href="/privacy-policy" className="text-blue-500 underline font-bold ">Privacy Policy</a>,
-              <a href="/community-guidelines" className="text-blue-500 underline font-bold ">Community Guidelines</a>, Acceptable Use Policy, applicable
+              Community Guidelines, Acceptable Use Policy, applicable
               subscription terms and any other policies published on the
               Platform. Those documents form part of these Terms to the extent
               stated in them.

@@ -65,9 +65,9 @@ export default function BoostAnalyticsPage({ params }: Props) {
             </p>
             <hr className="my-4 text-[#BBBFBF]" />
             <div className="text-primary text-sm font-semibold mb-4">
-                {formatBoostExpiry(boostData.boost.endsAt)}
+                {formatBoostExpiry(boostData.endsAt)}
             </div>
-            <BoostOfferCard offer={boostData.boost.offer} />
+            <BoostOfferCard offer={boostData.offer} />
             <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3 mt-6">
                 <BoostStatsCard label="Clicks" value={boostData.stats.comments} iconSrc="/clicks.svg" iconBg="bg-[#006400]/20" />
                 <BoostStatsCard label="Comment" value={boostData.stats.clicks} iconSrc="/comment.svg" iconBg="bg-[#FFD553]/20" />

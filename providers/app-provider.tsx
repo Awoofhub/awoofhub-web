@@ -1,4 +1,5 @@
 'use client';
+import { Cookie } from '@/components/cookie/Cookie';
 import { Toast } from '@/components/toast/Toast';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ReactNode } from 'react';
@@ -9,6 +10,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     return (
         <>
             <Toast />
+            <Cookie />
             <ReactQueryProvider>
                 <ReactQueryDevtools initialIsOpen={false} />
                     {children}

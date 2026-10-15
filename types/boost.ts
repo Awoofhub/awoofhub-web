@@ -20,7 +20,6 @@ export interface Stats {
   shares: number;
 }
 
-export interface BoostData {
-  boost: Boost;
+export interface BoostData extends Boost {
   stats: Stats;
 }

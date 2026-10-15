@@ -9,7 +9,6 @@ export function Cookie() {
             buttonText="Accept"
             cookieName="myAwesomeCookieName2"
             expires={30}
-            debug={true}
             disableStyles={true}
             containerClasses="fixed bottom-0 left-2 right-2 z-50 flex flex-col sm:flex-row items-center justify-between bg-[#102224] px-6 py-5 shadow-2xl rounded-2xl text-white mb-[100px] md:mb-[30px]"
             contentClasses="text-sm mb-4 sm:mb-0 pr-4"

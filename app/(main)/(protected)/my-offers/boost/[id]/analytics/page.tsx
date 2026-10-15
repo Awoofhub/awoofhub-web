@@ -5,7 +5,6 @@ import Loading from "@/components/loading/Loading";
 import BoostOfferCard from "@/components/my-offers/boost/BoostOfferCard";
 import BoostStatsCard from "@/components/my-offers/boost/BoostStatsCard";
 import { useActiveBoost } from "@/features/boost/useActiveBoost";
-import { useOffer } from "@/features/offers/useOffer";
 import { formatBoostExpiry } from "@/utils/formatBoostEndDate";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -20,7 +19,6 @@ export default function BoostAnalyticsPage({ params }: Props) {
     const { id } = use(params);
     const router = useRouter();
     const { data: boostData, isLoading } = useActiveBoost({ id });
-    const { data: offer } = useOffer({ id });
 
     if (isLoading) {
         return <Loading />
@@ -69,7 +67,7 @@ export default function BoostAnalyticsPage({ params }: Props) {
             <div className="text-primary text-sm font-semibold mb-4">
                 {formatBoostExpiry(boostData.boost.endsAt)}
             </div>
-            <BoostOfferCard offer={offer ?? boostData.boost.offer} />
+            <BoostOfferCard offer={boostData.boost.offer} />
             <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3 mt-6">
                 <BoostStatsCard label="Clicks" value={boostData.stats.comments} iconSrc="/clicks.svg" iconBg="bg-[#006400]/20" />
                 <BoostStatsCard label="Comment" value={boostData.stats.clicks} iconSrc="/comment.svg" iconBg="bg-[#FFD553]/20" />

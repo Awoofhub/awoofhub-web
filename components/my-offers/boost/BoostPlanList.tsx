@@ -10,10 +10,11 @@ const packages = [
         id: 'standard',
         name: 'Standard',
         price: 5000,
+        duration: '7 days',
         description: 'Great for trying out',
         features: [
-            '2 weeks duration',
             '7 days duration',
+            'Boost your visibility',
             'Basic targeting'
         ]
     },
@@ -21,10 +22,11 @@ const packages = [
         id: 'turbo',
         name: 'Turbo',
         price: 10000,
+        duration: '14 days',
         description: 'More reach, better results',
         features: [
-            '1 month duration',
             '14 days duration',
+            'Boost your visibility',
             'Advanced targeting'
         ]
     },
@@ -32,10 +34,11 @@ const packages = [
         id: 'apex',
         name: 'Apex',
         price: 20000,
+        duration: '3 months',
         description: 'Maximum visibility',
         features: [
-            '30,000 - 50,000 impressions',
             '3 month duration',
+            'Boost your visibility',
             'Advanced targeting + priority support'
         ]
     }
@@ -57,7 +60,7 @@ export default function BoostPlanList({ offerId }: Props) {
 
             openPayment(accessCode, {
                 onSuccess: () => {
-                   setIsPaymentModalOpen(true)
+                    setIsPaymentModalOpen(true)
                 },
             });
         }
@@ -73,7 +76,16 @@ export default function BoostPlanList({ offerId }: Props) {
 
     return (
         <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+            <div className="mt-1">
+                <h1 className="text-xl font-semibold leading-tight text-black">
+                    Choose a promotion package <span className="text-primary">*</span>
+                </h1>
+                <p className="text-sm md:text-base leading-tight text-muted">
+                    Packages are designed to help you reach more people
+                </p>
+            </div>
+
+            <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-3">
                 {packages.map((pkg) => (
                     <BoostPlanCard
                         key={pkg.id}
@@ -86,21 +98,41 @@ export default function BoostPlanList({ offerId }: Props) {
                     />
                 ))}
             </div>
+            <hr className="text-muted/30" />
 
-            <div className="bg-gray-100 p-4 flex items-center justify-between gap-4">
-                <div>
-                    <span className="text-xs text-gray-500 block">Total to pay:</span>
-                    <span className="text-lg font-bold text-gray-900">
-                        {formattedPrice}
+            <div className="bg-[#D9D9D966] flex flex-col xs:flex-row xs:items-center justify-between rounded-xl">
+                <div className="p-5">
+                    <span className="block text-xl font-baloo font-semibold leading-tight text-gray-900">
+                        {selectedPackage?.name} package
+                    </span>
+                    <span className="block text-sm lg:text-base leading-tight text-muted">
+                        {selectedPackage?.description}
                     </span>
                 </div>
 
-                <Button isLoading={boostOffer.isPending} onClick={onSubmit} isDisabled={boostOffer.isPending} className="!w-[280px] !mx-0 text-sm">
-                    Continue
-                </Button>
-            </div>
+                <div className="bg-white p-5 flex items-center justify-between gap-6 rounded-b-lg xs:rounded-lg">
+                    <div>
+                        <span className="text-sm lg:text-base text-muted block">
+                            Total for {selectedPackage?.duration}:
+                        </span>
+                        <span className="text-xl font-baloo font-bold text-gray-900">
+                            {formattedPrice}
+                        </span>
+                    </div>
 
-             <BoostPaymentSuccessModal offerId={offerId} isOpen={isPaymentModalOpen} price={formattedPrice} />
+                    <Button
+                        isLoading={boostOffer.isPending}
+                        onClick={onSubmit}
+                        isDisabled={boostOffer.isPending}
+                        className="!w-[150px] md:!w-[140px] lg:!w-[200px] !mx-0 text-sm"
+                    >
+                        Continue to pay
+                    </Button>
+                </div>
+            </div>
+            <hr className="text-muted/30" />
+
+            <BoostPaymentSuccessModal offerId={offerId} isOpen={isPaymentModalOpen} price={formattedPrice} />
         </>
 
     )

@@ -96,8 +96,8 @@ export default function BoostedOfferCard({ offer }: Props) {
           <span className="max-w-[55%] truncate text-primary text-[10px] lg:text-xs font-semibold">
             @{offer.contributor.username}
           </span>
-          <span className="flex items-center gap-1 text-[#006400] text-[10px] lg:text-xs">
-            <BsLightningChargeFill className="w-2 h-2 md:w-2.5 md:h-2.5" />
+          <span className="flex font-semibold items-center gap-0.5 text-[#006400] text-[10px] lg:text-xs">
+            <BsLightningChargeFill className="w-2 h-2 xs:w-2.5 xs:h-2.5 lg:w-3 lg:h-3" />
             Boosted
           </span>
         </div>

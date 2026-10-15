@@ -21,6 +21,7 @@ export default function BoostPaymentSuccessModal({ price, isOpen, offerId }: Pro
                     width={150}
                     height={150}
                     className="mb-2"
+                    priority
                 />
                 <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
                     Payment successful!

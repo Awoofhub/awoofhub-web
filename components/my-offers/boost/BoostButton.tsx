@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default function BoostButton({ offer }: Props) {
-        const router = useRouter();
+    const router = useRouter();
     const status = getDisplayStatus(offer);
 
     const handleClick = (e: React.MouseEvent) => {
@@ -16,7 +16,7 @@ export default function BoostButton({ offer }: Props) {
     };
 
     return status === "active" ? (
-        <button onClick={handleClick} className="border border-primary text-xs sm:text-sm p-1 text-primary rounded-lg cursor-pointer">
+        <button onClick={handleClick} className="border border-primary font-semibold text-[10px] xs:text-xs lg:text-sm md:px-2.5 xs:px-2 px-1.5 xs:py-1 py-0.5 text-primary rounded-full cursor-pointer">
             Boost Post
         </button>
     ) : null;

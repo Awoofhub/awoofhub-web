@@ -26,9 +26,9 @@ export default function BoostPaymentSuccessModal({ price, isOpen, offerId }: Pro
                     Payment successful!
                 </h2>
                 <p className="text-muted text-sm md:text-lg mb-6">
-                    {`Your payment of ${price} was successful Your promotion is now live and running`}
+                    {`Your payment of ${price} was successful, and your promotion has been activated`}
                 </p>
-                <div className="flex items-center gap-3 w-full">
+                <div className="flex flex-col-reverse xs:flex-row items-center gap-3 w-full">
                     <Link
                         href={"/my-offers?tab=boosted"}
                         className="w-full block text-center text-xs md:text-sm lg:text-base font-baloo text-primary py-2 rounded-md font-semibold hover:bg-primary/10 border border-primary cursor-pointer"

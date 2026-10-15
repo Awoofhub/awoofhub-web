@@ -2,7 +2,7 @@ import MyOfferListItemSkeleton from "../MyOfferListItemSkeleton";
 
 export default function BoostPlanListSkeleton() {
   return (
-    <div className="animate-pulse">
+    <div className="py-4 xs:py-6 px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto animate-pulse">
       <div className="mb-6">
         <MyOfferListItemSkeleton number={1} />
       </div>

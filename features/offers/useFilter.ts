@@ -27,23 +27,8 @@ export function useFilter(basePath: string) {
         });
       }
 
-        params.delete("page");
-
-      const query = params.toString();
-      const nextUrl = query ? `${basePath}?${query}` : basePath;
-
-      console.log("[useFilter] Before replace:", window.location.href);
-      console.log("[useFilter] Navigating to:", nextUrl);
-
-      router.replace(nextUrl, { scroll: false });
-
-      setTimeout(() => {
-        console.log(
-          "[useFilter] After replace:",
-          window.location.href
-        );
-      }, 1000);
-    
+      params.delete('page');
+      router.replace(`${basePath}?${params.toString()}`);
     },
     [searchParams, router, basePath]
   );

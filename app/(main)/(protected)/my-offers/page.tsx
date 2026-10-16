@@ -38,7 +38,7 @@ function MyOffersPage() {
 
         <div className="mb-6">
           <MyOffersTabs
-            activeTab={tab}
+            activeTab={tab ?? ""}
             onChange={(value) => updateTab("tab", value)}
             tabs={Tabs}
           />

@@ -28,6 +28,14 @@ export function useFilter(basePath: string) {
       }
 
       params.delete('page');
+      const query = params.toString();
+const nextUrl = query ? `${basePath}?${query}` : basePath;
+
+console.log("[useFilter] Value received:", keyOrUpdates, value);
+console.log("[useFilter] Current params:", searchParams.toString());
+console.log("[useFilter] Next URL:", nextUrl);
+
+router.replace(nextUrl, { scroll: false });
       router.replace(`${basePath}?${params.toString()}`);
     },
     [searchParams, router, basePath]

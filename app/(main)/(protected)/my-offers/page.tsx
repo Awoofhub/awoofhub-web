@@ -13,6 +13,9 @@ function MyOffersPage() {
   const searchParams = useSearchParams();
   const tab = searchParams.get("tab") ?? undefined;
 
+  console.log("[MyOffersPage] Rendered tab:", tab);
+console.log("[MyOffersPage] Search params:", searchParams.toString());
+
   const updateTab = useFilter("/my-offers");
   const { data } = useHasActiveBoost()
 

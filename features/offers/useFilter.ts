@@ -27,16 +27,23 @@ export function useFilter(basePath: string) {
         });
       }
 
-      params.delete('page');
+        params.delete("page");
+
       const query = params.toString();
-const nextUrl = query ? `${basePath}?${query}` : basePath;
+      const nextUrl = query ? `${basePath}?${query}` : basePath;
 
-console.log("[useFilter] Value received:", keyOrUpdates, value);
-console.log("[useFilter] Current params:", searchParams.toString());
-console.log("[useFilter] Next URL:", nextUrl);
+      console.log("[useFilter] Before replace:", window.location.href);
+      console.log("[useFilter] Navigating to:", nextUrl);
 
-router.replace(nextUrl, { scroll: false });
-      router.replace(`${basePath}?${params.toString()}`);
+      router.replace(nextUrl, { scroll: false });
+
+      setTimeout(() => {
+        console.log(
+          "[useFilter] After replace:",
+          window.location.href
+        );
+      }, 1000);
+    
     },
     [searchParams, router, basePath]
   );

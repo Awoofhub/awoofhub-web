@@ -40,7 +40,12 @@ function MyOffersPage() {
         <div className="mb-6">
           <MyOffersTabs
             activeTab={tab}
-            onChange={(value) => updateTab("tab", value)}
+             onChange={(value) => {
+    console.log("[MyOffers] Tab clicked:", value);
+    console.log("[MyOffers] Current URL:", window.location.href);
+
+    updateTab("tab", value);
+  }}
             tabs={Tabs}
           />
         </div>

@@ -1,9 +1,6 @@
 import { useMyOffers } from "@/features/offers/useMyOffers";
-import { Spinner } from "@chakra-ui/react";
 import { useEffect, useMemo } from "react";
 import { useInView } from "react-intersection-observer";
-import MyOfferListCard from "./MyOfferListCard";
-import MyOfferListItemSkeleton from "./MyOfferListItemSkeleton";
 import MyOffersEmptyState from "./MyOffersEmptyState";
 
 interface Props {
@@ -34,18 +31,9 @@ export default function MyOfferListItem({ tab }: Props) {
 
   return (
     <div className="flex flex-col gap-2">
-      {isLoading && <MyOfferListItemSkeleton />}
-      {!isLoading && !isFetching && offers.length === 0 && (
+     
         <MyOffersEmptyState tab={tab} />
-      )}
-      {!isLoading && offers.length > 0 && (
-        offers.map((offer) => (
-          <MyOfferListCard offer={offer} key={offer.id} />
-        )))
-      }
-      <div ref={ref} className="h-10 flex items-center justify-center mt-4">
-        {isFetchingNextPage && <Spinner className="text-primary w-10 h-10" size="md" />}
-      </div>
+      
     </div>
   )
 }

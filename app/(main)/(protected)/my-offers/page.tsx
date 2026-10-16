@@ -1,5 +1,7 @@
 "use client";
+
 import Loading from "@/components/loading/Loading";
+import MyOfferListItem from "@/components/my-offers/MyOfferListItem";
 import MyOffersTabs from "@/components/my-offers/MyOffersTabs";
 import { useHasActiveBoost } from "@/features/boost/useHasActiveBoost";
 import { useFilter } from "@/features/offers/useFilter";
@@ -44,7 +46,7 @@ function MyOffersPage() {
           />
         </div>
 
-        {/* <MyOfferListItem tab={tab} /> */}
+        <MyOfferListItem tab={tab} />
 
       </div>
     </div>

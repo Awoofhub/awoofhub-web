@@ -1,3 +1,5 @@
+"use client";
+
 import { Offer } from "@/types/offer";
 import { DisplayStatus, getDisplayStatus } from "@/utils/offerStatus";
 import { truncateId } from "@/utils/truncate";

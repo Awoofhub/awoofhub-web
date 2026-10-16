@@ -1,3 +1,5 @@
+"use client";
+
 import { MyOffersTabsCount } from "@/types/offer";
 
 interface Props {

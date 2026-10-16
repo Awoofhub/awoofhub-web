@@ -17,7 +17,7 @@ function MyOffersPage() {
 
 
   const Tabs: { value: keyof MyOffersTabsCount | undefined; label: string }[] = [
-    { value: undefined, label: "All" },
+    
     { value: "approved", label: "Active" },
    // ...(data ? [{ value: "boosted" as keyof MyOffersTabsCount, label: "Boosted" }] : []),
     { value: "pending", label: "Pending" },

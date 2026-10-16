@@ -15,7 +15,7 @@ export default function MyOffersTabs({ tabs, activeTab, onChange }: Props) {
       {tabs.map((tab) => (
         <button
           key={tab.label}
-          onClick={() => onChange(tab.value)}
+          onClick={() => onChange(tab.value === activeTab ? "" : tab.value)}
           className={`px-3 md:px-4 py-2.5 md:py-2 cursor-pointer rounded-xl md:rounded-md text-[10px] md:text-xs lg:text-sm font-semibold whitespace-nowrap transition-colors
             ${activeTab === tab.value ? "bg-primary text-white" : "text-muted hover:bg-gray-100"}`}
         >

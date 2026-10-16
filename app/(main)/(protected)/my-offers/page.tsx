@@ -2,7 +2,6 @@
 import Loading from "@/components/loading/Loading";
 import MyOfferListItem from "@/components/my-offers/MyOfferListItem";
 import MyOffersTabs from "@/components/my-offers/MyOffersTabs";
-import { useHasActiveBoost } from "@/features/boost/useHasActiveBoost";
 import { useFilter } from "@/features/offers/useFilter";
 import { MyOffersTabsCount } from "@/types/offer";
 import { useSearchParams } from "next/navigation";
@@ -14,7 +13,7 @@ function MyOffersPage() {
   const tab = searchParams.get("tab") ?? undefined;
 
   const updateTab = useFilter("/my-offers");
-  const { data } = useHasActiveBoost()
+ /// const { data } = useHasActiveBoost()
 
 
   const Tabs: { value: keyof MyOffersTabsCount | undefined; label: string }[] = [

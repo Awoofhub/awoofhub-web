@@ -1,5 +1,6 @@
 "use client";
 import Loading from "@/components/loading/Loading";
+import MyOfferListItem from "@/components/my-offers/MyOfferListItem";
 import MyOffersTabs from "@/components/my-offers/MyOffersTabs";
 import { useHasActiveBoost } from "@/features/boost/useHasActiveBoost";
 import { useFilter } from "@/features/offers/useFilter";
@@ -19,7 +20,7 @@ function MyOffersPage() {
   const Tabs: { value: keyof MyOffersTabsCount | undefined; label: string }[] = [
     { value: undefined, label: "All" },
     { value: "approved", label: "Active" },
-   /// ...(data ? [{ value: "boosted" as keyof MyOffersTabsCount, label: "Boosted" }] : []),
+   // ...(data ? [{ value: "boosted" as keyof MyOffersTabsCount, label: "Boosted" }] : []),
     { value: "pending", label: "Pending" },
     { value: "rejected", label: "Rejected" },
     { value: "suspended", label: "Suspended" },
@@ -44,7 +45,7 @@ function MyOffersPage() {
           />
         </div>
 
-        {/* <MyOfferListItem tab={tab} /> */}
+        <MyOfferListItem tab={tab} />
 
       </div>
     </div>

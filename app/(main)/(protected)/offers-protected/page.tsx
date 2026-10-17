@@ -52,7 +52,7 @@ function FilterResults() {
 
 
   const { data: categories } = useCategory();
-  const updateFilter = useFilter("/offers");
+  const updateFilter = useFilter("/offers-protected");
 
   const [boostedOffers, setBoostedOffers] = useState<Offer[]>([]);
 

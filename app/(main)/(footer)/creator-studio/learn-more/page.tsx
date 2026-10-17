@@ -32,12 +32,7 @@ const faqs = [
     answer:
       "You will not qualify for earnings for that performance period if you fail to meet any one of the four required benchmarks. Strong performance in one metric cannot compensate for a missed benchmark in another. You can use your Creator Studio analytics to identify areas that need improvement.",
   },
-  {
-    question:
-      "What are the Creator Studio subscription plans, and what benefits do they include?",
-    answer:
-      "AwoofHub offers three subscription plans, each designed to provide different levels of access to premium features and creator tools.",
-  },
+
   {
     question: "What happens if my premium subscription expires?",
     answer:
@@ -49,18 +44,13 @@ const faqs = [
     answer:
       "If you stop posting or become inactive, you may not generate enough engagement to meet the required monthly benchmarks. You will only qualify for earnings if you meet all the required benchmarks and satisfy the applicable eligibility rules. If your subscription expires during your inactivity, your accumulated engagement and performance progress will be automatically cleared.",
   },
-  {
-    question: "How much can I earn through Creator Studio?",
-    answer:
-      "Your earnings depend on your verified performance and AwoofHub’s applicable payout rules.",
-  },
+ 
   {
     question: "When and how will I receive my earnings?",
     answer:
       "Eligible creators are paid monthly, directly into the bank account associated with the account details they provide in Creator Studio. You are responsible for ensuring that your account details are accurate and valid. All payouts are subject to performance verification and confirmation of eligibility.",
   },
 ];
-
 
 export default function CreatorStudioPage() {
   const router = useRouter();
@@ -129,9 +119,15 @@ export default function CreatorStudioPage() {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="px-4 pb-6 text-xs leading-5 text-[#6B7280] sm:px-9 sm:pb-12 sm:text-lg sm:leading-7 lg:px-8 lg:pb-10">
-                      {faq.answer}
-                    </p>
+                    <div className="px-4 pb-6 sm:px-9 sm:pb-12 lg:px-8 lg:pb-10">
+                      {typeof faq.answer === "string" ? (
+                        <p className="text-xs leading-5 text-[#6B7280] sm:text-lg sm:leading-7">
+                          {faq.answer}
+                        </p>
+                      ) : (
+                        faq.answer
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

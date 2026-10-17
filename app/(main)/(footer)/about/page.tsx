@@ -90,10 +90,6 @@ export default function AboutUs() {
             tabs for one good price. If it's real, it's verified, and it's on
             AwoofHub.
           </p>
-          <button className="inline-flex items-center mb-6 gap-2 px-6 py-3 border border-primary text-primary rounded-sm text-sm font-medium hover:bg-gray-200 transition-colors">
-            Watch Video
-            <FaPlay className="text-primary" />
-          </button>
         </section>
       </div>
 
@@ -230,13 +226,15 @@ export default function AboutUs() {
                 <Image src="/line.png" alt="line" width={200} height={200} />
               </div>
               <p className="text-muted lg:max-w-xl  font-medium text-base md:text-lg lg:text-xl my-6">
-                Thousands of people are discovering deals on AwoofHub every day. Browse what's live right now and see what you've been missing.
+                Join a community of savvy shoppers who share great finds,
+                discover verified deals, and help each other make every naira go
+                further.
               </p>
               <Link
-                href="/offers"
+                href="/join-community"
                 className="inline-block  px-6 py-3 w-full xs:w-60 text-base text-center bg-primary text-white font-semibold rounded-md hover:bg-orange-600 transition-colors"
               >
-                Browse Active Offers
+                Join Community
               </Link>
             </div>
           </div>

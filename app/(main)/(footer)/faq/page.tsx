@@ -36,6 +36,32 @@ const faqs = [
     answer:
       "Yes — browsing and discovering deals on AwoofHub is completely free for users. For businesses, we offer flexible listing plans to suit different budgets and marketing goals. Visit our pricing page or contact us to learn more.",
   },
+
+  {
+    question:
+      "What are the Creator Studio subscription plans, and what benefits do they include?",
+    answer: (
+      <div className="space-y-4">
+        <p className="text-muted text-sm md:text-base font-medium">
+          AwoofHub offers three subscription plans, each designed to provide different levels of access to premium features and creator tools.
+        </p>
+        <p className="text-muted text-sm md:text-base font-medium">
+          <strong className="text-black">Starter Plan — ₦5,000/month:</strong>{" "}
+         Designed for users who need basic premium features. It includes: Up to 100 wishlist slots, the ability to set alerts for deal posters, 30 days of subscription access, and up to 2 business-opened DMs per month. The Starter Plan does not include a blue check mark or the ability to open direct messages. 
+        </p>
+        <p className="text-muted text-sm md:text-base font-medium">
+          <strong className="text-black">Growth Plan — ₦10,000/month:</strong>{" "}
+          This is designed for users who want more premium features and better engagement opportunities. It includes all Starter Plan benefits, a blue check mark, the ability to open direct messages, a monthly analytics report, and 30 days of subscription access. 
+        </p>
+        <p className="text-muted text-sm md:text-base font-medium">
+          <strong className="text-black">
+            Professional Plan — ₦20,000/month:
+          </strong>{" "}
+         This plan is designed for users who want access to all creator tools and expanded platform features. It includes all benefits available in the Starter and Growth plans, unlimited wishlist slots, unlimited alerts for deal posters, and unlimited business-opened DMs. 
+        </p>
+      </div>
+    ),
+  },
   {
     question: "How often are new deals added?",
     answer:
@@ -93,11 +119,13 @@ export default function FAQs() {
             FAQs
           </h2>
           <h1 className="text-3xl text-center lg:text-start md:text-4xl lg:text-5xl font-semibold text-black mb-4 md:mb-6 ">
-            Quick{" "}
-            <span className="text-primary">answers</span> before you go digging.
+            Quick <span className="text-primary">answers</span> before you go
+            digging.
           </h1>
           <p className="text-muted text-center lg:text-start text-base md:text-lg lg:text-xl font-medium max-w-6xl">
-           We've covered the questions Awoofers ask most — how deals work, how review and approval happen, how to post, how to claim. Can't find what you're looking for? Send us a message, and we'll sort it out.
+            We've covered the questions Awoofers ask most — how deals work, how
+            review and approval happen, how to post, how to claim. Can't find
+            what you're looking for? Send us a message, and we'll sort it out.
           </p>
         </section>
       </div>
@@ -127,9 +155,13 @@ export default function FAQs() {
 
                 {openFaq === index && (
                   <div className="px-6 pb-8 pl-14">
-                    <p className="text-muted text-sm md:text-base font-medium">
-                      {faq.answer}
-                    </p>
+                    {typeof faq.answer === "string" ? (
+                      <p className="text-muted text-sm md:text-base font-medium">
+                        {faq.answer}
+                      </p>
+                    ) : (
+                      faq.answer
+                    )}
                   </div>
                 )}
               </div>
@@ -138,7 +170,6 @@ export default function FAQs() {
         </section>
       </div>
 
-      
       <Footer />
     </main>
   );

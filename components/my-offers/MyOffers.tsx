@@ -15,11 +15,11 @@ interface FilterProps {
   searchParams: Promise<FilterParams>;
 }
 
-export default function MyOffersPage({ searchParams }: FilterProps) {
+export default function MyOffers({ searchParams }: FilterProps) {
   const params = use(searchParams);
   const { tab } = params;
 
-  const updateTab = useFilter("/myown");
+  const updateTab = useFilter("/my-offers");
   const { data } = useHasActiveBoost()
 
 

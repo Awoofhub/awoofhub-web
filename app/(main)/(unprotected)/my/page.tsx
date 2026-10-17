@@ -5,15 +5,21 @@ import MyOffersTabs from "@/components/my-offers/MyOffersTabs";
 import { useHasActiveBoost } from "@/features/boost/useHasActiveBoost";
 import { useFilter } from "@/features/offers/useFilter";
 import { MyOffersTabsCount } from "@/types/offer";
-import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, use } from "react";
 
+type FilterParams = {
+  tab?: string,
+};
 
-function MyOffersPage() {
-  const searchParams = useSearchParams();
-  const tab = searchParams.get("tab") ?? undefined;
+interface FilterProps {
+  searchParams: Promise<FilterParams>;
+}
 
-  const updateTab = useFilter("/my-offers");
+function MyOffersPage({ searchParams }: FilterProps) {
+  const params = use(searchParams);
+  const { tab } = params;
+
+  const updateTab = useFilter("/my");
   const { data } = useHasActiveBoost()
 
 
@@ -53,11 +59,10 @@ function MyOffersPage() {
 }
 
 
-
-export default function Filter() {
+export default function Filter({ searchParams }: FilterProps) {
   return (
     <Suspense fallback={<Loading />}>
-      <MyOffersPage />
+      <MyOffersPage searchParams={searchParams} />
     </Suspense>
   );
 }

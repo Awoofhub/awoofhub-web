@@ -175,7 +175,10 @@ function FilterResults() {
                 <OfferDateRangePicker
                   createdFrom={createdFrom}
                   createdTo={createdTo}
-                  onApply={updateFilter}
+                  onApply={(dates) => {
+                    updateFilter('createdFrom', dates.createdFrom);
+                    updateFilter('createdTo', dates.createdTo);
+                  }}
                 />
               </div>
             </div>
@@ -185,7 +188,12 @@ function FilterResults() {
                 disabled={!hasActiveFilters}
                 onClick={() => {
                   if (!hasActiveFilters) return;
-                  updateFilter({ dealType: "", location: "", category: "", minRating: "", createdFrom: "", createdTo: "" });
+                  updateFilter("dealType", "");
+                  updateFilter("location", "");
+                  updateFilter("category", "");
+                  updateFilter("minRating", "");
+                  updateFilter("createdFrom", "");
+                  updateFilter("createdTo", "");
                 }}
                 className={[
                   "flex items-center gap-1 px-2 text-sm transition",

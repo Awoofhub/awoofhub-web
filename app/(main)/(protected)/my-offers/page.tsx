@@ -1,5 +1,4 @@
 "use client";
-
 import Loading from "@/components/loading/Loading";
 import MyOfferListItem from "@/components/my-offers/MyOfferListItem";
 import MyOffersTabs from "@/components/my-offers/MyOffersTabs";

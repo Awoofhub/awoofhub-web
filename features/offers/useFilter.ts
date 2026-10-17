@@ -1,5 +1,5 @@
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
 type FilterValue = string | number | undefined | null;
 
@@ -9,21 +9,18 @@ export function useFilter(basePath: string) {
 
   const [params, setParamsState] = useState(new URLSearchParams(searchParams));
 
-  const updateFilter = useCallback(
-    (key: string, value?: FilterValue) => {
-      const updatedParams = new URLSearchParams(params);
+  const updateFilter = (key: string, value?: FilterValue) => {
+    const updatedParams = new URLSearchParams(params);
 
-      if (value) {
-        updatedParams.set(key, String(value));
-        setParamsState(updatedParams);
-      } else {
-        updatedParams.delete(key);
-      }
+    if (value) {
+      updatedParams.set(key, String(value));
+      setParamsState(updatedParams);
+    } else {
+      updatedParams.delete(key);
+    }
 
-      router.replace(`${basePath}?${updatedParams.toString()}`);
-    },
-    [searchParams, router, basePath]
-  );
+    router.replace(`${basePath}?${updatedParams.toString()}`);
+  }
 
   return updateFilter;
 }

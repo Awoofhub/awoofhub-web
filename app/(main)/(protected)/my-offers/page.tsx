@@ -3,20 +3,18 @@
 import Loading from "@/components/loading/Loading";
 import MyOfferListItem from "@/components/my-offers/MyOfferListItem";
 import MyOffersTabs from "@/components/my-offers/MyOffersTabs";
-import { OfferError } from "@/components/offers/OfferError";
 import { useHasActiveBoost } from "@/features/boost/useHasActiveBoost";
 import { useFilter } from "@/features/offers/useFilter";
 import { MyOffersTabsCount } from "@/types/offer";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-import { ErrorBoundary } from "react-error-boundary";
 
 
 function MyOffersPage() {
   const searchParams = useSearchParams();
   const tab = searchParams.get("tab") ?? undefined;
 
-  const updateTab = useFilter("/my-offers");
+  const updateFilter = useFilter("/my-offers");
   const { data } = useHasActiveBoost()
 
 
@@ -43,7 +41,7 @@ function MyOffersPage() {
         <div className="mb-6">
           <MyOffersTabs
             activeTab={tab}
-            onChange={(value) => updateTab("tab", value)}
+            onChange={(value) => updateFilter("tab", value)}
             tabs={Tabs}
           />
         </div>
@@ -60,9 +58,7 @@ function MyOffersPage() {
 export default function Filter() {
   return (
     <Suspense fallback={<Loading />}>
-      <ErrorBoundary fallback={<OfferError />}>
-        <MyOffersPage />
-      </ErrorBoundary>
+      <MyOffersPage />
     </Suspense>
   );
 }

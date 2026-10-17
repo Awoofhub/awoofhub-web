@@ -7,7 +7,7 @@ import { OfferLocationFilter } from "@/components/offers/OfferLocationFilter";
 import { OfferSelectDropdown } from "@/components/offers/OfferSelectDropdown";
 import { useBoostedOffers } from "@/features/boost/useBoostedOffers";
 import { useCategory } from "@/features/category/useCategory";
-import { useFilter } from "@/features/offers/useFilter";
+import { useFilter } from "@/features/filters/useFilter";
 import { useOffers } from "@/features/offers/useOffers";
 import { Offer } from "@/types/offer";
 import { appendUniqueBoostedOffers } from "@/utils/appendUniqueBoostedOffers";

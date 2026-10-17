@@ -12,7 +12,7 @@ interface FilterProps {
 
 export default function MyOffersPage({ searchParams }: FilterProps) {
   return (
-      <Suspense fallback={<Loading />}>
+    <Suspense fallback={<Loading />}>
       <MyOffers searchParams={searchParams} />
     </Suspense>
   );

@@ -14,7 +14,7 @@ function MyOffersPage() {
   const searchParams = useSearchParams();
   const tab = searchParams.get("tab") ?? undefined;
 
-  const updateFilter = useFilter("/my-offers");
+  const updateTab = useFilter("/my-offers");
   const { data } = useHasActiveBoost()
 
 
@@ -41,7 +41,7 @@ function MyOffersPage() {
         <div className="mb-6">
           <MyOffersTabs
             activeTab={tab}
-            onChange={(value) => updateFilter("tab", value)}
+            onChange={(value) => updateTab("tab", value)}
             tabs={Tabs}
           />
         </div>

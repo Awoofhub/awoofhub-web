@@ -1,63 +1,23 @@
-"use client";
 import Loading from "@/components/loading/Loading";
-import MyOfferListItem from "@/components/my-offers/MyOfferListItem";
-import MyOffersTabs from "@/components/my-offers/MyOffersTabs";
-import { useHasActiveBoost } from "@/features/boost/useHasActiveBoost";
-import { useFilter } from "@/features/offers/useFilter";
-import { MyOffersTabsCount } from "@/types/offer";
-import { useSearchParams } from "next/navigation";
+import MyOffers from "@/components/my-offers/MyOffers";
 import { Suspense } from "react";
 
+type FilterParams = {
+  tab?: string;
+};
 
-function MyOffersPage() {
-  const searchParams = useSearchParams();
-  const tab = searchParams.get("tab") ?? undefined;
-
-  const updateTab = useFilter("/my-offers");
-  const { data } = useHasActiveBoost()
-
-
-  const Tabs: { value: keyof MyOffersTabsCount | undefined; label: string }[] = [
-    { value: undefined, label: "All" },
-    { value: "approved", label: "Active" },
-    ...(data ? [{ value: "boosted" as keyof MyOffersTabsCount, label: "Boosted" }] : []),
-    { value: "pending", label: "Pending" },
-    { value: "rejected", label: "Rejected" },
-    { value: "suspended", label: "Suspended" },
-    { value: "expired", label: "Expired" },
-  ];
-
-  return (
-    <div className="bg-white">
-      <div className="px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto py-6">
-        <h1 className="text-xl lg:text-2xl font-semibold text-black mb-2">
-          My Posts
-        </h1>
-        <p className="text-muted text-xs md:text-sm lg:text-base mb-4">
-          Track the status of every deal you've shared.
-        </p>
-
-        <div className="mb-6">
-          <MyOffersTabs
-            activeTab={tab}
-            onChange={(value) => updateTab("tab", value)}
-            tabs={Tabs}
-          />
-        </div>
-
-        <MyOfferListItem tab={tab} />
-
-      </div>
-    </div>
-  );
+interface FilterProps {
+  searchParams: Promise<FilterParams>;
 }
 
-
-
-export default function Filter() {
+export default function MyOffersPage({ searchParams }: FilterProps) {
   return (
-    <Suspense fallback={<Loading />}>
-      <MyOffersPage />
+      <Suspense fallback={<Loading />}>
+      <MyOffers searchParams={searchParams} />
     </Suspense>
   );
 }
+
+
+
+

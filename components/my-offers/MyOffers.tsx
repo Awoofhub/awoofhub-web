@@ -19,7 +19,7 @@ export default function MyOffersPage({ searchParams }: FilterProps) {
   const params = use(searchParams);
   const { tab } = params;
 
-  const updateTab = useFilter("/myown");
+  const updateTab = useFilter("/my-offers");
   const { data } = useHasActiveBoost()
 
 

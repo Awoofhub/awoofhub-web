@@ -3,11 +3,13 @@
 import Loading from "@/components/loading/Loading";
 import MyOfferListItem from "@/components/my-offers/MyOfferListItem";
 import MyOffersTabs from "@/components/my-offers/MyOffersTabs";
+import { OfferError } from "@/components/offers/OfferError";
 import { useHasActiveBoost } from "@/features/boost/useHasActiveBoost";
 import { useFilter } from "@/features/offers/useFilter";
 import { MyOffersTabsCount } from "@/types/offer";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
 
 function MyOffersPage() {
@@ -58,7 +60,9 @@ function MyOffersPage() {
 export default function Filter() {
   return (
     <Suspense fallback={<Loading />}>
-      <MyOffersPage />
+      <ErrorBoundary fallback={<OfferError />}>
+        <MyOffersPage />
+      </ErrorBoundary>
     </Suspense>
   );
 }

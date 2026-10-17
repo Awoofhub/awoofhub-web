@@ -1,5 +1,5 @@
+"use client";
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useState } from 'react';
 
 type FilterValue = string | number | undefined | null;
 
@@ -7,19 +7,16 @@ export function useFilter(basePath: string) {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const [params, setParamsState] = useState(new URLSearchParams(searchParams));
-
   const updateFilter = (key: string, value?: FilterValue) => {
-    const updatedParams = new URLSearchParams(params);
+    const params = new URLSearchParams(searchParams.toString());
 
     if (value) {
-      updatedParams.set(key, String(value));
-      setParamsState(updatedParams);
+      params.set(key, String(value));
     } else {
-      updatedParams.delete(key);
+      params.delete(key);
     }
 
-    router.replace(`${basePath}?${updatedParams.toString()}`);
+    router.replace(`${basePath}?${params.toString()}`);
   }
 
   return updateFilter;

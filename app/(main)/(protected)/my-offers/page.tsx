@@ -1,5 +1,5 @@
 import Loading from "@/components/loading/Loading";
-import MyOffers from "@/components/my-offers/MyOffers";
+import MyOffersPage from "@/components/my-offers/MyOffersPage";
 import { Suspense } from "react";
 
 type FilterParams = {
@@ -10,10 +10,10 @@ interface FilterProps {
   searchParams: Promise<FilterParams>;
 }
 
-export default function MyOffersPage({ searchParams }: FilterProps) {
+export default function Page({ searchParams }: FilterProps) {
   return (
     <Suspense fallback={<Loading />}>
-      <MyOffers searchParams={searchParams} />
+      <MyOffersPage searchParams={searchParams} />
     </Suspense>
   );
 }

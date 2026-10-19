@@ -261,7 +261,7 @@ export default function AboutUs() {
                 <h5 className="text-xl xs:text-2xl">Call</h5>
               </div>
               <h5 className="font-semibold text-2xl text-gray-900">
-                +234 800 333 3330
+                09037848773
               </h5>
             </div>
 
@@ -271,7 +271,7 @@ export default function AboutUs() {
                 <h5 className="text-xl xs:text-2xl">Email Address</h5>
               </div>
               <h5 className="font-semibold text-2xl text-gray-900">
-                supports@awoofhub.com
+               info@awoofhub.ng
               </h5>
             </div>
           </div>

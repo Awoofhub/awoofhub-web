@@ -15,11 +15,11 @@ export default function SubscriptionPage() {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="max-w-[1440px] mx-auto p-2 md:p-6 mb-10">
+    <div className="py-4 xs:py-6 px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto mb-24 lg:mb-10">
       <button
         type="button"
         onClick={() => router.back()}
-        className="flex items-center gap-1 text-sm font-bold hover:text-gray-700"
+        className="flex cursor-pointer items-center gap-1 text-sm xs:text-base font-bold hover:text-gray-700"
       >
         <ChevronLeft className="h-4 w-4" />
         Back

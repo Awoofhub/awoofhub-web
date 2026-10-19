@@ -1,25 +1,17 @@
 import { CircleCheckBig } from "lucide-react";
-import { IoIosCloseCircle } from "react-icons/io";
 import { PiCrown } from "react-icons/pi";
 
 interface Props {
     title: string;
-    features: string[];
-    unavailableFeatures?: string[];
+    features: { name: string; description: string; }[];
     listClassName?: string;
     heading?: string;
 }
 
-const FEATURE_DESCRIPTION =
-    'Update your payment method, view billing history or cancel your subscription.';
-
-const DEFAULT_LIST_CLASS = "grid-cols-1 xs:grid-cols-2 lg:grid-cols-3";
-
 export default function SubscriptionPlanBenefits({
     title,
     features,
-    unavailableFeatures = [],
-    listClassName = DEFAULT_LIST_CLASS,
+    listClassName,
     heading,
 }: Props) {
     return (
@@ -40,22 +32,13 @@ export default function SubscriptionPlanBenefits({
                 Here’s what you get with your {title} Plan.
             </h2>
 
-            <ul className={`p-1 xs:p-3 grid gap-6 xs:gap-8 ${listClassName}`}>
+            <ul className={`p-1 xs:p-3 grid gap-6 xs:gap-8 ${listClassName ?? "grid-cols-1 xs:grid-cols-2 lg:grid-cols-3"}`}>
                 {features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-2">
+                    <li key={feature.name} className="flex items-start gap-2">
                         <CircleCheckBig className="mt-1 h-4 w-4 shrink-0 text-[#00A95D]" />
                         <div>
-                            <h2 className="text-base xs:text-lg font-semibold text-black">{feature}</h2>
-                            <p className="text-xs xs:text-sm text-muted">{FEATURE_DESCRIPTION}</p>
-                        </div>
-                    </li>
-                ))}
-                {unavailableFeatures.map((feature) => (
-                    <li key={feature} className="flex items-start gap-2 opacity-30">
-                        <IoIosCloseCircle className="mt-0.5 h-5 w-5 shrink-0 text-[#E7060680]" />
-                        <div>
-                            <h2 className="text-base xs:text-lg font-semibold text-black">{feature}</h2>
-                            <p className="text-xs xs:text-sm text-muted">{FEATURE_DESCRIPTION}</p>
+                            <h2 className="text-base xs:text-lg font-semibold text-black">{feature.name}</h2>
+                            <p className="text-xs xs:text-sm text-muted">{feature.description}</p>
                         </div>
                     </li>
                 ))}

@@ -8,7 +8,7 @@ export interface Subscription {
   planCode: string;
   amount: number;
   subscriptionExpiresAt: string | null,
-  status: 'pending' | 'active' | 'failed'| 'cancelled',
+  status: 'pending' | 'active' | 'failed' | 'cancelled',
   createdAt: string;
 }
 
@@ -24,10 +24,15 @@ export interface subscriptionPayload {
   planName: string;
 }
 
-export interface SubscriptionPlanData {
+export interface SubscriptionPlanConfig {
   id: SubscriptionPlan;
   title: string;
   price: number;
-  features: string[];
+  features: {
+    name: string;
+    description: string;
+  }[];
   recommended?: boolean;
+  description: string;
+  unavailableFeatures?: string[];
 }

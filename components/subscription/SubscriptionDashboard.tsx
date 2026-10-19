@@ -2,11 +2,10 @@ import { useManageSubscription } from '@/features/subscription/useManageSubscrip
 import { Subscription } from '@/types/subscription';
 import { formatDateShortMonth } from '@/utils/formatDate';
 import { addDays, differenceInCalendarDays } from 'date-fns';
-import { ArrowRight, CalendarDays } from 'lucide-react';
-import { CircleCheckBig } from "lucide-react";
+import { ArrowRight, CalendarDays, CircleCheckBig } from 'lucide-react';
 import Link from "next/link";
 import { PiCrown } from 'react-icons/pi';
-import PlanBenefits from './SubscriptionPlanBenefits';
+import SubscriptionPlanBenefits from './SubscriptionPlanBenefits';
 import { SUBSCRIPTION_PLANS } from './SubscriptionPlanList';
 
 interface Props {
@@ -124,11 +123,10 @@ export default function SubscriptionDashboard({ subscription }: Props) {
 
                 {/* Features: full width on tab, under the subscription card on desktop */}
                 <div className="md:col-span-3 lg:col-span-2">
-                    <PlanBenefits
+                    <SubscriptionPlanBenefits
                         heading="Features:"
                         title={plan.title}
                         features={plan.features}
-                        unavailableFeatures={plan.unavailableFeatures}
                         listClassName="grid-cols-1 md:grid-cols-2"
                     />
                 </div>

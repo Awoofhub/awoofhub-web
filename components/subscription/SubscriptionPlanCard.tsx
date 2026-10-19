@@ -7,14 +7,14 @@ import { IoCloseCircle } from "react-icons/io5";
 interface Props {
   id: string;
   title: string;
-  description?: string;
-  price?: number;
-  features?: string[];
+  description: string;
+  price: number;
+  features: { name: string; description: string; }[];
   unavailableFeatures?: string[];
   recommended?: boolean;
   selected: boolean;
   onSelect: () => void;
-  selectLabel?: string;
+  selectLabel: string;
 }
 
 export default function SubscriptionPlanCard({
@@ -22,12 +22,12 @@ export default function SubscriptionPlanCard({
   title,
   description,
   price,
-  features = [],
+  features,
   unavailableFeatures = [],
   recommended = false,
   selected,
   onSelect,
-  selectLabel = "Select Package",
+  selectLabel,
 }: Props) {
   const router = useRouter();
 
@@ -66,29 +66,25 @@ export default function SubscriptionPlanCard({
         </h3>
       </div>
 
-      {price !== undefined && (
-        <p className="text-3xl md:text-2xl lg:text-4xl font-bold">
-          N{price.toLocaleString()}
-          <span className="ml-1 text-xs md:text-[10px] lg:text-base font-baloo font-semibold">Per month</span>
-        </p>
-      )}
+      <p className="text-3xl md:text-2xl lg:text-4xl font-bold">
+        N{price.toLocaleString()}
+        <span className="ml-1 text-xs md:text-[10px] lg:text-base font-baloo font-semibold">Per month</span>
+      </p>
 
-      {description && (
-        <p className={`text-sm md:text-[10px] font-medium lg:text-sm mt-3 leading-snug ${selected ? "text-white/90" : "text-muted"}`}>
-          {description}
-        </p>
-      )}
+      <p className={`text-sm md:text-[10px] font-medium lg:text-sm mt-3 leading-snug ${selected ? "text-white/90" : "text-muted"}`}>
+        {description}
+      </p>
 
       <hr className={`my-6 ${selected ? "border-white/30" : "border-gray-200"}`} />
 
       <ul className="space-y-4 flex-1">
         {features.map((feature) => (
           <li
-            key={feature}
+            key={feature.name}
             className={`flex items-center font-medium gap-2 text-sm md:text-xs lg:text-base ${selected ? "text-white" : "text-muted"}`}
           >
             <IoIosCheckmarkCircle className={`h-5 w-5 shrink-0 ${selected ? "text-white" : "text-[#FE4F04]"}`} />
-            {feature}
+            {feature.name}
           </li>
         ))}
         {unavailableFeatures.map((feature) => (

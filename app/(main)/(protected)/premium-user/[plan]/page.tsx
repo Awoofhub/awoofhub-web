@@ -45,7 +45,7 @@ export default function SubscriptionCheckoutPage({ params }: Props) {
         );
     }
 
-    const formattedPrice = `N${plan.price.toLocaleString()}`;
+    const formattedPrice = `₦${plan.price.toLocaleString()}`;
 
     const onSubmit = () => {
         setIsLoading(true);
@@ -53,7 +53,6 @@ export default function SubscriptionCheckoutPage({ params }: Props) {
     };
 
     const handleContinue = async () => {
-        await subscribe.refreshSubscription();
         setIsSuccessModalOpen(false);
         router.replace('/premium-user');
     };
@@ -79,7 +78,6 @@ export default function SubscriptionCheckoutPage({ params }: Props) {
             <SubscriptionPlanBenefits
                 title={plan.title}
                 features={plan.features}
-                unavailableFeatures={plan.unavailableFeatures}
             />
 
             <PaymentSecureNotice />

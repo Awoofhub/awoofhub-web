@@ -17,13 +17,19 @@ export const useSubscribe = ({ onSuccess }: UseSubscribeOptions = {}) => {
     const { mutate, isPending } = useMutation({
         mutationFn: subscribe,
         onSuccess: (data) => {
-            queryClient.invalidateQueries({ queryKey: ['subscription'] });
             onSuccess?.(data);
         },
     });
 
+    const refreshSubscription = async () => {
+        await queryClient.refetchQueries({
+            queryKey: ["subscription"],
+        });
+    };
+
     return {
         submit: mutate,
         isPending,
+        refreshSubscription,
     };
 };

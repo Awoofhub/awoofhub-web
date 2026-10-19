@@ -53,6 +53,7 @@ export default function SubscriptionCheckoutPage({ params }: Props) {
     };
 
     const handleContinue = async () => {
+        await subscribe.refreshSubscription();
         setIsSuccessModalOpen(false);
         router.replace('/premium-user');
     };

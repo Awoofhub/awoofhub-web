@@ -1,28 +1,31 @@
+import { Button } from "@/components/button/Button";
 import { useManageSubscription } from "@/features/subscription/useManageSubscription";
+import { FolderX } from "lucide-react";
 
 export default function SubscriptionPaymentFailed() {
 
     const { manage, isLoading } = useManageSubscription();
 
     return (
-        <div>
-            <div className="text-center mt-4 mb-6 gap-2">
-                <h1 className="text-[20px] md:text-[40px] font-bold text-[#281812]">
-                    Payment Failed
-                </h1>
-                <p className="text-sm md:text-[18px] text-gray-400">
-                    Packages are designed to help you reach more people
-                </p>
-            </div>
-            <div className="flex gap-6 justify-center items-start flex-wrap text-red-500">
-                <button
-                    onClick={() => manage()}
-                    disabled={isLoading}
-                    className="w-50 bg-white hover:bg-gray-50 text-orange-600 border border-orange-200 font-medium text-sm py-2.5 px-4 rounded-xl transition">
-                    {isLoading ? "Loading..." : " Manage Payment"}
-                </button>
-            </div>
-        </div>
+        <div className="py-20 px-3 flex flex-col items-center text-center">
+            <FolderX className="text-primary w-8 h-8 xs:w-10 xs:h-10 mb-3" />
 
+            <h1 className="font-semibold text-xl xs:text-2xl lg:text-2xl text-black">
+                Payment failed
+            </h1>
+
+            <p className="text-muted text-base xs:text-lg max-w-md leading-tight mt-2 mb-6">
+                Packages are designed to help you reach more people
+            </p>
+
+            <Button
+                isLoading={isLoading}
+                onClick={() => manage()}
+                isDisabled={isLoading}
+                className="!w-[200px] !mx-0 text-sm"
+            >
+                Manage payment
+            </Button>
+        </div>
     );
 };

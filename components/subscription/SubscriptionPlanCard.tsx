@@ -1,11 +1,8 @@
 "use client";
 
-import { Button } from "@/components/button/Button";
-import { useSubscribe } from "@/features/subscription/useSubscribe";
-import { openPayment } from "@/lib/paystack";
-import { useState } from "react";
-import { FaRegCheckCircle } from "react-icons/fa";
-import SubscriptionSuccessModal from "../modals/subscription/SubscriptionSuccessModal";
+import { useRouter } from "next/navigation";
+import { IoIosCheckmarkCircle } from "react-icons/io";
+import { IoCloseCircle } from "react-icons/io5";
 
 interface Props {
   id: string;
@@ -13,13 +10,11 @@ interface Props {
   description?: string;
   price?: number;
   features?: string[];
+  unavailableFeatures?: string[];
   recommended?: boolean;
   selected: boolean;
   onSelect: () => void;
   selectLabel?: string;
-  isGlobalPending: boolean;
-  isThisCardLoading: boolean;
-  onLoadingChange: (isLoading: boolean) => void;
 }
 
 export default function SubscriptionPlanCard({
@@ -28,109 +23,93 @@ export default function SubscriptionPlanCard({
   description,
   price,
   features = [],
+  unavailableFeatures = [],
   recommended = false,
   selected,
   onSelect,
   selectLabel = "Select Package",
-  isGlobalPending,
-  isThisCardLoading,
-  onLoadingChange
 }: Props) {
-  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
-  const subscribe = useSubscribe({
-    onSuccess: (data) => {
-      const accessCode = data.accessCode;
-
-      openPayment(accessCode, {
-        onSuccess: () => {
-          onLoadingChange(false);
-          setIsSuccessModalOpen(true);
-        },
-        onCancel: () => {
-          onLoadingChange(false);
-        }
-      });
-    },
-  });
+  const router = useRouter();
 
   const onSubmit = (e: React.MouseEvent) => {
     e.stopPropagation();
-    onLoadingChange(true);
-    subscribe.submit({ planName: id });
+    router.push(`/premium-user/${id}`);
   };
-
-  const handleCardClick = () => {
-    if (isGlobalPending) return;
-    onSelect();
-  };
-
-  const handleContinue = async () => {
-    await subscribe.refreshSubscription();
-    setIsSuccessModalOpen(false);
-  };
-
 
   return (
-    <>
-      <div
-        onClick={handleCardClick}
-        className={`relative rounded-xl border min-w-[300px] p-6 md:p-10 flex flex-col bg-white
-        ${isGlobalPending ? "opacity-60 cursor-not-allowed" : "cursor-pointer"}
-        ${selected ? "border-[#FE4F04] border-2" : "border-gray-200"}`}
-      >
-        {selected && recommended && (
-          <span className="absolute -top-0 right-0 bg-[#FE4F04] text-white text-xs font-medium px-3 py-1 rounded-bl-lg rounded-tr-lg">
-            Recommended
-          </span>
-        )}
+    <div
+      onClick={onSelect}
+      className={`relative rounded-2xl border-2 max-w-95 p-5 md:px-2 md:py-5 lg:p-6 flex flex-col cursor-pointer
+      ${selected
+          ? "bg-[#FE4F04] border-[#FE4F04] text-white"
+          : "bg-white border-gray-200 text-gray-900"}`}
+    >
+      {selected && recommended && (
+        <span className="absolute -top-0.5 -right-0.5 bg-white text-primary text-[10px] md:text-[8px] lg:text-xs font-bold uppercase px-3 py-1.5 rounded-bl-2xl rounded-tr-2xl">
+          Recommended
+        </span>
+      )}
 
+      <div className="flex items-center gap-2 mb-3">
         <input
           type="radio"
           readOnly
           checked={selected}
-          disabled={isGlobalPending}
           name="propertyType"
-          className="h-4 w-4 border-2 mb-4 border-[#FE4F04]  accent-[#FE4F04]"
+          className={`h-5 w-5 shrink-0 appearance-none rounded-full border-2
+          ${selected
+              ? "border-white bg-white shadow-[inset_0_0_0_4px_#FE4F04]"
+              : "border-gray-400 bg-transparent"}`}
         />
-
-        <h3 className="font-semibold text-gray-900">{title}</h3>
-        {description && (
-          <p className="text-sm text-gray-400 mt-1">{description}</p>
-        )}
-
-        {price !== undefined && (
-          <p className="text-2xl font-bold text-gray-900 mt-4">
-            N{price.toLocaleString()}
-          </p>
-        )}
-
-
-        <ul className="mt-4 space-y-4 flex-1">
-          {features.map((feature) => (
-            <li
-              key={feature}
-              className="flex items-center gap-2 text-[12px] lg:text-[16px] text-gray-600"
-            >
-              <FaRegCheckCircle className="h-4 w-4 text-green-500" />
-              {feature}
-            </li>
-          ))}
-        </ul>
-
-
-        <Button
-          variant={selected ? "solid" : "outline"}
-          isLoading={isThisCardLoading}
-          onClick={onSubmit}
-          isDisabled={isGlobalPending || !selected}
-          className={`${selected ? "" : "!text-primary"} mt-6`}
-        >
-          {selectLabel}
-        </Button>
-
+        <h3 className={`text-xl md:text-base lg:text-2xl font-semibold uppercase ${selected ? "text-white" : "text-primary"}`}>
+          {title} Plan
+        </h3>
       </div>
 
-      <SubscriptionSuccessModal plan={title} isOpen={isSuccessModalOpen} onClose={handleContinue} />
-    </>
+      {price !== undefined && (
+        <p className="text-3xl md:text-2xl lg:text-4xl font-bold">
+          N{price.toLocaleString()}
+          <span className="ml-1 text-xs md:text-[10px] lg:text-base font-baloo font-semibold">Per month</span>
+        </p>
+      )}
+
+      {description && (
+        <p className={`text-sm md:text-[10px] font-medium lg:text-sm mt-3 leading-snug ${selected ? "text-white/90" : "text-muted"}`}>
+          {description}
+        </p>
+      )}
+
+      <hr className={`my-6 ${selected ? "border-white/30" : "border-gray-200"}`} />
+
+      <ul className="space-y-4 flex-1">
+        {features.map((feature) => (
+          <li
+            key={feature}
+            className={`flex items-center font-medium gap-2 text-sm md:text-xs lg:text-base ${selected ? "text-white" : "text-muted"}`}
+          >
+            <IoIosCheckmarkCircle className={`h-5 w-5 shrink-0 ${selected ? "text-white" : "text-[#FE4F04]"}`} />
+            {feature}
+          </li>
+        ))}
+        {unavailableFeatures.map((feature) => (
+          <li
+            key={feature}
+            className="flex items-center font-medium gap-2 text-sm md:text-xs lg:text-base opacity-50"
+          >
+            <IoCloseCircle className={`h-5 w-5 shrink-0 ${selected ? "text-white" : "text-[#FE4F04]"}`} />
+            {feature}
+          </li>
+        ))}
+      </ul>
+
+      <button
+        type="button"
+        onClick={onSubmit}
+        className={`mt-6 w-full font-baloo rounded-2xl py-3 cursor-pointer text-sm md:text-xs lg:text-lg font-semibold shadow-md transition-opacity hover:opacity-90
+          ${selected ? "bg-white text-black" : "bg-primary text-white"}`}
+      >
+        {selectLabel}
+      </button>
+    </div>
   );
 }

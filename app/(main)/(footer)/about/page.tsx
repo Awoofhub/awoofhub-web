@@ -231,7 +231,7 @@ export default function AboutUs() {
                 further.
               </p>
               <Link
-                href="/join-community"
+                href="https://www.awoofhub.ng/community"
                 className="inline-block  px-6 py-3 w-full xs:w-60 text-base text-center bg-primary text-white font-semibold rounded-md hover:bg-orange-600 transition-colors"
               >
                 Join Community

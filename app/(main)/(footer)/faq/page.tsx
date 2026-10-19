@@ -27,37 +27,75 @@ const faqs = [
       "Simply browse or search by category, location, or business name on our web platform or mobile app (available on iOS and Android). You can also set preferences so we surface the most relevant deals for you automatically.",
   },
   {
-    question: "How can my business post deals on AwoofHub?",
+    question: "How can I post deals on AwoofHub?",
     answer:
-      "Getting started is easy. Create a business account on AwoofHub, submit your deal or promo for review, and once verified, it goes live to thousands of deal-seekers. It's a fast, affordable way to drive traffic and boost sales.",
+      "Getting started is easy. Create an account on AwoofHub, submit your deal or promo for review, and once verified, it goes live to thousands of deal-seekers. It's a fast, affordable way to drive traffic and boost sales.",
   },
   {
     question: "Is AwoofHub free to use?",
     answer:
-      "Yes — browsing and discovering deals on AwoofHub is completely free for users. For businesses, we offer flexible listing plans to suit different budgets and marketing goals. Visit our pricing page or contact us to learn more.",
+      "Yes! AwoofHub is free to use. You can browse and discover amazing deals at no cost. However, we also offer  subscription plans with extra benefits, as well as post-boosting options to help your listings reach more people, gain more visibility, and attract more potential customers. You can choose the options that best suit your needs!",
   },
 
   {
     question:
-      "What are the Creator Studio subscription plans, and what benefits do they include?",
+      "What are the subscription plans, and what benefits do they include?",
     answer: (
       <div className="space-y-4">
         <p className="text-muted text-sm md:text-base font-medium">
-          AwoofHub offers three subscription plans, each designed to provide different levels of access to premium features and creator tools.
+          AwoofHub offers three subscription plans, each designed to provide
+          different levels of access to premium features and creator tools.
         </p>
         <p className="text-muted text-sm md:text-base font-medium">
           <strong className="text-black">Starter Plan — ₦5,000/month:</strong>{" "}
-         Designed for users who need basic premium features. It includes: Up to 100 wishlist slots, the ability to set alerts for deal posters, 30 days of subscription access, and up to 2 business-opened DMs per month. The Starter Plan does not include a blue check mark or the ability to open direct messages. 
+          Designed for users who need basic premium features. It includes: Up to
+          100 wishlist slots, the ability to set alerts for deal posters, 30
+          days of subscription access, and up to 2 business-opened DMs per
+          month. The Starter Plan does not include a blue check mark or the
+          ability to open direct messages.
         </p>
         <p className="text-muted text-sm md:text-base font-medium">
           <strong className="text-black">Growth Plan — ₦10,000/month:</strong>{" "}
-          This is designed for users who want more premium features and better engagement opportunities. It includes all Starter Plan benefits, a blue check mark, the ability to open direct messages, a monthly analytics report, and 30 days of subscription access. 
+          This is designed for users who want more premium features and better
+          engagement opportunities. It includes all Starter Plan benefits, a
+          blue check mark, the ability to open direct messages, a monthly
+          analytics report, and 30 days of subscription access.
         </p>
         <p className="text-muted text-sm md:text-base font-medium">
           <strong className="text-black">
             Professional Plan — ₦20,000/month:
           </strong>{" "}
-         This plan is designed for users who want access to all creator tools and expanded platform features. It includes all benefits available in the Starter and Growth plans, unlimited wishlist slots, unlimited alerts for deal posters, and unlimited business-opened DMs. 
+          This plan is designed for users who want access to all creator tools
+          and expanded platform features. It includes all benefits available in
+          the Starter and Growth plans, unlimited wishlist slots, unlimited
+          alerts for deal posters, and unlimited business-opened DMs.
+        </p>
+      </div>
+    ),
+  },
+
+  {
+    question: "What are the boosting packages?",
+    answer: (
+      <div className="space-y-4">
+        <p className="text-muted text-sm md:text-base font-medium">
+          AwoofHub offers three boosting packages designed to help your posts
+          reach more people and increase visibility. Each package offers a
+          different promotion duration to suit your needs and budget.
+        </p>
+        <p className="text-muted text-sm md:text-base font-medium">
+          <strong className="text-black">Standard Package — ₦5,000:</strong>{" "}
+        Includes 7 days of promotion.
+        </p>
+        <p className="text-muted text-sm md:text-base font-medium">
+          <strong className="text-black">Turbo Package — ₦10,000:</strong>{" "}
+         Includes 14 days of promotion.
+        </p>
+        <p className="text-muted text-sm md:text-base font-medium">
+          <strong className="text-black">
+            Apex Package — ₦20,000:
+          </strong>{" "}
+          Includes 3 months of promotion.
         </p>
       </div>
     ),

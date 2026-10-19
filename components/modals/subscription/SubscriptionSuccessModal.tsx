@@ -12,7 +12,7 @@ export default function SubscriptionSuccessModal({ plan, isOpen, onClose }: Prop
 
     return (
         <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/50 p-4">
-            <div className="bg-white rounded-xl w-[90vw] xs:w-[500px] lg:w-[600px] p-6 flex flex-col items-center text-center">
+            <div className="bg-white rounded-xl w-[90vw] xs:w-[500px] lg:w-[600px] p-4 xs:p-6 lg:p-8 flex flex-col items-center text-center">
                 <Image
                     src="/EditSuccess.svg"
                     alt="success-img"
@@ -28,8 +28,8 @@ export default function SubscriptionSuccessModal({ plan, isOpen, onClose }: Prop
                 <p className="text-muted text-sm md:text-lg mb-6">
                     {`Your premium subscription for the ${plan} package has  been activated.`}
                 </p>
-                <button onClick={onClose}  className="text-center text-xs md:text-sm lg:text-base font-baloo text-primary py-1 px-3 rounded-md font-bold hover:bg-primary/10 border border-primary cursor-pointer">
-                    Continue
+                <button onClick={onClose}  className="text-center w-full xs:w-75 text-xs md:text-sm lg:text-base font-baloo text-white py-2 px-3 rounded-md font-semibold hover:bg-orange-700 bg-primary cursor-pointer">
+                    Continue to Dashboard
                 </button>
             </div>
         </div>

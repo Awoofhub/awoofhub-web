@@ -33,7 +33,12 @@ export default function SubscriptionPlanCard({
 
   const onSubmit = (e: React.MouseEvent) => {
     e.stopPropagation();
-    router.push(`/premium-user/${id}`);
+    
+    if (!selected) {
+      onSelect();
+    } else {
+      router.push(`/premium-user/${id}`);
+    }
   };
 
   return (

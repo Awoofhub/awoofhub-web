@@ -5,9 +5,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { IoCall } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
 
-
 export default function HelpPage() {
-
   return (
     <main className="bg-background">
       <section className="text-center my-8">
@@ -16,7 +14,8 @@ export default function HelpPage() {
             Let’s get you sorted
           </h1>
           <p className="text-muted text-base xs:text-lg lg:text-xl font-medium max-w-4xl mx-auto">
-           Whatever you need help with, tell us a little more using the form below and we’ll take it from there.
+            Whatever you need help with, tell us a little more using the form
+            below and we’ll take it from there.
           </p>
         </div>
 
@@ -42,7 +41,7 @@ export default function HelpPage() {
                 <h5 className="text-xl xs:text-2xl">Call</h5>
               </div>
               <h5 className="font-semibold text-2xl text-gray-900">
-                +234 800 333 3330
+                +234 903 784  8773
               </h5>
             </div>
 
@@ -52,7 +51,7 @@ export default function HelpPage() {
                 <h5 className="text-xl xs:text-2xl">Email Address</h5>
               </div>
               <h5 className="font-semibold text-2xl text-gray-900">
-                supports@awoofhub.com
+                info@awoofhub.ng
               </h5>
             </div>
           </div>
@@ -60,6 +59,6 @@ export default function HelpPage() {
       </section>
 
       <Footer />
-    </main >
+    </main>
   );
 }

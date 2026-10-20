@@ -41,7 +41,7 @@ export default function HelpPage() {
                 <h5 className="text-xl xs:text-2xl">Call</h5>
               </div>
               <h5 className="font-semibold text-2xl text-gray-900">
-                +234 090 3784 8773
+                +234 903 784  8773
               </h5>
             </div>
 

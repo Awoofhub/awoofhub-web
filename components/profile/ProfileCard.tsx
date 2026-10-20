@@ -43,6 +43,7 @@ export default function ProfileCard({ isOwnProfile, profile, currentUser }: Prop
 
   const isProfileActive = profile.subscriptionState === "active" && (profile.subscriptionPlan === "growth" || profile.subscriptionPlan === "pro");
 
+  const hasActiveSub = profile.subscriptionState === "active";
 
   return (
     <>
@@ -102,7 +103,7 @@ export default function ProfileCard({ isOwnProfile, profile, currentUser }: Prop
                 <RiVerifiedBadgeFill size={15} />
                 Premium
               </Link>
-            ) : isOwnProfile ? (
+            ) : isOwnProfile && !hasActiveSub ? (
               <Link
                 href="/premium-user"
                 className="flex items-center gap-1 bg-blue-500/10 text-blue-500 text-xs font-bold px-2 py-1 rounded-full hover:underline"

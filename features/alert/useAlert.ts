@@ -1,9 +1,9 @@
-import { useBusinessAlert } from "./useBusinessAlert";
 import { useRemoveAlert } from "./useRemoveAlert";
 import { useSetAlert } from "./useSetAlert";
+import { useUserAlert } from "./useUserAlert";
 
 export const useAlert = (id: string) => {
-  const isSubscribed = useBusinessAlert(id);
+  const isSubscribed = useUserAlert(id);
   const { setAlert } = useSetAlert({id});
   const { removeAlert } = useRemoveAlert({id});
 

@@ -16,7 +16,7 @@ export const showToast = (type: ToastType, message: string) => {
   toastVariants[type](message);
 };
 
-export const Toast = () => {
+export function Toast() {
   return (
     <ToastContainer
       position="bottom-right"

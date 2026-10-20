@@ -8,7 +8,7 @@ import { RiInstagramFill } from "react-icons/ri";
 const footerLinks = {
   about: [
     { label: "About Us", href: "/about" },
-    { label: "Advertising Opportunity", href: "/advertising-opportunity" },
+    { label: "Creator Studio", href: "/creator-studio/learn-more" },
     { label: "Help & Support", href: "/help" },
     { label: "FAQs", href: "/faq" },
   ],
@@ -18,9 +18,9 @@ const footerLinks = {
     { label: "Browse Category", href: "/offers" },
   ],
   legal: [
-    { label: "Privacy policy", href: "/policy" },
+    { label: "Privacy policy", href: "/privacy" },
     { label: "Terms of Service", href: "/terms" },
-    { label: "Community Guidelines", href: "/community-guidelines" },
+    { label: "Billing Policy", href: "/billing-policy" },
   ],
 };
 

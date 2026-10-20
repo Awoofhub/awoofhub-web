@@ -8,14 +8,15 @@ interface Props {
   onChange: (value: any) => void;
   compulsory?: boolean;
   label?: string;
+  labelClassName?: string;
   error?: string;
 }
 
-export function FormSelectDropdown({ data, value, onChange, compulsory, label, error }: Props) {
+export function FormSelectDropdown({ data, value, onChange, compulsory, label, error, labelClassName }: Props) {
   return (
     <div className="my-4">
       {label && (
-        <label className="block text-black text-sm md:text-lg font-baloo font-medium mb-1">
+        <label className={`block text-left text-black mb-1 ${labelClassName ?? "text-sm md:text-lg font-baloo"}`}>
           {label}
           {compulsory && <span className="text-red-500"> *</span>}
         </label>

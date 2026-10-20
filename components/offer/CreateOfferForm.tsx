@@ -207,6 +207,7 @@ export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
           render={({ field, fieldState }) => (
             <FormSelectDropdown
               label="Deal Type"
+              labelClassName={LABEL_CLS}
               data={DealTypes}
               value={field.value}
               compulsory={true}

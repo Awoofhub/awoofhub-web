@@ -1,3 +1,4 @@
+"use client";
 import { useMyOffersTabsCount } from "@/features/offers/useMyOffersTabsCount";
 import { MyOffersTabsCount } from "@/types/offer";
 

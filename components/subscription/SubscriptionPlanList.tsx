@@ -117,7 +117,7 @@ export function SubscriptionPlanList() {
           Our Pricing Plans
         </h1>
         <p className="text-sm xs:text-lg lg:text-xl text-muted max-w-3xl xs:px-6 lg:px-0 mx-auto mt-1">
-          Simple, transparent pricing designed for every one. Packages are designed to help you reach more people
+          Simple, transparent pricing designed for every one. Packages are designed to help you reach more people. Automatically renews every month until canceled. You can cancel at any time before your next renewal charge.
         </p>
       </div>
 

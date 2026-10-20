@@ -19,7 +19,7 @@ export default function SubscriptionCheckoutSummary({ title, price, isLoading, o
                     {title} Package
                 </h1>
                 <p className="text-base xs:text-lg text-muted mt-0.5">
-                    Proceed to complete your premium subscription.
+                    Proceed to complete your premium subscription. Automatically renews every month, and you can cancel at any time before your next renewal charge.
                 </p>
             </div>
 

@@ -24,11 +24,12 @@ export default function SubscriptionDashboard({ subscription }: Props) {
         return null;
     }
 
-    const expiresAt = subscription.subscriptionExpiresAt
-    ? new Date(subscription.subscriptionExpiresAt)
-    : new Date();
-    
-    const daysLeft = Math.max(0, differenceInCalendarDays(expiresAt, new Date()));
+
+    const expiresAt = subscription.subscriptionExpiresAt && new Date(subscription.subscriptionExpiresAt) > new Date()
+        ? new Date(subscription.subscriptionExpiresAt)
+        : new Date();
+
+    const daysLeft = differenceInCalendarDays(expiresAt, new Date());
 
     return (
         <div className="text-gray-800 mt-4">

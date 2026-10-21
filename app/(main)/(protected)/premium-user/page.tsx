@@ -25,14 +25,14 @@ export default function SubscriptionPage() {
         Back
       </button>
 
-      {subscription?.status === 'active' ? (
+      {subscription?.status === 'active' || subscription?.status === 'not_renew' ? (
         <SubscriptionDashboard subscription={subscription} />
       ) : subscription?.status === 'failed' ? (
         <SubscriptionPaymentFailed />
       ) : (
         <SubscriptionPlanList />
       )}
-      
+
     </div>
   );
 }

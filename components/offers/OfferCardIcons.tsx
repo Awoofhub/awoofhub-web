@@ -1,5 +1,5 @@
 import { Offer } from "@/types/offer";
-import { Flag, Gift, Globe, MapPin, TrendingDown, Truck } from "lucide-react";
+import { Flag, Gift, Globe, MapPin, Sparkles, TrendingDown, Truck } from "lucide-react";
 import { FaArrowsRotate } from "react-icons/fa6";
 import { LuTags } from "react-icons/lu";
 import { RiCoupon4Line, RiFlashlightLine } from "react-icons/ri";
@@ -27,6 +27,8 @@ export function ValueIconFor({ dealType }: { dealType: Offer["dealType"] }) {
       return <TbCashMoveBack size={VALUE_ICON_SIZE} className={VALUE_ICON_CLASS} />;
     case "freebie":
       return <Gift size={VALUE_ICON_SIZE} className={VALUE_ICON_CLASS} />;
+    case "bonus":
+      return <Sparkles size={VALUE_ICON_SIZE} className={VALUE_ICON_CLASS} />;
     case "discount":
       return <LuTags size={VALUE_ICON_SIZE} className={VALUE_ICON_CLASS} />;
     case "bogo":

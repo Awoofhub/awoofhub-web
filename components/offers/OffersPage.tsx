@@ -37,6 +37,7 @@ const DEAL_TYPES = [
   ["freebie", "Freebie"],
   ["discount", "Discount"],
   ["bogo", "Buy One Get One"],
+  ["bonus", "Bonus"],
   ["promo_code", "Promo Code"],
   ["free_trial", "Free Trial"],
   ["free_delivery", "Free Delivery"],

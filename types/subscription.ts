@@ -8,7 +8,7 @@ export interface Subscription {
   planCode: string;
   amount: number;
   subscriptionExpiresAt: string | null,
-  status: 'pending' | 'active' | 'failed' | 'cancelled',
+  status: 'pending' | 'active' | 'failed' | 'not_renew' | 'cancelled',
   createdAt: string;
 }
 

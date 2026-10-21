@@ -1,7 +1,7 @@
 import { useManageSubscription } from '@/features/subscription/useManageSubscription';
 import { Subscription } from '@/types/subscription';
 import { formatDateShortMonth } from '@/utils/formatDate';
-import { addDays, differenceInCalendarDays } from 'date-fns';
+import { differenceInCalendarDays } from 'date-fns';
 import { ArrowRight, CalendarDays, CircleCheckBig } from 'lucide-react';
 import Link from "next/link";
 import { PiCrown } from 'react-icons/pi';
@@ -24,8 +24,11 @@ export default function SubscriptionDashboard({ subscription }: Props) {
         return null;
     }
 
-    const expiresAt = addDays(new Date(subscription.createdAt), 30);
-    const daysLeft = differenceInCalendarDays(expiresAt, new Date());
+    const expiresAt = subscription.subscriptionExpiresAt
+    ? new Date(subscription.subscriptionExpiresAt)
+    : new Date();
+    
+    const daysLeft = Math.max(0, differenceInCalendarDays(expiresAt, new Date()));
 
     return (
         <div className="text-gray-800 mt-4">

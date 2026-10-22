@@ -8,7 +8,6 @@ import { parsePriceDropValue } from "@/utils/parsePriceDropValue";
 import Rating from "@mui/material/Rating";
 import Image from "next/image";
 import Link from "next/link";
-import { FaRegUser } from "react-icons/fa6";
 import { FiUsers } from "react-icons/fi";
 import { IoAlarmOutline } from "react-icons/io5";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
@@ -25,12 +24,14 @@ export default function OfferCard({ offer }: Props) {
 
   const priceDrop = offer.dealType === "price_drop" ? parsePriceDropValue(offer.value) : null;
 
+  const isOfficial = offer.contributor.role === "staff";
+
   const isPremiumActive = offer.contributor.subscriptionState === "active" && (offer.contributor.subscriptionPlan === "growth" || offer.contributor.subscriptionPlan === "pro");
 
   return (
     <Link
       href={`/offers/${offer.id}`}
-      className="w-full bg-white h-[280px] xxs:h-[290px] xs:h-[280px] md:h-[350px] lg:h-[380px] xl:h-[420px] rounded-lg shadow-sm border border-gray-100 p-1.5 md:p-2 lg:p-3 flex flex-col group hover:shadow-md transition-shadow"
+      className={`w-full bg-white h-[280px] xxs:h-[290px] xs:h-[280px] md:h-[350px] lg:h-[380px] xl:h-[420px] rounded-lg shadow-sm border p-1.5 md:p-2 lg:p-3 flex flex-col group hover:shadow-md transition-shadow ${isOfficial ? "border-primary ring-1 ring-primary" : "border-gray-100"}`}
     >
       {/* Card Image & Badges */}
       <div className="relative h-[60%] md:h-[70%] rounded-md overflow-hidden bg-white">
@@ -81,14 +82,21 @@ export default function OfferCard({ offer }: Props) {
             @{offer.contributor.username}
           </span>
 
-          {isPremiumActive ? (
-            <span className="flex items-center gap-1 text-blue-500 text-[10px] lg:text-xs font-bold">
-              <RiVerifiedBadgeFill className="w-3 h-3 md:w-4 md:h-4" />
+          {isOfficial ? (
+            <span className="flex items-center gap-0.5 md:gap-1 text-[9px] xs:text-[10px] lg:text-xs font-semibold">
+              <Image src="/official-badge.svg" alt="" width={20} height={20} className="w-3 h-3 lg:w-4 lg:h-4" />
+              <span className="bg-linear-to-b from-[#896D02] to-[#EFBF04] bg-clip-text text-transparent">
+                Official
+              </span>
+            </span>
+          ) : isPremiumActive ? (
+            <span className="flex items-center gap-0.5 md:gap-1 text-[#164CC3] text-[9px] xs:text-[10px] lg:text-xs font-bold">
+              <RiVerifiedBadgeFill className="w-3 h-3 lg:w-4 lg:h-4" />
               Premium
             </span>
           ) : (
-            <span className="flex items-center gap-1 text-muted/70 text-[10px] lg:text-xs">
-              <FaRegUser className="w-2 h-2 md:w-2.5 md:h-2.5" />
+            <span className="flex items-center gap-0.5 md:gap-1 text-muted/70 text-[9px] xs:text-[10px] lg:text-xs">
+              <Image src="/user.svg" alt="" width={20} height={20} className="w-2.25 h-2.25 xs:w-2.5 xs:h-2.5 md:w-2.75 md:h-2.75 lg:w-3 lg:h-3" />
               Awoofer
             </span>
           )}
@@ -132,7 +140,7 @@ export default function OfferCard({ offer }: Props) {
             </div>
             {offer.clickCount > 0 && (
               <div className="flex items-center gap-1 text-muted text-[10px] lg:text-xs">
-                <FiUsers size={12} className="text-muted" />
+                <FiUsers size={12} className="text-muted w-2.5 h-2.5 md:w-2.75 md:h-2.75 lg:w-3 lg:h-3"/>
                 <span>
                   {offer.clickCount} {offer.clickCount === 1 ? "grab" : "grabs"}
                 </span>

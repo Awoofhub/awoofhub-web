@@ -73,12 +73,10 @@ export default function CreatorStudioPage() {
 
         <div className="max-w-4xl lg:mt-4 lg:pl-16">
           <h1 className="text-base font-semibold text-[#0F0F10] sm:text-3xl sm:font-bold">
-            Creator Studio — Frequently Asked Questions
+            Learn how Creator Rewards work
           </h1>
           <p className="mt-4 text-xs leading-5 text-[#6B7280] sm:mt-5 sm:text-2xl sm:leading-9 lg:mt-6 lg:text-xl lg:leading-8">
-            Got questions about earning on AwoofHub? Find answers to the most
-            common questions about contributing deals, engagement, rewards, and
-            payouts.
+            We're here to help. Find answers to common questions, get help with your account, or reach out to our team.
           </p>
         </div>
       </section>

@@ -15,7 +15,7 @@ export default function SubscriptionPaymentFailed() {
             </h1>
 
             <p className="text-muted text-base xs:text-lg max-w-md leading-tight mt-2 mb-6">
-                Packages are designed to help you reach more people
+               We couldn't process your payment. Please update your payment method and try again to continue enjoying your subscription.
             </p>
 
             <Button

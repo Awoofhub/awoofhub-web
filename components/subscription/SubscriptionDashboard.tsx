@@ -30,6 +30,7 @@ export default function SubscriptionDashboard({ subscription }: Props) {
         : new Date();
 
     const daysLeft = differenceInCalendarDays(expiresAt, new Date());
+    const isCanceled = subscription.status === 'not_renew' ;
 
     return (
         <div className="text-gray-800 mt-4">
@@ -105,13 +106,12 @@ export default function SubscriptionDashboard({ subscription }: Props) {
                     <div className="bg-white border border-gray-200 rounded-xl p-4 lg:p-6">
                         <h3 className="text-lg lg:text-2xl font-semibold text-gray-900 mb-2">Manage your subscription</h3>
                         <p className="text-xs xs:text-sm lg:text-base text-gray-900 leading-relaxed mb-4 lg:mb-6">
-                            Update your payment method, view billing history or cancel your subscription.
-                        </p>
+                            Keep your payment details up to date or cancel your subscription whenever you want.                        </p>
                         <button
                             onClick={() => manage()}
-                            disabled={isLoading}
-                            className="w-full bg-primary text-white font-baloo font-semibold text-sm xs:text-base py-2 px-4 rounded-md hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer transition">
-                            {isLoading ? "Loading..." : "Manage Subscription"}
+                            disabled={isLoading || isCanceled}
+                            className={`w-full  ${isCanceled ? "bg-[#2e2d2db2]" : "bg-primary"} text-white font-baloo font-semibold text-sm xs:text-base py-2 px-4 rounded-md hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer transition`}>
+                            {isLoading ? "Loading..." : isCanceled ? " Subscription Canceled": "Manage Subscription"}
                         </button>
                     </div>
                     <div className="bg-white border border-gray-200 rounded-xl p-4 [lg:p-6">

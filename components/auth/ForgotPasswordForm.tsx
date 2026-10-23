@@ -4,7 +4,6 @@ import { InputField } from "@/components/form/InputField";
 import { useForgotPassword } from "@/features/auth/useForgotPassword";
 import { EmailData } from "@/types/auth";
 import { Lock, Mail } from "lucide-react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
@@ -77,13 +76,6 @@ export default function ForgotPasswordForm({ onSuccess }: Props) {
                     Go back
                 </Button>
             </form>
-
-            <p className="mt-4 text-sm font-medium text-primary">
-                Remember password?{" "}
-                <Link href="/login" className="font-medium text-primary hover:underline">
-                    Login
-                </Link>
-            </p>
         </div>
     );
 }

@@ -9,13 +9,17 @@ export const resetPassword = async (data: ResetPasswordData): Promise<any> => {
 
 type UseResetPasswordOptions = {
     onSuccess?: () => void;
+    onError?: () => void;
 };
 
-export const useResetPassword = ({ onSuccess }: UseResetPasswordOptions = {}) => {
+export const useResetPassword = ({ onSuccess, onError }: UseResetPasswordOptions = {}) => {
     const { mutate: submit, isPending } = useMutation({
         mutationFn: resetPassword,
         onSuccess: () => {
             onSuccess?.();
+        },
+        onError: () => {
+            onError?.();
         },
     });
     return { submit, isPending };

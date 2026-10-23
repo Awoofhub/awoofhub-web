@@ -1,4 +1,4 @@
-import EmailVerificationPage from "@/components/auth/EmailVerificationPage";
+import ResetPasswordForm from "@/components/auth/ResetPasswordForm";
 import Loading from "@/components/loading/Loading";
 import { Suspense } from "react";
 
@@ -13,7 +13,7 @@ interface FilterProps {
 export default function Page({ searchParams }: FilterProps) {
  return (
     <Suspense fallback={<Loading />}>
-      <EmailVerificationPage searchParams={searchParams} />
+      <ResetPasswordForm searchParams={searchParams} />
     </Suspense>
   );
 }

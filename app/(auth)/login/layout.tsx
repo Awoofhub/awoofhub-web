@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { ReactNode } from "react";
+
+
+export const metadata: Metadata = {
+  title: "Login",
+   description: "Log in to AwoofHub to discover verified deals, exclusive discounts, promos, and freebies from businesses.",
+};
 
 export default function LoginLayout({ children }: { children: ReactNode }) {
 

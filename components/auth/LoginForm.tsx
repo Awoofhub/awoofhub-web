@@ -26,14 +26,6 @@ export const LoginForm = ({ onSuccess }: Props) => {
     window.location.assign(`${API_URL}/v1/auth/google`);
   };
 
-  const statusCode =
-    (login.error as any)?.response?.status ?? (login.error as any)?.statusCode;
-  const isIncorrectPassword = statusCode === 400 || statusCode === 401;
-
-  const errorMessage =
-    (login.error as any)?.response?.data?.message ||
-    (login.error as any)?.message ||
-    "Incorrect password combination";
 
   return (
     <div className="relative md:max-w-[600px] lg:max-w-[800px] xl:max-w-[850px] w-full bg-white py-8 lg:py-10 px-6 md:px-8 lg:px-10 xl:px-12 rounded-xl shadow-md mx-auto">

@@ -2,7 +2,6 @@ import EmailVerificationPage from "@/components/auth/EmailVerificationPage";
 import Loading from "@/components/loading/Loading";
 import { Suspense } from "react";
 
-
 type FilterParams = {
   token?: string;
 };

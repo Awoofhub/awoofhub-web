@@ -1,5 +1,4 @@
 "use client";
-
 import Loading from "@/components/loading/Loading";
 import { useVerifyEmail } from "@/features/auth/useVerifyEmail";
 import { useRouter } from "next/navigation";

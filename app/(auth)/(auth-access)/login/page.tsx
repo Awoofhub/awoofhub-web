@@ -1,7 +1,6 @@
 "use client";
+import { LoginForm } from "@/components/auth/LoginForm";
 import Spinner from "@/components/loading/Loading";
-import { LoginForm } from "@/components/login/LoginForm";
-import { Seo } from "@/components/seo/Seo";
 import { useUser } from "@/features/user/useUser";
 import Image from "next/image";
 import Link from "next/link";
@@ -34,7 +33,6 @@ function Login() {
   if (isCheckingUser || showLoading) {
     return (
       <div className="fixed inset-0 z-50 bg-white">
-        {showLoading && <Seo title="Welcome back!" />}
         <Spinner />
       </div>
     );
@@ -46,7 +44,6 @@ function Login() {
 
   return (
     <div className="w-full min-h-screen  px-4 md:px-0">
-      <Seo title="Sign In" />
       <div className="px-20 pt-10 pb-6 flex justify-center lg:justify-start items-center">
         <Link href="/">
           <Image

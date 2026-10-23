@@ -1,19 +1,28 @@
 "use client";
-import { Seo } from "@/components/seo/Seo";
-import SignupForm from "@/components/signup/SignupForm";
-import { useRouter } from "next/navigation";
+import EmailSent from "@/components/auth/EmailSent";
+import SignupForm from "@/components/auth/SignupForm";
+import SignupWrapper from "@/components/auth/SignupWrapper";
+import { useState } from "react";
+
 
 export default function SignupPage() {
-  const router = useRouter();
-  
-  const onSuccess = (email: string) => {
-    router.push(`/email-sent?email=${encodeURIComponent(email)}`);
+  const [email, setEmail] = useState<string | null>(null);
+
+  const handleSuccess = (userEmail: string) => {
+    setEmail(userEmail);
   };
 
+  if (email) {
+    return (
+      <div className="bg-white min-h-screen">
+        <EmailSent email={email} onReset={() => setEmail(null)} />
+      </div>
+    )
+  }
+
   return (
-    <div className="w-full px-4 md:px-6  lg:px-0">
-      <Seo title="Sign Up" />
-      <SignupForm onSuccess={onSuccess} />
-    </div>
+    <SignupWrapper>
+        <SignupForm onSuccess={handleSuccess} />
+    </SignupWrapper>
   );
 }

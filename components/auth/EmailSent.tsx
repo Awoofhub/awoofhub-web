@@ -1,23 +1,21 @@
 "use client";
 
 import { Button } from "@/components/button/Button";
-import { Seo } from "@/components/seo/Seo";
 import { useResendVerification } from "@/features/auth/useResendVerification";
 import { Mail } from "lucide-react";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 
 const RESEND_COOLDOWN_SECONDS = 5 * 60;
 const STORAGE_KEY = "verifyEmailResendAvailableAt";
 
-function VerifyEmailContent() {
-  const searchParams = useSearchParams();
-  const email = searchParams.get("email");
+interface Props {
+  email: string;
+  onReset: () => void;
+}
 
-  const { submit: resendEmail, isPending: isResending } =
-    useResendVerification();
+export default function EmailSent({ email, onReset }: Props) {
+
   const [secondsLeft, setSecondsLeft] = useState<number>(() => {
     if (typeof window === "undefined") return RESEND_COOLDOWN_SECONDS;
 
@@ -35,6 +33,14 @@ function VerifyEmailContent() {
     return Math.max(0, Math.ceil(remainingMs / 1000));
   });
 
+  const { submit: resendEmail, isPending: isResending } = useResendVerification({
+    onSuccess: () => {
+      const availableAt = Date.now() + RESEND_COOLDOWN_SECONDS * 1000;
+      sessionStorage.setItem(STORAGE_KEY, availableAt.toString());
+      setSecondsLeft(RESEND_COOLDOWN_SECONDS);
+    },
+  });
+
   useEffect(() => {
     if (secondsLeft <= 0) return;
     const interval = setInterval(() => {
@@ -45,16 +51,12 @@ function VerifyEmailContent() {
 
   const handleResend = () => {
     if (!email) return;
-    resendEmail(
-      { email },
-      {
-        onSuccess: () => {
-          const availableAt = Date.now() + RESEND_COOLDOWN_SECONDS * 1000;
-          sessionStorage.setItem(STORAGE_KEY, availableAt.toString());
-          setSecondsLeft(RESEND_COOLDOWN_SECONDS);
-        },
-      },
-    );
+    resendEmail({ email });
+  };
+
+  const handleWrongEmail = () => {
+    sessionStorage.removeItem(STORAGE_KEY);
+    onReset();
   };
 
   const canResend = secondsLeft <= 0;
@@ -63,19 +65,13 @@ function VerifyEmailContent() {
 
   return (
     <div className="max-w-[600px] mx-auto flex flex-col justify-center items-center min-h-[90vh] text-center space-y-6 px-4">
-      <Seo title="Check your inbox" />
-
       <div className="space-y-2">
         <h1 className="text-2xl xs:text-3xl md:text-4xl font-bold text-gray-900">
           Check your <span className="text-primary">inbox!</span>
         </h1>
         <p className="text-sm xxs:text-base xs:text-lg md:text-xl font-medium text-muted">
-          We've sent a verification link to the email{" "}
-          {email ? (
-            <span className="font-semibold text-gray-700">{email}</span>
-          ) : (
-            "your mail"
-          )}
+          <span>We've sent a verification link to the email</span><br />
+          <span className="font-semibold text-gray-700">{email}</span>
         </p>
       </div>
 
@@ -86,41 +82,31 @@ function VerifyEmailContent() {
       </div>
 
       <p className="text-sm xxs:text-base md:text-lg text-gray-900 leading-relaxed max-w-[300px]">
-        Do{" "}
-        <span className="font-semibold text-gray-900">
-          check your spam folder,
-        </span>{" "}
-        <br />
-        sometimes it likes to hide there.
+        Do <span className="font-semibold text-gray-900">check your spam folder,</span><br />
+        <span>
+          sometimes it likes to hide there.
+        </span>
       </p>
       <span className="text-xs xxs:text-sm xs:text-base md:text-lg text-gray-900 leading-relaxed mt-0">
-        Click on the link to complete the verification process.{" "}
+        Click on the link to complete the verification process.
       </span>
       <Button
         type="button"
         isLoading={isResending}
-        isDisabled={!canResend || !email}
+        isDisabled={!canResend}
         onClick={handleResend}
       >
-        {canResend
-          ? "Resend Email"
-          : `Resend in ${minutes}:${seconds.toString().padStart(2, "0")}`}
+        {canResend ? "Resend Email" : `Resend in ${minutes}:${seconds.toString().padStart(2, "0")}`}
       </Button>
 
-      <Link
-        href="/signup"
-        className="inline-flex font-baloo items-center gap-1 text-sm xxs:text-base md:text-lg font-semibold text-primary hover:underline"
+      <button
+        type="button"
+        onClick={handleWrongEmail}
+        className="inline-flex font-baloo items-center gap-1 text-sm xxs:text-base md:text-lg font-semibold text-primary hover:underline cursor-pointer"
       >
         Wrong Email <FaArrowRight size={15} />
-      </Link>
+      </button>
     </div>
   );
 }
 
-export default function VerifyEmailPage() {
-  return (
-    <Suspense fallback={null}>
-      <VerifyEmailContent />
-    </Suspense>
-  );
-}

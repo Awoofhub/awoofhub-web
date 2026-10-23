@@ -4,18 +4,19 @@ import { InputField } from "@/components/form/InputField";
 import { API_URL } from "@/config/constants";
 import { useLogin } from "@/features/auth/useLogin";
 import { LoginData } from "@/types/auth";
-import { LoginFormProps } from "@/types/form-props";
 import { Lock, Mail } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 
-export const LoginForm = ({ onSuccess }: LoginFormProps) => {
+interface Props {
+  onSuccess: () => void;
+};
+
+export const LoginForm = ({ onSuccess }: Props) => {
   const login = useLogin({ onSuccess });
 
-  const { register, handleSubmit, formState, reset } = useForm<LoginData>({
-    mode: "onChange",
-  });
+  const { register, handleSubmit, formState } = useForm<LoginData>({ mode: "onChange", });
 
   const onSubmit = (data: LoginData) => {
     login.submit(data);

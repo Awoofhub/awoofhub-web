@@ -1,9 +1,9 @@
-import { resetPasswordService } from '@/services/auth-service';
+import AuthService from '@/services/auth-service';
 import { ResetPasswordData } from '@/types/auth';
 import { useMutation } from '@tanstack/react-query';
 
 export const resetPassword = async (data: ResetPasswordData): Promise<any> => {
-    const result = await resetPasswordService(data);
+    const result = await AuthService.resetPassword(data);
     return result.data;
 };
 

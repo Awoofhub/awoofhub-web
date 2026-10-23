@@ -6,11 +6,10 @@ import { format } from "date-fns";
 import { Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import { BsThreeDots } from "react-icons/bs";
+import { useState } from "react";
+import { LuMessageSquareText } from "react-icons/lu";
 import { FaRegUser } from "react-icons/fa";
 import { GoDotFill } from "react-icons/go";
-import { MdOutlineChat } from "react-icons/md";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import AlertButton from "../alert/Alert";
 import ChatButton from "../chat/ChatButton";
@@ -23,23 +22,15 @@ interface Props {
 }
 
 export default function ProfileCard({ isOwnProfile, profile, currentUser }: Props) {
-  const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const [isReportOpen, setIsReportOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
   const [isEditOpen, setIsEditOpen] = useState(false);
 
-  useEffect(() => {
-    const handleClickOutside = (e: Event) => {
-      const target = e.target;
-      if (target instanceof Node && dropdownRef.current?.contains(target))
-        return;
-      setIsOpenDropdown(false);
-    };
-    window.addEventListener("click", handleClickOutside);
-    return () => window.removeEventListener("click", handleClickOutside);
-  }, []);
 
   const isViewerActivePro = currentUser?.subscriptionState === "active" && currentUser?.subscriptionPlan === "pro";
+
+  const isOfficial = profile.role === "staff";
+
+  const canMessage = isViewerActivePro || isOfficial;
 
   const isProfileActive = profile.subscriptionState === "active" && (profile.subscriptionPlan === "growth" || profile.subscriptionPlan === "pro");
 
@@ -48,75 +39,58 @@ export default function ProfileCard({ isOwnProfile, profile, currentUser }: Prop
   return (
     <>
       <div className="w-full xs:w-1/3 lg:w-1/4 shrink-0 bg-white rounded-2xl px-4 xs:px-2 xl:px-4 py-6 xl:py-8 shadow-sm border border-gray-100 relative">
-        {!isOwnProfile && (
-          <div ref={dropdownRef} className="absolute right-3 top-3">
-            <button
-              onClick={() => setIsOpenDropdown((prev) => !prev)}
-              className="cursor-pointer pt-4"
-            >
-              <BsThreeDots className="text-black" size={25} />
-            </button>
-            {isOpenDropdown && (
-              <div className="w-32 absolute text-[#E70606] border border-[#E70606] right-0 bg-white rounded-lg overflow-hidden z-50">
-                <button
-                  onClick={() => {
-                    setIsReportOpen(true);
-                    setIsOpenDropdown(false);
-                  }}
-                  className="text-sm w-full flex items-center justify-center gap-2 px-4 py-3 hover:bg-gray-100 font-medium"
-                >
-                  Report User
-                </button>
-              </div>
-            )}
-          </div>
-        )}
-
         <div className="flex flex-col mb-4">
-          <div className={`w-25 h-25 xs:w-20 xs:h-20 md:w-22 md:h-22 lg:w-24 lg:h-24 xl:w-30 xl:h-30 border-2 border-[#FF4D0D] rounded-full overflow-hidden mb-3 ${isOwnProfile ? 'xs:mx-auto' : ''}`}>
-            {profile.profileImageUrl ? (
-              <Image
-                width={200}
-                height={200}
-                unoptimized
-                src={profile.profileImageUrl}
-                alt={profile.name}
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <div className="bg-[#F7C8D5] text-[#B85B80] text-3xl font-semibold flex items-center justify-center w-full h-full">
-                {capitalizeFirstLetter(profile.name)}
-              </div>
-            )}
-          </div>
+          <div className="flex justify-between">
+            <div className="w-25 h-25 xs:w-20 xs:h-20 md:w-22 md:h-22 lg:w-24 lg:h-24 xl:w-30 xl:h-30 border-2 border-[#FF4D0D] rounded-full overflow-hidden mb-3">
+              {profile.profileImageUrl ? (
+                <Image
+                  width={200}
+                  height={200}
+                  unoptimized
+                  src={profile.profileImageUrl}
+                  alt={profile.name}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="bg-[#F7C8D5] text-[#B85B80] text-3xl font-semibold flex items-center justify-center w-full h-full">
+                  {capitalizeFirstLetter(profile.name)}
+                </div>
+              )}
+            </div>
 
-          <div className="flex items-center gap-4 xs:gap-2 lg:gap-4 flex-wrap">
-            <h1 className="text-xl  md:text-lg xl:text-2xl font-semibold text-black">
-              {profile.name}
-            </h1>
-
-            {isProfileActive ? (
-              <Link
-                href="/premium-user"
-                className="flex items-center gap-1 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full hover:underline"
-              >
-                <RiVerifiedBadgeFill size={15} />
-                Premium
-              </Link>
-            ) : isOwnProfile && !hasActiveSub ? (
-              <Link
-                href="/premium-user"
-                className="flex items-center gap-1 bg-blue-500/10 text-blue-500 text-xs font-bold px-2 py-1 rounded-full hover:underline"
-              >
-                <RiVerifiedBadgeFill size={15} />
-                Get Premium
-              </Link>
-            ) : (
-              <span className="flex items-center gap-1 bg-[#FFF0EC] text-primary text-xs font-semibold px-2 py-1 rounded-full">
-                <FaRegUser size={10} /> Awoofer
-              </span>
-            )}
+            {/* Profile badge */}
+            <div >
+              {isOfficial ? (
+                <span className="flex items-center gap-1 bg-linear-to-b from-[#896D02] to-[#EFBF04] text-white text-[10px] lg:text-xs font-semibold py-1 px-2 rounded-full">
+                  <RiVerifiedBadgeFill size={13} />
+                  Official
+                </span>
+              ) : isProfileActive ? (
+                <Link
+                  href="/premium-user"
+                  className="flex items-center gap-1 bg-[#164CC3] text-white text-[10px] lg:text-xs font-semibold px-2 py-1 rounded-full hover:underline"
+                >
+                  <RiVerifiedBadgeFill size={13} />
+                  Premium
+                </Link>
+              ) : isOwnProfile && !hasActiveSub ? (
+                <Link
+                  href="/premium-user"
+                  className="flex items-center gap-1 bg-[#DEE8FB] text-[#164CC3] text-[10px] lg:text-xs font-bold px-2 py-1 rounded-full hover:underline"
+                >
+                  <RiVerifiedBadgeFill size={13} />
+                  Get Premium
+                </Link>
+              ) : (
+                <span className="flex items-center gap-1 bg-[#FFF0EC] text-primary text-[10px] lg:text-xs font-semibold px-2 py-1 rounded-full">
+                  <FaRegUser size={11} /> Awoofer
+                </span>
+              )}
+            </div>
           </div>
+          <h1 className="text-xl  md:text-lg xl:text-2xl font-semibold text-black">
+            {profile.name}
+          </h1>
 
           <div className="flex items-start gap-2 text-black text-base xs:text-sm lg:text-base font-medium mt-1 flex-wrap">
             <span>@{profile.username}</span>
@@ -138,23 +112,25 @@ export default function ProfileCard({ isOwnProfile, profile, currentUser }: Prop
             </p>
           )}
 
-          <p className="text-primary text-sm xs:text-sm font-medium mt-3">
-            Awoofer since {format(new Date(profile.createdAt), "MMMM yyyy")}
-          </p>
+          {!isOfficial && (
+            <p className="text-primary text-sm xs:text-sm font-medium mt-3">
+              Awoofer since {format(new Date(profile.createdAt), "MMMM yyyy")}
+            </p>
+          )}
         </div>
 
         {!isOwnProfile && (
-          isViewerActivePro ? (
+          canMessage ? (
 
             <ChatButton targetUserId={profile.id}>
               <span className="w-full mt-6 mb-4 text-center border border-primary text-primary py-2 rounded-md text-sm lg:text-base font-medium font-baloo hover:bg-gray-50 transition-colors flex items-center justify-center gap-1">
-                <MdOutlineChat className="w-5 h-5" />
+                <LuMessageSquareText className="w-5 h-5" />
                 Message
               </span>
             </ChatButton>
           ) : (
-            <div className="w-full mt-6 mb-4 text-center border border-gray-300 bg-gray-100 text-gray-500 py-2 rounded-md text-sm lg:text-base font-medium font-baloo flex items-center justify-center gap-1 cursor-not-allowed">
-              <MdOutlineChat className="w-5 h-5" />
+            <div className="w-full mt-6 mb-4 text-center border border-gray-300 bg-[#D9D9D980] text-muted py-2 rounded-md text-sm lg:text-base font-medium font-baloo flex items-center justify-center gap-1 cursor-not-allowed">
+              <LuMessageSquareText className="w-5 h-5" />
               Upgrade to Message
             </div>
           )
@@ -202,7 +178,7 @@ export default function ProfileCard({ isOwnProfile, profile, currentUser }: Prop
             <div className="flex justify-between items-center">
               <div>
                 <p className="text-base font-medium font-baloo text-black">
-                  Post alerts
+                  Set alerts
                 </p>
                 <p className="text-xs xs:text-[10px] xl:text-xs text-muted">
                   Get notified when {profile.name.split(" ")[0]} posts.
@@ -210,6 +186,19 @@ export default function ProfileCard({ isOwnProfile, profile, currentUser }: Prop
               </div>
               <AlertButton contributorId={profile.id} />
             </div>
+          </div>
+        )}
+
+        {!isOwnProfile && (
+          <div className="flex text-center items-center justify-center">
+            <button
+              onClick={() => {
+                setIsReportOpen(true);
+              }}
+              className="cursor-pointer text-[#E70606] font-semibold text-xs lg:text-sm underline"
+            >
+              Report this user
+            </button>
           </div>
         )}
       </div >

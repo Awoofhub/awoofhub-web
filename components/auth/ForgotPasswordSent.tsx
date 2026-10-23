@@ -6,7 +6,6 @@ import { Info, Mail } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const RESEND_COOLDOWN_SECONDS = 60;
-const STORAGE_KEY = "forgotPasswordResendAvailableAt";
 
 interface Props {
   email: string;
@@ -15,27 +14,10 @@ interface Props {
 
 export default function ForgotPasswordSent({ email, onReset }: Props) {
 
-  const [secondsLeft, setSecondsLeft] = useState<number>(() => {
-    if (typeof window === "undefined") return RESEND_COOLDOWN_SECONDS;
-
-    const stored = sessionStorage.getItem(STORAGE_KEY);
-    let availableAt: number;
-
-    if (stored) {
-      availableAt = parseInt(stored, 10);
-    } else {
-      availableAt = Date.now() + RESEND_COOLDOWN_SECONDS * 1000;
-      sessionStorage.setItem(STORAGE_KEY, availableAt.toString());
-    }
-
-    const remainingMs = availableAt - Date.now();
-    return Math.max(0, Math.ceil(remainingMs / 1000));
-  });
+  const [secondsLeft, setSecondsLeft] = useState<number>(RESEND_COOLDOWN_SECONDS);
 
   const { submit: resendEmail, isPending: isResending } = useForgotPassword({
     onSuccess: () => {
-      const availableAt = Date.now() + RESEND_COOLDOWN_SECONDS * 1000;
-      sessionStorage.setItem(STORAGE_KEY, availableAt.toString());
       setSecondsLeft(RESEND_COOLDOWN_SECONDS);
     },
   })
@@ -54,7 +36,6 @@ export default function ForgotPasswordSent({ email, onReset }: Props) {
   };
 
   const handleWrongEmail = () => {
-    sessionStorage.removeItem(STORAGE_KEY);
     onReset();
   };
 

@@ -7,7 +7,6 @@ import { useCreateOffer } from "@/features/offers/useCreateOffer";
 import { useOffer } from "@/features/offers/useOffer";
 import { useUpdateOffer } from "@/features/offers/useUpdateOffer";
 import { useUploadSinglePhoto } from "@/features/upload/useUpdateProfilePhoto";
-import { CreateOfferFormProps } from "@/types/form-props";
 import { CreateOfferData } from "@/types/offer";
 import { formatNairaDisplay } from "@/utils/formatNaira";
 import { normalizeUrl } from "@/utils/normalizeUrl";
@@ -56,7 +55,12 @@ type CreateOfferFormData = CreateOfferData & {
   awoofPrice?: number;
 };
 
-export const CreateOfferForm = ({ onSuccess }: CreateOfferFormProps) => {
+
+interface Props {
+    onSuccess: () => void;
+};
+
+export const CreateOfferForm = ({ onSuccess }: Props) => {
   const searchParams = useSearchParams();
   const editOfferId = searchParams.get("editId");
 

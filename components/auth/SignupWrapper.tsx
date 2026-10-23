@@ -1,12 +1,13 @@
-import { ReactNode } from "react";
 import Image from "next/image";
-import SignupHero from "@/components/signup/SignupHero";
+import { ReactNode } from "react";
+import SignupHero from "./SignupHero";
 
-export default function SignupLayout({ children }: { children: ReactNode }) {
+export default function SignupWrapper({ children }: { children: ReactNode }) {
+
   return (
     <div className="mx-auto w-full max-w-[1440px] flex flex-col lg:flex-row">
       <SignupHero />
-     <div className="relative bg-gray-50 w-full min-h-screen lg:min-h-0 pb-12 lg:pb-0 lg:w-1/2 lg:px-8 xl:px-14 flex items-start lg:items-center justify-center">
+      <div className="relative bg-gray-50 w-full min-h-screen lg:min-h-0 pb-12 lg:pb-0 lg:w-1/2 lg:px-8 xl:px-14 flex items-start lg:items-center justify-center">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <Image
             src="/onboarding-oval1.svg"

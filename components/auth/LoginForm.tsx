@@ -4,18 +4,19 @@ import { InputField } from "@/components/form/InputField";
 import { API_URL } from "@/config/constants";
 import { useLogin } from "@/features/auth/useLogin";
 import { LoginData } from "@/types/auth";
-import { LoginFormProps } from "@/types/form-props";
 import { Lock, Mail } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 
-export const LoginForm = ({ onSuccess }: LoginFormProps) => {
+interface Props {
+  onSuccess: () => void;
+};
+
+export const LoginForm = ({ onSuccess }: Props) => {
   const login = useLogin({ onSuccess });
 
-  const { register, handleSubmit, formState, reset } = useForm<LoginData>({
-    mode: "onChange",
-  });
+  const { register, handleSubmit, formState } = useForm<LoginData>({ mode: "onChange", });
 
   const onSubmit = (data: LoginData) => {
     login.submit(data);
@@ -25,14 +26,6 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
     window.location.assign(`${API_URL}/v1/auth/google`);
   };
 
-  const statusCode =
-    (login.error as any)?.response?.status ?? (login.error as any)?.statusCode;
-  const isIncorrectPassword = statusCode === 400 || statusCode === 401;
-
-  const errorMessage =
-    (login.error as any)?.response?.data?.message ||
-    (login.error as any)?.message ||
-    "Incorrect password combination";
 
   return (
     <div className="relative md:max-w-[600px] lg:max-w-[800px] xl:max-w-[850px] w-full bg-white py-8 lg:py-10 px-6 md:px-8 lg:px-10 xl:px-12 rounded-xl shadow-md mx-auto">

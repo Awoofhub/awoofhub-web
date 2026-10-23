@@ -1,25 +1,40 @@
 "use client";
-
 import { Button } from "@/components/button/Button";
 import { InputField } from "@/components/form/InputField";
 import { useResetPassword } from "@/features/auth/useResetPassword";
-import { Spinner } from "@chakra-ui/react";
 import { Lock } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { use, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-export interface ResetPasswordTempData {
-  token: string;
+type ResetPasswordData = {
   password: string;
   confirmPassword: string;
 }
 
-function ResetPassword() {
-  const searchParams = useSearchParams();
-  const token = searchParams.get("token")?.toString();
+type FilterParams = {
+  token?: string;
+};
+
+interface FilterProps {
+  searchParams: Promise<FilterParams>;
+}
+
+export default function ResetPasswordForm({ searchParams }: FilterProps) {
+  const params = use(searchParams);
+  const { token } = params;
 
   const router = useRouter();
+
+  const onSuccess = () => {
+    router.push("/reset-password/success");
+  };
+
+   const onError = () => {
+    router.replace("/forgot-password");
+  };
+
+  const { submit, isPending } = useResetPassword({ onSuccess, onError });
 
   useEffect(() => {
     if (!token) {
@@ -27,19 +42,9 @@ function ResetPassword() {
     }
   }, [token, router]);
 
-  const onSuccess = () => {
-    const redirect = "/reset-password/success";
-    router.push(redirect);
-  };
+  const { register, handleSubmit, formState, getValues } = useForm<ResetPasswordData>();
 
-  const { submit, isPending } = useResetPassword({
-    onSuccess,
-  });
-
-  const { register, handleSubmit, formState, getValues } =
-    useForm<ResetPasswordTempData>();
-
-  const onSubmit = (data: ResetPasswordTempData) => {
+  const onSubmit = (data: ResetPasswordData) => {
     if (!token) return;
     const { confirmPassword, ...resetData } = data;
 
@@ -117,16 +122,3 @@ function ResetPassword() {
   );
 }
 
-export default function ResetPasswordPage() {
-  return (
-    <Suspense
-      fallback={
-        <div className="flex justify-center">
-          <Spinner size="xl" />
-        </div>
-      }
-    >
-      <ResetPassword />
-    </Suspense>
-  );
-}

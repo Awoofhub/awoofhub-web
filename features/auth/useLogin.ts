@@ -1,11 +1,11 @@
 "use client"
-import { loginService } from "@/services/auth-service";
+import AuthService from "@/services/auth-service";
 import { LoginData, LoginResponse } from '@/types/auth';
 import { User } from '@/types/user';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const login = async (data: LoginData): Promise<LoginResponse> => {
-  const result = await loginService(data);
+  const result = await AuthService.login(data);
   return result.data;
 };
 

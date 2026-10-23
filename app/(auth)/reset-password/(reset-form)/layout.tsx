@@ -1,26 +1,9 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 
-export default function PasswordResetLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
-  const pathname = usePathname();
-  const isResetSuccess = pathname?.startsWith("/reset-password/success");
-
-  if (isResetSuccess) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center p-6">
-        {children}
-      </div>
-    );
-  }
-
+export default function ResetFormLayout({  children}: {  children: ReactNode}) {
+ 
   return (
     <div className="relative min-h-screen bg-gray-50 flex flex-col p-6 overflow-hidden">
       <Image

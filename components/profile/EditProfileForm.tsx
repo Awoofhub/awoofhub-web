@@ -4,8 +4,7 @@ import { InputField } from "@/components/form/InputField";
 import { useUploadSinglePhoto } from "@/features/upload/useUpdateProfilePhoto";
 import { useUpdateUser } from "@/features/user/useUpdateUser";
 import { useUser } from "@/features/user/useUser";
-import { EditProfileFormProps } from "@/types/form-props";
-import { UpdateUserData, UsernameCheckResult } from "@/types/user";
+import { UpdateUserData, User, UsernameCheckResult } from "@/types/user";
 import { capitalizeFirstLetter } from "@/utils/truncate";
 import { differenceInDays, parseISO } from "date-fns";
 import Image from "next/image";
@@ -17,7 +16,12 @@ import { LocationAutocomplete } from "../form/LocationAutocomplete";
 import UsernameChecker from "../form/UsernameChecker";
 import { showToast } from "../toast/Toast";
 
-export const EditProfileForm = ({ onSuccess }: EditProfileFormProps) => {
+
+interface Props {
+    onSuccess: (user: User) => void;
+};
+
+export const EditProfileForm = ({ onSuccess }: Props) => {
   const { data: currentUser } = useUser();
   const updateUser = useUpdateUser({ onSuccess });
   const { uploadPhoto, isPending: isUploading } = useUploadSinglePhoto();

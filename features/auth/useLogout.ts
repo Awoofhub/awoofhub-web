@@ -1,9 +1,9 @@
 "use client"
-import { logoutService } from "@/services/auth-service";
+import AuthService from "@/services/auth-service";
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export const logout = async (): Promise<{}> => {
-  const result = await logoutService();
+export const logout = async (): Promise<any> => {
+  const result = await AuthService.logout();
   return result.data;
 };
 

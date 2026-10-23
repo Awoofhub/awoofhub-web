@@ -38,7 +38,6 @@ Reusable UI components grouped by domain.
 - form/ → Form inputs and fields
 - home/ → Landing page sections (hero, trending, categories)
 - protected/ → Auth guard UI wrapper
-- seo/ → SEO/meta helpers
 
 Purpose: UI layer only — no business logic here.
 

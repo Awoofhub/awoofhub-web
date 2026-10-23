@@ -1,6 +1,6 @@
 import { showToast } from "@/components/toast/Toast";
 import { API_URL } from "@/config/constants";
-import { refreshTokenService } from "@/services/auth-service";
+import AuthService from "@/services/auth-service";
 import axios from "axios";
 
 export const apiClient = axios.create({
@@ -32,7 +32,7 @@ apiClient.interceptors.response.use(
                 try {
                     if (!isRefreshing) {
                         isRefreshing = true;
-                        await refreshTokenService();
+                        await AuthService.refreshToken();
                         isRefreshing = false;
                     }
 

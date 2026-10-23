@@ -1,15 +1,24 @@
-import { resendVerificationService } from "@/services/auth-service";
+import AuthService from "@/services/auth-service";
 import { EmailData } from "@/types/auth";
 import { useMutation } from "@tanstack/react-query";
 
-export const resendVerification = async (data: EmailData): Promise<any> => {
-  const result = await resendVerificationService(data);
+export const resendVerificationEmail = async (data: EmailData): Promise<any> => {
+  const result = await AuthService.resendVerificationEmail(data);
   return result.data;
 };
 
-export const useResendVerification = () => {
+type UseResendOptions = {
+  onSuccess?: () => void;
+};
+
+export const useResendVerification = ({ onSuccess }: UseResendOptions = {}) => {
+  
   const { mutate: submit, isPending } = useMutation({
-    mutationFn: resendVerification,
+    mutationFn: resendVerificationEmail,
+    onSuccess: () => {
+      onSuccess?.();
+    },
   });
+
   return { submit, isPending };
 };

@@ -4,7 +4,7 @@ export interface User {
   name: string;
   username: string;
   profileImageUrl: string | null;
-  role: "user" | "business";
+  role: "user" | "business" | "staff";
   bio: string | null;
   address: string | null;
   website: string | null;

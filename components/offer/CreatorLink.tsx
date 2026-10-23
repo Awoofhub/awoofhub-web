@@ -13,6 +13,8 @@ interface Props {
 
 export default function CreatorLink({ offer, variant = "top" }: Props) {
 
+  const isOfficial = offer.contributor.role === "staff";
+
   const isPremiumActive = offer.contributor.subscriptionState === "active" && (offer.contributor.subscriptionPlan === "growth" || offer.contributor.subscriptionPlan === "pro");
 
   if (variant === "card") {
@@ -42,14 +44,19 @@ export default function CreatorLink({ offer, variant = "top" }: Props) {
             <span className="font-semibold font-baloo text-black text-sm lg:text-lg hover:underline">
               {offer.contributor.name}
             </span>
-    
-            {isPremiumActive ? (
-              <span className="flex items-center gap-1 bg-blue-600 text-white text-[10px] lg:text-xs font-bold px-2.5 py-1 lg:py-2 rounded-full shrink-0">
-                <RiVerifiedBadgeFill size={15} />
+
+            {isOfficial ? (
+              <span className="flex items-center gap-1 bg-linear-to-b from-[#896D02] to-[#EFBF04] text-white text-[10px] lg:text-xs font-semibold px-2 py-1  rounded-full shrink-0">
+                <RiVerifiedBadgeFill size={13} />
+                Official
+              </span>
+            ) : isPremiumActive ? (
+              <span className="flex items-center gap-1 bg-[#164CC3] text-white text-[10px] lg:text-xs font-semibold px-2 py-1  rounded-full shrink-0">
+                <RiVerifiedBadgeFill size={13} />
                 Premium
               </span>
             ) : (
-              <span className="flex items-center gap-1 bg-[#FFF0EC] text-primary text-[10px] lg:text-xs font-semibold px-2.5 py-1 lg:py-2 rounded-full shrink-0">
+              <span className="flex items-center gap-1 bg-[#FFF0EC] text-primary text-[10px] lg:text-xs font-semibold px-2 py-1 rounded-full shrink-0">
                 <FaRegUser size={11} /> Awoofer
               </span>
             )}

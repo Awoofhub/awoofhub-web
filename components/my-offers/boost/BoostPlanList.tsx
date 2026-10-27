@@ -10,10 +10,10 @@ const packages = [
         id: 'standard',
         name: 'Standard',
         price: 5000,
-        duration: '7 days',
+        duration: '14 days',
         description: 'Great for trying out',
         features: [
-            '7 days duration',
+            '14 days duration',
             'Boost your visibility',
             'Basic targeting'
         ]
@@ -22,7 +22,7 @@ const packages = [
         id: 'turbo',
         name: 'Turbo',
         price: 10000,
-        duration: '14 days',
+        duration: '1 month',
         description: 'More reach, better results',
         features: [
             '14 days duration',
@@ -37,7 +37,7 @@ const packages = [
         duration: '3 months',
         description: 'Maximum visibility',
         features: [
-            '3 month duration',
+            '3 months duration',
             'Boost your visibility',
             'Advanced targeting + priority support'
         ]

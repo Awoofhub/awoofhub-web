@@ -85,11 +85,11 @@ const faqs = [
         </p>
         <p className="text-muted text-sm md:text-base font-medium">
           <strong className="text-black">Standard Package — ₦5,000:</strong>{" "}
-        Includes 7 days of promotion.
+        Includes 14 days of promotion.
         </p>
         <p className="text-muted text-sm md:text-base font-medium">
           <strong className="text-black">Turbo Package — ₦10,000:</strong>{" "}
-         Includes 14 days of promotion.
+         Includes 1 month of promotion.
         </p>
         <p className="text-muted text-sm md:text-base font-medium">
           <strong className="text-black">

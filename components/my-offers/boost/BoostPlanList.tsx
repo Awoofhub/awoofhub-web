@@ -25,7 +25,7 @@ const packages = [
         duration: '1 month',
         description: 'More reach, better results',
         features: [
-            '14 days duration',
+            '1 month duration',
             'Boost your visibility',
             'Advanced targeting'
         ]

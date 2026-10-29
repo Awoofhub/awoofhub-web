@@ -47,7 +47,7 @@ const faqs = [
           different levels of access to premium features and creator tools.
         </p>
         <p className="text-muted text-sm md:text-base font-medium">
-          <strong className="text-black">Starter Plan — ₦5,000/month:</strong>{" "}
+          <strong className="text-black">Starter Plan — ₦2,000/month:</strong>{" "}
           Designed for users who need basic premium features. It includes: Up to
           100 wishlist slots, the ability to set alerts for deal posters, 30
           days of subscription access, and up to 2 business-opened DMs per
@@ -55,7 +55,7 @@ const faqs = [
           ability to open direct messages.
         </p>
         <p className="text-muted text-sm md:text-base font-medium">
-          <strong className="text-black">Growth Plan — ₦10,000/month:</strong>{" "}
+          <strong className="text-black">Growth Plan — ₦5,000/month:</strong>{" "}
           This is designed for users who want more premium features and better
           engagement opportunities. It includes all Starter Plan benefits, a
           blue check mark, the ability to open direct messages, a monthly
@@ -63,7 +63,7 @@ const faqs = [
         </p>
         <p className="text-muted text-sm md:text-base font-medium">
           <strong className="text-black">
-            Professional Plan — ₦20,000/month:
+            Professional Plan — ₦7,500/month:
           </strong>{" "}
           This plan is designed for users who want access to all creator tools
           and expanded platform features. It includes all benefits available in

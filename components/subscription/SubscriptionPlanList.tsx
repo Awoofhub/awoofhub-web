@@ -9,7 +9,7 @@ export const SUBSCRIPTION_PLANS: SubscriptionPlanConfig[] = [
   {
     id: 'starter',
     title: 'Starter',
-    price: 5000,
+    price: 2000,
     description: 'Get the basic premium features. Packages are designed to help you reach more people',
     features: [
       {
@@ -34,7 +34,7 @@ export const SUBSCRIPTION_PLANS: SubscriptionPlanConfig[] = [
   {
     id: 'growth',
     title: 'Growth',
-    price: 10000,
+    price: 5000,
     recommended: true,
     description: 'More reach, better results. Packages are designed to help you reach more people',
     features: [
@@ -66,7 +66,7 @@ export const SUBSCRIPTION_PLANS: SubscriptionPlanConfig[] = [
   {
     id: 'pro',
     title: 'Professional',
-    price: 20000,
+    price: 7500,
     description: 'Get full access to all creators tools. Packages are designed to help you reach more people',
     features: [
       {

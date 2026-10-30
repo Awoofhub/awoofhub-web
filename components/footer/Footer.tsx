@@ -106,7 +106,7 @@ export default function Footer() {
               className="w-40 h-auto"
             />
             <p className="text-sm mt-2 mb-6 max-w-xs font-baloo">
-              The marketplace where deals find customers
+              Where Every Deal Feels Like a Win.
             </p>
             <SocialIcons />
           </div>
@@ -173,7 +173,7 @@ export default function Footer() {
                 className="w-40 h-auto"
               />
               <p className="text-sm mt-2 mb-6 max-w-xs font-baloo">
-                The marketplace where deals find customers
+                Where Every Deal Feels Like a Win.
               </p>
               <SocialIcons />
             </div>
@@ -236,7 +236,7 @@ export default function Footer() {
               className="w-40 h-auto"
             />
             <p className="text-sm mt-2 mb-6 max-w-xs font-baloo">
-              The marketplace where deals find customers
+              Where Every Deal Feels Like a Win.
             </p>
             <SocialIcons />
           </div>

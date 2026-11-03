@@ -11,7 +11,7 @@ export default function ContributorPage() {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="max-w-[1440px] mx-auto p-2 md:p-6 mb-10">
+    <div className="pt-6 px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto mb-24 lg:mb-10">
       {subscription?.status === 'active' ? (
         <CreatorSubscribed />
       ) : (

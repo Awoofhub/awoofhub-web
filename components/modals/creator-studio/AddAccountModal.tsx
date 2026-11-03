@@ -55,9 +55,9 @@ export default function AddAccountModal({ isOpen, onClose, getBankName }: Props)
         <>
             {!isDone && (
                 <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4" onClick={handleClose}>
-                    <div className="bg-white rounded-xl px-6 py-6 max-w-md w-full" onClick={(e) => e.stopPropagation()}>
+                    <div className="bg-white rounded-xl px-6 py-6 max-w-lg w-full" onClick={(e) => e.stopPropagation()}>
 
-                        <h3 className="font-bold text-lg text-gray-900 mb-4 text-center">Verify Bank Account</h3>
+                        <h3 className="font-semibold text-xl xs:text-2xl text-gray-900 mb-4 text-center">Verify Bank Account</h3>
 
                         <form onSubmit={handleSubmit(onSubmit)}>
 
@@ -67,8 +67,9 @@ export default function AddAccountModal({ isOpen, onClose, getBankName }: Props)
                                 rules={{ required: "Please select a bank" }}
                                 render={({ field, fieldState }) => (
                                     <BankSearch
-                                        label="Select Bank"
+                                        label="Bank Name"
                                         compulsory={true}
+                                        labelClassName="font-semibold font-baloo text-base xs:text-lg"
                                         placeholder="Search for your bank..."
                                         value={field.value}
                                         onBankSelect={(code) => field.onChange(code)}
@@ -79,6 +80,7 @@ export default function AddAccountModal({ isOpen, onClose, getBankName }: Props)
 
                             <InputField
                                 label="Account Number"
+                                labelClassName="font-semibold font-baloo text-base xs:text-lg"
                                 placeholder="0123456789"
                                 compulsory={true}
                                 type="text"

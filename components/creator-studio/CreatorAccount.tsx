@@ -16,13 +16,6 @@ export default function CreatorAccount({ account, getBankName }: Props) {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
-  useEffect(() => {
-    window.addEventListener("click", handleClickOutSide);
-    return () => {
-      window.removeEventListener("click", handleClickOutSide);
-    };
-  }, []);
-
   const handleClickOutSide = (e: Event) => {
     const target = e.target;
     if (target instanceof Node && dropdownRef.current?.contains(target)) {
@@ -30,6 +23,13 @@ export default function CreatorAccount({ account, getBankName }: Props) {
     }
     setOpen(false);
   };
+
+  useEffect(() => {
+    window.addEventListener("click", handleClickOutSide);
+    return () => {
+      window.removeEventListener("click", handleClickOutSide);
+    };
+  }, []);
 
   const toggleDropdown = () => {
     setOpen((prev) => !prev);
@@ -46,19 +46,26 @@ export default function CreatorAccount({ account, getBankName }: Props) {
         <p className="text-muted text-base xs:text-lg">Manage the bank account you use to receive payouts</p>
       </div>
 
-      <div className="p-4 xs:px-4 xs:py-6 bg-white  rounded-xl shadow-sm overflow-hidden">
+      <div className="p-4 xs:px-4 xs:py-6 bg-white  rounded-xl shadow-sm ">
         <div className="flex justify-between items-center bg-[#F3F3F5] rounded-2xl px-4 py-3">
           <h3 className="text-base xs:text-lg uppercase font-semibold text-gray-900">Account</h3>
           <div
             ref={dropdownRef}
             onClick={() => toggleDropdown()}
-            className="text-black hover:text-gray-700 rounded-full hover:bg-gray-100 transition-colors"
+            className="cursor-pointer relative text-black hover:text-gray-700 rounded-full hover:bg-gray-100 transition-colors"
             aria-label="Account Options"
           >
             <MoreVertical size={20} />
             {open && (
-              <div onClick={() => setIsDeleteOpen(true)} className="absolute right-0 top-full z-50 mt-1 whitespace-nowrap rounded-xl px-4 py-2 bg-white border border-red-500 text-base font-medium text-red-500 flex items-center gap-1 shadow-sm cursor-pointer">
-                <RiDeleteBinLine /> delete
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsDeleteOpen(true);
+                  setOpen(false);
+                }}
+                className="absolute right-0 top-full z-50 mt-2 whitespace-nowrap rounded-xl px-6 py-2 bg-white font-baloo  text-base font-medium text-red-500 flex items-center gap-1 shadow-sm cursor-pointer"
+              >
+                <RiDeleteBinLine /> Delete
               </div>
             )}
           </div>

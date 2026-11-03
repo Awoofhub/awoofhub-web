@@ -33,7 +33,7 @@ export default function DeleteAccountModal({ accountId, isOpen, onClose }: Props
 
     return (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4" onClick={handleClose}>
-            <div className="bg-white rounded-xl px-6 py-10 max-w-md w-full text-center" onClick={(e) => e.stopPropagation()}>
+            <div className="bg-white rounded-xl px-4 xs:px-6 py-10 max-w-md w-full text-center" onClick={(e) => e.stopPropagation()}>
                 <Image src="/reject.png" width={200} height={200} alt='' priority className="mx-auto w-[150px]" />
 
                 <h3 className="font-bold text-xl xs:text-2xl text-gray-900 mb-4">Confirm that you are about to delete this account</h3>
@@ -50,7 +50,7 @@ export default function DeleteAccountModal({ accountId, isOpen, onClose }: Props
                             Deleting...
                         </>
                     ) : (
-                        'Delete'
+                        'Confirm Delete'
                     )}
                 </button>
 

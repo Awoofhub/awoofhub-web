@@ -12,18 +12,18 @@ export default function PaymentSettingsPage() {
   const router = useRouter();
   const { getBankName, isLoading: isBanksLoading } = useBankName();
   const { data: account, isLoading } = usePayoutAccount();
-  
+
   if (isLoading || isBanksLoading) return <Loading />;
   return (
-    <div className="max-w-[1440px] mx-auto p-2 md:p-6 mb-10">
-      <button
-        type="button"
-        onClick={() => router.back()}
-        className="flex items-center gap-1 text-sm font-bold hover:text-gray-700"
-      >
-        <ChevronLeft className="h-4 w-4" />
-        Back
-      </button>
+    <div className="pt-6 px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto mb-24 lg:mb-10">
+      <div className="flex gap-2 items-start ">
+        <button
+          type="button"
+          onClick={() => router.back()}
+          className="cursor-pointer flex items-center text-black font-baloo font-semibold hover:text-gray-800 mb-2 transition-colors">
+          <ChevronLeft className="w-4 h-4 mr-2" /> Back
+        </button>
+      </div>
 
       {account ? (
         <CreatorAccount account={account} getBankName={getBankName} />

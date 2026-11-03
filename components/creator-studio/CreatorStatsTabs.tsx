@@ -1,4 +1,3 @@
-
 interface Props {
     activeTab: string;
     onChange: (tab: string) => void;
@@ -7,25 +6,21 @@ interface Props {
 
 export default function CreatorStatsTabs({ tabs, activeTab, onChange }: Props) {
     return (
-        <div className="overflow-hidden rounded-2xl bg-gray-100">
-            <div className="flex gap-2 max-w-2xl">
+        <div className="w-full overflow-x-auto rounded-2xl bg-[#59585814] px-2 py-1.5 no-scrollbar">
+            <div className="flex min-w-max gap-2 md:min-w-0">
                 {tabs.map((tab) => {
                     const isActive = activeTab === tab.value;
                     return (
                         <button
                             key={tab.value}
+                            type="button"
                             onClick={() => onChange(tab.value)}
-                            className={`relative flex-1 cursor-pointer py-3 text-xs md:text-sm font-medium text-gray-500 transition-colors duration-200 ${isActive ? "text-gray-900" : ""
+                            className={`min-w-[110px] shrink-0 cursor-pointer whitespace-nowrap rounded-xl px-4 py-2 lg:py-3 font-semibold transition-colors duration-200 md:min-w-0 md:flex-1 ${isActive
+                                ? "bg-white text-primary shadow-sm"
+                                : "text-muted hover:text-black"
                                 }`}
                         >
                             {tab.label}
-
-                            <span
-                                className={`absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-primary transition-all duration-200 ${isActive
-                                        ? "scale-x-100 opacity-100"
-                                        : "scale-x-0 opacity-0"
-                                    }`}
-                            />
                         </button>
                     );
                 })}

@@ -32,7 +32,7 @@ export default function ProfileCard({ isOwnProfile, profile, currentUser }: Prop
 
   const canMessage = isViewerActivePro || isOfficial;
 
-  const isProfileActive = profile.subscriptionState === "active" && (profile.subscriptionPlan === "growth" || profile.subscriptionPlan === "pro");
+  const isProfileActive = profile.subscriptionState === "active" && (profile.subscriptionPlan === "growth" || profile.subscriptionPlan === "pro" || (isOwnProfile && profile.subscriptionPlan === "starter"));
 
   const hasActiveSub = profile.subscriptionState === "active";
 

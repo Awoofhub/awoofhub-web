@@ -1,4 +1,4 @@
-import { useCreatorMonthlyClicks } from "@/features/creator-studio/useCreatorMonthlyClicks";
+import { useCreatorMonthlyGrabs } from "@/features/creator-studio/useCreatorMonthlyGrabs";
 import { useMediaQuery } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import { Bar, BarChart, Rectangle, ResponsiveContainer, XAxis, YAxis } from "recharts";
@@ -77,10 +77,10 @@ function MonthTick({ x, y, payload }: MonthTickProps) {
     );
 }
 
-export default function CreatorClicksChart() {
+export default function CreatorGrabsChart() {
     const [isMobile] = useMediaQuery("(max-width: 500px)");
     const [isTablet] = useMediaQuery("(min-width: 501px) and (max-width: 1023px)");
-    const { data } = useCreatorMonthlyClicks();
+    const { data } = useCreatorMonthlyGrabs();
 
     const scrollRef = useRef<HTMLDivElement>(null);
     const [indicator, setIndicator] = useState({ scrollable: false, width: 100, left: 0 });
@@ -160,10 +160,10 @@ export default function CreatorClicksChart() {
     return (
         <div className="bg-white p-4 xs:p-6 rounded-xl flex flex-col shadow-sm flex-1 min-w-72">
             <p className="text-sm lg:text-base font-semibold uppercase text-primary">
-                Clicks over time
+                Grabs over time
             </p>
             <p className="font-medium text-xs lg:text-sm text-muted mb-4">
-                Monthly click activity for your published Awoofs
+                Monthly grab activity for your published Awoofs
             </p>
 
             <div className="flex">

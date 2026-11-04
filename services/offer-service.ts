@@ -17,7 +17,7 @@ async function offers(search: string, category: string, minRating: number, creat
 
 
 async function grab(id: string): Promise<ApiResponse<any>> {
-  const res: ApiResponse<any> = await apiClient.post(`/clicks/offer/${id}`)
+  const res: ApiResponse<any> = await apiClient.post(`/grabs/offer/${id}`)
 
   return res;
 }

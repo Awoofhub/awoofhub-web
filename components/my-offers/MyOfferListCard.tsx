@@ -77,7 +77,7 @@ export default function MyOfferListCard({ offer }: Props) {
               <div className="flex items-center gap-1">
                 <FiUsers size={12} />
                 <span className="text-[8px] md:text-xs">
-                  {offer.clickCount} grabs
+                  {offer.grabCount} grabs
                 </span>
               </div>
               <FiArrowUpRight color="#FE4F04" size={16} />

@@ -3,9 +3,7 @@
 import SubscriptionSuccessModal from '@/components/modals/subscription/SubscriptionSuccessModal';
 import PaymentSecureNotice from '@/components/subscription/PaymentSecureNotice';
 import SubscriptionCheckoutSummary from '@/components/subscription/SubscriptionCheckoutSummary';
-import SubscriptionCheckoutSummarySkeleton from '@/components/subscription/SubscriptionCkeckoutSummarySkeleton';
 import SubscriptionPlanBenefits from '@/components/subscription/SubscriptionPlanBenefits';
-import SubscriptionPlanBenefitsSkeleton from '@/components/subscription/SubscriptionPlanBenefitsSkeleton';
 import { SUBSCRIPTION_PLANS } from '@/components/subscription/SubscriptionPlanList';
 import { useSubscribe } from '@/features/subscription/useSubscribe';
 import { useSubscription } from '@/features/subscription/useSubscription';
@@ -13,6 +11,8 @@ import { openPayment } from '@/lib/paystack';
 import { ChevronLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { use, useEffect, useState } from 'react';
+import Loading from '@/components/loading/Loading';
+
 
 interface Props {
     params: Promise<{ plan: string }>;
@@ -58,15 +58,7 @@ export default function SubscriptionCheckoutPage({ params }: Props) {
         );
     }
 
-    if (isSubscriptionLoading || (isSubscribed && !isSuccessModalOpen)) {
-        return (
-            <div className="py-4 xs:py-6 px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto mb-24 lg:mb-10 flex flex-col gap-6">
-                <div className="h-5 w-16 rounded bg-gray-200 animate-pulse" />
-                <SubscriptionCheckoutSummarySkeleton />
-                <SubscriptionPlanBenefitsSkeleton />
-            </div>
-        );
-    }
+    if (isSubscriptionLoading ) return  <Loading />  ; 
 
     const formattedPrice = `₦${plan.price.toLocaleString()}`;
 
@@ -80,6 +72,10 @@ export default function SubscriptionCheckoutPage({ params }: Props) {
         setIsSuccessModalOpen(false);
         router.replace('/premium-user');
     };
+    
+    if (isSubscribed) {
+        return null;
+    }
 
     return (
         <div className="py-4 xs:py-6 px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto mb-24 lg:mb-10 flex flex-col gap-6">

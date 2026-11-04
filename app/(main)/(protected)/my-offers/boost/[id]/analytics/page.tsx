@@ -69,8 +69,8 @@ export default function BoostAnalyticsPage({ params }: Props) {
             </div>
             <BoostOfferCard offer={boostData.offer} />
             <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3 mt-6">
-                <BoostStatsCard label="Clicks" value={boostData.stats.comments} iconSrc="/clicks.svg" iconBg="bg-[#006400]/20" />
-                <BoostStatsCard label="Comment" value={boostData.stats.clicks} iconSrc="/comment.svg" iconBg="bg-[#FFD553]/20" />
+                <BoostStatsCard label="Grabs" value={boostData.stats.grabs} iconSrc="/grabs.svg" iconBg="bg-[#006400]/20" />
+                <BoostStatsCard label="Comment" value={boostData.stats.comments} iconSrc="/comment.svg" iconBg="bg-[#FFD553]/20" />
                 <BoostStatsCard label="Shares" value={boostData.stats.shares} iconSrc="/share.svg" iconBg="bg-[#FE7B9C]/20" />
                 <BoostStatsCard label="Impressions" value={boostData.stats.impressions} iconSrc="/eye.svg" iconBg="bg-[#8280FF]/20" />
             </div>

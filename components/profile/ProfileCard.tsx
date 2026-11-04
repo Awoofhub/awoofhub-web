@@ -7,9 +7,9 @@ import { Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { LuMessageSquareText } from "react-icons/lu";
 import { FaRegUser } from "react-icons/fa";
 import { GoDotFill } from "react-icons/go";
+import { LuMessageSquareText } from "react-icons/lu";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import AlertButton from "../alert/Alert";
 import ChatButton from "../chat/ChatButton";
@@ -32,7 +32,7 @@ export default function ProfileCard({ isOwnProfile, profile, currentUser }: Prop
 
   const canMessage = isViewerActivePro || isOfficial;
 
-  const isProfileActive = profile.subscriptionState === "active" && (profile.subscriptionPlan === "growth" || profile.subscriptionPlan === "pro");
+  const isProfileActive = profile.subscriptionState === "active" && (profile.subscriptionPlan === "growth" || profile.subscriptionPlan === "pro" || (isOwnProfile && profile.subscriptionPlan === "starter"));
 
   const hasActiveSub = profile.subscriptionState === "active";
 
@@ -147,10 +147,10 @@ export default function ProfileCard({ isOwnProfile, profile, currentUser }: Prop
           </div>
           <div className="flex justify-between px-4 py-6 border border-muted/10 shadow-lg rounded-md items-center">
             <span className="text-muted text-sm xs:text-xs lg:text-sm font-semibold">
-              OFFER CLICKS
+              OFFER GRABS
             </span>
             <span className="font-bold text-lg text-black">
-              {profile.offerClicks ?? 0}
+              {profile.offerGrabs ?? 0}
             </span>
           </div>
         </div>

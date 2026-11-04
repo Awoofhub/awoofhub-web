@@ -86,7 +86,7 @@ export interface Offer {
   endDate: string;
   avgRating: number;
   reviewCount: number;
-  clickCount: number;
+  grabCount: number;
   isTrending: boolean;
   isBoosted: boolean;
   ratingDistribution: any;

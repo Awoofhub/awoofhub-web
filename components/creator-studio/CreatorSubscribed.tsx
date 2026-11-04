@@ -1,5 +1,6 @@
 "use client";
 
+import type { LucideIcon } from "lucide-react";
 import {
   ArrowRight,
   BarChart3,
@@ -9,7 +10,6 @@ import {
   MoreHorizontal,
   Wallet,
 } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -26,7 +26,7 @@ interface MenuItem {
 const MENU_ITEMS: MenuItem[] = [
   {
     title: "Analytics",
-    description: "Track views, saves, clicks, and engagements across your Awoofs",
+    description: "Track views, saves, grabs, and engagements across your Awoofs",
     linkLabel: "View Analytics",
     href: "/creator-studio/analytics",
     icon: BarChart3,

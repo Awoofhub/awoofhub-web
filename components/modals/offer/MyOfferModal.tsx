@@ -70,7 +70,7 @@ export default function MyOfferModal({ offer, isOpen, onClose }: Props) {
                 <div className="flex items-center justify-center gap-1 md:gap-2">
                   <FiUsers size={12} className="text-primary/60 w-2.5 md:w-3" />
                   <span className="font-baloo text-[10px] md:text-sm lg:text-base font-medium text-muted/80">
-                    {offer.clickCount} grabs
+                    {offer.grabCount} grabs
                   </span>
                 </div>
               )}

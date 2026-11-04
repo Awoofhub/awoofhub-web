@@ -11,7 +11,7 @@ export interface User {
   createdAt: string;
   updatedAt: string;
   numOfDealPosted?: number;
-  offerClicks?: number;
+  offerGrabs?: number;
   usernameChangeLockedUntil: string;
   subscriptionPlan: 'starter' | 'growth' | 'pro' | null,
   subscriptionState: "inactive" | "active" | "payment_failed",

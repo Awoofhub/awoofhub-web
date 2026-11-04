@@ -30,7 +30,7 @@ export default function CreatorTopOffers() {
         );
     }
 
-    const topClickedOffers = data?.topClickedOffers || [];
+    const topGrabbedOffers = data?.topGrabbedOffers || [];
     const topSharedOffers = data?.topSharedOffers || [];
 
     return (
@@ -90,7 +90,7 @@ export default function CreatorTopOffers() {
                     <p className="text-muted text-xs lg:text-sm font-medium mb-1">These awoofs were claimed and loved the most</p>
                 </div>
 
-                {topClickedOffers.length === 0 ? (
+                {topGrabbedOffers.length === 0 ? (
                     <div className="px-6 py-8 text-center">
                         <p className="text-sm xs:text-base font-semibold text-gray-700">
                             No offers grabbed yet
@@ -101,7 +101,7 @@ export default function CreatorTopOffers() {
                     </div>
                 ) : (
                     <div className="divide-y divide-[#E5E7EB]">
-                        {topClickedOffers.map((item) => (
+                        {topGrabbedOffers.map((item) => (
                             <div
                                 key={item.id}
                                 className="flex items-center justify-between py-4 px-4 xs:px-8 hover:bg-gray-50/50 transition-colors"
@@ -122,7 +122,7 @@ export default function CreatorTopOffers() {
                                     </div>
                                 </div>
                                 <div className="text-right">
-                                    <span className="text-sm font-semibold text-gray-900">{item.clicks}</span>
+                                    <span className="text-sm font-semibold text-gray-900">{item.grabs}</span>
                                     <p className="text-xs text-muted">Grabs</p>
                                 </div>
                             </div>

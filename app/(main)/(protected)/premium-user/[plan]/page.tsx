@@ -6,10 +6,13 @@ import SubscriptionCheckoutSummary from '@/components/subscription/SubscriptionC
 import SubscriptionPlanBenefits from '@/components/subscription/SubscriptionPlanBenefits';
 import { SUBSCRIPTION_PLANS } from '@/components/subscription/SubscriptionPlanList';
 import { useSubscribe } from '@/features/subscription/useSubscribe';
+import { useSubscription } from '@/features/subscription/useSubscription';
 import { openPayment } from '@/lib/paystack';
 import { ChevronLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { use, useState } from 'react';
+import { use, useEffect, useState } from 'react';
+import Loading from '@/components/loading/Loading';
+
 
 interface Props {
     params: Promise<{ plan: string }>;
@@ -20,6 +23,16 @@ export default function SubscriptionCheckoutPage({ params }: Props) {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+    const { data: subscription, isLoading: isSubscriptionLoading } = useSubscription();
+
+    const isSubscribed =
+        subscription?.status === 'active' || subscription?.status === 'not_renew';
+
+    useEffect(() => {
+        if (!isSubscriptionLoading && isSubscribed && !isSuccessModalOpen) {
+            router.replace('/premium-user');
+        }
+    }, [isSubscriptionLoading, isSubscribed, isSuccessModalOpen, router]);
 
     const subscribe = useSubscribe({
         onSuccess: (data) => {
@@ -45,6 +58,8 @@ export default function SubscriptionCheckoutPage({ params }: Props) {
         );
     }
 
+    if (isSubscriptionLoading ) return  <Loading />  ; 
+
     const formattedPrice = `₦${plan.price.toLocaleString()}`;
 
     const onSubmit = () => {
@@ -57,6 +72,10 @@ export default function SubscriptionCheckoutPage({ params }: Props) {
         setIsSuccessModalOpen(false);
         router.replace('/premium-user');
     };
+    
+    if (isSubscribed) {
+        return null;
+    }
 
     return (
         <div className="py-4 xs:py-6 px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1440px] mx-auto mb-24 lg:mb-10 flex flex-col gap-6">

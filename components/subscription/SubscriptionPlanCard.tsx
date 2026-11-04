@@ -33,7 +33,6 @@ export default function SubscriptionPlanCard({
 
   const onSubmit = (e: React.MouseEvent) => {
     e.stopPropagation();
-    
     if (!selected) {
       onSelect();
     } else {

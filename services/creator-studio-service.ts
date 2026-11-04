@@ -1,6 +1,6 @@
 import { apiClient } from "@/lib/api-client";
 import { ApiResponse } from "@/types/api-response";
-import { AccountData, Bank, BankAccount, CreatorMonthlyClicks, CreatorStats, CreatorTopOffers, Payout, VerifiedAccount } from "@/types/creator-studio";
+import { AccountData, Bank, BankAccount, CreatorMonthlyGrabs, CreatorStats, CreatorTopOffers, Payout, VerifiedAccount } from "@/types/creator-studio";
 
 async function stats(dateFilter?: string): Promise<ApiResponse<CreatorStats>> {
   const res: ApiResponse<CreatorStats> = await apiClient.get('/creator-studio/stats', {
@@ -10,8 +10,8 @@ async function stats(dateFilter?: string): Promise<ApiResponse<CreatorStats>> {
   return res;
 }
 
-async function monthlyClicks(): Promise<ApiResponse<CreatorMonthlyClicks>> {
-  const res: ApiResponse<CreatorMonthlyClicks> = await apiClient.get('/creator-studio/monthly-clicks')
+async function monthlyGrabs(): Promise<ApiResponse<CreatorMonthlyGrabs>> {
+  const res: ApiResponse<CreatorMonthlyGrabs> = await apiClient.get('/creator-studio/monthly-grabs')
 
   return res;
 }
@@ -60,7 +60,7 @@ async function deleteAccount(id: string): Promise<ApiResponse<any>> {
 
 const CreatorStudioService = {
   stats,
-  monthlyClicks,
+  monthlyGrabs,
   topOffers,
   payouts,
   getBanks,

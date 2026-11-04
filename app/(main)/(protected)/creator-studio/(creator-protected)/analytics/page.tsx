@@ -1,5 +1,5 @@
 "use client";
-import CreatorClicksChart from "@/components/creator-studio/CreatorClicksChart";
+import CreatorGrabsChart from "@/components/creator-studio/CreatorGrabsChart";
 import CreatorStats from "@/components/creator-studio/CreatorStats";
 import CreatorTopOffers from "@/components/creator-studio/CreatorTopOffers";
 import { ChevronLeft } from "lucide-react";
@@ -27,7 +27,7 @@ export default function AnalyticsPage() {
                 </div>
                 <CreatorStats />
 
-                <CreatorClicksChart />
+                <CreatorGrabsChart />
 
                 <CreatorTopOffers />
 

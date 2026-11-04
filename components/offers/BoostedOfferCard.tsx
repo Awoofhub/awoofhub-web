@@ -128,7 +128,7 @@ export default function BoostedOfferCard({ offer }: Props) {
 
           <div className="flex items-center justify-between mb-1 lg:mb-2">
             <div
-              className={`flex items-center gap-1 ${offer.clickCount > 0
+              className={`flex items-center gap-1 ${offer.grabCount > 0
                 ? "max-w-[50%]"
                 : "w-full"
                 }`}
@@ -138,11 +138,11 @@ export default function BoostedOfferCard({ offer }: Props) {
                 {offer.location}
               </p>
             </div>
-            {offer.clickCount > 0 && (
+            {offer.grabCount > 0 && (
               <div className="flex items-center gap-1 text-black text-[10px] lg:text-xs">
                 <FiUsers size={12} className="text-black" />
                 <span>
-                  {offer.clickCount} {offer.clickCount === 1 ? "grab" : "grabs"}
+                  {offer.grabCount} {offer.grabCount === 1 ? "grab" : "grabs"}
                 </span>
               </div>
             )}

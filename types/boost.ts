@@ -15,7 +15,7 @@ export interface Boost {
 
 export interface Stats {
   impressions: number;
-  clicks: number;
+  grabs: number;
   comments: number;
   shares: number;
 }

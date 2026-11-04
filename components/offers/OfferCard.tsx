@@ -128,7 +128,7 @@ export default function OfferCard({ offer }: Props) {
 
           <div className="flex items-center justify-between mb-1 lg:mb-2">
             <div
-              className={`flex items-center gap-1 ${offer.clickCount > 0
+              className={`flex items-center gap-1 ${offer.grabCount > 0
                 ? "max-w-[50%]"
                 : "w-full"
                 }`}
@@ -138,11 +138,11 @@ export default function OfferCard({ offer }: Props) {
                 {offer.location}
               </p>
             </div>
-            {offer.clickCount > 0 && (
+            {offer.grabCount > 0 && (
               <div className="flex items-center gap-1 text-muted text-[10px] lg:text-xs">
                 <FiUsers size={12} className="text-muted w-2.5 h-2.5 md:w-2.75 md:h-2.75 lg:w-3 lg:h-3"/>
                 <span>
-                  {offer.clickCount} {offer.clickCount === 1 ? "grab" : "grabs"}
+                  {offer.grabCount} {offer.grabCount === 1 ? "grab" : "grabs"}
                 </span>
               </div>
             )}

@@ -7,7 +7,7 @@ export interface CreatorStats {
 }
 
 
-export interface CreatorMonthlyClicks {
+export interface CreatorMonthlyGrabs {
     jan: number;
     feb: number;
     march: number;
@@ -22,12 +22,12 @@ export interface CreatorMonthlyClicks {
     dec: number;
 }
 
-export interface ClickedOffer {
+export interface GrabbedOffer {
     id: string;
     title: string;
     imageUrl: string;
     createdAt: string;
-    clicks: number;
+    grabs: number;
 }
 
 export interface SharedOffer {
@@ -39,7 +39,7 @@ export interface SharedOffer {
 }
 
 export interface CreatorTopOffers {
-    topClickedOffers: ClickedOffer[];
+    topGrabbedOffers: GrabbedOffer[];
     topSharedOffers: SharedOffer[];
 }
 

@@ -34,7 +34,7 @@ export const useAddToWishlist = ({ offerId }: AddToWishlistOptions) => {
             offer: {
               id: offerId,
               endDate: new Date().toISOString(),
-              clickCount: 0,
+              grabCount: 0,
               imageUrl: "/placeholder.png", // or any placeholder image
               title: "Loading...",
               description: "",

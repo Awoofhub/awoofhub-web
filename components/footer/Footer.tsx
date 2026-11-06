@@ -11,6 +11,7 @@ const footerLinks = {
     { label: "Creator Studio", href: "/creator-studio/learn-more" },
     { label: "Help & Support", href: "/help" },
     { label: "FAQs", href: "/faq" },
+    { label: "Career", href: "/careers" },
   ],
   community: [
     { label: "Join Community", href: "/join-community" },

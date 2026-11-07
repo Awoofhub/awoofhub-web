@@ -9,7 +9,7 @@ const faqs = [
   {
     question: "What is Creator Studio?",
     answer:
-      "Creator Studio is a premium feature on AwoofHub that allows eligible creators to track how their Awoofs perform, monitor engagement metrics, understand how the community engages with their content, view performance scores, and earn based on verified performance. Premium users can view their deal grabs, saves, shares, and comments, track their overall performance score, monitor their earnings, and review their payout history.",
+      "Creator Studio is a premium feature on AwoofHub that allows eligible creators to track how their Awoofs perform, monitor engagement metrics, understand how the community engages with their content, view performance scores, and earn based on verified performance. Premium users can view their deal grabs, saves, shares, and comments, track their overall performance score, monitor their earnings and payout history.",
   },
   {
     question: "Who can access Creator Studio?",
@@ -19,18 +19,18 @@ const faqs = [
   {
     question: "How can I earn through Creator Studio?",
     answer:
-      "You can qualify for earnings by publishing valuable Awoofs and meeting all four monthly performance benchmarks: Deal Grabs, Saves, Shares, and Comments. Your engagement must also satisfy AwoofHub’s verification and payout requirements.",
+      "You can qualify for earnings by publishing valuable Awoofs and meeting all five monthly performance benchmarks: Deal Grabs, Saves, Shares, and Comments and 5-star ratings. Your engagement must also satisfy AwoofHub’s verification and payout requirements.",
   },
   {
     question:
       "What are the performance benchmarks, and how is my performance score calculated?",
     answer:
-      "Creators must meet all four monthly benchmarks to qualify for earnings. Each metric has a target and a weighting that determines its contribution to your overall performance score.",
+      "Creators must meet all five monthly benchmarks to qualify for earnings. Each metric has a target and a weighting that determines its contribution to your overall performance score.",
   },
   {
     question: "What happens if I meet some benchmarks but miss others?",
     answer:
-      "You will not qualify for earnings for that performance period if you fail to meet any one of the four required benchmarks. Strong performance in one metric cannot compensate for a missed benchmark in another. You can use your Creator Studio analytics to identify areas that need improvement.",
+      "You will not qualify for earnings for that performance period if you fail to meet any one of the five required benchmarks. Strong performance in one metric cannot compensate for a missed benchmark in another. You can use your Creator Studio analytics to identify areas that need improvement.",
   },
 
   {

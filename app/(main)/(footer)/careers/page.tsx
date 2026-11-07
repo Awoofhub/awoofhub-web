@@ -1,8 +1,8 @@
-
-
 import Image from "next/image";
-import { ChevronLeft, ChevronRight,   } from "lucide-react";
-import { LuMail } from "react-icons/lu";
+import { ChevronLeft, ChevronRight, Mail } from "lucide-react";
+import Footer from "@/components/footer/Footer";
+
+const CAREER_EMAIL = "career@awoofhub.ng";
 
 const jobs = [
   {
@@ -10,7 +10,6 @@ const jobs = [
     team: "Support",
     location: "Remote",
     type: "Full-Time",
-    email: "career@awoofhub.ng",
   },
 ];
 
@@ -40,7 +39,7 @@ export default function CareersPage() {
 
           <div className="relative mx-auto h-[400px] w-full max-w-[440px]">
             <Image
-              src="/careerimg.png"
+              src="/images/career.png"
               alt="Team members smiling together"
               fill
               priority
@@ -55,14 +54,13 @@ export default function CareersPage() {
         <h2 className="text-3xl font-bold">Open Job Positions</h2>
 
         <div className="mt-10 overflow-x-auto">
-          <table className="w-full min-w-[820px] text-left">
+          <table className="w-full min-w-[720px] table-fixed text-left">
             <thead>
               <tr className="border-b border-gray-700 bg-[#F6F7F9] text-sm uppercase text-gray-700">
-                <th className="w-[26%] py-4 pl-14 font-normal">Role</th>
-                <th className="w-[18%] py-4 font-normal">Team</th>
-                <th className="w-[18%] py-4 font-normal">Location</th>
-                <th className="w-[16%] py-4 font-normal">Type</th>
-                <th className="py-4 font-normal">Action</th>
+                <th className="w-[30%] py-4 pl-14 font-normal">Role</th>
+                <th className="w-[25%] py-4 font-normal">Team</th>
+                <th className="w-[25%] py-4 font-normal">Location</th>
+                <th className="py-4 font-normal">Type</th>
               </tr>
             </thead>
             <tbody>
@@ -75,23 +73,23 @@ export default function CareersPage() {
                   <td>{j.team}</td>
                   <td>{j.location}</td>
                   <td>{j.type}</td>
-                  <td>
-                    Send ur resume to
-                    <br />
-                    <a href={`mailto:${j.email}`} className="underline">
-                      {j.email}
-                    </a>
-                  </td>
                 </tr>
               ))}
-              {/* empty placeholder rows to keep table height */}
-              {Array.from({ length: Math.max(0, 3 - jobs.length) }).map(
-                (_, i) => (
-                  <tr key={i} className="h-[89px] border-b border-gray-200">
-                    <td colSpan={5} />
-                  </tr>
-                )
-              )}
+
+              {/* empty placeholder row */}
+              <tr className="h-[89px] border-b border-gray-200">
+                <td colSpan={4} />
+              </tr>
+
+              {/* application note */}
+              <tr className="h-[89px] border-b border-gray-200">
+                <td colSpan={4} className="pl-6 text-2xl font-medium">
+                  Send your resume and application to{" "}
+                  <a href={`mailto:${CAREER_EMAIL}`} className="underline">
+                    {CAREER_EMAIL}
+                  </a>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -113,17 +111,18 @@ export default function CareersPage() {
       <section className="bg-[#F6F7F9]">
         <div className="mx-auto max-w-[1440px] px-6 py-12 lg:px-[120px]">
           <div className="flex items-center gap-5">
-            <LuMail className="h-9 w-9  text-white" />
+            <Mail className="h-9 w-9 fill-black text-white" />
             <span className="text-2xl">Email Address</span>
           </div>
           <a
-            href="mailto:career@awoofhub.ng"
+            href={`mailto:${CAREER_EMAIL}`}
             className="mt-6 block text-3xl font-semibold"
           >
             Career@awoofhub.ng
           </a>
         </div>
       </section>
+      <Footer/>
     </div>
   );
 }

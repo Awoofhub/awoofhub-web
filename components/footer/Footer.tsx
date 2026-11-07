@@ -11,11 +11,13 @@ const footerLinks = {
     { label: "Creator Studio", href: "/creator-studio/learn-more" },
     { label: "Help & Support", href: "/help" },
     { label: "FAQs", href: "/faq" },
+    
   ],
   community: [
     { label: "Join Community", href: "/join-community" },
     { label: "Feature Requests", href: "/feature-requests" },
     { label: "Browse Category", href: "/offers" },
+    { label: "Career", href: "/careers" },
   ],
   legal: [
     { label: "Privacy policy", href: "/privacy" },

@@ -39,7 +39,7 @@ export default function CareersPage() {
 
           <div className="relative mx-auto h-[400px] w-full max-w-[440px]">
             <Image
-              src="/images/career.png"
+              src="/career.png"
               alt="Team members smiling together"
               fill
               priority

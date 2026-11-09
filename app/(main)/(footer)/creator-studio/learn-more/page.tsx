@@ -44,7 +44,7 @@ const faqs = [
     answer:
       "If you stop posting or become inactive, you may not generate enough engagement to meet the required monthly benchmarks. You will only qualify for earnings if you meet all the required benchmarks and satisfy the applicable eligibility rules. If your subscription expires during your inactivity, your accumulated engagement and performance progress will be automatically cleared.",
   },
- 
+
   {
     question: "When and how will I receive my earnings?",
     answer:
@@ -54,58 +54,60 @@ const faqs = [
 
 export default function CreatorStudioPage() {
   const router = useRouter();
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i);
 
   return (
     <main className="bg-white">
-      {/* Hero */}
-      <section className="bg-[#F5F6F8] px-4 pb-10 pt-10 sm:px-8 sm:pb-16 sm:pt-20 lg:px-20 lg:pb-20 lg:pt-12">
-        <button
-          type="button"
-          onClick={() => router.back()}
-          className="hidden items-center gap-1 text-sm font-semibold text-[#1F2937] hover:opacity-70 lg:flex"
-        >
-          <ChevronLeft size={16} />
-          Back
-        </button>
+      {/* Header */}
+      <section className="bg-[#F6F7F8] mb-2 xs:mb-3 lg:mb-4">
+        <div className="mx-auto max-w-[1440px] px-4 pb-6 pt-4 md:px-6 lg:px-8 lg:pb-10 xl:px-12 xs:pt-6">
+          <button
+            type="button"
+            onClick={() => router.back()}
+            className="flex cursor-pointer items-center gap-1 text-sm font-bold hover:text-gray-700 xs:text-base"
+          >
+            <ChevronLeft className="h-4 w-4" />
+            Back
+          </button>
 
-        <div className="max-w-4xl lg:mt-4 lg:pl-16">
-          <h1 className="text-base font-semibold text-[#0F0F10] sm:text-3xl sm:font-bold">
-            Learn how Creator Rewards work
-          </h1>
-          <p className="mt-4 text-xs leading-5 text-[#6B7280] sm:mt-5 sm:text-2xl sm:leading-9 lg:mt-6 lg:text-xl lg:leading-8">
-            We're here to help. Find answers to common questions, get help with your account, or reach out to our team.
-          </p>
+          <div className="mt-4 max-w-6xl lg:mt-6">
+            <h1 className="text-2xl xs:text-3xl lg:text-4xl leading-tight font-semibold text-black ">
+              Learn how Creator Rewards work
+            </h1>
+            <p className="mt-2 text-base xs:text-xl lg:text-2xl text-muted font-medium">
+              Find answers to common questions about your account, earnings, payouts, and using AwoofHub.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* FAQ accordion */}
-      <section className="bg-[#F5F6F8] px-4 pb-10 sm:px-8 sm:pb-12 lg:px-16 lg:pb-16">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 sm:gap-3">
+      <section className="bg-[#F6F7F8]">
+        <div className="mx-auto flex max-w-[1440px] flex-col gap-4 px-4 py-6 md:px-6 lg:px-8 lg:py-10 xl:px-12">
           {faqs.map((faq, i) => {
             const isOpen = openIndex === i;
             return (
               <div
                 key={faq.question}
-                className="rounded-lg bg-white shadow-[0_4px_14px_rgba(15,23,42,0.08)] lg:rounded-md"
+                className="rounded-lg bg-white shadow-md"
               >
                 <button
                   type="button"
                   onClick={() => toggle(i)}
                   aria-expanded={isOpen}
                   aria-controls={`faq-panel-${i}`}
-                  className="flex w-full items-center gap-3 px-4 py-5 text-left sm:gap-9 sm:px-9 sm:py-8 lg:gap-6 lg:px-8 lg:py-7"
+                  className="flex w-full cursor-pointer items-center gap-3 px-4 h-20 xs:h-25 text-left xs:gap-4 xs:px-6 lg:px-8"
                 >
                   <span className="shrink-0">
                     {isOpen ? (
-                      <Minus className="h-3.5 w-3.5 text-[#FF4D00] sm:h-5 sm:w-5 sm:text-[#4FD1C5]" />
+                      <Minus className="h-4 w-4 text-[#52BD95] xs:h-5 xs:w-5" />
                     ) : (
-                      <Plus className="h-3.5 w-3.5 text-[#2D2A4A] sm:h-5 sm:w-5" />
+                      <Plus className="h-4 w-4 text-[#1B1139] xs:h-5 xs:w-5" />
                     )}
                   </span>
-                  <span className="text-[13px] font-semibold leading-5 text-[#1F1B3A] sm:text-lg lg:text-base">
+                  <span className="text-sm font-semibold text-black xs:text-base">
                     {faq.question}
                   </span>
                 </button>
@@ -117,9 +119,9 @@ export default function CreatorStudioPage() {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <div className="px-4 pb-6 sm:px-9 sm:pb-12 lg:px-8 lg:pb-10">
+                    <div className="px-4 pb-5 xs:pl-6 xs:pb-6 lg:pl-8 lg:pb-8">
                       {typeof faq.answer === "string" ? (
-                        <p className="text-xs leading-5 text-[#6B7280] sm:text-lg sm:leading-7">
+                        <p className="text-xs leading-5 text-muted xs:text-sm xs:leading-6 lg:text-base lg:leading-7">
                           {faq.answer}
                         </p>
                       ) : (

@@ -131,6 +131,20 @@ export default function CreatorGrabsChart() {
         );
     };
 
+    // Show the current month by default
+    useEffect(() => {
+        const el = scrollRef.current;
+        if (!el || chartMinWidth === 0) return;
+
+        const slotWidth = el.scrollWidth / MONTHS_COUNT;
+        const currentMonth = new Date().getMonth();
+
+        el.scrollTo({
+            left: slotWidth * currentMonth - (el.clientWidth - slotWidth) / 2,
+            behavior: "auto",
+        });
+    }, [chartMinWidth]);
+
     useEffect(() => {
         const el = scrollRef.current;
         if (!el) return;

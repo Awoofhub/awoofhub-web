@@ -1,10 +1,8 @@
-"use client";
 import Image from "next/image";
-import { useState } from "react";
-import { ChevronDown, Mail, MapPin, Phone } from "lucide-react";
-import { showToast } from "@/components/toast/Toast";
-import { useHelpAndSupport } from "@/features/help-and-support/useHelpAndSupport";
+import { Mail, MapPin, Phone } from "lucide-react";
 import Footer from "@/components/footer/Footer";
+
+const CONTACT_EMAIL = "partnerships@awoofhub.ng";
 
 const benefits = [
   {
@@ -25,66 +23,35 @@ const benefits = [
   },
 ];
 
-const subjects = [
-  "Advertising",
-  "Sponsored offers",
-  "Brand collaboration",
-  "Business listing",
-  "Other",
+const logoRows: { src: string; alt: string }[][] = [
+  [
+    { src: "/temu.png", alt: "Temu" },
+    { src: "/Zara.png", alt: "Zara" },
+    { src: "/dhl.png", alt: "DHL" },
+    { src: "/Chanel.png", alt: "Chanel" },
+    { src: "/YouTube.png", alt: "YouTube" },
+    { src: "/tiktok.png", alt: "TikTok" },
+    { src: "/Netflix.png", alt: "Netflix" },
+    { src: "/facebook.png", alt: "Facebook" },
+    { src: "/Google.png", alt: "Google" },
+    { src: "/Shopify.png", alt: "Shopify" },
+    { src: "/Netflix.png", alt: "Netflix" },
+  ],
+  [
+    { src: "/Gucci.png", alt: "Gucci" },
+    { src: "/FedEx.png", alt: "FedEx" },
+    { src: "/Upwork.png", alt: "Upwork" },
+    { src: "/temu.png", alt: "Temu" },
+    { src: "/Zara.png", alt: "Zara" },
+    { src: "/FedEx.png", alt: "FedEx" },
+    { src: "/dhl.png", alt: "DHL" },
+    { src: "/Gucci.png", alt: "Gucci" },
+    { src: "/Canva.png", alt: "Canva" },
+    { src: "/Figma.png", alt: "Figma" },
+  ],
 ];
-
-const contacts = [
-  {
-    icon: Mail,
-    label: "Email Address",
-    value: "partnerships@awoofhub.ng",
-    href: "mailto:partnerships@awoofhub.ng",
-  },
-  {
-    icon: Phone,
-    label: "Call",
-    value: "+234 800 333 3330",
-    href: "tel:+2348003333330",
-  },
-  { icon: MapPin, label: "Location", value: "Lagos, Nigeria" },
-];
-
-const inputClass =
-  "w-full rounded-lg border border-gray-300 bg-white px-4 py-4 text-base outline-none placeholder:text-gray-400 focus:border-[#FF4A00]";
 
 export default function PartnershipPage() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-  const { submit, isPending: sending } = useHelpAndSupport({
-    onSuccess: () => {
-      showToast("success", "Your partnership message has been sent.");
-      setForm({ name: "", email: "", subject: "", message: "" });
-    },
-  });
-
-  const update =
-    (key: keyof typeof form) =>
-    (
-      e: React.ChangeEvent<
-        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-      >
-    ) =>
-      setForm((f) => ({ ...f, [key]: e.target.value }));
-
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    submit({
-      name: form.name.trim(),
-      email: form.email.trim(),
-      category: form.subject,
-      message: form.message.trim(),
-    });
-  }
-
   return (
     <div className="bg-[#F6F7F9]">
       {/* Hero */}
@@ -104,14 +71,14 @@ export default function PartnershipPage() {
               let&apos;s make more happen together.
             </p>
             <a
-              href="#contact-form"
-              className="mt-8 inline-flex h-12 w-full items-center justify-center rounded-sm bg-[#FF4A00] px-12 text-base font-semibold text-white hover:bg-[#e04200] sm:w-auto sm:min-w-[270px]"
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="mt-8 inline-flex h-12 w-full items-center justify-center rounded-sm bg-[#FF4A00] px-12 text-base font-semibold text-white hover:bg-[#e04200] sm:w-auto sm:min-w-[270px] lg:min-w-[400px]"
             >
               Send Message
             </a>
           </div>
 
-          <div className="relative mx-auto h-[260px] w-full max-w-[420px] sm:h-[320px] md:h-[360px]">
+          <div className="relative mx-auto h-[260px] w-full max-w-[420px] sm:h-[320px] md:h-[380px]">
             <Image
               src="/partner.png"
               alt="Two business partners shaking hands in front of a chart"
@@ -123,15 +90,41 @@ export default function PartnershipPage() {
         </div>
       </section>
 
+      {/* Brand logos */}
+      <section className="bg-white">
+        <div className="mx-auto flex max-w-[1440px] flex-col gap-8 px-5 py-10 sm:px-8 lg:gap-12 lg:px-10 lg:py-14">
+          {logoRows.map((row,rowindex) => (
+            <ul
+              key={rowindex}
+              className={`flex flex-wrap items-center justify-center gap-x-8 gap-y-6 lg:flex-nowrap lg:justify-between ${
+                rowindex === 1 ? "lg:px-12" : ""
+              }`}
+            >
+              {row.map((logo, logoindex) => (
+                <li key={`${logo.alt}-${logoindex}`}>
+                  <Image
+                    src={logo.src}
+                    alt={logo.alt}
+                    width={120}
+                    height={48}
+                    className="h-8 w-auto object-contain sm:h-10 lg:h-12"
+                  />
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
+      </section>
+
       {/* Key benefits */}
-      <section className="bg-[#F6F7F9]">
+      <section>
         <div className="mx-auto max-w-[1440px] px-5 py-10 sm:px-8 lg:px-20 lg:py-16">
           <h2 className="text-2xl font-bold sm:text-3xl">
             Key <span className="text-[#FF4A00]">benefits?</span>
           </h2>
 
           <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_1.4fr]">
-            <div className="relative hidden min-h-[300px] overflow-hidden rounded-2xl bg-white sm:block lg:min-h-[340px]">
+            <div className="relative hidden min-h-[300px] overflow-hidden rounded-2xl bg-white sm:block lg:min-h-[360px]">
               <Image
                 src="/partnerdeal.png"
                 alt="Partners meeting in a lobby"
@@ -141,16 +134,16 @@ export default function PartnershipPage() {
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              {benefits.map((b) => (
+              {benefits.map((item) => (
                 <div
-                  key={b.title}
+                  key={item.title}
                   className="flex flex-col items-center justify-center rounded-xl bg-white px-6 py-8 text-center shadow-sm"
                 >
                   <h3 className="text-lg font-semibold sm:text-xl">
-                    {b.title}
+                    {item.title}
                   </h3>
                   <p className="mt-3 text-base leading-6 text-gray-600 sm:text-lg">
-                    {b.text}
+                    {item.text}
                   </p>
                 </div>
               ))}
@@ -159,126 +152,47 @@ export default function PartnershipPage() {
         </div>
       </section>
 
-      {/* Form */}
-      <section id="contact-form" className="scroll-mt-24 bg-white">
-        <div className="mx-auto max-w-[1440px] px-5 py-10 sm:px-8 lg:px-24 lg:py-16">
-          <h2 className="text-2xl font-bold sm:text-3xl">
-            Send us a <span className="text-[#FF4A00]">direct message</span> to
-            become our partner
-          </h2>
-
-          <form onSubmit={onSubmit} className="mt-10 space-y-6">
-            <div className="grid gap-6 md:grid-cols-2">
-              <div>
-                <label htmlFor="name" className="mb-2 block font-medium">
-                  Name
-                </label>
-                <input
-                  id="name"
-                  required
-                  value={form.name}
-                  onChange={update("name")}
-                  placeholder="John Debby"
-                  className={inputClass}
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="mb-2 block font-medium">
-                  Email Address
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  required
-                  value={form.email}
-                  onChange={update("email")}
-                  placeholder="you@email.com"
-                  className={inputClass}
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="subject" className="mb-2 block font-medium">
-                Subject
-              </label>
-              <div className="relative">
-                <select
-                  id="subject"
-                  required
-                  value={form.subject}
-                  onChange={update("subject")}
-                  className={`${inputClass} appearance-none pr-12 ${
-                    form.subject ? "text-black" : "text-gray-400"
-                  }`}
-                >
-                  <option value="" disabled>
-                    Select category
-                  </option>
-                  {subjects.map((s) => (
-                    <option key={s} value={s} className="text-black">
-                      {s}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2" />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="message" className="mb-2 block font-medium">
-                Message
-              </label>
-              <textarea
-                id="message"
-                required
-                rows={4}
-                value={form.message}
-                onChange={update("message")}
-                placeholder="Enter your message"
-                className={`${inputClass} resize-none`}
-              />
-            </div>
-
-            <div className="flex justify-center pt-2">
-              <button
-                type="submit"
-                disabled={sending}
-                className="h-12 w-full rounded-sm bg-[#FF4A00] text-base font-semibold text-white hover:bg-[#e04200] disabled:opacity-60 sm:w-[390px]"
-              >
-                {sending ? "Sending..." : "Send Message"}
-              </button>
-            </div>
-          </form>
-        </div>
-      </section>
-
       {/* Contact info */}
-      <section>
+      <section className="bg-[#F6F7F9]">
         <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-10 sm:grid-cols-2 sm:px-8 lg:grid-cols-3 lg:px-20 lg:py-14">
-          {contacts.map(({ icon: Icon, label, value, href }) => (
-            <div key={label}>
-              <div className="flex items-center gap-4">
-                <Icon className="h-7 w-7 shrink-0" />
-                <span className="text-xl sm:text-2xl">{label}</span>
-              </div>
-              {href ? (
-                <a
-                  href={href}
-                  className="mt-4 block break-words text-xl font-semibold sm:text-2xl lg:text-3xl"
-                >
-                  {value}
-                </a>
-              ) : (
-                <p className="mt-4 text-xl font-semibold sm:text-2xl lg:text-3xl">
-                  {value}
-                </p>
-              )}
+          <div>
+            <div className="flex items-center gap-4">
+              <Mail className="h-7 w-7 shrink-0" />
+              <span className="text-xl sm:text-2xl">Email Address</span>
             </div>
-          ))}
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="mt-4 block break-words text-xl font-semibold sm:text-2xl lg:text-3xl"
+            >
+              {CONTACT_EMAIL}
+            </a>
+          </div>
+
+          <div>
+            <div className="flex items-center gap-4">
+              <Phone className="h-7 w-7 shrink-0" />
+              <span className="text-xl sm:text-2xl">Call</span>
+            </div>
+            <a
+              href="tel:+2348003333330"
+              className="mt-4 block text-xl font-semibold sm:text-2xl lg:text-3xl"
+            >
+              +234 800 333 3330
+            </a>
+          </div>
+
+          <div>
+            <div className="flex items-center gap-4">
+              <MapPin className="h-7 w-7 shrink-0" />
+              <span className="text-xl sm:text-2xl">Location</span>
+            </div>
+            <p className="mt-4 text-xl font-semibold sm:text-2xl lg:text-3xl">
+              Lagos, Nigeria
+            </p>
+          </div>
         </div>
       </section>
-        <Footer />
+      <Footer/>
     </div>
   );
 }

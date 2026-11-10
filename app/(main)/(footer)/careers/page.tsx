@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 import Footer from "@/components/footer/Footer";
 
 const CAREER_EMAIL = "career@awoofhub.ng";
@@ -64,15 +64,15 @@ export default function CareersPage() {
               </tr>
             </thead>
             <tbody>
-              {jobs.map((j) => (
+              {jobs.map((job) => (
                 <tr
-                  key={j.role}
+                  key={job.role}
                   className="h-[110px] border-b border-gray-200 text-xl font-medium"
                 >
-                  <td className="pl-14">{j.role}</td>
-                  <td>{j.team}</td>
-                  <td>{j.location}</td>
-                  <td>{j.type}</td>
+                  <td className="pl-14">{job.role}</td>
+                  <td>{job.team}</td>
+                  <td>{job.location}</td>
+                  <td>{job.type}</td>
                 </tr>
               ))}
 
@@ -94,17 +94,7 @@ export default function CareersPage() {
           </table>
         </div>
 
-        <div className="mt-10 flex items-center justify-between text-gray-500">
-          <span className="text-lg">Showing 1/1</span>
-          <div className="flex items-center gap-8">
-            <button aria-label="Previous page" className="text-gray-800">
-              <ChevronLeft className="h-6 w-6" />
-            </button>
-            <button aria-label="Next page" className="text-gray-300" disabled>
-              <ChevronRight className="h-6 w-6" />
-            </button>
-          </div>
-        </div>
+       
       </section>
 
       {/* Contact */}

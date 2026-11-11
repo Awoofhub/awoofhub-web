@@ -27,14 +27,14 @@ const benefits = [
 
 const logoRows: { src: string; alt: string }[][] = [
   [
-    { src: "/Temu.png", alt: "Temu" },
+    { src: "/temu.png", alt: "Temu" },
     { src: "/Zara.png", alt: "Zara" },
     { src: "/dhl.png", alt: "DHL" },
     { src: "/Chanel.png", alt: "Chanel" },
     { src: "/YouTube.png", alt: "YouTube" },
-    { src: "/Tiktok.png", alt: "TikTok" },
+    { src: "/tiktok.png", alt: "TikTok" },
     { src: "/Netflix.png", alt: "Netflix" },
-    { src: "/Facebook.png", alt: "Facebook" },
+    { src: "/facebook.png", alt: "Facebook" },
     { src: "/Google.png", alt: "Google" },
     { src: "/Shopify.png", alt: "Shopify" },
     { src: "/Netflix.png", alt: "Netflix" },
@@ -43,7 +43,7 @@ const logoRows: { src: string; alt: string }[][] = [
     { src: "/Gucci.png", alt: "Gucci" },
     { src: "/FedEx.png", alt: "FedEx" },
     { src: "/Upwork.png", alt: "Upwork" },
-    { src: "/Temu.png", alt: "Temu" },
+    { src: "/temu.png", alt: "Temu" },
     { src: "/Zara.png", alt: "Zara" },
     { src: "/FedEx.png", alt: "FedEx" },
     { src: "/dhl.png", alt: "DHL" },
@@ -58,16 +58,16 @@ export default function PartnershipPage() {
     <div className="bg-[#F6F7F9]">
       {/* Hero */}
       <section>
-        <div className="mx-auto grid max-w-[1440px] items-center gap-10 px-5 py-10 sm:px-8 md:grid-cols-2 lg:px-20 lg:py-16">
+        <div className="mx-auto grid max-w-[1440px] items-start gap-10 px-5 py-10 sm:px-8 md:grid-cols-2 lg:px-20 lg:py-16">
           <div>
             <span className="inline-block rounded-lg bg-white px-4 py-3 text-xs font-semibold tracking-wide text-[#FF4A00] shadow-sm sm:text-sm">
               PARTNERSHIP
             </span>
-            <h1 className="mt-6 text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
+            <h1 className="mt-6 text-3xl font-bold leading-tight sm:text-4xl">
               Become an <span className="text-[#FF4A00]">Awoof</span>Hub
               partner!
             </h1>
-            <p className="mt-5 max-w-[640px] text-lg leading-8 text-gray-600 sm:text-xl lg:text-2xl lg:leading-9">
+            <p className="mt-5 max-w-[640px] text-lg leading-8 text-gray-600 sm:text-xl lg:leading-9">
               Put your business in front of more potential customers, and grow
               your audience. Great deals deserve a bigger audience, join us and
               let&apos;s make more happen together.

@@ -75,31 +75,21 @@ export default function CareersPage() {
                   <td>{job.type}</td>
                 </tr>
               ))}
-
-              {/* empty placeholder row */}
-              <tr className="h-[89px] border-b border-gray-200">
-                <td colSpan={4} />
-              </tr>
-
-              {/* application note */}
-              <tr className="h-[89px] border-b border-gray-200">
-                <td colSpan={4} className="pl-6 text-2xl font-medium">
-                  Send your resume and application to{" "}
-                  <a href={`mailto:${CAREER_EMAIL}`} className="underline">
-                    {CAREER_EMAIL}
-                  </a>
-                </td>
-              </tr>
             </tbody>
           </table>
         </div>
 
-
+        <div className="mt-8 text-lg font-medium text-gray-800">
+          Send your resume and application to{" "}
+          <a href={`mailto:${CAREER_EMAIL}`} className="underline">
+            {CAREER_EMAIL}
+          </a>
+        </div>
       </section>
 
       {/* Contact */}
 
-      <div className="px-4 md:px-6 lg:px-8 xl:px-12 bg-[#F6F7F9]">
+      <div className="mx-auto max-w-[1440px] px-6 py-14 lg:px-20 bg-[#F6F7F9]">
         <div className="my-5 grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-8 justify-between">
           <div className="flex flex-col items-start gap-2">
             <div className="flex gap-1 items-center ">

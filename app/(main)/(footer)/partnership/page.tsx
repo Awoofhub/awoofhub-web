@@ -1,6 +1,8 @@
-import Image from "next/image";
-import { Mail, MapPin, Phone } from "lucide-react";
 import Footer from "@/components/footer/Footer";
+import Image from "next/image";
+import { FaLocationDot } from "react-icons/fa6";
+import { IoCall } from "react-icons/io5";
+import { MdEmail } from "react-icons/md";
 
 const CONTACT_EMAIL = "partnerships@awoofhub.ng";
 
@@ -25,14 +27,14 @@ const benefits = [
 
 const logoRows: { src: string; alt: string }[][] = [
   [
-    { src: "/temu.png", alt: "Temu" },
+    { src: "/Temu.png", alt: "Temu" },
     { src: "/Zara.png", alt: "Zara" },
     { src: "/dhl.png", alt: "DHL" },
     { src: "/Chanel.png", alt: "Chanel" },
     { src: "/YouTube.png", alt: "YouTube" },
-    { src: "/tiktok.png", alt: "TikTok" },
+    { src: "/Tiktok.png", alt: "TikTok" },
     { src: "/Netflix.png", alt: "Netflix" },
-    { src: "/facebook.png", alt: "Facebook" },
+    { src: "/Facebook.png", alt: "Facebook" },
     { src: "/Google.png", alt: "Google" },
     { src: "/Shopify.png", alt: "Shopify" },
     { src: "/Netflix.png", alt: "Netflix" },
@@ -41,7 +43,7 @@ const logoRows: { src: string; alt: string }[][] = [
     { src: "/Gucci.png", alt: "Gucci" },
     { src: "/FedEx.png", alt: "FedEx" },
     { src: "/Upwork.png", alt: "Upwork" },
-    { src: "/temu.png", alt: "Temu" },
+    { src: "/Temu.png", alt: "Temu" },
     { src: "/Zara.png", alt: "Zara" },
     { src: "/FedEx.png", alt: "FedEx" },
     { src: "/dhl.png", alt: "DHL" },
@@ -93,12 +95,11 @@ export default function PartnershipPage() {
       {/* Brand logos */}
       <section className="bg-white">
         <div className="mx-auto flex max-w-[1440px] flex-col gap-8 px-5 py-10 sm:px-8 lg:gap-12 lg:px-10 lg:py-14">
-          {logoRows.map((row,rowindex) => (
+          {logoRows.map((row, rowindex) => (
             <ul
               key={rowindex}
-              className={`flex flex-wrap items-center justify-center gap-x-8 gap-y-6 lg:flex-nowrap lg:justify-between ${
-                rowindex === 1 ? "lg:px-12" : ""
-              }`}
+              className={`flex flex-wrap items-center justify-center gap-x-8 gap-y-6 lg:flex-nowrap lg:justify-between ${rowindex === 1 ? "lg:px-12" : ""
+                }`}
             >
               {row.map((logo, logoindex) => (
                 <li key={`${logo.alt}-${logoindex}`}>
@@ -154,45 +155,41 @@ export default function PartnershipPage() {
 
       {/* Contact info */}
       <section className="bg-[#F6F7F9]">
-        <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-10 sm:grid-cols-2 sm:px-8 lg:grid-cols-3 lg:px-20 lg:py-14">
-          <div>
-            <div className="flex items-center gap-4">
-              <Mail className="h-7 w-7 shrink-0" />
-              <span className="text-xl sm:text-2xl">Email Address</span>
+        <div className="px-4 md:px-6 lg:px-8 xl:px-12">
+          <div className="my-5 grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-8 justify-between">
+             <div className="flex flex-col items-start gap-2">
+              <div className="flex gap-1 items-center ">
+                <MdEmail className="w-6 h-6 xs:w-10 xs:h-10" />
+                <h5 className="text-xl xs:text-2xl">Email Address</h5>
+              </div>
+              <h5 className="font-semibold text-2xl text-gray-900">
+                 {CONTACT_EMAIL}
+              </h5>
             </div>
-            <a
-              href={`mailto:${CONTACT_EMAIL}`}
-              className="mt-4 block break-words text-xl font-semibold sm:text-2xl lg:text-3xl"
-            >
-              {CONTACT_EMAIL}
-            </a>
-          </div>
 
-          <div>
-            <div className="flex items-center gap-4">
-              <Phone className="h-7 w-7 shrink-0" />
-              <span className="text-xl sm:text-2xl">Call</span>
+            <div className="flex flex-col items-start gap-2">
+              <div className="flex gap-1 items-center ">
+                <IoCall className="w-6 h-6 xs:w-10 xs:h-10" />
+                <h5 className="text-xl xs:text-2xl">Call</h5>
+              </div>
+              <h5 className="font-semibold text-2xl text-gray-900">
+                +234 903 784  8773
+              </h5>
             </div>
-            <a
-              href="tel:+2348003333330"
-              className="mt-4 block text-xl font-semibold sm:text-2xl lg:text-3xl"
-            >
-              +234 800 333 3330
-            </a>
-          </div>
 
-          <div>
-            <div className="flex items-center gap-4">
-              <MapPin className="h-7 w-7 shrink-0" />
-              <span className="text-xl sm:text-2xl">Location</span>
+            <div className="flex flex-col items-start gap-2">
+              <div className="flex gap-1 items-center ">
+                <FaLocationDot className="w-6 h-6 xs:w-10 xs:h-10" />
+                <h5 className="text-xl xs:text-2xl">Location</h5>
+              </div>
+              <h5 className="font-semibold text-2xl text-gray-900">
+                Lagos, Nigeria
+              </h5>
             </div>
-            <p className="mt-4 text-xl font-semibold sm:text-2xl lg:text-3xl">
-              Lagos, Nigeria
-            </p>
           </div>
         </div>
       </section>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

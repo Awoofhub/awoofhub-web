@@ -1,6 +1,6 @@
-import Image from "next/image";
-import { Mail } from "lucide-react";
 import Footer from "@/components/footer/Footer";
+import Image from "next/image";
+import { MdEmail } from "react-icons/md";
 
 const CAREER_EMAIL = "career@awoofhub.ng";
 
@@ -94,25 +94,26 @@ export default function CareersPage() {
           </table>
         </div>
 
-       
+
       </section>
 
       {/* Contact */}
-      <section className="bg-[#F6F7F9]">
-        <div className="mx-auto max-w-[1440px] px-6 py-12 lg:px-[120px]">
-          <div className="flex items-center gap-5">
-            <Mail className="h-9 w-9 fill-black text-white" />
-            <span className="text-2xl">Email Address</span>
+
+      <div className="px-4 md:px-6 lg:px-8 xl:px-12 bg-[#F6F7F9]">
+        <div className="my-5 grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-8 justify-between">
+          <div className="flex flex-col items-start gap-2">
+            <div className="flex gap-1 items-center ">
+              <MdEmail className="w-6 h-6 xs:w-10 xs:h-10" />
+              <h5 className="text-xl xs:text-2xl">Email Address</h5>
+            </div>
+            <h5 className="font-semibold text-2xl text-gray-900">
+              Career@awoofhub.ng
+            </h5>
           </div>
-          <a
-            href={`mailto:${CAREER_EMAIL}`}
-            className="mt-6 block text-3xl font-semibold"
-          >
-            Career@awoofhub.ng
-          </a>
         </div>
-      </section>
-      <Footer/>
+      </div>
+
+      <Footer />
     </div>
   );
 }

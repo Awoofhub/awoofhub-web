@@ -15,10 +15,10 @@ const jobs = [
 
 export default function CareersPage() {
   return (
-    <div className="bg-white">
+    <div className="bg-white max-w-[1440px] mx-auto">
       {/* Hero */}
       <section className="bg-[#F6F7F9]">
-        <div className="mx-auto grid max-w-[1440px] items-center gap-8 px-6 py-12 lg:grid-cols-2 lg:px-20">
+        <div className=" grid  items-center gap-8 px-6 py-12 lg:grid-cols-2 lg:px-20">
           <div>
             <span className="inline-block rounded-lg bg-white px-4 py-3 text-sm font-semibold tracking-wide text-[#FF4A00] shadow-sm">
               CAREERS
@@ -50,7 +50,7 @@ export default function CareersPage() {
       </section>
 
       {/* Open positions */}
-      <section className="mx-auto max-w-[1440px] px-6 py-14 lg:px-20">
+      <section className=" px-6 py-14 lg:px-20">
         <h2 className="text-3xl font-bold">Open Job Positions</h2>
 
         <div className="mt-10 overflow-x-auto">
@@ -89,7 +89,7 @@ export default function CareersPage() {
 
       {/* Contact */}
 
-      <div className="mx-auto max-w-[1440px] px-6 py-14 lg:px-20 bg-[#F6F7F9]">
+      <div className=" px-6 py-14 lg:px-20 bg-[#F6F7F9]">
         <div className="my-5 grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-8 justify-between">
           <div className="flex flex-col items-start gap-2">
             <div className="flex gap-1 items-center ">

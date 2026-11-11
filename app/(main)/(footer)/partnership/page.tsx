@@ -27,14 +27,14 @@ const benefits = [
 
 const logoRows: { src: string; alt: string }[][] = [
   [
-    { src: "/temu.png", alt: "Temu" },
+    { src: "/Temu.png", alt: "Temu" },
     { src: "/Zara.png", alt: "Zara" },
     { src: "/dhl.png", alt: "DHL" },
     { src: "/Chanel.png", alt: "Chanel" },
     { src: "/YouTube.png", alt: "YouTube" },
-    { src: "/tiktok.png", alt: "TikTok" },
+    { src: "/Tiktok.png", alt: "TikTok" },
     { src: "/Netflix.png", alt: "Netflix" },
-    { src: "/facebook.png", alt: "Facebook" },
+    { src: "/Facebook.png", alt: "Facebook" },
     { src: "/Google.png", alt: "Google" },
     { src: "/Shopify.png", alt: "Shopify" },
     { src: "/Netflix.png", alt: "Netflix" },
@@ -43,7 +43,7 @@ const logoRows: { src: string; alt: string }[][] = [
     { src: "/Gucci.png", alt: "Gucci" },
     { src: "/FedEx.png", alt: "FedEx" },
     { src: "/Upwork.png", alt: "Upwork" },
-    { src: "/temu.png", alt: "Temu" },
+    { src: "/Temu.png", alt: "Temu" },
     { src: "/Zara.png", alt: "Zara" },
     { src: "/FedEx.png", alt: "FedEx" },
     { src: "/dhl.png", alt: "DHL" },

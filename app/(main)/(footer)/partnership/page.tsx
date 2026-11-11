@@ -58,16 +58,16 @@ export default function PartnershipPage() {
     <div className="bg-[#F6F7F9]">
       {/* Hero */}
       <section>
-        <div className="mx-auto grid max-w-[1440px] items-center gap-10 px-5 py-10 sm:px-8 md:grid-cols-2 lg:px-20 lg:py-16">
+        <div className="mx-auto grid max-w-[1440px] items-start gap-10 px-5 py-10 sm:px-8 md:grid-cols-2 lg:px-20 lg:py-16">
           <div>
             <span className="inline-block rounded-lg bg-white px-4 py-3 text-xs font-semibold tracking-wide text-[#FF4A00] shadow-sm sm:text-sm">
               PARTNERSHIP
             </span>
-            <h1 className="mt-6 text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
+            <h1 className="mt-6 text-3xl font-bold leading-tight sm:text-4xl">
               Become an <span className="text-[#FF4A00]">Awoof</span>Hub
               partner!
             </h1>
-            <p className="mt-5 max-w-[640px] text-lg leading-8 text-gray-600 sm:text-xl lg:text-2xl lg:leading-9">
+            <p className="mt-5 max-w-[640px] text-lg leading-8 text-gray-600 sm:text-xl lg:leading-9">
               Put your business in front of more potential customers, and grow
               your audience. Great deals deserve a bigger audience, join us and
               let&apos;s make more happen together.
@@ -157,13 +157,13 @@ export default function PartnershipPage() {
       <section className="bg-[#F6F7F9]">
         <div className="px-4 md:px-6 lg:px-8 xl:px-12">
           <div className="my-5 grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-8 justify-between">
-             <div className="flex flex-col items-start gap-2">
+            <div className="flex flex-col items-start gap-2">
               <div className="flex gap-1 items-center ">
                 <MdEmail className="w-6 h-6 xs:w-10 xs:h-10" />
                 <h5 className="text-xl xs:text-2xl">Email Address</h5>
               </div>
               <h5 className="font-semibold text-2xl text-gray-900">
-                 {CONTACT_EMAIL}
+                {CONTACT_EMAIL}
               </h5>
             </div>
 

@@ -23,16 +23,16 @@ export default function CareersPage() {
             <span className="inline-block rounded-lg bg-white px-4 py-3 text-sm font-semibold tracking-wide text-[#FF4A00] shadow-sm">
               CAREERS
             </span>
-            <h1 className="mt-10 text-4xl font-bold leading-tight lg:text-5xl">
+            <h1 className="mt-8 text-4xl font-bold leading-tight">
               Join <span className="text-[#FF4A00]">AwoofHub</span> &amp; make a
               difference!
             </h1>
-            <p className="mt-8 max-w-[780px] text-2xl leading-9 text-gray-600">
+            <p className="mt-4 max-w-[780px] text-xl leading-9 text-gray-600">
               Join the team of great minds and help build an innovative and
               sustainable space. Explore open roles and be part of something
               worth showing up for.
             </p>
-            <button className="mt-10 h-12 rounded-sm bg-[#FF4A00] px-12 text-base font-semibold text-white hover:bg-[#e04200]">
+            <button className="mt-8 h-12 rounded-sm bg-[#FF4A00] px-12 text-base font-semibold text-white hover:bg-[#e04200]">
               Learn More
             </button>
           </div>
@@ -53,7 +53,7 @@ export default function CareersPage() {
       <section className=" px-6 py-14 lg:px-20">
         <h2 className="text-3xl font-bold">Open Job Positions</h2>
 
-        <div className="mt-10 overflow-x-auto">
+        <div className="mt-4 overflow-x-auto">
           <table className="w-full min-w-[720px] table-fixed text-left">
             <thead>
               <tr className="border-b border-gray-700 bg-[#F6F7F9] text-sm uppercase text-gray-700">
@@ -67,7 +67,7 @@ export default function CareersPage() {
               {jobs.map((job) => (
                 <tr
                   key={job.role}
-                  className="h-[110px] border-b border-gray-200 text-xl font-medium"
+                  className="h-[110px] border-b border-gray-200 text-base font-medium"
                 >
                   <td className="pl-14">{job.role}</td>
                   <td>{job.team}</td>

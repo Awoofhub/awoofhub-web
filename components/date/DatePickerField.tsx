@@ -10,7 +10,10 @@ export const DatePickerField = ({ label, error, compulsory, value, onChange, lab
   // Get 'now' so we can block the past
   const today = dayjs().add(1, 'day');
 
-  const formattedValue = value ? dayjs(value) : null;
+  // Use a permanent value for now so things don't expire quickly
+  // const formattedValue = value ? dayjs(value) : null;
+
+  const formattedValue = dayjs().add(3, "month");
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -23,6 +26,7 @@ export const DatePickerField = ({ label, error, compulsory, value, onChange, lab
 
         <DatePicker
           value={formattedValue}
+          disabled
           onChange={(newValue) => onChange(newValue)}
           minDate={today}
           slotProps={{
@@ -32,8 +36,8 @@ export const DatePickerField = ({ label, error, compulsory, value, onChange, lab
               slotProps: {
                 input: {
                   disableUnderline: true,
-                  className: `!mt-2 !w-full !px-3 !py-1 xxs:!py-0.5 lg:!py-1 !bg-white !border ${error ? '!border-red-500' : '!border-gray-300'
-                    } !rounded-md !shadow-sm text-sm lg:text-base focus-within:!border-orange-500`,
+                  className: `!mt-2 !w-full !px-3 !py-1 xxs:!py-0.5 lg:!py-1 !bg-gray-300 !border ${error ? '!border-red-500' : '!border-gray-300'
+                    } !rounded-md !shadow-sm text-sm lg:text-base`,
                 },
                 htmlInput: {
                   placeholder: "Select date",

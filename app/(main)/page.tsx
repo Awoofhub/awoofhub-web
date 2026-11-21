@@ -5,11 +5,13 @@ import FeaturedOffers from "@/components/home/FeaturedOffers";
 import Hero from "@/components/home/Hero";
 import TrendingOffers from "@/components/home/TrendingOffers";
 import CommunityModal from "@/components/modals/community/CommunityModal";
+import { useSession } from "@/features/storage/useSession";
 import Image from "next/image";
-import { useState } from "react";
 
 export default function Home() {
-  const [open, setOpen] = useState(true);
+
+  const [isModalOpen, setIsModalOpen, isLoaded] = useSession<boolean>("communityModalSeen");
+
   return (
     <>
       <Hero />
@@ -34,10 +36,12 @@ export default function Home() {
       <FeaturedOffers />
       <Footer />
 
-      <CommunityModal
-        isOpen={open}
-        onClose={() => setOpen(false)}
-      />
+      {isLoaded && (
+        <CommunityModal
+          isOpen={isModalOpen ?? true}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
     </>
   );
 }

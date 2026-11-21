@@ -107,27 +107,24 @@ export default function CommunityModal({ isOpen, onClose }: Props) {
             id="awoofer-modal-title"
             className="text-2xl font-extrabold tracking-tight text-neutral-900 sm:text-[32px] sm:leading-[1.15]"
           >
-            Don't enjoy the <span className="text-[#FF4D00]">awoof</span> alone! 
+            Don't enjoy the <span className="text-[#FF4D00]">awoof</span> alone!
           </h2>
 
           <p className="mt-3 max-w-md text-sm leading-relaxed text-neutral-500 sm:text-[15px]">
-             Join the Awoofers Community and connect with people who love finding and sharing awoof!
+            Join the Awoofers Community and connect with people who love finding and sharing awoof!
 
           </p>
 
-
-            <a
-              href="https://chat.whatsapp.com/Lp7SjLs7drx11MxHl5zVgy"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={onClose}
-              className="mt-7 flex h-12 w-full items-center justify-center gap-2.5 rounded-xl bg-[#FF4D00] px-5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#e84500] active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-[#FF4D00]/40"
-            >
-              <FaWhatsapp className="h-4.5 w-4.5" />
-              <span>Join the community</span>
-            </a>
-
-          
+          <a
+            href="https://chat.whatsapp.com/Lp7SjLs7drx11MxHl5zVgy"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={onClose}
+            className="mt-7 flex h-12 w-full items-center justify-center gap-2.5 rounded-xl bg-[#FF4D00] px-5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#e84500] active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-[#FF4D00]/40"
+          >
+            <FaWhatsapp className="h-4.5 w-4.5" />
+            <span>Join the community</span>
+          </a>
 
           <ul className="mt-7 space-y-3">
             <li className="flex items-center gap-3 text-sm font-medium text-neutral-700" >
@@ -142,7 +139,7 @@ export default function CommunityModal({ isOpen, onClose }: Props) {
                 <MessagesSquare className="h-3.5 w-3.5" />
               </span>
               <span>Daily gist and conversations with fellow Awoofers</span>
-                    
+
             </li>
 
             <li className="flex items-center gap-3 text-sm font-medium text-neutral-700">
@@ -152,7 +149,7 @@ export default function CommunityModal({ isOpen, onClose }: Props) {
               <span>A say in what we build next</span>
             </li>
           </ul>
-        
+
         </div>
       </div>
     </div>

@@ -4,9 +4,12 @@ import ExpiringOffers from "@/components/home/ExpiringOffers";
 import FeaturedOffers from "@/components/home/FeaturedOffers";
 import Hero from "@/components/home/Hero";
 import TrendingOffers from "@/components/home/TrendingOffers";
+import CommunityModal from "@/components/modals/community/CommunityModal";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Home() {
+  const [open, setOpen] = useState(true);
   return (
     <>
       <Hero />
@@ -30,6 +33,11 @@ export default function Home() {
       </div>
       <FeaturedOffers />
       <Footer />
+
+      <CommunityModal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+      />
     </>
   );
 }

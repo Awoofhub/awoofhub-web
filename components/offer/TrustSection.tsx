@@ -20,7 +20,7 @@ export default function TrustSection({ offer }: Props) {
       {/* Store Info */}
       <div className="">
         <div className="flex flex-col justify-center gap-10 items-center bg-white rounded-2xl py-3 shadow-md border-2 border-orange-500  ">
-          <CreatorLink offer={offer} variant="card" />
+          <CreatorLink offer={offer} />
         </div>
       </div>
 

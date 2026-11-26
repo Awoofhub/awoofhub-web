@@ -5,7 +5,6 @@ import Image from "next/image";
 import Comment from "../comment/Comment";
 import ReviewChart from "../review/ReviewChart";
 import Action from "./Action";
-import CreatorLink from "./CreatorLink";
 import OfferInfo from "./OfferInfo";
 import TrustSection from "./TrustSection";
 
@@ -31,7 +30,7 @@ export default function SingleOffer({ offer }: Props) {
 
         <div className="lg:col-span-5 md:col-span-4 flex flex-col pt-2">
           <div className="flex justify-between items-center mb-3">
-            <CreatorLink offer={offer} />
+            <span className="text-xs sm:text-sm lg:text-base text-gray-500">Brand: <span className="capitalize text-primary font-semibold">{offer.brandName}</span></span>
             <span className="bg-[#20B52633] font-baloo text-[#2C742F] text-xs lg:text-sm  animate-pulse font-medium px-4 md:px-5 py-1 md:py-2 rounded-sm">
               Available
             </span>
